@@ -1,0 +1,22 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import DashboardMember from './pages/DashboardMember';
+import DashboardCoach from './pages/DashboardCoach';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard-member" element={<DashboardMember />} />
+        <Route path="/dashboard-coach" element={<DashboardCoach />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
