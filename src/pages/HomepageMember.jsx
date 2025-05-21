@@ -130,61 +130,6 @@ const HomepageMember = () => {
                     </div>
                 </div>
             )}
-
-            <style jsx>{`
-        .quick-action-card {
-          transition: var(--transition);
-        }
-        
-        .quick-action-card:hover {
-          transform: translateY(-5px);
-          box-shadow: var(--box-shadow-lg);
-        }
-        
-        .card-icon {
-          width: 3rem;
-          height: 3rem;
-          border-radius: var(--border-radius);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-        }
-        
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 1000;
-        }
-        
-        .modal-content {
-          background-color: var(--white);
-          border-radius: var(--border-radius-lg);
-          max-width: 900px;
-          width: 90%;
-          max-height: 90vh;
-          overflow-y: auto;
-          position: relative;
-        }
-        
-        .modal-close {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          background: none;
-          border: none;
-          font-size: 1.5rem;
-          cursor: pointer;
-          z-index: 10;
-        }
-      `}</style>
         </div>
     );
 };

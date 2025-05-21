@@ -22,24 +22,16 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (selectedRole === 'Member') {
-      if (selectedRole === 'member') {
-        localStorage.setItem('user', JSON.stringify({ username: selectedRole, role: 'member' }));
-        navigate('/homepage-member');
-      } else {
-        setError('Invalid username or password');
-      }
+      localStorage.setItem('user', JSON.stringify({ username: 'member', role: 'member' }));
+      navigate('/homepage-member');
     } else if (selectedRole === 'Coach') {
-      if (selectedRole === 'coach') {
-        localStorage.setItem('user', JSON.stringify({ username: selectedRole, role: 'coach' }));
-        navigate('/dashboard-coach');
-      } else {
-        setError('Invalid username or password');
-      }
+      localStorage.setItem('user', JSON.stringify({ username: 'coach', role: 'coach' }));
+      navigate('/dashboard-coach');
     } else if (selectedRole === 'Admin') {
-      localStorage.setItem('user', JSON.stringify({ username: selectedRole, role: 'admin' }));
+      localStorage.setItem('user', JSON.stringify({ username: 'admin', role: 'admin' }));
       navigate('/dashboard-member');
     } else {
-      setError('Invalid role');
+      navigate('/');
     }
   };
 
