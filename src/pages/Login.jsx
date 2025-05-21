@@ -12,26 +12,37 @@ function Login() {
   const [selectedRole, setSelectedRole] = useState('Member');
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
-  
+  const [error, setError] = useState('');
+
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
     setShowDropdown(false);
   };
-  
-  const handleSubmit = (e) => {
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    // Redirect based on role
     if (selectedRole === 'Member') {
-      navigate('/dashboard-member');
+      if (selectedRole === 'member') {
+        localStorage.setItem('user', JSON.stringify({ username: selectedRole, role: 'member' }));
+        navigate('/homepage-member');
+      } else {
+        setError('Invalid username or password');
+      }
     } else if (selectedRole === 'Coach') {
-      navigate('/dashboard-coach');
+      if (selectedRole === 'coach') {
+        localStorage.setItem('user', JSON.stringify({ username: selectedRole, role: 'coach' }));
+        navigate('/dashboard-coach');
+      } else {
+        setError('Invalid username or password');
+      }
     } else if (selectedRole === 'Admin') {
+      localStorage.setItem('user', JSON.stringify({ username: selectedRole, role: 'admin' }));
       navigate('/dashboard-member');
     } else {
-      navigate('/');
+      setError('Invalid role');
     }
   };
-  
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -58,7 +69,7 @@ function Login() {
       }}>
         Breathing Free
       </button>
-      <form onSubmit={handleSubmit} style={{
+      <form onSubmit={handleLogin} style={{
         background: '#fff',
         padding: '2.5rem 2rem',
         borderRadius: '18px',
@@ -169,6 +180,11 @@ function Login() {
           Don't have an account?{' '}
           <Link to="/register" style={{ color: '#0057b8', fontWeight: 700, textDecoration: 'underline' }}>Register</Link>
         </div>
+        {error && (
+          <div style={{ textAlign: 'center', color: 'red', fontWeight: 500, marginTop: '0.5rem' }}>
+            {error}
+          </div>
+        )}
       </form>
     </div>
   );
