@@ -1,21 +1,31 @@
-# Breathing Free - Quit Smoking App
+# Breathing Free - Smoking Cessation Application
 
-A comprehensive platform to help users quit smoking and track their progress. This application provides tools and resources for individuals on their journey to become smoke-free.
+A web application designed to help users quit smoking by providing a personalized journey with progress tracking, professional support, and membership options.
 
 ## Features
 
-- **Personalized Quit Plan**: Create a personalized plan with a selected quit date
-- **Progress Tracking**: Monitor smoke-free days and money saved
-- **Achievement System**: Unlock achievements as you reach important milestones
-- **Health Timeline**: View the health benefits of quitting smoking over time
-- **Multi-role Support**: Different interfaces for members, coaches, and administrators
+- **Member Dashboard**: Track your smoke-free days and progress
+- **Track Your Status**: Monitor health improvements and chat with consultants
+- **Professional Membership Plans**: Access premium features with flexible plans
+- **Doctor Consultation**: Connect with specialized doctors for support
 
-## Technology Stack
+## Technologies Used
 
-- React
+- React.js
 - Vite
-- React Router
-- LocalStorage for data persistence
+- CSS with custom styling
+- LocalStorage for persistence (demo purposes)
+
+## Installation
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Install dependencies with `npm install`
+4. Run the development server with `npm run dev`
+
+## Project Contributors
+
+- [Your Name]
 
 ## Getting Started
 
@@ -23,24 +33,6 @@ A comprehensive platform to help users quit smoking and track their progress. Th
 
 - Node.js (v14 or newer)
 - npm or yarn
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/breathing-free.git
-cd breathing-free
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
 
 ### Demo Accounts
 
