@@ -181,6 +181,7 @@ const TrackStatus = () => {
                         </div>
                     </div>
 
+                    {/* Doctor Cards */}
                     <div className="chat-section">
                         <div className="card chat-card">
                             <h2 className="section-title">Communication with Doctor</h2>
@@ -232,7 +233,8 @@ const TrackStatus = () => {
                 
                 .page-header {
                     text-align: center;
-                    margin: 2rem 0;
+                    margin: 2rem 0 3rem;
+                    position: relative;
                 }
                 
                 .page-title {
@@ -241,6 +243,7 @@ const TrackStatus = () => {
                     position: relative;
                     display: inline-block;
                     margin-bottom: 1rem;
+                    font-weight: 700;
                 }
                 
                 .page-title::after {
@@ -259,6 +262,7 @@ const TrackStatus = () => {
                     color: var(--text-light);
                     max-width: 600px;
                     margin: 0 auto;
+                    font-size: 1.1rem;
                 }
                 
                 .content-grid {
@@ -345,10 +349,18 @@ const TrackStatus = () => {
                     color: var(--text-light);
                 }
                 
+                .chat-section {
+                    margin-bottom: 1.5rem;
+                }
+                
                 .chat-card {
                     height: 100%;
                     display: flex;
                     flex-direction: column;
+                    padding: 1.5rem;
+                    box-shadow: var(--box-shadow);
+                    background-color: var(--white);
+                    border-radius: var(--border-radius-lg);
                 }
                 
                 .chat-messages {
@@ -398,12 +410,14 @@ const TrackStatus = () => {
                     border-radius: var(--border-radius);
                     margin-bottom: 1rem;
                     max-width: 80%;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
                 }
                 
                 .message-incoming {
                     background-color: var(--gray-100);
                     align-self: flex-start;
                     border-top-left-radius: 0;
+                    border-left: 3px solid var(--primary-color);
                 }
                 
                 .message-outgoing {
@@ -411,6 +425,7 @@ const TrackStatus = () => {
                     align-self: flex-end;
                     margin-left: auto;
                     border-top-right-radius: 0;
+                    border-right: 3px solid var(--secondary-color);
                 }
                 
                 .message-header {
@@ -432,12 +447,16 @@ const TrackStatus = () => {
                 .message-body {
                     font-size: 1rem;
                     color: var(--text-dark);
+                    word-wrap: break-word;
                 }
                 
                 .chat-input-form {
                     display: flex;
                     gap: 0.5rem;
-                    margin-top: auto;
+                    margin-top: 1rem;
+                    position: relative;
+                    border-top: 1px solid var(--gray-200);
+                    padding-top: 1rem;
                 }
                 
                 .chat-input {
@@ -448,10 +467,13 @@ const TrackStatus = () => {
                     font-size: 1rem;
                     outline: none;
                     transition: border-color 0.3s;
+                    background-color: var(--gray-50);
                 }
                 
                 .chat-input:focus {
                     border-color: var(--secondary-color);
+                    box-shadow: 0 0 0 2px rgba(68, 184, 157, 0.2);
+                    background-color: white;
                 }
                 
                 .chat-send-button {
@@ -463,6 +485,7 @@ const TrackStatus = () => {
                     font-weight: 600;
                     cursor: pointer;
                     transition: background-color 0.3s;
+                    box-shadow: 0 2px 4px rgba(53, 167, 156, 0.3);
                 }
                 
                 .chat-send-button:hover {

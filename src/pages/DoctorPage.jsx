@@ -90,7 +90,7 @@ const DoctorPage = () => {
                     zIndex: 2,
                 }}>
                     <button
-                        onClick={() => navigate('/')}
+                        onClick={() => navigate('/homepage-member')}
                         style={{
                             background: 'rgba(255,255,255,0.15)',
                             border: 'none',
@@ -108,7 +108,7 @@ const DoctorPage = () => {
                         }}
                     >
                         <span style={{ fontSize: '1.2rem' }}>←</span>
-                        Home
+                        Back to Dashboard
                     </button>
 
                     <div style={{
@@ -314,7 +314,9 @@ const DoctorPage = () => {
                             ':hover': {
                                 transform: 'translateY(-5px)',
                                 boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)',
-                            }
+                            },
+                            display: 'flex',
+                            flexDirection: 'column',
                         }}>
                             {/* Doctor Header */}
                             <div style={{
@@ -358,6 +360,9 @@ const DoctorPage = () => {
                             {/* Doctor Info */}
                             <div style={{
                                 padding: '1.5rem',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                flexGrow: 1,
                             }}>
                                 <p style={{
                                     fontSize: '1rem',
@@ -388,25 +393,29 @@ const DoctorPage = () => {
                                     ))}
                                 </div>
 
-                                <button
-                                    onClick={() => handleContactDoctor(doctor.name)}
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.75rem',
-                                        borderRadius: '8px',
-                                        background: doctor.buttonColor,
-                                        color: 'white',
-                                        border: 'none',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer',
-                                        transition: 'background 0.2s',
-                                        ':hover': {
-                                            opacity: 0.9,
-                                        }
-                                    }}
-                                >
-                                    Contact Now
-                                </button>
+                                <div style={{ marginTop: 'auto' }}>
+                                    <button
+                                        onClick={() => handleContactDoctor(doctor.name)}
+                                        style={{
+                                            width: '100%',
+                                            padding: '0.75rem',
+                                            borderRadius: '8px',
+                                            background: doctor.buttonColor,
+                                            color: 'white',
+                                            border: 'none',
+                                            fontWeight: 'bold',
+                                            cursor: 'pointer',
+                                            transition: 'background 0.2s',
+                                            height: '45px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '1rem',
+                                        }}
+                                    >
+                                        Contact Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -453,18 +462,15 @@ const DoctorPage = () => {
                         gap: '1rem',
                     }}>
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={() => navigate('/homepage-member')}
                             style={{
                                 background: 'none',
                                 border: 'none',
                                 color: 'rgba(255,255,255,0.8)',
                                 cursor: 'pointer',
-                                ':hover': {
-                                    color: 'white',
-                                }
                             }}
                         >
-                            Home
+                            Dashboard
                         </button>
                         <button
                             style={{
@@ -472,9 +478,6 @@ const DoctorPage = () => {
                                 border: 'none',
                                 color: 'rgba(255,255,255,0.8)',
                                 cursor: 'pointer',
-                                ':hover': {
-                                    color: 'white',
-                                }
                             }}
                         >
                             About
@@ -485,9 +488,6 @@ const DoctorPage = () => {
                                 border: 'none',
                                 color: 'rgba(255,255,255,0.8)',
                                 cursor: 'pointer',
-                                ':hover': {
-                                    color: 'white',
-                                }
                             }}
                         >
                             Contact
