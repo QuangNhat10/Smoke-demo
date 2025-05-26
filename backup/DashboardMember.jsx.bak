@@ -1117,10 +1117,10 @@ const DashboardMember = () => {
             borderRadius: '15px',
             boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
           }}>
-            <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Tiến Độ</h2>
+            <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Progress</h2>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6', marginBottom: '1rem' }}>
-              Số ngày không hút thuốc: <span style={{ fontWeight: 'bold', color: '#e74c3c' }}>{smokeFreeCount}</span> ngày<br />
-              Tiền tiết kiệm được: <span style={{ fontWeight: 'bold', color: '#27ae60' }}>{formatCurrency(moneySaved)}</span>
+              Smoke-free days: <span style={{ fontWeight: 'bold', color: '#e74c3c' }}>{smokeFreeCount}</span> days<br />
+              Money saved: <span style={{ fontWeight: 'bold', color: '#27ae60' }}>{formatCurrency(moneySaved)}</span>
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <button
@@ -1136,7 +1136,7 @@ const DashboardMember = () => {
                   boxShadow: '0 2px 4px rgba(52, 152, 219, 0.3)'
                 }}
               >
-                Thêm Ngày Không Hút Thuốc
+                Add Smoke-Free Day
               </button>
               <button
                 onClick={resetSmokeFreeCount}
@@ -1151,7 +1151,7 @@ const DashboardMember = () => {
                   boxShadow: '0 2px 4px rgba(231, 76, 60, 0.3)'
                 }}
               >
-                Đặt Lại
+                Reset
               </button>
             </div>
           </div>
@@ -1162,14 +1162,14 @@ const DashboardMember = () => {
             borderRadius: '15px',
             boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
           }}>
-            <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Thành Tựu</h2>
-            {smokeFreeCount >= 1 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 1 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 7 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 7 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 30 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 30 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 90 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 90 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 180 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 180 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 365 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 1 năm không hút thuốc!</p>}
-            {smokeFreeCount === 0 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Bạn chưa có thành tựu nào. Hãy bắt đầu hành trình cai thuốc!</p>}
+            <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Achievements</h2>
+            {smokeFreeCount >= 1 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 1 day smoke-free</p>}
+            {smokeFreeCount >= 7 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 7 days smoke-free</p>}
+            {smokeFreeCount >= 30 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 30 days smoke-free</p>}
+            {smokeFreeCount >= 90 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 90 days smoke-free</p>}
+            {smokeFreeCount >= 180 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 180 days smoke-free</p>}
+            {smokeFreeCount >= 365 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 1 year smoke-free!</p>}
+            {smokeFreeCount === 0 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>You have no achievements yet. Start your quit journey!</p>}
           </div>
         </div>
       </div>
