@@ -86,7 +86,13 @@ function Home() {
   };
 
   const navigateToDashboard = (path) => {
-    navigate(path);
+    // Check if user is logged in before navigating to dashboard
+    if (isLoggedIn) {
+      navigate(path);
+    } else {
+      alert('Vui lòng đăng nhập để truy cập tính năng này.');
+      navigate('/login');
+    }
   };
 
   // Handle logout
@@ -119,7 +125,7 @@ function Home() {
   const handleContactSubmit = (e) => {
     e.preventDefault();
     // Here you would typically send the form data to your backend
-    alert('Thank you for your message. We will get back to you soon!');
+    alert('Cảm ơn vì tin nhắn của bạn. Chúng tôi sẽ liên hệ lại sớm!');
     setShowContactModal(false);
     setContactForm({
       name: '',
@@ -128,8 +134,6 @@ function Home() {
       isRobot: true
     });
   };
-
-
 
   return (
     <div style={{
@@ -171,7 +175,7 @@ function Home() {
           {/* Search Icon & Input */}
           <div style={{ position: 'relative', marginRight: '1rem' }}>
             <button
-              aria-label="Search"
+              aria-label="Tìm kiếm"
               onClick={handleSearchIconClick}
               style={{
                 background: '#e5e8ee',
@@ -215,7 +219,7 @@ function Home() {
                   type="text"
                   value={searchValue}
                   onChange={e => setSearchValue(e.target.value)}
-                  placeholder="Search..."
+                  placeholder="Tìm kiếm..."
                   style={{
                     border: 'none',
                     outline: 'none',
@@ -237,7 +241,7 @@ function Home() {
                   fontWeight: 600,
                   boxShadow: '0 2px 8px #002f6c22',
                   transition: 'background 0.2s',
-                }}>Go</button>
+                }}>Đi</button>
               </form>
             </div>
           </div>
@@ -286,7 +290,7 @@ function Home() {
                   cursor: 'pointer',
                 }}
               >
-                Logout
+                Đăng Xuất
               </button>
             </div>
           ) : (
@@ -303,7 +307,7 @@ function Home() {
                 border: 'none',
                 fontSize: '1.08rem',
               }}>
-                Login
+                Đăng Nhập
               </Link>
               <Link to="/register" style={{
                 padding: '0.5rem 1.5rem',
@@ -317,7 +321,7 @@ function Home() {
                 border: 'none',
                 fontSize: '1.08rem',
               }}>
-                Register
+                Đăng Ký
               </Link>
             </>
           )}
@@ -339,59 +343,66 @@ function Home() {
         zIndex: 9,
         borderBottom: '2px solid #e5e8ee',
       }}>
-        <button onClick={() => navigate('/')} style={navBtnStyle}>Home</button>
+        <button onClick={() => navigate('/')} style={navBtnStyle}>Trang Chủ</button>
         <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('tools')} style={navBtnStyle}>Tools & Tips ▾</button>
+          <button onClick={() => handleDropdown('tools')} style={navBtnStyle}>Công Cụ & Mẹo ▾</button>
           {openDropdown === 'tools' && (
             <div style={dropdownMenuStyle}>
-              <button style={dropdownBtnStyle}>Track Your Status</button>
+              <button style={dropdownBtnStyle}>Theo Dõi Trạng Thái</button>
               <button
-                onClick={() => navigateToDashboard('/dashboard-member')}
+                onClick={() => {
+                  if (isLoggedIn) {
+                    navigateToDashboard('/dashboard-member');
+                  } else {
+                    alert('Vui lòng đăng nhập để tạo kế hoạch cai thuốc.');
+                    navigate('/login');
+                  }
+                }}
                 style={dropdownBtnStyle}
               >
-                Create a Plan
+                Tạo Kế Hoạch
               </button>
-              <button style={dropdownBtnStyle}>How to Quit</button>
+              <button style={dropdownBtnStyle}>Cách Cai Thuốc</button>
             </div>
           )}
         </div>
         <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('about')} style={navBtnStyle}>About Us ▾</button>
+          <button onClick={() => handleDropdown('about')} style={navBtnStyle}>Về Chúng Tôi ▾</button>
           {openDropdown === 'about' && (
             <div style={dropdownMenuStyle}>
-              <button style={dropdownBtnStyle}>Expert Sharing</button>
-              <button style={dropdownBtnStyle}>Quit Smoking Advice</button>
+              <button style={dropdownBtnStyle}>Chia Sẻ Từ Chuyên Gia</button>
+              <button style={dropdownBtnStyle}>Lời Khuyên Cai Thuốc</button>
               <button style={dropdownBtnStyle}>Blog</button>
             </div>
           )}
         </div>
         <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('challenge')} style={navBtnStyle}>Challenge ▾</button>
+          <button onClick={() => handleDropdown('challenge')} style={navBtnStyle}>Thử Thách ▾</button>
           {openDropdown === 'challenge' && (
             <div style={dropdownMenuStyle}>
-              <button style={dropdownBtnStyle}>Difficulties</button>
-              <button style={dropdownBtnStyle}>Supportive Exercises</button>
-              <button style={dropdownBtnStyle}>Nutrition</button>
+              <button style={dropdownBtnStyle}>Khó Khăn</button>
+              <button style={dropdownBtnStyle}>Bài Tập Hỗ Trợ</button>
+              <button style={dropdownBtnStyle}>Dinh Dưỡng</button>
             </div>
           )}
         </div>
         <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('help')} style={navBtnStyle}>Help & Support ▾</button>
+          <button onClick={() => handleDropdown('help')} style={navBtnStyle}>Trợ Giúp & Hỗ Trợ ▾</button>
           {openDropdown === 'help' && (
             <div style={dropdownMenuStyle}>
               <button
                 onClick={() => setShowContactModal(true)}
                 style={dropdownBtnStyle}
               >
-                Contact
+                Liên Hệ
               </button>
               <button
                 onClick={() => navigate('/doctors')}
                 style={dropdownBtnStyle}
               >
-                Doctor
+                Bác Sĩ
               </button>
-              <button style={dropdownBtnStyle}>Chat Message</button>
+              <button style={dropdownBtnStyle}>Nhắn Tin Hỗ Trợ</button>
             </div>
           )}
         </div>
@@ -459,7 +470,7 @@ function Home() {
               position: 'relative',
               paddingBottom: '10px'
             }}>
-              CONTACT US
+              LIÊN HỆ CHÚNG TÔI
               <div style={{
                 content: '""',
                 position: 'absolute',
@@ -482,14 +493,14 @@ function Home() {
                   fontWeight: '600',
                   color: '#2c3e50'
                 }}>
-                  Name <span style={{ color: '#e74c3c' }}>*</span>
+                  Họ tên <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={contactForm.name}
                   onChange={handleContactFormChange}
-                  placeholder="Your name"
+                  placeholder="Tên của bạn"
                   required
                   style={{
                     width: '100%',
@@ -525,14 +536,14 @@ function Home() {
                   fontWeight: '600',
                   color: '#2c3e50'
                 }}>
-                  E-mail Address <span style={{ color: '#e74c3c' }}>*</span>
+                  Địa chỉ Email <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={contactForm.email}
                   onChange={handleContactFormChange}
-                  placeholder="Your email address"
+                  placeholder="Địa chỉ email của bạn"
                   required
                   style={{
                     width: '100%',
@@ -568,13 +579,13 @@ function Home() {
                   fontWeight: '600',
                   color: '#2c3e50'
                 }}>
-                  Message <span style={{ color: '#e74c3c' }}>*</span>
+                  Tin nhắn <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <textarea
                   name="message"
                   value={contactForm.message}
                   onChange={handleContactFormChange}
-                  placeholder="Your message"
+                  placeholder="Nội dung tin nhắn"
                   required
                   style={{
                     width: '100%',
@@ -614,7 +625,7 @@ function Home() {
                   fontWeight: '600',
                   color: '#2c3e50'
                 }}>
-                  Are you a robot? <span style={{ color: '#e74c3c' }}>*</span>
+                  Bạn có phải là robot? <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <div style={{
                   display: 'flex',
@@ -640,7 +651,7 @@ function Home() {
                         height: '18px'
                       }}
                     />
-                    I am
+                    Tôi là
                   </label>
                   <label style={{
                     display: 'flex',
@@ -661,7 +672,7 @@ function Home() {
                         height: '18px'
                       }}
                     />
-                    I am not
+                    Tôi không phải
                   </label>
                 </div>
               </div>
@@ -693,7 +704,7 @@ function Home() {
                     }
                   }}
                 >
-                  SEND
+                  GỬI
                 </button>
               </div>
             </form>
@@ -709,187 +720,235 @@ function Home() {
         />
       )}
 
-      {/* Hero Section */}
-      <section
-        style={{
-          width: '100%',
-          minHeight: '420px',
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundImage:
-            'url(/hero-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          marginBottom: '0',
-        }}
-      >
-        {/* Content */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 2,
-            color: 'white',
-            padding: '3rem 2rem',
-            maxWidth: '700px',
-            marginLeft: '5vw',
-            textShadow: '0 4px 24px rgba(0,47,108,0.18)',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: '2.8rem',
-              fontWeight: 800,
-              marginBottom: '1.2rem',
-              lineHeight: 1.1,
-              letterSpacing: '1px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            Freedom begins with a<br />
-            <span style={{
-              display: 'inline-block',
-              background: 'linear-gradient(90deg, #0057b8 0%, #1976d2 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              fontSize: '3.2rem',
-              fontWeight: 900,
-            }}>
-              breath of fresh air.
-            </span>
-          </h1>
-          <p
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 400,
-              color: '#fff',
-              maxWidth: '500px',
-              marginBottom: '0',
-              lineHeight: 1.6,
-              textShadow: '0 2px 8px rgba(0,47,108,0.12)',
-            }}
-          >
-            Join BreathingFree and start your journey to a healthier, happier, smoke-free life today.
-          </p>
-        </div>
-      </section>
-
-      {/* Timeline Section - New Design */}
-      <div id="timeline" style={{
-        padding: '5rem 2rem',
-        backgroundColor: 'white',
+      {/* Hero section */}
+      <section style={{
+        padding: '2rem 2rem 4rem',
         width: '100%',
-        boxSizing: 'border-box'
+        maxWidth: '1300px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '3rem',
+        boxSizing: 'border-box',
       }}>
+        {/* Hero content: Title, text, and CTA buttons */}
         <div style={{
-          maxWidth: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          maxWidth: '1000px',
+          width: '100%',
           margin: '0 auto',
-          width: '100%'
+          padding: '3rem 1rem',
+          background: 'linear-gradient(135deg, #ffffff 0%, #f4f6f8 100%)',
+          borderRadius: '20px',
+          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.08)',
+          position: 'relative',
+          overflow: 'hidden',
         }}>
-          <h2 style={{
-            textAlign: 'center',
-            fontSize: '2.8rem',
-            color: '#2c3e50',
-            marginBottom: '1rem',
-            fontWeight: '700'
+          <div style={{
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '8px',
+            background: 'linear-gradient(90deg, #1976d2 0%, #44b89d 100%)',
+          }}></div>
+
+          <h1 style={{
+            fontSize: '2.7rem',
+            fontWeight: '900',
+            marginBottom: '1.5rem',
+            color: '#002f6c',
+            letterSpacing: '1px',
+            paddingBottom: '10px',
+            position: 'relative',
+            display: 'inline-block',
           }}>
-            What happens when you quit?
-          </h2>
+            Bỏ Thuốc Lá Vì Một Cuộc Sống Khỏe Mạnh Hơn
+            <div style={{
+              position: 'absolute',
+              bottom: '0',
+              left: '10%',
+              right: '10%',
+              height: '3px',
+              background: '#44b89d',
+              borderRadius: '2px',
+            }}></div>
+          </h1>
 
           <p style={{
-            textAlign: 'center',
             fontSize: '1.2rem',
-            color: '#34495e',
+            marginBottom: '2rem',
             maxWidth: '800px',
-            margin: '0 auto 4rem',
-            lineHeight: '1.6'
+            color: '#2c3e50',
+            lineHeight: '1.6',
           }}>
-            The sooner you quit, the sooner you'll notice changes to your body and health. Look at what happens when you quit for good.
+            Chúng tôi cung cấp sự hỗ trợ, các công cụ và tài nguyên cá nhân hóa để giúp bạn cai thuốc lá.
+            Hãy lập kế hoạch và bắt đầu hành trình cai thuốc lá của bạn ngay hôm nay!
           </p>
 
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '3rem 2rem',
-            width: '100%'
+            display: 'flex',
+            gap: '1.5rem',
+            marginTop: '1rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
           }}>
-            {/* 20 minutes */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img20m} alt="20 minutes" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 20 minutes</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Check your pulse rate, it will already be starting to return to normal.</p>
-              </div>
-            </div>
+            <button
+              onClick={() => {
+                if (isLoggedIn) {
+                  navigate('/dashboard-member');
+                } else {
+                  navigate('/login');
+                }
+              }}
+              style={{
+                padding: '1rem 2rem',
+                background: '#1976d2',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                fontWeight: '700',
+                fontSize: '1.1rem',
+                cursor: 'pointer',
+                boxShadow: '0 4px 10px rgba(25, 118, 210, 0.3)',
+                transition: 'transform 0.2s, background 0.2s',
+                willChange: 'transform',
+                position: 'relative',
+                overflow: 'hidden',
+                zIndex: 1,
+              }}
+            >
+              <span style={{
+                position: 'relative',
+                zIndex: 2,
+              }}>
+                Bắt Đầu Hành Trình Cai Thuốc Lá Ngay
+              </span>
+              <div style={{
+                position: 'absolute',
+                top: '0',
+                left: '-100%',
+                width: '200%',
+                height: '100%',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                zIndex: 1,
+                animation: 'glowingEffect 3s infinite linear',
+              }}></div>
+            </button>
 
-            {/* 8 hours */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img8h} alt="8 hours" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 8 hours</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Your oxygen levels are recovering, and the harmful carbon monoxide level in your blood will have reduced by half.</p>
-              </div>
-            </div>
-
-            {/* 48 hours */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img48h} alt="48 hours" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 48 hours</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Your carbon monoxide levels have dropped to that of a non-smoker. Your lungs are clearing out mucus and your senses of taste and smell are improving.</p>
-              </div>
-            </div>
-
-            {/* 72 hours */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img72h} alt="72 hours" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 72 hours</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>If you notice that breathing feels easier, it's because your bronchial tubes have started to relax. Also your energy will be increasing.</p>
-              </div>
-            </div>
-
-            {/* 2-12 weeks */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img2_12w} alt="2-12 weeks" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 2 to 12 weeks</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Blood will be pumping through to your heart and muscles much better because your circulation will have improved.</p>
-              </div>
-            </div>
-
-            {/* 3-9 months */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img3_9m} alt="3-9 months" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 3 to 9 months</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Any coughs, wheezing or breathing problems will be improving as your lung function increases by up to 10%.</p>
-              </div>
-            </div>
-
-            {/* 1 year */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img1y} alt="1 year" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 1 year</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Great news! Your risk of heart attack will have halved compared with a smoker's.</p>
-              </div>
-            </div>
-
-            {/* 10 years */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <img src={img10y} alt="10 years" style={{ width: 70, height: 70, objectFit: 'contain', flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#2c3e50', marginBottom: '0.5rem' }}>After 10 years</h3>
-                <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>More great news! Your risk of death from lung cancer will have halved compared with a smoker's.</p>
-              </div>
-            </div>
+            <button
+              onClick={() => {
+                setShowDoctorModal(true);
+              }}
+              style={{
+                padding: '1rem 2rem',
+                background: 'white',
+                color: '#1976d2',
+                border: '2px solid #1976d2',
+                borderRadius: '10px',
+                fontWeight: '700',
+                fontSize: '1.1rem',
+                cursor: 'pointer',
+                transition: 'transform 0.2s, background 0.2s, box-shadow 0.2s',
+                boxShadow: '0 4px 10px rgba(25, 118, 210, 0.1)',
+              }}
+            >
+              Tìm Bác Sĩ Gần Đây
+            </button>
           </div>
+        </div>
+      </section>
+
+      {/* Health Benefits Section */}
+      <div style={{
+        width: '100%',
+        marginTop: '1rem',
+        marginBottom: '1rem',
+      }}>
+        <h2 style={{
+          textAlign: 'center',
+          color: '#002f6c',
+          fontSize: '2.2rem',
+          fontWeight: '800',
+          marginBottom: '1.5rem',
+          position: 'relative',
+          paddingBottom: '0.75rem',
+          display: 'inline-block',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}>
+          Lợi ích sức khỏe khi cai thuốc lá
+          <div style={{
+            position: 'absolute',
+            bottom: '0',
+            left: '10%',
+            right: '10%',
+            height: '3px',
+            background: '#44b89d',
+            borderRadius: '2px',
+          }}></div>
+        </h2>
+
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '2rem',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '1rem 0',
+        }}>
+          <BenefitCard
+            title="20 phút"
+            image={img20m}
+            text="Nhịp tim và huyết áp của bạn giảm về mức bình thường, thúc đẩy lưu thông máu khỏe mạnh hơn và giảm nguy cơ tim mạch."
+          />
+
+          <BenefitCard
+            title="8 giờ"
+            image={img8h}
+            text="Nồng độ nicotine và carbon monoxide trong máu giảm đi một nửa, mức oxy trong máu tăng lên mức bình thường, cải thiện chức năng phổi của bạn."
+          />
+
+          <BenefitCard
+            title="48 giờ"
+            image={img48h}
+            text="Cơ thể bạn đã loại bỏ tất cả nicotine. Các dây thần kinh bắt đầu mọc lại và khả năng nếm và ngửi của bạn cải thiện đáng kể."
+          />
+
+          <BenefitCard
+            title="72 giờ"
+            image={img72h}
+            text="Khí quản của bạn thư giãn, mức năng lượng tăng lên và việc thở trở nên dễ dàng hơn khi chức năng phổi tiếp tục cải thiện."
+          />
+
+          <BenefitCard
+            title="2-12 tuần"
+            image={img2_12w}
+            text="Tuần hoàn trong cơ thể bạn cải thiện, làm cho hoạt động thể chất trở nên dễ dàng hơn. Phổi của bạn có thể hoạt động tốt hơn đến 30%."
+          />
+
+          <BenefitCard
+            title="3-9 tháng"
+            image={img3_9m}
+            text="Các vấn đề về hô hấp như ho và khó thở giảm đi và chức năng phổi tăng lên khi viêm trong phổi giảm."
+          />
+
+          <BenefitCard
+            title="1 năm"
+            image={img1y}
+            text="Nguy cơ mắc bệnh tim mạch vành giảm còn một nửa so với người hút thuốc. Lưu thông máu và chức năng phổi cải thiện đáng kể."
+          />
+
+          <BenefitCard
+            title="10 năm"
+            image={img10y}
+            text="Nguy cơ tử vong do ung thư phổi giảm một nửa so với người tiếp tục hút thuốc lá. Nguy cơ mắc các loại ung thư khác cũng giảm."
+          />
         </div>
       </div>
 
@@ -907,7 +966,7 @@ function Home() {
           marginBottom: '3rem',
           fontWeight: '700'
         }}>
-          Key Features
+          Tính Năng Chính
         </h2>
 
         <div style={{
@@ -940,9 +999,9 @@ function Home() {
             }}>
               <div style={{ fontSize: '2rem', color: '#35a79c' }}>📊</div>
             </div>
-            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Progress Tracking</h3>
+            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Theo Dõi Tiến Độ</h3>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
-              Monitor your smoke-free days, money saved, and health improvements in real-time with our advanced tracking tools.
+              Theo dõi số ngày không hút thuốc, tiền tiết kiệm được và các cải thiện sức khỏe theo thời gian thực với công cụ theo dõi tiên tiến của chúng tôi.
             </p>
           </div>
 
@@ -967,9 +1026,9 @@ function Home() {
             }}>
               <div style={{ fontSize: '2rem', color: '#44b89d' }}>🏆</div>
             </div>
-            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Achievements & Rewards</h3>
+            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Thành Tích & Phần Thưởng</h3>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
-              Unlock badges and earn achievements as you reach important milestones in your journey to quit smoking.
+              Mở khóa huy hiệu và đạt được thành tích khi bạn đạt đến các cột mốc quan trọng trong hành trình cai thuốc lá của mình.
             </p>
           </div>
 
@@ -994,9 +1053,9 @@ function Home() {
             }}>
               <div style={{ fontSize: '2rem', color: '#3d7da0' }}>👥</div>
             </div>
-            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Professional Coaching</h3>
+            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Huấn Luyện Chuyên Nghiệp</h3>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
-              Connect with professional coaches to receive personalized guidance for your smoking cessation journey.
+              Kết nối với huấn luyện viên chuyên nghiệp để nhận hướng dẫn cá nhân hóa cho hành trình cai thuốc lá của bạn.
             </p>
           </div>
         </div>
@@ -1004,25 +1063,63 @@ function Home() {
 
       {/* Footer */}
       <footer style={{
-        backgroundColor: '#2c3e50',
+        background: '#002f6c',
         color: 'white',
         padding: '3rem 2rem',
-        textAlign: 'center',
-        width: '100%',
-        boxSizing: 'border-box'
+        marginTop: '2rem',
       }}>
-        <div style={{ marginBottom: '1.5rem' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-            <span style={{ color: '#44b89d' }}>Breathing</span>
-            <span style={{ color: '#35a79c' }}>Free</span>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '3rem',
+        }}>
+          <div>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>Breathing Free</h3>
+            <p style={{ lineHeight: '1.6' }}>
+              Trang web hỗ trợ cai thuốc lá hàng đầu, cung cấp hỗ trợ, công cụ và tài nguyên cá nhân hóa để giúp bạn thành công trong hành trình cai thuốc lá.
+            </p>
           </div>
-          <p style={{ maxWidth: '600px', margin: '0 auto', color: '#bdc3c7' }}>
-            Smoking Cessation Support Platform - A comprehensive solution to help you quit smoking. We're here to support you every step of the way.
-          </p>
+
+          <div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '1.5rem' }}>Liên kết hữu ích</h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Giới thiệu</a></li>
+              <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Blog</a></li>
+              <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Đội ngũ</a></li>
+              <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Chính sách riêng tư</a></li>
+              <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Điều khoản sử dụng</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '1.5rem' }}>Liên hệ chúng tôi</h3>
+            <p style={{ marginBottom: '0.8rem' }}>Email: contact@breathingfree.com</p>
+            <p style={{ marginBottom: '0.8rem' }}>Điện thoại: +84 12 345 6789</p>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+              <a href="#" style={{ color: 'white', textDecoration: 'none' }}>
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+              </a>
+              <a href="#" style={{ color: 'white', textDecoration: 'none' }}>
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.068 10.068 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.894 4.894 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.894 4.894 0 01-2.186-.61v.061a4.919 4.919 0 003.946 4.824 4.925 4.925 0 01-2.184.081 4.935 4.935 0 004.604 3.42 9.863 9.863 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.99 13.99 0 007.557 2.21c8.195 0 12.68-6.773 12.68-12.605 0-.19 0-.385-.013-.578a9.005 9.005 0 002.21-2.296z" /></svg>
+              </a>
+              <a href="#" style={{ color: 'white', textDecoration: 'none' }}>
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.323 6.162 6.162 0 000-12.323zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.441 1.441 0 100 2.881 1.441 1.441 0 000-2.881z" /></svg>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div style={{ marginTop: '2rem', color: '#7f8c8d', fontSize: '0.9rem' }}>
-          © 2024 BreathingFree. All rights reserved.
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          textAlign: 'center',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          paddingTop: '2rem',
+          marginTop: '2rem',
+        }}>
+          <p>© 2023 Breathing Free. Tất cả quyền được bảo lưu.</p>
         </div>
       </footer>
     </div>
@@ -1073,6 +1170,51 @@ const dropdownBtnStyle = {
   borderRadius: '8px',
   transition: 'background 0.2s, color 0.2s',
   outline: 'none',
+};
+
+// BenefitCard component
+const BenefitCard = ({ title, image, text }) => {
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '260px',
+      padding: '1.5rem',
+      borderRadius: '15px',
+      boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+      background: 'white',
+      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+    }}>
+      <img
+        src={image}
+        alt={title}
+        style={{
+          width: '80px',
+          height: '80px',
+          marginBottom: '1rem',
+          objectFit: 'contain'
+        }}
+      />
+      <h3 style={{
+        color: '#002f6c',
+        marginBottom: '0.5rem',
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        textAlign: 'center'
+      }}>
+        {title}
+      </h3>
+      <p style={{
+        color: '#2c3e50',
+        textAlign: 'center',
+        lineHeight: '1.5',
+        fontSize: '0.95rem'
+      }}>
+        {text}
+      </p>
+    </div>
+  );
 };
 
 export default Home;

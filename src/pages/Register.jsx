@@ -82,12 +82,12 @@ function Register() {
         alignItems: 'stretch',
       }}>
         <div style={{ fontSize: '2rem', fontWeight: 800, color: '#002f6c', marginBottom: '0.5rem', lineHeight: 1.1, fontFamily: "'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif" }}>
-          Create your account
+          Tạo tài khoản của bạn
         </div>
         <input
           type="text"
           name="name"
-          placeholder="Full Name"
+          placeholder="Họ và tên"
           value={form.name}
           onChange={handleChange}
           style={{
@@ -102,7 +102,7 @@ function Register() {
         <input
           type="date"
           name="dob"
-          placeholder="Date of Birth"
+          placeholder="Ngày sinh"
           value={form.dob}
           onChange={handleChange}
           style={{
@@ -115,21 +115,21 @@ function Register() {
           }}
         />
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', margin: '0.5rem 0 0.5rem 0' }}>
-          <span style={{ color: '#002f6c', fontWeight: 600 }}>Gender:</span>
+          <span style={{ color: '#002f6c', fontWeight: 600 }}>Giới tính:</span>
           <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontWeight: 500, color: '#002f6c' }}>
-            <input type="radio" name="gender" value="Male" checked={form.gender === 'Male'} onChange={handleChange} /> Male
+            <input type="radio" name="gender" value="Male" checked={form.gender === 'Male'} onChange={handleChange} /> Nam
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontWeight: 500, color: '#002f6c' }}>
-            <input type="radio" name="gender" value="Female" checked={form.gender === 'Female'} onChange={handleChange} /> Female
+            <input type="radio" name="gender" value="Female" checked={form.gender === 'Female'} onChange={handleChange} /> Nữ
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontWeight: 500, color: '#002f6c' }}>
-            <input type="radio" name="gender" value="Other" checked={form.gender === 'Other'} onChange={handleChange} /> Other
+            <input type="radio" name="gender" value="Other" checked={form.gender === 'Other'} onChange={handleChange} /> Khác
           </label>
         </div>
         <input
           type="text"
           name="job"
-          placeholder="Occupation"
+          placeholder="Nghề nghiệp"
           value={form.job}
           onChange={handleChange}
           style={{
@@ -143,7 +143,7 @@ function Register() {
         <input
           type="email"
           name="email"
-          placeholder="Gmail"
+          placeholder="Email"
           value={form.email}
           onChange={handleChange}
           style={{
@@ -158,7 +158,7 @@ function Register() {
           <input
             type="password"
             name="password"
-            placeholder="Password (min 8 chars, 1 uppercase, 1 number, 1 special)"
+            placeholder="Mật khẩu (tối thiểu 8 ký tự, 1 chữ hoa, 1 số, 1 ký tự đặc biệt)"
             value={form.password}
             onChange={handleChange}
             style={{
@@ -177,7 +177,7 @@ function Register() {
             marginBottom: showPasswordError ? '-0.5rem' : '0',
             minHeight: '1.2em',
           }}>
-            Password must be at least 8 characters, include 1 uppercase, 1 number, and 1 special character.
+            Mật khẩu phải có ít nhất 8 ký tự, bao gồm 1 chữ hoa, 1 số và 1 ký tự đặc biệt.
           </div>
         </div>
         <button type="submit" style={{
@@ -192,10 +192,10 @@ function Register() {
           cursor: 'pointer',
           boxShadow: '0 2px 8px #002f6c22',
           transition: 'background 0.2s',
-        }}>Register</button>
+        }}>Đăng Ký</button>
         <div style={{ textAlign: 'center', color: '#002f6c', fontWeight: 500, marginTop: '0.5rem' }}>
-          Already have an account?{' '}
-          <Link to="/login" style={{ color: '#1976d2', fontWeight: 700, textDecoration: 'underline' }}>Login</Link>
+          Đã có tài khoản?{' '}
+          <Link to="/login" style={{ color: '#1976d2', fontWeight: 700, textDecoration: 'underline' }}>Đăng Nhập</Link>
         </div>
       </form>
     </div>
