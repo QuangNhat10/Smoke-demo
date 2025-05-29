@@ -445,6 +445,198 @@ function HomepageMember() {
                                 }}>Kết nối với các bác sĩ chuyên khoa để được hỗ trợ cho hành trình của bạn.</p>
                             </div>
                         </div>
+                        <div onClick={() => navigate('/expert-advice')} style={{
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            padding: '1.8rem',
+                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1.2rem',
+                            transition: 'all 0.3s ease',
+                            border: '1px solid rgba(53, 167, 156, 0.05)'
+                        }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.05)';
+                            }}>
+                            <div style={{
+                                backgroundColor: '#9c27b020',
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '1.8rem',
+                                flexShrink: 0
+                            }}>📚</div>
+                            <div>
+                                <h3 style={{
+                                    margin: '0 0 0.7rem 0',
+                                    color: '#2c3e50',
+                                    fontWeight: '600',
+                                    fontSize: '1.3rem'
+                                }}>Lời Khuyên Từ Chuyên Gia</h3>
+                                <p style={{
+                                    margin: '0',
+                                    color: '#7f8c8d',
+                                    lineHeight: '1.5',
+                                    fontSize: '0.95rem'
+                                }}>Đọc những lời khuyên và kinh nghiệm quý báu từ các chuyên gia về cai thuốc lá.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Expert Advice Section */}
+                <section style={{
+                    marginBottom: '2rem'
+                }}>
+                    <h2 style={{
+                        fontWeight: '600',
+                        marginBottom: '1.2rem',
+                        color: '#35a79c',
+                        fontSize: '1.6rem'
+                    }}>Lời Khuyên Từ Chuyên Gia</h2>
+
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '15px',
+                        padding: '2rem',
+                        boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                        marginBottom: '1.5rem'
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '1.5rem',
+                        }}>
+                            <div style={{
+                                width: '70px',
+                                height: '70px',
+                                borderRadius: '50%',
+                                background: '#44b89d22',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '2rem',
+                                flexShrink: 0
+                            }}>
+                                👨‍⚕️
+                            </div>
+
+                            <div style={{ flex: 1 }}>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    marginBottom: '0.5rem'
+                                }}>
+                                    <div>
+                                        <h3 style={{
+                                            fontSize: '1.3rem',
+                                            fontWeight: '600',
+                                            color: '#2c3e50',
+                                            margin: '0 0 0.3rem 0'
+                                        }}>
+                                            BS. Nguyễn Đức Quảng
+                                        </h3>
+                                        <p style={{
+                                            color: '#44b89d',
+                                            fontSize: '0.9rem',
+                                            margin: '0'
+                                        }}>
+                                            Phó Giám đốc Bệnh viện Phổi Hà Tĩnh
+                                        </p>
+                                    </div>
+                                    <span style={{
+                                        fontSize: '0.9rem',
+                                        color: '#7f8c8d'
+                                    }}>
+                                        15/06/2023
+                                    </span>
+                                </div>
+
+                                <h4 style={{
+                                    color: '#44b89d',
+                                    fontSize: '1.3rem',
+                                    fontWeight: '600',
+                                    margin: '1rem 0 0.8rem 0'
+                                }}>
+                                    Giải pháp hỗ trợ khi gặp cơn thèm thuốc lá
+                                </h4>
+
+                                <p style={{
+                                    color: '#2c3e50',
+                                    fontSize: '1rem',
+                                    lineHeight: '1.6',
+                                    margin: '0 0 1.5rem 0'
+                                }}>
+                                    Khi bạn gặp cơn thèm thuốc lá, điều quan trọng là phân tán sự chú ý của bạn. Hãy thử phương pháp 4D: Delay (Trì hoãn) - hãy đợi 5-10 phút, cơn thèm thuốc sẽ qua đi; Deep breathing (Hít thở sâu) - hít thở sâu và chậm; Drink water (Uống nước) - uống từng ngụm nhỏ nước; Distract (Chuyển hướng) - làm việc gì đó để phân tán sự chú ý...
+                                </p>
+
+                                <button
+                                    onClick={() => navigate('/expert-advice')}
+                                    style={{
+                                        backgroundColor: '#44b89d',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        padding: '0.8rem 1.5rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 4px 10px rgba(68, 184, 157, 0.3)',
+                                        transition: 'all 0.2s'
+                                    }}
+                                    onMouseOver={(e) => {
+                                        e.target.style.backgroundColor = '#399b8d';
+                                        e.target.style.transform = 'translateY(-2px)';
+                                    }}
+                                    onMouseOut={(e) => {
+                                        e.target.style.backgroundColor = '#44b89d';
+                                        e.target.style.transform = 'translateY(0)';
+                                    }}
+                                >
+                                    Đọc Tiếp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
+                        <button
+                            onClick={() => navigate('/expert-advice')}
+                            style={{
+                                backgroundColor: 'white',
+                                color: '#35a79c',
+                                border: '2px solid #35a79c',
+                                borderRadius: '10px',
+                                padding: '0.8rem 2rem',
+                                fontWeight: '700',
+                                fontSize: '1rem',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s'
+                            }}
+                            onMouseOver={(e) => {
+                                e.target.style.backgroundColor = '#f0f7f5';
+                            }}
+                            onMouseOut={(e) => {
+                                e.target.style.backgroundColor = 'white';
+                            }}
+                        >
+                            Xem Tất Cả Lời Khuyên
+                        </button>
                     </div>
                 </section>
             </div>
