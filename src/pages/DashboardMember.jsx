@@ -1,15 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import SecondaryNavigation from '../components/SecondaryNavigation';
 
 const DashboardMember = () => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Add window resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // Add authentication check
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+    const storedUserName = localStorage.getItem('userName');
+
     if (!isLoggedIn) {
       alert('Please log in to access the member dashboard.');
       navigate('/login');
+    }
+
+    if (storedUserName) {
+      setUserName(storedUserName);
     }
   }, [navigate]);
 
@@ -361,11 +383,14 @@ const DashboardMember = () => {
       width: '100%',
       background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
       fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-      padding: '2rem',
       boxSizing: 'border-box',
       overflowX: 'hidden'
     }}>
+      <Header userName={userName} />
+      <SecondaryNavigation />
+
       <div style={{
+        padding: '2rem',
         maxWidth: '100%',
         margin: '0 auto',
         width: '100%',
@@ -403,7 +428,7 @@ const DashboardMember = () => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gridTemplateColumns: windowWidth < 1024 ? '1fr' : 'repeat(3, 1fr)',
           gap: '2rem',
           width: '100%'
         }}>
@@ -411,7 +436,10 @@ const DashboardMember = () => {
             padding: '2rem',
             backgroundColor: 'white',
             borderRadius: '15px',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
+            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+            height: '100%',
+            overflow: 'auto',
+            maxHeight: '600px'
           }}>
             <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Kế Hoạch Cai Thuốc</h2>
 
@@ -1115,13 +1143,45 @@ const DashboardMember = () => {
             padding: '2rem',
             backgroundColor: 'white',
             borderRadius: '15px',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
+            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+            height: '100%',
+            overflow: 'auto',
+            maxHeight: '600px'
           }}>
             <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Tiến Độ</h2>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6', marginBottom: '1rem' }}>
               Số ngày không hút thuốc: <span style={{ fontWeight: 'bold', color: '#e74c3c' }}>{smokeFreeCount}</span> ngày<br />
               Tiền tiết kiệm được: <span style={{ fontWeight: 'bold', color: '#27ae60' }}>{formatCurrency(moneySaved)}</span>
             </p>
+
+            {/* Progress Bar */}
+            <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                <span style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Tiến độ cai thuốc</span>
+                <span style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>
+                  {smokeFreeCount < 30 ? `${smokeFreeCount}/30 ngày` : '30+ ngày'}
+                </span>
+              </div>
+              <div style={{
+                width: '100%',
+                height: '10px',
+                backgroundColor: '#ecf0f1',
+                borderRadius: '5px',
+                overflow: 'hidden'
+              }}>
+                <div style={{
+                  width: `${Math.min(smokeFreeCount / 30 * 100, 100)}%`,
+                  height: '100%',
+                  backgroundColor: smokeFreeCount >= 30 ? '#27ae60' : '#3498db',
+                  borderRadius: '5px',
+                  transition: 'width 0.5s ease-in-out'
+                }}></div>
+              </div>
+              <div style={{ fontSize: '0.8rem', color: '#95a5a6', marginTop: '0.5rem', textAlign: 'center' }}>
+                {smokeFreeCount >= 30 ? 'Chúc mừng! Bạn đã đạt mốc 30 ngày không hút thuốc!' : 'Mục tiêu: 30 ngày không hút thuốc'}
+              </div>
+            </div>
+
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <button
                 onClick={increaseSmokeFreeDay}
@@ -1160,16 +1220,159 @@ const DashboardMember = () => {
             padding: '2rem',
             backgroundColor: 'white',
             borderRadius: '15px',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
+            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+            height: '100%',
+            overflow: 'auto',
+            maxHeight: '600px'
           }}>
             <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Thành Tựu</h2>
-            {smokeFreeCount >= 1 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 1 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 7 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 7 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 30 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 30 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 90 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 90 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 180 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 180 ngày không hút thuốc</p>}
-            {smokeFreeCount >= 365 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>🏅 1 năm không hút thuốc!</p>}
-            {smokeFreeCount === 0 && <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>Bạn chưa có thành tựu nào. Hãy bắt đầu hành trình cai thuốc!</p>}
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                background: smokeFreeCount >= 1 ? 'rgba(52, 152, 219, 0.1)' : '#f9f9f9',
+                borderLeft: smokeFreeCount >= 1 ? '4px solid #3498db' : '4px solid #e0e0e0',
+                opacity: smokeFreeCount >= 1 ? 1 : 0.6
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: smokeFreeCount >= 1 ? '#3498db' : '#e0e0e0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.2rem'
+                }}>
+                  🏅
+                </div>
+                <div>
+                  <div style={{ fontWeight: '600', color: smokeFreeCount >= 1 ? '#2c3e50' : '#95a5a6' }}>1 ngày không hút thuốc</div>
+                  <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Bước đầu tiên trên hành trình</div>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                background: smokeFreeCount >= 7 ? 'rgba(155, 89, 182, 0.1)' : '#f9f9f9',
+                borderLeft: smokeFreeCount >= 7 ? '4px solid #9b59b6' : '4px solid #e0e0e0',
+                opacity: smokeFreeCount >= 7 ? 1 : 0.6
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: smokeFreeCount >= 7 ? '#9b59b6' : '#e0e0e0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.2rem'
+                }}>
+                  🥉
+                </div>
+                <div>
+                  <div style={{ fontWeight: '600', color: smokeFreeCount >= 7 ? '#2c3e50' : '#95a5a6' }}>7 ngày không hút thuốc</div>
+                  <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Một tuần chiến thắng</div>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                background: smokeFreeCount >= 30 ? 'rgba(241, 196, 15, 0.1)' : '#f9f9f9',
+                borderLeft: smokeFreeCount >= 30 ? '4px solid #f1c40f' : '4px solid #e0e0e0',
+                opacity: smokeFreeCount >= 30 ? 1 : 0.6
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: smokeFreeCount >= 30 ? '#f1c40f' : '#e0e0e0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.2rem'
+                }}>
+                  🥈
+                </div>
+                <div>
+                  <div style={{ fontWeight: '600', color: smokeFreeCount >= 30 ? '#2c3e50' : '#95a5a6' }}>30 ngày không hút thuốc</div>
+                  <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Một tháng thành công</div>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                background: smokeFreeCount >= 90 ? 'rgba(230, 126, 34, 0.1)' : '#f9f9f9',
+                borderLeft: smokeFreeCount >= 90 ? '4px solid #e67e22' : '4px solid #e0e0e0',
+                opacity: smokeFreeCount >= 90 ? 1 : 0.6
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: smokeFreeCount >= 90 ? '#e67e22' : '#e0e0e0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.2rem'
+                }}>
+                  🥇
+                </div>
+                <div>
+                  <div style={{ fontWeight: '600', color: smokeFreeCount >= 90 ? '#2c3e50' : '#95a5a6' }}>90 ngày không hút thuốc</div>
+                  <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Ba tháng kiên trì</div>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '0.8rem',
+                borderRadius: '8px',
+                background: smokeFreeCount >= 365 ? 'rgba(39, 174, 96, 0.1)' : '#f9f9f9',
+                borderLeft: smokeFreeCount >= 365 ? '4px solid #27ae60' : '4px solid #e0e0e0',
+                opacity: smokeFreeCount >= 365 ? 1 : 0.6
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: smokeFreeCount >= 365 ? '#27ae60' : '#e0e0e0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.2rem'
+                }}>
+                  👑
+                </div>
+                <div>
+                  <div style={{ fontWeight: '600', color: smokeFreeCount >= 365 ? '#2c3e50' : '#95a5a6' }}>365 ngày không hút thuốc</div>
+                  <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Một năm chiến thắng!</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
