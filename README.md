@@ -1,12 +1,53 @@
-# React + Vite
+# Breathing Free - Smoking Cessation Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application designed to help users quit smoking by providing a personalized journey with progress tracking, professional support, and membership options.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Member Dashboard**: Track your smoke-free days and progress
+- **Track Your Status**: Monitor health improvements and chat with consultants
+- **Professional Membership Plans**: Access premium features with flexible plans
+- **Doctor Consultation**: Connect with specialized doctors for support
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js
+- Vite
+- CSS with custom styling
+- LocalStorage for persistence (demo purposes)
+
+## Installation
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Install dependencies with `npm install`
+4. Run the development server with `npm run dev`
+
+## Project Contributors
+
+- [Your Name]
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or newer)
+- npm or yarn
+
+### Demo Accounts
+
+For testing purposes, you can use the following accounts:
+
+- **Member**: username: member123, password: Member123!
+- **Coach**: username: coach123, password: Coach123!
+- **Admin**: username: admin123, password: Admin123!
+
+## Project Structure
+
+- `/src/pages`: Main application pages
+- `/src/components`: Reusable React components
+- `/src/assets`: Images and static assets
+
+## License
+
+MIT
