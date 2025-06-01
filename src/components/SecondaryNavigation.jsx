@@ -45,6 +45,7 @@ const SecondaryNavigation = () => {
                                 </button>
                                 <button
                                     className="dropdown-item"
+                                    onClick={() => navigate('/smoking-cessation')}
                                 >
                                     Cách Cai Thuốc
                                 </button>
@@ -68,7 +69,12 @@ const SecondaryNavigation = () => {
                                     Chia Sẻ Từ Chuyên Gia
                                 </button>
                                 <button className="dropdown-item">Lời Khuyên Cai Thuốc</button>
-                                <button className="dropdown-item">Blog</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/blog')}
+                                >
+                                    Blog
+                                </button>
                             </div>
                         )}
                     </li>
