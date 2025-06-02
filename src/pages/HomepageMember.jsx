@@ -496,6 +496,168 @@ function HomepageMember() {
                     </div>
                 </section>
 
+                {/* Help & Support Section */}
+                <section style={{
+                    marginBottom: '2rem'
+                }}>
+                    <h2 style={{
+                        fontWeight: '600',
+                        marginBottom: '1.2rem',
+                        color: '#35a79c',
+                        fontSize: '1.6rem'
+                    }}>Trợ Giúp & Hỗ trợ</h2>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                        gap: '1.5rem'
+                    }}>
+                        <div onClick={() => navigate('/support-chat')} style={{
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            padding: '1.8rem',
+                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1.2rem',
+                            transition: 'all 0.3s ease',
+                            border: '1px solid rgba(53, 167, 156, 0.05)'
+                        }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.05)';
+                            }}>
+                            <div style={{
+                                backgroundColor: '#0057b820',
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '1.8rem',
+                                flexShrink: 0
+                            }}>💬</div>
+                            <div>
+                                <h3 style={{
+                                    margin: '0 0 0.7rem 0',
+                                    color: '#2c3e50',
+                                    fontWeight: '600',
+                                    fontSize: '1.3rem'
+                                }}>Chat Hỗ Trợ</h3>
+                                <p style={{
+                                    margin: '0',
+                                    color: '#7f8c8d',
+                                    lineHeight: '1.5',
+                                    fontSize: '0.95rem'
+                                }}>Nhận hỗ trợ trực tuyến từ nhân viên và bác sĩ của chúng tôi.</p>
+                            </div>
+                        </div>
+                        <div onClick={() => navigate('/faq')} style={{
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            padding: '1.8rem',
+                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1.2rem',
+                            transition: 'all 0.3s ease',
+                            border: '1px solid rgba(53, 167, 156, 0.05)'
+                        }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.05)';
+                            }}>
+                            <div style={{
+                                backgroundColor: '#9c27b020',
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '1.8rem',
+                                flexShrink: 0
+                            }}>❓</div>
+                            <div>
+                                <h3 style={{
+                                    margin: '0 0 0.7rem 0',
+                                    color: '#2c3e50',
+                                    fontWeight: '600',
+                                    fontSize: '1.3rem'
+                                }}>Câu Hỏi Thường Gặp</h3>
+                                <p style={{
+                                    margin: '0',
+                                    color: '#7f8c8d',
+                                    lineHeight: '1.5',
+                                    fontSize: '0.95rem'
+                                }}>Tìm câu trả lời cho những câu hỏi phổ biến về cai thuốc lá.</p>
+                            </div>
+                        </div>
+                        <div onClick={() => navigate('/contact')} style={{
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            padding: '1.8rem',
+                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1.2rem',
+                            transition: 'all 0.3s ease',
+                            border: '1px solid rgba(53, 167, 156, 0.05)'
+                        }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
+                                e.currentTarget.style.borderColor = 'rgba(53, 167, 156, 0.05)';
+                            }}>
+                            <div style={{
+                                backgroundColor: '#e74c3c20',
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '1.8rem',
+                                flexShrink: 0
+                            }}>📞</div>
+                            <div>
+                                <h3 style={{
+                                    margin: '0 0 0.7rem 0',
+                                    color: '#2c3e50',
+                                    fontWeight: '600',
+                                    fontSize: '1.3rem'
+                                }}>Liên Hệ</h3>
+                                <p style={{
+                                    margin: '0',
+                                    color: '#7f8c8d',
+                                    lineHeight: '1.5',
+                                    fontSize: '0.95rem'
+                                }}>Liên hệ với chúng tôi qua email hoặc điện thoại.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Expert Advice Section */}
                 <section style={{
                     marginBottom: '2rem'
