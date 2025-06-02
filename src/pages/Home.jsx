@@ -436,7 +436,12 @@ function Home() {
               >
                 Bác Sĩ
               </button>
-              <button style={dropdownBtnStyle}>Nhắn Tin Hỗ Trợ</button>
+              <button
+                onClick={() => navigate('/support-chat')}
+                style={dropdownBtnStyle}
+              >
+                Nhắn Tin Hỗ Trợ
+              </button>
             </div>
           )}
         </div>

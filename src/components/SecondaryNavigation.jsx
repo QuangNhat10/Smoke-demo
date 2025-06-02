@@ -104,14 +104,24 @@ const SecondaryNavigation = () => {
                         </button>
                         {activeDropdown === 'help' && (
                             <div className="dropdown-menu">
-                                <button className="dropdown-item">Liên Hệ</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/contact')}
+                                >
+                                    Liên Hệ
+                                </button>
                                 <button
                                     className="dropdown-item"
                                     onClick={() => navigate('/doctors')}
                                 >
                                     Bác Sĩ
                                 </button>
-                                <button className="dropdown-item">Nhắn Tin Hỗ Trợ</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/support-chat')}
+                                >
+                                    Nhắn Tin Hỗ Trợ
+                                </button>
                             </div>
                         )}
                     </li>
