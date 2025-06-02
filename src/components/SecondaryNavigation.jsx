@@ -18,7 +18,7 @@ const SecondaryNavigation = () => {
                             className="nav-link"
                             onClick={() => navigate('/homepage-member')}
                         >
-                            Home
+                            Trang Chủ
                         </button>
                     </li>
 
@@ -27,7 +27,7 @@ const SecondaryNavigation = () => {
                             className="nav-link dropdown-toggle"
                             onClick={() => handleDropdownToggle('tools')}
                         >
-                            Tools & Tips <span className="dropdown-arrow">▾</span>
+                            Công Cụ & Mẹo <span className="dropdown-arrow">▾</span>
                         </button>
                         {activeDropdown === 'tools' && (
                             <div className="dropdown-menu">
@@ -35,18 +35,19 @@ const SecondaryNavigation = () => {
                                     className="dropdown-item"
                                     onClick={() => navigate('/track-status')}
                                 >
-                                    Track Your Status
+                                    Theo Dõi Trạng Thái
                                 </button>
                                 <button
                                     className="dropdown-item"
                                     onClick={() => navigate('/dashboard-member')}
                                 >
-                                    Create a Plan
+                                    Tạo Kế Hoạch
                                 </button>
                                 <button
                                     className="dropdown-item"
+                                    onClick={() => navigate('/smoking-cessation')}
                                 >
-                                    How to Quit
+                                    Cách Cai Thuốc
                                 </button>
                             </div>
                         )}
@@ -57,13 +58,23 @@ const SecondaryNavigation = () => {
                             className="nav-link dropdown-toggle"
                             onClick={() => handleDropdownToggle('about')}
                         >
-                            About Us <span className="dropdown-arrow">▾</span>
+                            Về Chúng Tôi <span className="dropdown-arrow">▾</span>
                         </button>
                         {activeDropdown === 'about' && (
                             <div className="dropdown-menu">
-                                <button className="dropdown-item">Expert Sharing</button>
-                                <button className="dropdown-item">Quit Smoking Advice</button>
-                                <button className="dropdown-item">Blog</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/expert-advice')}
+                                >
+                                    Chia Sẻ Từ Chuyên Gia
+                                </button>
+                                <button className="dropdown-item">Lời Khuyên Cai Thuốc</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/blog')}
+                                >
+                                    Blog
+                                </button>
                             </div>
                         )}
                     </li>
@@ -73,13 +84,13 @@ const SecondaryNavigation = () => {
                             className="nav-link dropdown-toggle"
                             onClick={() => handleDropdownToggle('challenge')}
                         >
-                            Challenge <span className="dropdown-arrow">▾</span>
+                            Thử Thách <span className="dropdown-arrow">▾</span>
                         </button>
                         {activeDropdown === 'challenge' && (
                             <div className="dropdown-menu">
-                                <button className="dropdown-item">Difficulties</button>
-                                <button className="dropdown-item">Supportive Exercises</button>
-                                <button className="dropdown-item">Nutrition</button>
+                                <button className="dropdown-item">Khó Khăn</button>
+                                <button className="dropdown-item">Bài Tập Hỗ Trợ</button>
+                                <button className="dropdown-item">Dinh Dưỡng</button>
                             </div>
                         )}
                     </li>
@@ -89,18 +100,28 @@ const SecondaryNavigation = () => {
                             className="nav-link dropdown-toggle"
                             onClick={() => handleDropdownToggle('help')}
                         >
-                            Help & Support <span className="dropdown-arrow">▾</span>
+                            Trợ Giúp & Hỗ Trợ <span className="dropdown-arrow">▾</span>
                         </button>
                         {activeDropdown === 'help' && (
                             <div className="dropdown-menu">
-                                <button className="dropdown-item">Contact</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/contact')}
+                                >
+                                    Liên Hệ
+                                </button>
                                 <button
                                     className="dropdown-item"
                                     onClick={() => navigate('/doctors')}
                                 >
-                                    Doctor
+                                    Bác Sĩ
                                 </button>
-                                <button className="dropdown-item">Chat Message</button>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={() => navigate('/support-chat')}
+                                >
+                                    Nhắn Tin Hỗ Trợ
+                                </button>
                             </div>
                         )}
                     </li>

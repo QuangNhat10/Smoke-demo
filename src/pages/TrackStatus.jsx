@@ -133,11 +133,13 @@ const TrackStatus = () => {
                     }}>Theo dõi tiến trình và giữ liên lạc với đội ngũ hỗ trợ của bạn</p>
                 </div>
 
+                {/* Content Grid */}
                 <div className="content-grid" style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                     gap: '2rem'
                 }}>
+                    {/* Info Section */}
                     <div className="info-section" style={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -396,7 +398,7 @@ const TrackStatus = () => {
                         </div>
                     </div>
 
-                    {/* Doctor Cards */}
+                    {/* Chat Section - Moved back to bottom */}
                     <div className="chat-section">
                         <div className="card chat-card" style={{
                             backgroundColor: 'white',

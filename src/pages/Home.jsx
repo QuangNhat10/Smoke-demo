@@ -139,7 +139,7 @@ function Home() {
     <div style={{
       minHeight: '100vh',
       width: '100%',
-      background: '#f4f6f8',
+      background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
       fontFamily: "'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif",
       boxSizing: 'border-box',
       overflowX: 'hidden'
@@ -151,7 +151,7 @@ function Home() {
         alignItems: 'center',
         padding: '1.5rem 2rem 0.5rem 2rem',
         background: '#fff',
-        boxShadow: '0 8px 32px 0 rgba(0,47,108,0.08)',
+        boxShadow: '0 8px 32px 0 rgba(53, 167, 156, 0.08)',
         width: '100%',
         boxSizing: 'border-box',
         position: 'relative',
@@ -161,7 +161,7 @@ function Home() {
         <button onClick={() => navigate('/')} style={{
           fontSize: '2.2rem',
           fontWeight: 900,
-          color: '#002f6c',
+          color: '#35a79c',
           letterSpacing: '1px',
           fontFamily: "'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif",
           background: 'none',
@@ -186,14 +186,14 @@ function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 borderRadius: '50%',
-                boxShadow: showSearch ? '0 2px 8px #002f6c33' : '0 1px 3px #002f6c22',
+                boxShadow: showSearch ? '0 2px 8px rgba(53, 167, 156, 0.3)' : '0 1px 3px rgba(53, 167, 156, 0.2)',
                 transition: 'box-shadow 0.2s, background 0.2s',
                 height: '40px',
                 width: '40px',
                 justifyContent: 'center',
               }}
             >
-              <svg width="24" height="24" fill="#002f6c" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#002f6c" strokeWidth="2" fill="none" /><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="#002f6c" strokeWidth="2" strokeLinecap="round" /></svg>
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#35a79c" strokeWidth="2" fill="none" /><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="#35a79c" strokeWidth="2" strokeLinecap="round" /></svg>
             </button>
             <div style={{
               position: 'absolute',
@@ -331,8 +331,8 @@ function Home() {
       {/* Secondary Navigation Bar */}
       <div style={{
         width: '100%',
-        background: '#002f6c',
-        boxShadow: '0 2px 8px rgba(0, 47, 108, 0.04)',
+        background: '#35a79c',
+        boxShadow: '0 2px 8px rgba(53, 167, 156, 0.04)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -348,7 +348,19 @@ function Home() {
           <button onClick={() => handleDropdown('tools')} style={navBtnStyle}>Công Cụ & Mẹo ▾</button>
           {openDropdown === 'tools' && (
             <div style={dropdownMenuStyle}>
-              <button style={dropdownBtnStyle}>Theo Dõi Trạng Thái</button>
+              <button
+                onClick={() => {
+                  if (isLoggedIn) {
+                    navigate('/track-status');
+                  } else {
+                    alert('Vui lòng đăng nhập để theo dõi trạng thái cai thuốc.');
+                    navigate('/login');
+                  }
+                }}
+                style={dropdownBtnStyle}
+              >
+                Theo Dõi Trạng Thái
+              </button>
               <button
                 onClick={() => {
                   if (isLoggedIn) {
@@ -362,7 +374,19 @@ function Home() {
               >
                 Tạo Kế Hoạch
               </button>
-              <button style={dropdownBtnStyle}>Cách Cai Thuốc</button>
+              <button
+                onClick={() => {
+                  if (isLoggedIn) {
+                    navigate('/smoking-cessation');
+                  } else {
+                    alert('Vui lòng đăng nhập để xem cách cai thuốc.');
+                    navigate('/login');
+                  }
+                }}
+                style={dropdownBtnStyle}
+              >
+                Cách Cai Thuốc
+              </button>
             </div>
           )}
         </div>
@@ -370,9 +394,19 @@ function Home() {
           <button onClick={() => handleDropdown('about')} style={navBtnStyle}>Về Chúng Tôi ▾</button>
           {openDropdown === 'about' && (
             <div style={dropdownMenuStyle}>
-              <button style={dropdownBtnStyle}>Chia Sẻ Từ Chuyên Gia</button>
+              <button
+                onClick={() => navigate('/expert-advice')}
+                style={dropdownBtnStyle}
+              >
+                Chia Sẻ Từ Chuyên Gia
+              </button>
               <button style={dropdownBtnStyle}>Lời Khuyên Cai Thuốc</button>
-              <button style={dropdownBtnStyle}>Blog</button>
+              <button
+                onClick={() => navigate('/blog')}
+                style={dropdownBtnStyle}
+              >
+                Blog
+              </button>
             </div>
           )}
         </div>
@@ -402,7 +436,12 @@ function Home() {
               >
                 Bác Sĩ
               </button>
-              <button style={dropdownBtnStyle}>Nhắn Tin Hỗ Trợ</button>
+              <button
+                onClick={() => navigate('/support-chat')}
+                style={dropdownBtnStyle}
+              >
+                Nhắn Tin Hỗ Trợ
+              </button>
             </div>
           )}
         </div>
@@ -742,9 +781,9 @@ function Home() {
           width: '100%',
           margin: '0 auto',
           padding: '3rem 1rem',
-          background: 'linear-gradient(135deg, #ffffff 0%, #f4f6f8 100%)',
+          background: 'linear-gradient(135deg, #ffffff 0%, #f0f7fa 100%)',
           borderRadius: '20px',
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.08)',
+          boxShadow: '0 10px 25px rgba(53, 167, 156, 0.08)',
           position: 'relative',
           overflow: 'hidden',
         }}>
@@ -754,14 +793,14 @@ function Home() {
             left: '0',
             width: '100%',
             height: '8px',
-            background: 'linear-gradient(90deg, #1976d2 0%, #44b89d 100%)',
+            background: 'linear-gradient(90deg, #35a79c 0%, #44b89d 100%)',
           }}></div>
 
           <h1 style={{
             fontSize: '2.7rem',
             fontWeight: '900',
             marginBottom: '1.5rem',
-            color: '#002f6c',
+            color: '#35a79c',
             letterSpacing: '1px',
             paddingBottom: '10px',
             position: 'relative',
@@ -807,14 +846,14 @@ function Home() {
               }}
               style={{
                 padding: '1rem 2rem',
-                background: '#1976d2',
+                background: '#35a79c',
                 color: 'white',
                 border: 'none',
                 borderRadius: '10px',
                 fontWeight: '700',
                 fontSize: '1.1rem',
                 cursor: 'pointer',
-                boxShadow: '0 4px 10px rgba(25, 118, 210, 0.3)',
+                boxShadow: '0 4px 10px rgba(53, 167, 156, 0.3)',
                 transition: 'transform 0.2s, background 0.2s',
                 willChange: 'transform',
                 position: 'relative',
@@ -847,14 +886,14 @@ function Home() {
               style={{
                 padding: '1rem 2rem',
                 background: 'white',
-                color: '#1976d2',
-                border: '2px solid #1976d2',
+                color: '#35a79c',
+                border: '2px solid #35a79c',
                 borderRadius: '10px',
                 fontWeight: '700',
                 fontSize: '1.1rem',
                 cursor: 'pointer',
                 transition: 'transform 0.2s, background 0.2s, box-shadow 0.2s',
-                boxShadow: '0 4px 10px rgba(25, 118, 210, 0.1)',
+                boxShadow: '0 4px 10px rgba(53, 167, 156, 0.1)',
               }}
             >
               Tìm Bác Sĩ Gần Đây
@@ -871,7 +910,7 @@ function Home() {
       }}>
         <h2 style={{
           textAlign: 'center',
-          color: '#002f6c',
+          color: '#35a79c',
           fontSize: '2.2rem',
           fontWeight: '800',
           marginBottom: '1.5rem',
@@ -952,6 +991,246 @@ function Home() {
         </div>
       </div>
 
+      {/* Expert Advice Section */}
+      <div style={{
+        padding: '5rem 2rem',
+        backgroundColor: 'white',
+        width: '100%',
+        boxSizing: 'border-box',
+        marginBottom: '1rem'
+      }}>
+        <h2 style={{
+          textAlign: 'center',
+          fontSize: '2.5rem',
+          color: '#35a79c',
+          marginBottom: '1.5rem',
+          fontWeight: '700',
+          position: 'relative',
+          paddingBottom: '10px'
+        }}>
+          Lời Khuyên Từ Chuyên Gia
+          <div style={{
+            position: 'absolute',
+            bottom: '0',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80px',
+            height: '3px',
+            background: '#35a79c',
+            borderRadius: '2px',
+          }}></div>
+        </h2>
+
+        <p style={{
+          textAlign: 'center',
+          color: '#7f8c8d',
+          fontSize: '1.1rem',
+          maxWidth: '800px',
+          margin: '0 auto 3rem',
+          lineHeight: '1.6',
+        }}>
+          Những lời khuyên quý báu từ các chuyên gia hàng đầu về cai thuốc lá sẽ giúp bạn trên hành trình này
+        </p>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2rem',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          width: '100%'
+        }}>
+          <div style={{
+            backgroundColor: '#f8f9fa',
+            borderRadius: '12px',
+            padding: '2rem',
+            borderLeft: '4px solid #44b89d',
+            boxShadow: '0 5px 15px rgba(53, 167, 156, 0.05)',
+            transition: 'transform 0.3s ease',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              marginBottom: '1.2rem'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: '#44b89d22',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                flexShrink: 0
+              }}>
+                👨‍⚕️
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.1rem', color: '#2c3e50', margin: '0 0 0.2rem 0', fontWeight: '600' }}>BS. Nguyễn Đức Quảng</h3>
+                <p style={{ fontSize: '0.85rem', color: '#44b89d', margin: 0 }}>Phó Giám đốc Bệnh viện Phổi Hà Tĩnh</p>
+              </div>
+            </div>
+            <h4 style={{ fontSize: '1.2rem', color: '#44b89d', marginBottom: '0.7rem', height: '58px', display: 'flex', alignItems: 'center' }}>Giải pháp hỗ trợ khi gặp cơn thèm thuốc lá</h4>
+            <p style={{ color: '#7f8c8d', lineHeight: '1.6', margin: '0 0 1.5rem 0', flexGrow: 1 }}>
+              Khi bạn gặp cơn thèm thuốc lá, hãy thử phương pháp 4D: Delay (Trì hoãn), Deep breathing (Hít thở sâu), Drink water (Uống nước), Distract (Chuyển hướng)...
+            </p>
+            <Link
+              to="/expert-advice"
+              style={{
+                display: 'inline-block',
+                color: '#44b89d',
+                fontWeight: '600',
+                textDecoration: 'none',
+                padding: '0.5rem 0',
+                borderBottom: '2px solid #44b89d',
+                marginTop: 'auto'
+              }}
+            >
+              Đọc tiếp →
+            </Link>
+          </div>
+
+          <div style={{
+            backgroundColor: '#f8f9fa',
+            borderRadius: '12px',
+            padding: '2rem',
+            borderLeft: '4px solid #1976d2',
+            boxShadow: '0 5px 15px rgba(53, 167, 156, 0.05)',
+            transition: 'transform 0.3s ease',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              marginBottom: '1.2rem'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: '#1976d222',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                flexShrink: 0
+              }}>
+                👨‍⚕️
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.1rem', color: '#2c3e50', margin: '0 0 0.2rem 0', fontWeight: '600' }}>BS. Bùi Duy Anh</h3>
+                <p style={{ fontSize: '0.85rem', color: '#1976d2', margin: 0 }}>Phòng Quản lý Chất lượng BV Y học cổ truyền</p>
+              </div>
+            </div>
+            <h4 style={{ fontSize: '1.2rem', color: '#1976d2', marginBottom: '0.7rem', height: '58px', display: 'flex', alignItems: 'center' }}>Phương pháp Nhĩ châm trong cai thuốc lá</h4>
+            <p style={{ color: '#7f8c8d', lineHeight: '1.6', margin: '0 0 1.5rem 0', flexGrow: 1 }}>
+              Phương pháp nhĩ châm tác động lên các huyệt đặc biệt trên vành tai, giúp giảm ham muốn sử dụng nicotine và làm dịu các triệu chứng cai nghiện...
+            </p>
+            <Link
+              to="/expert-advice"
+              style={{
+                display: 'inline-block',
+                color: '#1976d2',
+                fontWeight: '600',
+                textDecoration: 'none',
+                padding: '0.5rem 0',
+                borderBottom: '2px solid #1976d2',
+                marginTop: 'auto'
+              }}
+            >
+              Đọc tiếp →
+            </Link>
+          </div>
+
+          <div style={{
+            backgroundColor: '#f8f9fa',
+            borderRadius: '12px',
+            padding: '2rem',
+            borderLeft: '4px solid #e74c3c',
+            boxShadow: '0 5px 15px rgba(53, 167, 156, 0.05)',
+            transition: 'transform 0.3s ease',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              marginBottom: '1.2rem'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: '#e74c3c22',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                flexShrink: 0
+              }}>
+                👩‍⚕️
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.1rem', color: '#2c3e50', margin: '0 0 0.2rem 0', fontWeight: '600' }}>BS. Phạm Thị Hương</h3>
+                <p style={{ fontSize: '0.85rem', color: '#e74c3c', margin: 0 }}>Trưởng khoa Nội, Bệnh viện Đại học Y Hà Nội</p>
+              </div>
+            </div>
+            <h4 style={{ fontSize: '1.2rem', color: '#e74c3c', marginBottom: '0.7rem', height: '58px', display: 'flex', alignItems: 'center' }}>Dinh dưỡng và thực phẩm hỗ trợ cai thuốc lá</h4>
+            <p style={{ color: '#7f8c8d', lineHeight: '1.6', margin: '0 0 1.5rem 0', flexGrow: 1 }}>
+              Dinh dưỡng đóng vai trò quan trọng trong quá trình cai thuốc lá. Hãy bổ sung các thực phẩm giàu vitamin C, B và omega-3...
+            </p>
+            <Link
+              to="/expert-advice"
+              style={{
+                display: 'inline-block',
+                color: '#e74c3c',
+                fontWeight: '600',
+                textDecoration: 'none',
+                padding: '0.5rem 0',
+                borderBottom: '2px solid #e74c3c',
+                marginTop: 'auto'
+              }}
+            >
+              Đọc tiếp →
+            </Link>
+          </div>
+        </div>
+
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '3rem'
+        }}>
+          <Link
+            to="/expert-advice"
+            style={{
+              display: 'inline-block',
+              padding: '1rem 2.5rem',
+              background: '#35a79c',
+              color: 'white',
+              fontWeight: '700',
+              fontSize: '1.1rem',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 12px rgba(53, 167, 156, 0.3)',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+            }}
+          >
+            Xem Tất Cả Lời Khuyên
+          </Link>
+        </div>
+      </div>
+
       {/* Features Section */}
       <div id="features" style={{
         padding: '5rem 2rem',
@@ -962,7 +1241,7 @@ function Home() {
         <h2 style={{
           textAlign: 'center',
           fontSize: '2.5rem',
-          color: '#2c3e50',
+          color: '#35a79c',
           marginBottom: '3rem',
           fontWeight: '700'
         }}>
@@ -984,7 +1263,7 @@ function Home() {
             borderRadius: '10px',
             padding: '2rem',
             textAlign: 'center',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+            boxShadow: '0 5px 15px rgba(53, 167, 156, 0.05)',
             transition: 'transform 0.3s ease'
           }}>
             <div style={{
@@ -999,7 +1278,7 @@ function Home() {
             }}>
               <div style={{ fontSize: '2rem', color: '#35a79c' }}>📊</div>
             </div>
-            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Theo Dõi Tiến Độ</h3>
+            <h3 style={{ fontSize: '1.5rem', color: '#35a79c', marginBottom: '1rem' }}>Theo Dõi Tiến Độ</h3>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
               Theo dõi số ngày không hút thuốc, tiền tiết kiệm được và các cải thiện sức khỏe theo thời gian thực với công cụ theo dõi tiên tiến của chúng tôi.
             </p>
@@ -1011,7 +1290,7 @@ function Home() {
             borderRadius: '10px',
             padding: '2rem',
             textAlign: 'center',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+            boxShadow: '0 5px 15px rgba(53, 167, 156, 0.05)',
             transition: 'transform 0.3s ease'
           }}>
             <div style={{
@@ -1026,7 +1305,7 @@ function Home() {
             }}>
               <div style={{ fontSize: '2rem', color: '#44b89d' }}>🏆</div>
             </div>
-            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Thành Tích & Phần Thưởng</h3>
+            <h3 style={{ fontSize: '1.5rem', color: '#35a79c', marginBottom: '1rem' }}>Thành Tích & Phần Thưởng</h3>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
               Mở khóa huy hiệu và đạt được thành tích khi bạn đạt đến các cột mốc quan trọng trong hành trình cai thuốc lá của mình.
             </p>
@@ -1038,11 +1317,11 @@ function Home() {
             borderRadius: '10px',
             padding: '2rem',
             textAlign: 'center',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+            boxShadow: '0 5px 15px rgba(53, 167, 156, 0.05)',
             transition: 'transform 0.3s ease'
           }}>
             <div style={{
-              backgroundColor: 'rgba(61, 125, 160, 0.1)',
+              backgroundColor: 'rgba(53, 167, 156, 0.1)',
               width: '70px',
               height: '70px',
               borderRadius: '50%',
@@ -1051,9 +1330,9 @@ function Home() {
               justifyContent: 'center',
               margin: '0 auto 1.5rem auto'
             }}>
-              <div style={{ fontSize: '2rem', color: '#3d7da0' }}>👥</div>
+              <div style={{ fontSize: '2rem', color: '#35a79c' }}>👥</div>
             </div>
-            <h3 style={{ fontSize: '1.5rem', color: '#2c3e50', marginBottom: '1rem' }}>Huấn Luyện Chuyên Nghiệp</h3>
+            <h3 style={{ fontSize: '1.5rem', color: '#35a79c', marginBottom: '1rem' }}>Huấn Luyện Chuyên Nghiệp</h3>
             <p style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
               Kết nối với huấn luyện viên chuyên nghiệp để nhận hướng dẫn cá nhân hóa cho hành trình cai thuốc lá của bạn.
             </p>
@@ -1063,7 +1342,7 @@ function Home() {
 
       {/* Footer */}
       <footer style={{
-        background: '#002f6c',
+        background: '#35a79c',
         color: 'white',
         padding: '3rem 2rem',
         marginTop: '2rem',
@@ -1086,7 +1365,7 @@ function Home() {
             <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '1.5rem' }}>Liên kết hữu ích</h3>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Giới thiệu</a></li>
-              <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Blog</a></li>
+              <li style={{ marginBottom: '0.8rem' }}><a onClick={() => navigate('/blog')} style={{ color: 'white', textDecoration: 'none', cursor: 'pointer' }}>Blog</a></li>
               <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Đội ngũ</a></li>
               <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Chính sách riêng tư</a></li>
               <li style={{ marginBottom: '0.8rem' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Điều khoản sử dụng</a></li>
@@ -1119,7 +1398,7 @@ function Home() {
           paddingTop: '2rem',
           marginTop: '2rem',
         }}>
-          <p>© 2023 Breathing Free. Tất cả quyền được bảo lưu.</p>
+          <p>© 2025 Breathing Free. Tất cả quyền được bảo lưu.</p>
         </div>
       </footer>
     </div>
@@ -1147,7 +1426,7 @@ const dropdownMenuStyle = {
   top: '110%',
   left: 0,
   background: '#fff',
-  boxShadow: '0 2px 12px #002f6c22',
+  boxShadow: '0 2px 12px rgba(53, 167, 156, 0.22)',
   borderRadius: '12px',
   minWidth: '240px',
   zIndex: 100,
@@ -1161,7 +1440,7 @@ const dropdownBtnStyle = {
   width: '100%',
   background: 'none',
   border: 'none',
-  color: '#002f6c',
+  color: '#35a79c',
   fontWeight: 500,
   fontSize: '1.08rem',
   textAlign: 'left',
