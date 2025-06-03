@@ -47,7 +47,11 @@ function HomepageMember() {
     }, [navigate]);
 
     const handleManageMembership = () => {
-        setShowMembershipModal(true);
+        if (hasMembership) {
+            setShowMembershipModal(true);
+        } else {
+            navigate('/membership');
+        }
     };
 
     // Calculate money saved
@@ -95,19 +99,21 @@ function HomepageMember() {
                     backgroundColor: 'white',
                     marginTop: '2rem',
                     marginBottom: '2rem',
-                    padding: '2.5rem',
-                    borderRadius: '15px',
-                    boxShadow: '0 5px 20px rgba(53, 167, 156, 0.1)',
+                    padding: '2.5rem 3rem',
+                    borderRadius: '18px',
+                    boxShadow: '0 8px 25px rgba(53, 167, 156, 0.12)',
                     backgroundImage: 'linear-gradient(to right, rgba(53, 167, 156, 0.05), rgba(53, 167, 156, 0.01))',
                     position: 'relative',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    width: '100%',
+                    boxSizing: 'border-box'
                 }}>
                     <div style={{
                         position: 'absolute',
                         top: 0,
                         right: 0,
-                        width: '150px',
-                        height: '150px',
+                        width: '180px',
+                        height: '180px',
                         background: 'radial-gradient(circle at center, rgba(53, 167, 156, 0.15), transparent 70%)',
                         borderRadius: '50%',
                         transform: 'translate(30%, -30%)',
@@ -116,64 +122,122 @@ function HomepageMember() {
 
                     <div style={{
                         zIndex: 2,
-                        maxWidth: '600px'
+                        maxWidth: '650px',
+                        width: '100%'
                     }}>
                         <h1 style={{
-                            marginBottom: '1rem',
+                            marginBottom: '1.2rem',
                             color: '#35a79c',
-                            fontSize: '2.4rem',
+                            fontSize: '2.5rem',
                             fontWeight: '700',
                             lineHeight: '1.2'
                         }}>Xin chào, {userName}!</h1>
                         <p style={{
-                            color: '#7f8c8d',
-                            marginBottom: '1.5rem',
-                            lineHeight: '1.6',
-                            fontSize: '1.05rem'
+                            color: '#5a6a6e',
+                            marginBottom: '2rem',
+                            lineHeight: '1.7',
+                            fontSize: '1.1rem'
                         }}>Hành trình cai thuốc lá của bạn đang tiến triển. Dưới đây là tiến độ hiện tại và thông tin thành viên của bạn.</p>
 
-                        <button
-                            onClick={handleManageMembership}
-                            style={{
-                                padding: '0.8rem 1.5rem',
-                                backgroundColor: '#35a79c',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '50px',
-                                cursor: 'pointer',
-                                fontWeight: '600',
-                                boxShadow: '0 4px 10px rgba(53, 167, 156, 0.3)',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '0.5rem',
-                                transition: 'all 0.2s ease'
-                            }}
-                            onMouseOver={(e) => {
-                                e.target.style.backgroundColor = '#2c9085';
-                                e.target.style.transform = 'translateY(-2px)';
-                                e.target.style.boxShadow = '0 6px 15px rgba(53, 167, 156, 0.4)';
-                            }}
-                            onMouseOut={(e) => {
-                                e.target.style.backgroundColor = '#35a79c';
-                                e.target.style.transform = 'translateY(0)';
-                                e.target.style.boxShadow = '0 4px 10px rgba(53, 167, 156, 0.3)';
-                            }}
-                        >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2 6.89 2 8V19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19Z" fill="white" />
-                                <path d="M13 10H11V12H9V14H11V16H13V14H15V12H13V10Z" fill="white" />
-                            </svg>
-                            {hasMembership ? 'Quản Lý Gói Thành Viên' : 'Đăng Ký Gói Thành Viên'}
-                        </button>
+                        <div style={{
+                            display: 'flex',
+                            gap: '1.2rem',
+                            flexWrap: 'wrap'
+                        }}>
+                            <button
+                                onClick={handleManageMembership}
+                                style={{
+                                    padding: '0.9rem 1.8rem',
+                                    backgroundColor: '#35a79c',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '50px',
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    fontSize: '1rem',
+                                    boxShadow: '0 4px 12px rgba(53, 167, 156, 0.3)',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.7rem',
+                                    transition: 'all 0.25s ease'
+                                }}
+                                onMouseOver={(e) => {
+                                    e.target.style.backgroundColor = '#2c9085';
+                                    e.target.style.transform = 'translateY(-3px)';
+                                    e.target.style.boxShadow = '0 8px 20px rgba(53, 167, 156, 0.4)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.target.style.backgroundColor = '#35a79c';
+                                    e.target.style.transform = 'translateY(0)';
+                                    e.target.style.boxShadow = '0 4px 12px rgba(53, 167, 156, 0.3)';
+                                }}
+                            >
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2 6.89 2 8V19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19Z" fill="white" />
+                                    <path d="M13 10H11V12H9V14H11V16H13V14H15V12H13V10Z" fill="white" />
+                                </svg>
+                                {hasMembership ? 'Quản Lý Gói Thành Viên' : 'Đăng Ký Gói Thành Viên'}
+                            </button>
+
+                            {/* Add a direct payment button for membership renewals or upgrades */}
+                            {hasMembership && (
+                                <button
+                                    onClick={() => navigate('/payment', {
+                                        state: {
+                                            packageInfo: {
+                                                duration: membershipPlan,
+                                                price: membershipPlan === '1 Tháng' ? 600000 :
+                                                    membershipPlan === '6 Tháng' ? 3000000 : 5400000,
+                                                discount: membershipPlan === '6 Tháng' ? 16 :
+                                                    membershipPlan === '1 Năm' ? 25 : 0
+                                            }
+                                        }
+                                    })}
+                                    style={{
+                                        padding: '0.9rem 1.8rem',
+                                        backgroundColor: '#3498db',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '50px',
+                                        cursor: 'pointer',
+                                        fontWeight: '600',
+                                        fontSize: '1rem',
+                                        boxShadow: '0 4px 12px rgba(52, 152, 219, 0.3)',
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '0.7rem',
+                                        transition: 'all 0.25s ease'
+                                    }}
+                                    onMouseOver={(e) => {
+                                        e.target.style.backgroundColor = '#2980b9';
+                                        e.target.style.transform = 'translateY(-3px)';
+                                        e.target.style.boxShadow = '0 8px 20px rgba(52, 152, 219, 0.4)';
+                                    }}
+                                    onMouseOut={(e) => {
+                                        e.target.style.backgroundColor = '#3498db';
+                                        e.target.style.transform = 'translateY(0)';
+                                        e.target.style.boxShadow = '0 4px 12px rgba(52, 152, 219, 0.3)';
+                                    }}
+                                >
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z" fill="white" />
+                                        <path d="M6 14H18V16H6V14Z" fill="white" />
+                                    </svg>
+                                    Thanh Toán
+                                </button>
+                            )}
+                        </div>
                     </div>
 
                     <div style={{
-                        width: '180px',
-                        height: '180px',
+                        width: '220px',
+                        height: '220px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        zIndex: 2
+                        zIndex: 2,
+                        marginLeft: '20px',
+                        flexShrink: 0
                     }}>
                         <img
                             src="https://cdn-icons-png.flaticon.com/512/2947/2947903.png"
@@ -182,7 +246,8 @@ function HomepageMember() {
                                 width: '100%',
                                 height: '100%',
                                 objectFit: 'contain',
-                                opacity: 0.9
+                                opacity: 0.9,
+                                filter: 'drop-shadow(0 8px 15px rgba(53, 167, 156, 0.2))'
                             }}
                         />
                     </div>
@@ -193,52 +258,116 @@ function HomepageMember() {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        backgroundColor: '#f9f9f9',
+                        backgroundColor: 'white',
                         marginBottom: '2rem',
-                        padding: '1.2rem 2rem',
-                        borderRadius: '12px',
+                        padding: '2rem 3rem',
+                        borderRadius: '18px',
                         borderLeft: '4px solid #35a79c',
-                        boxShadow: '0 3px 10px rgba(0, 0, 0, 0.04)'
+                        boxShadow: '0 8px 25px rgba(53, 167, 156, 0.12)',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        backgroundImage: 'linear-gradient(to right, rgba(53, 167, 156, 0.02), rgba(53, 167, 156, 0))'
                     }}>
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '1rem'
+                            gap: '1.2rem'
                         }}>
-                            <span style={{
-                                fontWeight: '600',
-                                color: '#2c3e50'
-                            }}>Gói Thành Viên Hiện Tại:</span>
-                            <span style={{
-                                backgroundColor: '#35a79c',
-                                color: 'white',
-                                fontWeight: '700',
-                                padding: '0.35rem 0.75rem',
-                                borderRadius: '50px',
-                                fontSize: '0.9rem'
-                            }}>{membershipPlan}</span>
+                            <div style={{
+                                backgroundColor: '#35a79c15',
+                                width: '48px',
+                                height: '48px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2 6.89 2 8V19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19Z" fill="#35a79c" />
+                                    <path d="M13 10H11V12H9V14H11V16H13V14H15V12H13V10Z" fill="#35a79c" />
+                                </svg>
+                            </div>
+                            <div>
+                                <span style={{
+                                    fontWeight: '600',
+                                    color: '#2c3e50',
+                                    fontSize: '1.1rem'
+                                }}>Gói Thành Viên Hiện Tại:</span>
+                                <span style={{
+                                    backgroundColor: '#35a79c',
+                                    color: 'white',
+                                    fontWeight: '700',
+                                    padding: '0.35rem 0.75rem',
+                                    borderRadius: '50px',
+                                    fontSize: '0.95rem',
+                                    marginLeft: '0.8rem'
+                                }}>{membershipPlan}</span>
+                            </div>
                         </div>
-                        <button
-                            onClick={handleManageMembership}
-                            style={{
-                                padding: '0.5rem 1rem',
-                                backgroundColor: 'transparent',
-                                color: '#35a79c',
-                                border: '1px solid #35a79c',
-                                borderRadius: '8px',
-                                cursor: 'pointer',
-                                fontWeight: '500',
-                                transition: 'all 0.2s'
-                            }}
-                            onMouseOver={(e) => {
-                                e.target.style.backgroundColor = '#f0f7f5';
-                            }}
-                            onMouseOut={(e) => {
-                                e.target.style.backgroundColor = 'transparent';
-                            }}
-                        >
-                            Quản Lý Gói
-                        </button>
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                            <button
+                                onClick={handleManageMembership}
+                                style={{
+                                    padding: '0.7rem 1.2rem',
+                                    backgroundColor: 'transparent',
+                                    color: '#35a79c',
+                                    border: '1.5px solid #35a79c',
+                                    borderRadius: '12px',
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    fontSize: '0.95rem',
+                                    transition: 'all 0.2s'
+                                }}
+                                onMouseOver={(e) => {
+                                    e.target.style.backgroundColor = '#f0f7f5';
+                                    e.target.style.transform = 'translateY(-2px)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.target.style.backgroundColor = 'transparent';
+                                    e.target.style.transform = 'translateY(0)';
+                                }}
+                            >
+                                Quản Lý Gói
+                            </button>
+
+                            <button
+                                onClick={() => navigate('/payment', {
+                                    state: {
+                                        packageInfo: {
+                                            duration: membershipPlan,
+                                            price: membershipPlan === '1 Tháng' ? 600000 :
+                                                membershipPlan === '6 Tháng' ? 3000000 : 5400000,
+                                            discount: membershipPlan === '6 Tháng' ? 16 :
+                                                membershipPlan === '1 Năm' ? 25 : 0
+                                        }
+                                    }
+                                })}
+                                style={{
+                                    padding: '0.7rem 1.2rem',
+                                    backgroundColor: '#3498db',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '12px',
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    fontSize: '0.95rem',
+                                    boxShadow: '0 4px 10px rgba(52, 152, 219, 0.2)',
+                                    transition: 'all 0.2s'
+                                }}
+                                onMouseOver={(e) => {
+                                    e.target.style.backgroundColor = '#2980b9';
+                                    e.target.style.transform = 'translateY(-2px)';
+                                    e.target.style.boxShadow = '0 6px 15px rgba(52, 152, 219, 0.3)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.target.style.backgroundColor = '#3498db';
+                                    e.target.style.transform = 'translateY(0)';
+                                    e.target.style.boxShadow = '0 4px 10px rgba(52, 152, 219, 0.2)';
+                                }}
+                            >
+                                Thanh Toán
+                            </button>
+                        </div>
                     </section>
                 )}
 

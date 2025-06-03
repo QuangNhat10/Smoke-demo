@@ -4,16 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 // Fake user database
 const fakeUsers = [
   { username: 'member123', password: 'Member123!', role: 'Member', name: 'John Smith' },
-  { username: 'coach123', password: 'Coach123!', role: 'Coach', name: 'Emma Wilson' },
+  { username: 'doctor123', password: 'Doctor123!', role: 'Doctor', name: 'Emma Wilson' },
   { username: 'admin123', password: 'Admin123!', role: 'Admin', name: 'David Brown' },
-  { username: 'guest123', password: 'Guest123!', role: 'Guest', name: 'Sarah Johnson' },
+  { username: 'staff123', password: 'Staff123!', role: 'Staff', name: 'Sarah Johnson' },
 ];
 
 const roles = [
-  'Guest',
   'Member',
-  'Coach',
+  'Doctor',
   'Admin',
+  'Staff',
 ];
 
 function Login() {
@@ -58,8 +58,12 @@ function Login() {
       // Redirect based on role
       if (user.role === 'Member') {
         navigate('/homepage-member');
-      } else if (user.role === 'Coach') {
-        navigate('/dashboard-coach');
+      } else if (user.role === 'Doctor') {
+        navigate('/dashboard-doctor');
+      } else if (user.role === 'Admin') {
+        navigate('/dashboard-admin');
+      } else if (user.role === 'Staff') {
+        navigate('/dashboard-staff');
       } else {
         navigate('/');
       }
@@ -83,11 +87,11 @@ function Login() {
       <button onClick={() => navigate('/')} style={{
         fontSize: '2.6rem',
         fontWeight: 900,
-        color: '#35a79c',
+        color: '#002f6c',
         letterSpacing: '1px',
         marginBottom: '2.5rem',
         fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-        textShadow: '0 2px 8px rgba(53, 167, 156, 0.2)',
+        textShadow: '0 2px 8px rgba(0, 47, 108, 0.2)',
         background: 'none',
         border: 'none',
         cursor: 'pointer',
@@ -145,7 +149,7 @@ function Login() {
         )}
 
         <div style={{ marginBottom: '0.5rem' }}>
-          <span style={{ color: '#666', fontWeight: 500, fontSize: '1.08rem', marginRight: 8, display: 'block', marginBottom: '0.5rem' }}>Tôi là</span>
+          <span style={{ color: '#5a6a6e', fontWeight: 500, fontSize: '1.08rem', marginRight: 8, display: 'block', marginBottom: '0.5rem' }}>Tôi là</span>
           <div style={{ position: 'relative' }}>
             <button
               type="button"
@@ -195,7 +199,7 @@ function Login() {
                       padding: '0.9rem 1.2rem',
                       cursor: 'pointer',
                       background: selectedRole === role ? '#e5f7f4' : '#fff',
-                      color: selectedRole === role ? '#35a79c' : '#222',
+                      color: selectedRole === role ? '#35a79c' : '#5a6a6e',
                       fontWeight: selectedRole === role ? 700 : 500,
                       transition: 'background 0.2s',
                       fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
@@ -212,7 +216,7 @@ function Login() {
 
         <div style={{ position: 'relative' }}>
           <label style={{
-            color: '#666',
+            color: '#5a6a6e',
             fontWeight: 500,
             fontSize: '1.08rem',
             display: 'block',
@@ -236,26 +240,27 @@ function Login() {
                 width: '100%',
                 boxSizing: 'border-box',
                 transition: 'border-color 0.2s, box-shadow 0.2s',
+                color: '#5a6a6e',
               }}
               onFocus={(e) => e.target.style.borderColor = '#35a79c'}
               onBlur={(e) => e.target.style.borderColor = '#e5e8ee'}
             />
             <svg
-              style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#999' }}
+              style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#35a79c' }}
               width="20"
               height="20"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#999" />
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#35a79c" />
             </svg>
           </div>
         </div>
 
         <div style={{ position: 'relative' }}>
           <label style={{
-            color: '#666',
+            color: '#5a6a6e',
             fontWeight: 500,
             fontSize: '1.08rem',
             display: 'block',
@@ -279,19 +284,20 @@ function Login() {
                 width: '100%',
                 boxSizing: 'border-box',
                 transition: 'border-color 0.2s, box-shadow 0.2s',
+                color: '#5a6a6e',
               }}
               onFocus={(e) => e.target.style.borderColor = '#35a79c'}
               onBlur={(e) => e.target.style.borderColor = '#e5e8ee'}
             />
             <svg
-              style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#999' }}
+              style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#35a79c' }}
               width="20"
               height="20"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" fill="#999" />
+              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" fill="#35a79c" />
             </svg>
           </div>
         </div>
@@ -319,7 +325,7 @@ function Login() {
           }}
         >Đăng Nhập</button>
 
-        <div style={{ textAlign: 'center', color: '#666', fontWeight: 500, marginTop: '0.5rem' }}>
+        <div style={{ textAlign: 'center', color: '#5a6a6e', fontWeight: 500, marginTop: '0.5rem' }}>
           Chưa có tài khoản?{' '}
           <Link to="/register" style={{
             color: '#35a79c',
@@ -335,17 +341,18 @@ function Login() {
         <div style={{
           marginTop: '1rem',
           fontSize: '0.9rem',
-          color: '#666',
+          color: '#5a6a6e',
           textAlign: 'center',
           padding: '1rem',
           background: '#f5f7fa',
           borderRadius: '8px',
-          border: '1px dashed #ccd',
+          border: '1px dashed #35a79c',
         }}>
           <div style={{ fontWeight: 600, marginBottom: '0.4rem', color: '#35a79c' }}>Tài khoản Demo:</div>
           <div style={{ margin: '0.2rem 0' }}>Thành viên: member123 / Member123!</div>
-          <div style={{ margin: '0.2rem 0' }}>Huấn luyện viên: coach123 / Coach123!</div>
+          <div style={{ margin: '0.2rem 0' }}>Bác sĩ: doctor123 / Doctor123!</div>
           <div style={{ margin: '0.2rem 0' }}>Quản trị viên: admin123 / Admin123!</div>
+          <div style={{ margin: '0.2rem 0' }}>Nhân viên: staff123 / Staff123!</div>
         </div>
       </form>
     </div>

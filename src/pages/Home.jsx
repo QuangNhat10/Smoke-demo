@@ -10,6 +10,8 @@ import img3_9m from '../assets/3-9m.png';
 import img1y from '../assets/1y.png';
 import img10y from '../assets/10y.png';
 import DoctorModal from '../components/DoctorModal';
+import Header from '../components/Header';
+import SecondaryNavigation from '../components/SecondaryNavigation';
 
 // Icon SVGs
 const icons = {
@@ -144,308 +146,79 @@ function Home() {
       boxSizing: 'border-box',
       overflowX: 'hidden'
     }}>
-      {/* Navigation */}
-      <nav style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1.5rem 2rem 0.5rem 2rem',
-        background: '#fff',
-        boxShadow: '0 8px 32px 0 rgba(53, 167, 156, 0.08)',
-        width: '100%',
-        boxSizing: 'border-box',
-        position: 'relative',
-        zIndex: 10,
-        borderBottom: '1.5px solid #e5e8ee',
-      }}>
-        <button onClick={() => navigate('/')} style={{
-          fontSize: '2.2rem',
-          fontWeight: 900,
-          color: '#35a79c',
-          letterSpacing: '1px',
-          fontFamily: "'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif",
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 0,
-        }}>
-          Breathing Free
-        </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          {/* Search Icon & Input */}
-          <div style={{ position: 'relative', marginRight: '1rem' }}>
-            <button
-              aria-label="Tìm kiếm"
-              onClick={handleSearchIconClick}
-              style={{
-                background: '#e5e8ee',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.5rem',
-                outline: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                borderRadius: '50%',
-                boxShadow: showSearch ? '0 2px 8px rgba(53, 167, 156, 0.3)' : '0 1px 3px rgba(53, 167, 156, 0.2)',
-                transition: 'box-shadow 0.2s, background 0.2s',
-                height: '40px',
-                width: '40px',
-                justifyContent: 'center',
-              }}
-            >
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#35a79c" strokeWidth="2" fill="none" /><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="#35a79c" strokeWidth="2" strokeLinecap="round" /></svg>
-            </button>
-            <div style={{
-              position: 'absolute',
-              left: '50%',
-              top: '110%',
-              transform: showSearch ? 'translateX(-50%) scaleX(1)' : 'translateX(-50%) scaleX(0.5)',
-              opacity: showSearch ? 1 : 0,
-              pointerEvents: showSearch ? 'auto' : 'none',
-              background: 'rgba(255,255,255,0.97)',
-              borderRadius: '12px',
-              boxShadow: '0 4px 16px #002f6c22',
-              padding: showSearch ? '0.5rem 1rem' : '0 0',
-              zIndex: 100,
-              display: 'flex',
-              alignItems: 'center',
-              minWidth: '220px',
-              border: '1px solid #e5e8ee',
-              transition: 'all 0.25s cubic-bezier(.4,2,.6,1)',
-            }}>
-              <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchValue}
-                  onChange={e => setSearchValue(e.target.value)}
-                  placeholder="Tìm kiếm..."
-                  style={{
-                    border: 'none',
-                    outline: 'none',
-                    fontSize: '1rem',
-                    padding: '0.5rem',
-                    width: '150px',
-                    background: 'transparent',
-                    color: '#002f6c',
-                  }}
-                />
-                <button type="submit" style={{
-                  background: '#002f6c',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '0.4rem 0.9rem',
-                  marginLeft: '0.5rem',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  boxShadow: '0 2px 8px #002f6c22',
-                  transition: 'background 0.2s',
-                }}>Đi</button>
-              </form>
+      {/* Sử dụng Header component thay vì tự tạo */}
+      {isLoggedIn ? (
+        <Header userName={userName} />
+      ) : (
+        <header className="main-header">
+          <div className="container">
+            <div className="header-content">
+              <button
+                onClick={() => navigate('/')}
+                className="logo-button"
+              >
+                <span className="logo-text">Breathing Free</span>
+              </button>
+
+              <div className="user-actions">
+                <Link to="/login" className="btn btn-primary btn-sm mr-2">Đăng Nhập</Link>
+                <Link to="/register" className="btn btn-outline btn-sm">Đăng Ký</Link>
+              </div>
             </div>
           </div>
 
-          {/* User profile or login/register */}
-          {isLoggedIn ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                background: '#e5f5ff',
-                padding: '0.5rem 1rem',
-                borderRadius: '50px',
-                color: '#1976d2',
-                fontWeight: '600',
-              }}>
-                <span style={{
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                  background: '#1976d2',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '1rem'
-                }}>
-                  {userName.charAt(0)}
-                </span>
-                <span>{userName}</span>
-              </div>
-              <button
-                onClick={handleLogout}
-                style={{
-                  padding: '0.5rem 1.5rem',
-                  background: '#e74c3c',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '50px',
-                  fontWeight: '600',
-                  boxShadow: '0 4px 12px #e74c3c22',
-                  transition: 'transform 0.2s, background 0.2s',
-                  fontSize: '1.08rem',
-                  cursor: 'pointer',
-                }}
-              >
-                Đăng Xuất
-              </button>
-            </div>
-          ) : (
-            <>
-              <Link to="/login" style={{
-                padding: '0.5rem 1.5rem',
-                background: '#1976d2',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '50px',
-                fontWeight: '600',
-                boxShadow: '0 4px 12px #002f6c22',
-                transition: 'transform 0.2s, background 0.2s',
-                border: 'none',
-                fontSize: '1.08rem',
-              }}>
-                Đăng Nhập
-              </Link>
-              <Link to="/register" style={{
-                padding: '0.5rem 1.5rem',
-                background: '#0057b8',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '50px',
-                fontWeight: '600',
-                boxShadow: '0 4px 12px #002f6c22',
-                transition: 'transform 0.2s, background 0.2s',
-                border: 'none',
-                fontSize: '1.08rem',
-              }}>
-                Đăng Ký
-              </Link>
-            </>
-          )}
-        </div>
-      </nav>
+          <style jsx>{`
+            .main-header {
+              background-color: var(--white);
+              box-shadow: 0 8px 32px 0 rgba(0,47,108,0.08);
+              position: relative;
+              z-index: 10;
+              border-bottom: 1.5px solid var(--gray-200);
+            }
+            
+            .header-content {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 1.5rem 0 0.5rem;
+            }
+            
+            .logo-button {
+              background: none;
+              border: none;
+              cursor: pointer;
+              padding: 0;
+            }
+            
+            .logo-text {
+              font-size: 2.2rem;
+              font-weight: 900;
+              color: var(--primary-color);
+              letter-spacing: 1px;
+              font-family: 'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            }
+            
+            .user-actions {
+              display: flex;
+              align-items: center;
+              gap: 0.8rem;
+            }
+            
+            .btn-sm {
+              padding: 0.4rem 1rem;
+              font-size: 0.9rem;
+              border-radius: var(--border-radius-sm);
+            }
+            
+            .mr-2 {
+              margin-right: 0.5rem;
+            }
+          `}</style>
+        </header>
+      )}
 
-      {/* Secondary Navigation Bar */}
-      <div style={{
-        width: '100%',
-        background: '#35a79c',
-        boxShadow: '0 2px 8px rgba(53, 167, 156, 0.04)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '2rem',
-        padding: '0.5rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 9,
-        borderBottom: '2px solid #e5e8ee',
-      }}>
-        <button onClick={() => navigate('/')} style={navBtnStyle}>Trang Chủ</button>
-        <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('tools')} style={navBtnStyle}>Công Cụ & Mẹo ▾</button>
-          {openDropdown === 'tools' && (
-            <div style={dropdownMenuStyle}>
-              <button
-                onClick={() => {
-                  if (isLoggedIn) {
-                    navigate('/track-status');
-                  } else {
-                    alert('Vui lòng đăng nhập để theo dõi trạng thái cai thuốc.');
-                    navigate('/login');
-                  }
-                }}
-                style={dropdownBtnStyle}
-              >
-                Theo Dõi Trạng Thái
-              </button>
-              <button
-                onClick={() => {
-                  if (isLoggedIn) {
-                    navigateToDashboard('/dashboard-member');
-                  } else {
-                    alert('Vui lòng đăng nhập để tạo kế hoạch cai thuốc.');
-                    navigate('/login');
-                  }
-                }}
-                style={dropdownBtnStyle}
-              >
-                Tạo Kế Hoạch
-              </button>
-              <button
-                onClick={() => {
-                  if (isLoggedIn) {
-                    navigate('/smoking-cessation');
-                  } else {
-                    alert('Vui lòng đăng nhập để xem cách cai thuốc.');
-                    navigate('/login');
-                  }
-                }}
-                style={dropdownBtnStyle}
-              >
-                Cách Cai Thuốc
-              </button>
-            </div>
-          )}
-        </div>
-        <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('about')} style={navBtnStyle}>Về Chúng Tôi ▾</button>
-          {openDropdown === 'about' && (
-            <div style={dropdownMenuStyle}>
-              <button
-                onClick={() => navigate('/expert-advice')}
-                style={dropdownBtnStyle}
-              >
-                Chia Sẻ Từ Chuyên Gia
-              </button>
-              <button style={dropdownBtnStyle}>Lời Khuyên Cai Thuốc</button>
-              <button
-                onClick={() => navigate('/blog')}
-                style={dropdownBtnStyle}
-              >
-                Blog
-              </button>
-            </div>
-          )}
-        </div>
-        <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('challenge')} style={navBtnStyle}>Thử Thách ▾</button>
-          {openDropdown === 'challenge' && (
-            <div style={dropdownMenuStyle}>
-              <button style={dropdownBtnStyle}>Khó Khăn</button>
-              <button style={dropdownBtnStyle}>Bài Tập Hỗ Trợ</button>
-              <button style={dropdownBtnStyle}>Dinh Dưỡng</button>
-            </div>
-          )}
-        </div>
-        <div style={{ position: 'relative' }}>
-          <button onClick={() => handleDropdown('help')} style={navBtnStyle}>Trợ Giúp & Hỗ Trợ ▾</button>
-          {openDropdown === 'help' && (
-            <div style={dropdownMenuStyle}>
-              <button
-                onClick={() => setShowContactModal(true)}
-                style={dropdownBtnStyle}
-              >
-                Liên Hệ
-              </button>
-              <button
-                onClick={() => navigate('/doctors')}
-                style={dropdownBtnStyle}
-              >
-                Bác Sĩ
-              </button>
-              <button
-                onClick={() => navigate('/support-chat')}
-                style={dropdownBtnStyle}
-              >
-                Nhắn Tin Hỗ Trợ
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+      {/* Sử dụng SecondaryNavigation component */}
+      <SecondaryNavigation />
 
       {/* Contact Modal */}
       {showContactModal && (
@@ -988,6 +761,88 @@ function Home() {
             image={img10y}
             text="Nguy cơ tử vong do ung thư phổi giảm một nửa so với người tiếp tục hút thuốc lá. Nguy cơ mắc các loại ung thư khác cũng giảm."
           />
+        </div>
+      </div>
+
+      {/* Benefits */}
+      <div style={{
+        backgroundColor: '#fff',
+        padding: '5rem 2rem',
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          textAlign: 'center',
+        }}>
+          <h2 style={{
+            fontSize: '2.5rem',
+            color: '#35a79c',
+            marginBottom: '1rem',
+          }}>
+            Lợi ích khi sử dụng Breathing Free
+          </h2>
+          <p style={{
+            fontSize: '1.2rem',
+            color: '#7f8c8d',
+            maxWidth: '800px',
+            margin: '0 auto 3rem auto',
+            lineHeight: '1.6',
+          }}>
+            Breathing Free cung cấp nhiều công cụ và tài nguyên để hỗ trợ bạn trong hành trình cai thuốc lá. Khám phá các lợi ích chính của chúng tôi.
+          </p>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '2rem',
+            flexWrap: 'wrap',
+            marginBottom: '3rem',
+          }}>
+            {/* ... existing benefit items ... */}
+          </div>
+
+          <div style={{
+            marginTop: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1rem',
+            flexWrap: 'wrap',
+          }}>
+            <button
+              onClick={() => navigate(isLoggedIn ? '/homepage-member' : '/login')}
+              style={{
+                background: '#35a79c',
+                color: 'white',
+                border: 'none',
+                borderRadius: '30px',
+                padding: '1rem 2rem',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(53, 167, 156, 0.3)',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Bắt Đầu Ngay
+            </button>
+
+            <button
+              onClick={() => navigate('/payment')}
+              style={{
+                background: 'white',
+                color: '#35a79c',
+                border: '2px solid #35a79c',
+                borderRadius: '30px',
+                padding: '1rem 2rem',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Đăng Ký Gói Thành Viên
+            </button>
+          </div>
         </div>
       </div>
 

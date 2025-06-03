@@ -70,27 +70,11 @@ const SecondaryNavigation = () => {
                                 </button>
                                 <button className="dropdown-item">Lời Khuyên Cai Thuốc</button>
                                 <button
-                                    className="dropdown-item"
+                                    className="dropdown-item blog-menu-item"
                                     onClick={() => navigate('/blog')}
                                 >
-                                    Blog
+                                    Blog Cộng Đồng
                                 </button>
-                            </div>
-                        )}
-                    </li>
-
-                    <li className="nav-item dropdown">
-                        <button
-                            className="nav-link dropdown-toggle"
-                            onClick={() => handleDropdownToggle('challenge')}
-                        >
-                            Thử Thách <span className="dropdown-arrow">▾</span>
-                        </button>
-                        {activeDropdown === 'challenge' && (
-                            <div className="dropdown-menu">
-                                <button className="dropdown-item">Khó Khăn</button>
-                                <button className="dropdown-item">Bài Tập Hỗ Trợ</button>
-                                <button className="dropdown-item">Dinh Dưỡng</button>
                             </div>
                         )}
                     </li>
@@ -106,9 +90,9 @@ const SecondaryNavigation = () => {
                             <div className="dropdown-menu">
                                 <button
                                     className="dropdown-item"
-                                    onClick={() => navigate('/contact')}
+                                    onClick={() => navigate('/appointment')}
                                 >
-                                    Liên Hệ
+                                    Đặt Lịch
                                 </button>
                                 <button
                                     className="dropdown-item"
@@ -160,6 +144,11 @@ const SecondaryNavigation = () => {
         
         .nav-link:hover {
           color: var(--secondary-color);
+        }
+        
+        .blog-menu-item {
+          color: #3498db;
+          font-weight: 600;
         }
         
         .dropdown-toggle {
