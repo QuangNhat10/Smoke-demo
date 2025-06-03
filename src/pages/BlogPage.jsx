@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BlogPostForm from '../components/BlogPostForm';
+import CommentModal from '../components/CommentModal';
 
 const BlogPage = () => {
     const navigate = useNavigate();
     const [activeCategory, setActiveCategory] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
+    const [isPostFormOpen, setIsPostFormOpen] = useState(false);
+    const [commentModalPostId, setCommentModalPostId] = useState(null);
+    const [blogComments, setBlogComments] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [currentUser, setCurrentUser] = useState({
+        name: '',
+        type: 'Người dùng',
+        avatar: '👤',
+        avatarColor: '#3498db22',
+        accentColor: '#3498db'
+    });
+    const [editingPost, setEditingPost] = useState(null);
 
-    const blogPosts = [
+    // Check login status
+    useEffect(() => {
+        const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+        setIsLoggedIn(userLoggedIn);
+
+        if (userLoggedIn) {
+            const userName = localStorage.getItem('userName');
+            setCurrentUser(prev => ({
+                ...prev,
+                name: userName || 'Người dùng'
+            }));
+        }
+    }, []);
+
+    // Initial blog posts
+    const [blogPosts, setBlogPosts] = useState([
         {
             id: 1,
             authorName: 'Trần Văn Minh',
@@ -20,7 +49,8 @@ const BlogPage = () => {
             date: '10/07/2023',
             readTime: '5 phút đọc',
             likes: 45,
-            comments: 12
+            comments: 12,
+            liked: false
         },
         {
             id: 2,
@@ -35,7 +65,8 @@ const BlogPage = () => {
             date: '25/08/2023',
             readTime: '7 phút đọc',
             likes: 78,
-            comments: 23
+            comments: 23,
+            liked: false
         },
         {
             id: 3,
@@ -50,7 +81,8 @@ const BlogPage = () => {
             date: '03/09/2023',
             readTime: '6 phút đọc',
             likes: 56,
-            comments: 18
+            comments: 18,
+            liked: false
         },
         {
             id: 4,
@@ -65,7 +97,8 @@ const BlogPage = () => {
             date: '15/10/2023',
             readTime: '8 phút đọc',
             likes: 92,
-            comments: 31
+            comments: 31,
+            liked: false
         },
         {
             id: 5,
@@ -80,7 +113,8 @@ const BlogPage = () => {
             date: '07/11/2023',
             readTime: '6 phút đọc',
             likes: 67,
-            comments: 20
+            comments: 20,
+            liked: false
         },
         {
             id: 6,
@@ -95,9 +129,184 @@ const BlogPage = () => {
             date: '20/12/2023',
             readTime: '7 phút đọc',
             likes: 105,
-            comments: 42
+            comments: 42,
+            liked: false
         }
-    ];
+    ]);
+
+    // Check if post belongs to current logged in user
+    const isUserPost = (post) => {
+        return isLoggedIn && post.authorName === currentUser.name;
+    };
+
+    // Khởi tạo dữ liệu bình luận mẫu
+    useState(() => {
+        const initialComments = {
+            1: [
+                {
+                    id: 101,
+                    authorName: 'Hoàng Minh Tuấn',
+                    avatar: '👨',
+                    avatarColor: '#3498db22',
+                    content: 'Cảm ơn bạn đã chia sẻ! Tôi cũng đang trong quá trình cai thuốc và thấy rất đồng cảm với những gì bạn trải qua.',
+                    date: '12/07/2023',
+                    time: '09:45'
+                },
+                {
+                    id: 102,
+                    authorName: 'Nguyễn Thị Lan',
+                    avatar: '👩',
+                    avatarColor: '#e74c3c22',
+                    content: 'Bạn có thể chia sẻ thêm về cách đối phó với cơn thèm thuốc không? Tôi thấy đó là khó khăn lớn nhất.',
+                    date: '15/07/2023',
+                    time: '14:23'
+                }
+            ]
+        };
+        setBlogComments(initialComments);
+    }, []);
+
+    // Handle new post submission
+    const handlePostSubmit = (newPostData) => {
+        if (!isLoggedIn) {
+            alert('Vui lòng đăng nhập để đăng bài viết!');
+            navigate('/login');
+            return;
+        }
+
+        if (editingPost) {
+            // Updating existing post
+            const updatedPosts = blogPosts.map(post => {
+                if (post.id === editingPost.id) {
+                    return {
+                        ...post,
+                        title: newPostData.title,
+                        content: newPostData.content,
+                        categories: newPostData.categories,
+                        date: new Date().toLocaleDateString('vi-VN') + ' (đã chỉnh sửa)',
+                    };
+                }
+                return post;
+            });
+
+            setBlogPosts(updatedPosts);
+            setEditingPost(null);
+            alert('Bài viết đã được cập nhật thành công!');
+        } else {
+            // Create a new post object with necessary fields
+            const newPost = {
+                id: blogPosts.length + 1,
+                authorName: currentUser.name,
+                authorType: currentUser.type,
+                avatar: currentUser.avatar,
+                avatarColor: currentUser.avatarColor,
+                accentColor: currentUser.accentColor,
+                ...newPostData,
+                likes: 0,
+                comments: 0,
+                liked: false
+            };
+
+            // Add the new post to the beginning of the posts array
+            setBlogPosts([newPost, ...blogPosts]);
+            alert('Bài viết của bạn đã được đăng thành công!');
+        }
+
+        // Close the form
+        setIsPostFormOpen(false);
+    };
+
+    // Handle post button click - check login first
+    const handlePostButtonClick = () => {
+        if (!isLoggedIn) {
+            alert('Vui lòng đăng nhập để đăng bài viết!');
+            navigate('/login');
+            return;
+        }
+
+        setIsPostFormOpen(true);
+    };
+
+    // Handle like/unlike a post
+    const handleLikePost = (postId) => {
+        if (!isLoggedIn) {
+            alert('Vui lòng đăng nhập để thích bài viết!');
+            navigate('/login');
+            return;
+        }
+
+        setBlogPosts(
+            blogPosts.map(post => {
+                if (post.id === postId) {
+                    // If already liked, unlike it (decrease count)
+                    if (post.liked) {
+                        return { ...post, likes: post.likes - 1, liked: false };
+                    }
+                    // If not liked, like it (increase count)
+                    return { ...post, likes: post.likes + 1, liked: true };
+                }
+                return post;
+            })
+        );
+    };
+
+    // Edit post handler
+    const handleEditPost = (post) => {
+        setEditingPost(post);
+        setIsPostFormOpen(true);
+    };
+
+    // Delete post handler
+    const handleDeletePost = (postId) => {
+        if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
+            setBlogPosts(blogPosts.filter(post => post.id !== postId));
+            // Also remove any comments for this post
+            if (blogComments[postId]) {
+                const newComments = { ...blogComments };
+                delete newComments[postId];
+                setBlogComments(newComments);
+            }
+            alert('Bài viết đã được xóa thành công!');
+        }
+    };
+
+    // Open comment modal for a post
+    const openCommentModal = (postId) => {
+        if (!isLoggedIn) {
+            alert('Vui lòng đăng nhập để bình luận!');
+            navigate('/login');
+            return;
+        }
+
+        setCommentModalPostId(postId);
+    };
+
+    // Close comment modal
+    const closeCommentModal = () => {
+        setCommentModalPostId(null);
+    };
+
+    // Add a new comment to a post
+    const handleAddComment = (postId, newComment) => {
+        // Update the comments object with the new comment
+        setBlogComments(prevComments => {
+            const postComments = prevComments[postId] || [];
+            return {
+                ...prevComments,
+                [postId]: [...postComments, newComment]
+            };
+        });
+
+        // Update the post's comment count
+        setBlogPosts(
+            blogPosts.map(post => {
+                if (post.id === postId) {
+                    return { ...post, comments: post.comments + 1 };
+                }
+                return post;
+            })
+        );
+    };
 
     // Filter blog posts by search term and category
     const filteredPosts = blogPosts.filter(post => {
@@ -178,7 +387,50 @@ const BlogPage = () => {
                         <span style={{ color: '#ffffff' }}>Free</span>
                     </div>
 
-                    <div style={{ width: '120px' }}></div>
+                    {isLoggedIn ? (
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            color: 'white',
+                            fontWeight: 'bold',
+                        }}>
+                            <span style={{
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '50%',
+                                background: '#ffffff22',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '1.2rem',
+                            }}>
+                                {currentUser.avatar}
+                            </span>
+                            <span>{currentUser.name}</span>
+                        </div>
+                    ) : (
+                        <button
+                            onClick={() => navigate('/login')}
+                            style={{
+                                background: 'rgba(255,255,255,0.15)',
+                                border: 'none',
+                                color: 'white',
+                                fontWeight: 'bold',
+                                fontSize: '1rem',
+                                padding: '0.6rem 1.2rem',
+                                borderRadius: '30px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                backdropFilter: 'blur(5px)',
+                                transition: 'all 0.2s',
+                            }}
+                        >
+                            Đăng Nhập
+                        </button>
+                    )}
                 </div>
             </header>
 
@@ -437,7 +689,9 @@ const BlogPage = () => {
                                     }}>
                                         {post.avatar}
                                     </div>
-                                    <div>
+                                    <div style={{
+                                        flex: 1,
+                                    }}>
                                         <h3 style={{
                                             margin: '0 0 0.3rem 0',
                                             fontSize: '1.2rem',
@@ -455,6 +709,54 @@ const BlogPage = () => {
                                             {post.authorType}
                                         </p>
                                     </div>
+                                    {/* Thêm nút chỉnh sửa và xóa cho bài viết của người dùng đang đăng nhập */}
+                                    {isUserPost(post) && (
+                                        <div style={{
+                                            display: 'flex',
+                                            gap: '0.5rem'
+                                        }}>
+                                            <button
+                                                onClick={() => handleEditPost(post)}
+                                                style={{
+                                                    background: '#f8f9fa',
+                                                    color: '#3498db',
+                                                    border: '1px solid #e5e8ee',
+                                                    borderRadius: '8px',
+                                                    padding: '0.5rem',
+                                                    fontSize: '1rem',
+                                                    cursor: 'pointer',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    width: '35px',
+                                                    height: '35px',
+                                                }}
+                                                title="Chỉnh sửa bài viết"
+                                            >
+                                                ✏️
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeletePost(post.id)}
+                                                style={{
+                                                    background: '#f8f9fa',
+                                                    color: '#e74c3c',
+                                                    border: '1px solid #e5e8ee',
+                                                    borderRadius: '8px',
+                                                    padding: '0.5rem',
+                                                    fontSize: '1rem',
+                                                    cursor: 'pointer',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    width: '35px',
+                                                    height: '35px',
+                                                }}
+                                                title="Xóa bài viết"
+                                            >
+                                                🗑️
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <h2 style={{
@@ -525,32 +827,39 @@ const BlogPage = () => {
                                 justifyContent: 'space-between',
                                 background: '#f9f9f9',
                             }}>
-                                <button style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.5rem',
-                                    background: 'none',
-                                    border: 'none',
-                                    color: '#7f8c8d',
-                                    fontWeight: '500',
-                                    fontSize: '0.95rem',
-                                    cursor: 'pointer',
-                                }}>
-                                    <span style={{ fontSize: '1.1rem' }}>👍</span>
+                                <button
+                                    onClick={() => handleLikePost(post.id)}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.5rem',
+                                        background: 'none',
+                                        border: 'none',
+                                        color: post.liked ? post.accentColor : '#7f8c8d',
+                                        fontWeight: '500',
+                                        fontSize: '0.95rem',
+                                        cursor: 'pointer',
+                                        transition: 'color 0.2s ease',
+                                    }}
+                                >
+                                    <span style={{ fontSize: '1.1rem' }}>{post.liked ? '❤️' : '👍'}</span>
                                     {post.likes} Thích
                                 </button>
 
-                                <button style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.5rem',
-                                    background: 'none',
-                                    border: 'none',
-                                    color: '#7f8c8d',
-                                    fontWeight: '500',
-                                    fontSize: '0.95rem',
-                                    cursor: 'pointer',
-                                }}>
+                                <button
+                                    onClick={() => openCommentModal(post.id)}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.5rem',
+                                        background: 'none',
+                                        border: 'none',
+                                        color: '#7f8c8d',
+                                        fontWeight: '500',
+                                        fontSize: '0.95rem',
+                                        cursor: 'pointer',
+                                    }}
+                                >
                                     <span style={{ fontSize: '1.1rem' }}>💬</span>
                                     {post.comments} Bình luận
                                 </button>
@@ -589,29 +898,54 @@ const BlogPage = () => {
                     ))}
                 </div>
 
-                {/* Write Post Button */}
+                {/* Write Post Button - now checks login */}
                 <div style={{
                     position: 'fixed',
                     bottom: '2rem',
                     right: '2rem',
                 }}>
-                    <button style={{
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
-                        color: 'white',
-                        fontSize: '2rem',
-                        border: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 4px 15px rgba(52, 152, 219, 0.4)',
-                        cursor: 'pointer',
-                    }}>
+                    <button
+                        onClick={handlePostButtonClick}
+                        style={{
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
+                            color: 'white',
+                            fontSize: '2rem',
+                            border: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: '0 4px 15px rgba(52, 152, 219, 0.4)',
+                            cursor: 'pointer',
+                        }}
+                    >
                         ✏️
                     </button>
                 </div>
+
+                {/* Blog Post Form Modal */}
+                <BlogPostForm
+                    isOpen={isPostFormOpen}
+                    onClose={() => {
+                        setIsPostFormOpen(false);
+                        setEditingPost(null);
+                    }}
+                    onSubmit={handlePostSubmit}
+                    initialData={editingPost}
+                />
+
+                {/* Comment Modal */}
+                {commentModalPostId && (
+                    <CommentModal
+                        isOpen={commentModalPostId !== null}
+                        onClose={closeCommentModal}
+                        comments={blogComments[commentModalPostId] || []}
+                        onAddComment={handleAddComment}
+                        postId={commentModalPostId}
+                    />
+                )}
             </div>
         </div>
     );

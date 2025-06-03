@@ -12,6 +12,10 @@ import ExpertAdvicePage from './pages/ExpertAdvicePage';
 import BlogPage from './pages/BlogPage';
 import SmokingCessationPage from './pages/SmokingCessationPage';
 import SupportChat from './pages/SupportChat';
+import MembershipPage from './pages/MembershipPage';
+import PaymentPage from './pages/PaymentPage';
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import AppointmentPage from './pages/AppointmentPage';
 
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/smoking-cessation" element={<SmokingCessationPage />} />
         <Route path="/support-chat" element={<SupportChat />} />
+        <Route path="/membership" element={<MembershipPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/payment-success" element={<PaymentSuccessPage />} />
+        <Route path="/appointment" element={<AppointmentPage />} />
       </Routes>
     </Router>
   );

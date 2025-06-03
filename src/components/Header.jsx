@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ userName }) => {
   const navigate = useNavigate();
+  const [isMember, setIsMember] = useState(false);
+
+  useEffect(() => {
+    // Kiểm tra xem người dùng đã là thành viên chưa
+    const membershipStatus = localStorage.getItem('isMember') === 'true';
+    setIsMember(membershipStatus);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('userLoggedIn');

@@ -218,7 +218,7 @@ const MembershipPlans = ({ onClose }) => {
           }}>Chọn gói phù hợp nhất với bạn</p>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
             marginBottom: '2rem'
           }}>
@@ -228,127 +228,184 @@ const MembershipPlans = ({ onClose }) => {
                 onClick={() => setSelectedPlan(plan)}
                 style={{
                   backgroundColor: 'white',
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   overflow: 'hidden',
-                  boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                  boxShadow: '0 8px 20px rgba(0, 0, 0, 0.08)',
                   cursor: 'pointer',
                   position: 'relative',
                   display: 'flex',
                   flexDirection: 'column',
                   border: selectedPlan?.id === plan.id ? `2px solid ${plan.color}` : '2px solid transparent',
-                  transform: plan.popular ? 'scale(1.05)' : selectedPlan?.id === plan.id ? 'translateY(-5px)' : 'none',
+                  transform: selectedPlan?.id === plan.id ? 'translateY(-5px)' : 'none',
                   zIndex: plan.popular ? 10 : 1,
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.3s ease',
+                  height: '100%',
+                  minHeight: '480px',
+                  maxWidth: '100%',
+                  width: '100%'
                 }}
                 onMouseOver={(e) => {
-                  if (!plan.popular && selectedPlan?.id !== plan.id) {
+                  if (selectedPlan?.id !== plan.id) {
                     e.currentTarget.style.transform = 'translateY(-5px)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                    e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.12)';
                   }
                 }}
                 onMouseOut={(e) => {
-                  if (!plan.popular && selectedPlan?.id !== plan.id) {
+                  if (selectedPlan?.id !== plan.id) {
                     e.currentTarget.style.transform = 'none';
-                    e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.08)';
                   }
                 }}
               >
                 {plan.popular && (
                   <div style={{
                     position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    backgroundColor: '#ff9800',
+                    top: '12px',
+                    right: '0',
+                    backgroundColor: '#f39c12',
                     color: 'white',
-                    fontSize: '0.75rem',
+                    fontSize: '0.85rem',
                     fontWeight: '700',
-                    padding: '0.25rem 0.5rem',
-                    borderBottomLeftRadius: '8px',
-                    letterSpacing: '0.5px'
-                  }}>PHỔ BIẾN NHẤT</div>
+                    padding: '0.5rem 1rem',
+                    borderTopLeftRadius: '50px',
+                    borderBottomLeftRadius: '50px',
+                    boxShadow: '0 4px 8px rgba(243, 156, 18, 0.3)',
+                    zIndex: 5
+                  }}>
+                    PHỔ BIẾN NHẤT
+                  </div>
                 )}
+
                 <div style={{
-                  padding: '1.5rem',
-                  textAlign: 'center',
-                  borderBottom: '1px solid #f0f0f0',
-                  backgroundColor: `${plan.color}11`
+                  borderBottom: '1px solid #f1f1f1',
+                  padding: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  backgroundColor: 'white',
+                  height: '180px'
                 }}>
                   <h3 style={{
-                    fontSize: '1.5rem',
-                    marginBottom: '0.5rem',
+                    fontSize: '1.8rem',
+                    fontWeight: '700',
                     color: '#2c3e50',
-                    fontWeight: '700'
+                    marginBottom: '1rem',
+                    textAlign: 'center'
                   }}>{plan.name}</h3>
+
                   <div style={{
-                    marginBottom: '0.5rem',
+                    color: '#95a5a6',
+                    fontSize: '1rem',
+                    marginBottom: '1rem',
+                    textAlign: 'center',
+                    height: '48px',
                     display: 'flex',
-                    alignItems: 'baseline',
-                    justifyContent: 'center',
-                    gap: '0.25rem'
+                    alignItems: 'center'
                   }}>
-                    <span style={{
-                      fontSize: '2rem',
-                      fontWeight: '800',
-                      color: plan.color
-                    }}>{plan.price}</span>
+                    {plan.description}
+                  </div>
+
+                  <div style={{ marginBottom: '0.5rem' }}>
                     <span style={{
                       fontSize: '1rem',
-                      color: '#7f8c8d'
+                      color: '#7f8c8d',
+                      fontWeight: '500'
                     }}>VND</span>
                   </div>
-                  <p style={{
-                    color: '#7f8c8d',
-                    fontSize: '0.875rem',
-                    margin: '0'
-                  }}>{plan.description}</p>
+
+                  <div style={{
+                    fontSize: '3rem',
+                    fontWeight: '800',
+                    color: plan.color,
+                    marginBottom: '1.5rem',
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    {plan.popular && (
+                      <div style={{
+                        position: 'absolute',
+                        height: '100%',
+                        width: '6px',
+                        backgroundColor: plan.color,
+                        left: '-12px',
+                        borderRadius: '3px'
+                      }}></div>
+                    )}
+                    {plan.price}
+                  </div>
                 </div>
+
                 <div style={{
-                  padding: '1.5rem',
-                  flexGrow: 1
+                  padding: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flexGrow: 1,
+                  justifyContent: 'space-between',
+                  height: '300px'
                 }}>
                   <ul style={{
                     listStyle: 'none',
                     padding: 0,
-                    margin: 0
+                    margin: 0,
+                    marginBottom: '2rem',
+                    height: '220px'
                   }}>
                     {plan.features.map((feature, index) => (
-                      <li key={index} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        marginBottom: '0.75rem',
-                        fontSize: '0.95rem',
-                        color: '#2c3e50'
-                      }}>
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="12" cy="12" r="10" stroke={plan.color} strokeWidth="2" />
-                          <path d="M8 12l2 2 4-4" stroke={plan.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                      <li
+                        key={index}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          marginBottom: '1rem',
+                          color: '#2c3e50',
+                          fontSize: '1rem'
+                        }}
+                      >
+                        <span style={{
+                          color: plan.color,
+                          marginRight: '0.75rem',
+                          fontWeight: 'bold',
+                          fontSize: '1.2rem'
+                        }}>✓</span>
                         {feature}
                       </li>
                     ))}
                   </ul>
-                </div>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  padding: '1rem',
-                  fontWeight: '600',
-                  color: plan.color,
-                  backgroundColor: selectedPlan?.id === plan.id ? `${plan.color}11` : 'transparent',
-                  transition: 'all 0.2s',
-                  marginTop: 'auto',
-                  borderTop: selectedPlan?.id === plan.id ? `2px solid ${plan.color}` : '2px solid transparent'
-                }}>
-                  {selectedPlan?.id === plan.id && (
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="10" fill={plan.color} fillOpacity="0.2" stroke={plan.color} strokeWidth="2" />
-                      <path d="M8 12l2 2 6-6" stroke={plan.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
-                  <span>Chọn Gói</span>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPlan(plan);
+                    }}
+                    style={{
+                      backgroundColor: selectedPlan?.id === plan.id ? plan.color : 'white',
+                      color: selectedPlan?.id === plan.id ? 'white' : plan.color,
+                      border: `2px solid ${plan.color}`,
+                      borderRadius: '50px',
+                      padding: '1rem',
+                      fontWeight: '700',
+                      fontSize: '1rem',
+                      cursor: 'pointer',
+                      width: '100%',
+                      transition: 'all 0.2s'
+                    }}
+                    onMouseOver={(e) => {
+                      if (selectedPlan?.id !== plan.id) {
+                        e.target.style.backgroundColor = plan.color;
+                        e.target.style.color = 'white';
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      if (selectedPlan?.id !== plan.id) {
+                        e.target.style.backgroundColor = 'white';
+                        e.target.style.color = plan.color;
+                      }
+                    }}
+                  >
+                    Chọn Gói
+                  </button>
                 </div>
               </div>
             ))}
