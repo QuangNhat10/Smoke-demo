@@ -555,7 +555,7 @@ const PaymentPage = () => {
                                             Số tài khoản
                                         </div>
                                         <div style={{ fontWeight: 'bold' }}>
-                                            1234567890
+                                            1027739641
                                         </div>
                                     </div>
 
@@ -564,7 +564,7 @@ const PaymentPage = () => {
                                             Chủ tài khoản
                                         </div>
                                         <div style={{ fontWeight: 'bold' }}>
-                                            CONG TY BREATHINGFREE
+                                            TRAN TIEN DAT
                                         </div>
                                     </div>
 

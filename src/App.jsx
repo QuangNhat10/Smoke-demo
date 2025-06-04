@@ -16,6 +16,7 @@ import MembershipPage from './pages/MembershipPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import AppointmentPage from './pages/AppointmentPage';
+import Rankings from './pages/Rankings';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment-success" element={<PaymentSuccessPage />} />
         <Route path="/appointment" element={<AppointmentPage />} />
+        <Route path="/rankings" element={<Rankings />} />
       </Routes>
     </Router>
   );
