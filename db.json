@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "823f",
+      "name": "John Doe",
+      "email": "JohnDoe@gmail.com",
+      "password": "Test@123456",
+      "dob": "1990-01-01",
+      "gender": "Male",
+      "job": "Sinh Vien",
+      "createdAt": "2025-06-06T09:16:01.659Z",
+      "role": "user"
+    },
+    {
+      "id": "6f90",
+      "name": "Quang Minh",
+      "email": "minh@gmail.com",
+      "password": "Test@123456",
+      "dob": "2003-10-10",
+      "gender": "Male",
+      "job": "Ki Su",
+      "createdAt": "2025-06-06T09:19:33.563Z",
+      "role": "user"
+    }
+  ],
+  "auth": {
+    "register": []
+  },
+  "blog-posts": [],
+  "appointments": [],
+  "doctors": [],
+  "membership-plans": [],
+  "tracking": []
+}
