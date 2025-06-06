@@ -3,10 +3,50 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // Fake user database
 const fakeUsers = [
-  { username: 'member123', password: 'Member123!', role: 'Member', name: 'John Smith' },
-  { username: 'doctor123', password: 'Doctor123!', role: 'Doctor', name: 'Emma Wilson' },
-  { username: 'admin123', password: 'Admin123!', role: 'Admin', name: 'David Brown' },
-  { username: 'staff123', password: 'Staff123!', role: 'Staff', name: 'Sarah Johnson' },
+  {
+    username: 'member123',
+    password: 'Member123!',
+    role: 'Member',
+    name: 'John Smith',
+    profilePicture: 'https://randomuser.me/api/portraits/men/32.jpg',
+    email: 'john.smith@example.com',
+    gender: 'Nam',
+    dateOfBirth: '1990-05-15',
+    phone: '0912345678',
+    address: 'Hà Nội, Việt Nam',
+    smokingHistory: '10 năm',
+    cigarettesPerDay: 20
+  },
+  {
+    username: 'doctor123',
+    password: 'Doctor123!',
+    role: 'Doctor',
+    name: 'Emma Wilson',
+    profilePicture: 'https://randomuser.me/api/portraits/women/44.jpg',
+    email: 'emma.wilson@example.com',
+    gender: 'Nữ',
+    dateOfBirth: '1985-08-22',
+    phone: '0987654321',
+    address: 'Hồ Chí Minh, Việt Nam',
+    specialization: 'Chuyên gia cai nghiện thuốc lá',
+    experience: '8 năm'
+  },
+  {
+    username: 'admin123',
+    password: 'Admin123!',
+    role: 'Admin',
+    name: 'David Brown',
+    profilePicture: 'https://randomuser.me/api/portraits/men/43.jpg',
+    email: 'david.brown@example.com'
+  },
+  {
+    username: 'staff123',
+    password: 'Staff123!',
+    role: 'Staff',
+    name: 'Sarah Johnson',
+    profilePicture: 'https://randomuser.me/api/portraits/women/22.jpg',
+    email: 'sarah.johnson@example.com'
+  },
 ];
 
 const roles = [
@@ -54,6 +94,30 @@ function Login() {
       localStorage.setItem('userName', user.name);
       localStorage.setItem('userLoggedIn', 'true');
       localStorage.setItem('userId', user.username);
+      localStorage.setItem('profilePicture', user.profilePicture);
+      localStorage.setItem('userEmail', user.email);
+
+      // Lưu thông tin chi tiết theo vai trò
+      if (user.role === 'Member') {
+        localStorage.setItem('gender', user.gender || '');
+        localStorage.setItem('dateOfBirth', user.dateOfBirth || '');
+        localStorage.setItem('phone', user.phone || '');
+        localStorage.setItem('address', user.address || '');
+        localStorage.setItem('smokingHistory', user.smokingHistory || '');
+        localStorage.setItem('cigarettesPerDay', user.cigarettesPerDay || 0);
+
+        // Khởi tạo giá trị theo dõi cai thuốc
+        if (!localStorage.getItem('smokeFreeCount')) {
+          localStorage.setItem('smokeFreeCount', '0');
+        }
+      } else if (user.role === 'Doctor') {
+        localStorage.setItem('gender', user.gender || '');
+        localStorage.setItem('dateOfBirth', user.dateOfBirth || '');
+        localStorage.setItem('phone', user.phone || '');
+        localStorage.setItem('address', user.address || '');
+        localStorage.setItem('specialization', user.specialization || '');
+        localStorage.setItem('experience', user.experience || '');
+      }
 
       // Redirect based on role
       if (user.role === 'Member') {

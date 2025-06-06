@@ -58,6 +58,12 @@ const SecondaryNavigationDoctor = () => {
                             <div className="dropdown-menu">
                                 <button
                                     className="dropdown-item"
+                                    onClick={() => navigate('/profile')}
+                                >
+                                    Hồ Sơ Cá Nhân
+                                </button>
+                                <button
+                                    className="dropdown-item"
                                     onClick={() => navigate('/rankings')}
                                 >
                                     Bảng Xếp Hạng
