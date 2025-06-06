@@ -59,7 +59,7 @@ function Login() {
       if (user.role === 'Member') {
         navigate('/homepage-member');
       } else if (user.role === 'Doctor') {
-        navigate('/dashboard-doctor');
+        navigate('/homepage-doctor');
       } else if (user.role === 'Admin') {
         navigate('/dashboard-admin');
       } else if (user.role === 'Staff') {

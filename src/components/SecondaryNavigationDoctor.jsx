@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SecondaryNavigation = () => {
+const SecondaryNavigationDoctor = () => {
     const navigate = useNavigate();
     const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -16,7 +16,7 @@ const SecondaryNavigation = () => {
                     <li className="nav-item">
                         <button
                             className="nav-link"
-                            onClick={() => navigate('/homepage-member')}
+                            onClick={() => navigate('/homepage-doctor')}
                         >
                             Trang Chủ
                         </button>
@@ -33,21 +33,15 @@ const SecondaryNavigation = () => {
                             <div className="dropdown-menu">
                                 <button
                                     className="dropdown-item"
-                                    onClick={() => navigate('/track-status')}
+                                    onClick={() => navigate('/patient-monitoring')}
                                 >
-                                    Theo Dõi Trạng Thái
+                                    Theo Dõi Bệnh Nhân
                                 </button>
                                 <button
                                     className="dropdown-item"
-                                    onClick={() => navigate('/dashboard-member')}
+                                    onClick={() => navigate('/patient-plans')}
                                 >
-                                    Tạo Kế Hoạch
-                                </button>
-                                <button
-                                    className="dropdown-item"
-                                    onClick={() => navigate('/smoking-cessation')}
-                                >
-                                    Cách Cai Thuốc
+                                    Xem Kế Hoạch Bệnh Nhân
                                 </button>
                             </div>
                         )}
@@ -62,12 +56,6 @@ const SecondaryNavigation = () => {
                         </button>
                         {activeDropdown === 'about' && (
                             <div className="dropdown-menu">
-                                <button
-                                    className="dropdown-item"
-                                    onClick={() => navigate('/expert-advice')}
-                                >
-                                    Chia Sẻ Từ Chuyên Gia
-                                </button>
                                 <button
                                     className="dropdown-item"
                                     onClick={() => navigate('/rankings')}
@@ -95,21 +83,15 @@ const SecondaryNavigation = () => {
                             <div className="dropdown-menu">
                                 <button
                                     className="dropdown-item"
-                                    onClick={() => navigate('/appointment')}
+                                    onClick={() => navigate('/work-schedule')}
                                 >
-                                    Đặt Lịch
+                                    Thông Tin Lịch Làm Việc
                                 </button>
                                 <button
                                     className="dropdown-item"
-                                    onClick={() => navigate('/doctors')}
+                                    onClick={() => navigate('/patient-chat')}
                                 >
-                                    Bác Sĩ
-                                </button>
-                                <button
-                                    className="dropdown-item"
-                                    onClick={() => navigate('/support-chat')}
-                                >
-                                    Nhắn Tin Hỗ Trợ
+                                    Nhắn Tin Với Bệnh Nhân
                                 </button>
                             </div>
                         )}
@@ -122,16 +104,6 @@ const SecondaryNavigation = () => {
           background-color: var(--white);
           border-bottom: 2px solid var(--gray-200);
           padding: 0;
-          width: 100%;
-          margin: 0;
-          left: 0;
-          right: 0;
-        }
-        
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
         }
         
         .nav-list {
@@ -218,4 +190,4 @@ const SecondaryNavigation = () => {
     );
 };
 
-export default SecondaryNavigation; 
+export default SecondaryNavigationDoctor; 

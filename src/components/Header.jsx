@@ -4,11 +4,21 @@ import { useNavigate } from 'react-router-dom';
 const Header = ({ userName }) => {
   const navigate = useNavigate();
   const [isMember, setIsMember] = useState(false);
+  const [userRole, setUserRole] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Kiểm tra xem người dùng đã là thành viên chưa
     const membershipStatus = localStorage.getItem('isMember') === 'true';
     setIsMember(membershipStatus);
+
+    // Lấy vai trò người dùng
+    const role = localStorage.getItem('userRole');
+    setUserRole(role);
+
+    // Kiểm tra đăng nhập
+    const loggedIn = localStorage.getItem('userLoggedIn') === 'true';
+    setIsLoggedIn(loggedIn);
   }, []);
 
   const handleLogout = () => {
@@ -21,45 +31,85 @@ const Header = ({ userName }) => {
     navigate('/');
   };
 
+  const handleLogoClick = () => {
+    if (userRole === 'Doctor') {
+      navigate('/homepage-doctor');
+    } else if (userRole === 'Member') {
+      navigate('/homepage-member');
+    } else if (userRole === 'Admin') {
+      navigate('/dashboard-admin');
+    } else if (userRole === 'Staff') {
+      navigate('/dashboard-staff');
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <header className="main-header">
       <div className="container">
         <div className="header-content">
           <button
-            onClick={() => navigate('/homepage-member')}
+            onClick={handleLogoClick}
             className="logo-button"
           >
             <span className="logo-text">Breathing Free</span>
           </button>
 
           <div className="user-actions">
-            <div className="user-info">
-              <span className="user-greeting">Xin chào, {userName}</span>
-              <button
-                onClick={handleLogout}
-                className="btn btn-danger btn-sm"
-              >
-                Đăng Xuất
-              </button>
-            </div>
+            {isLoggedIn ? (
+              <div className="user-info">
+                <span className="user-greeting">Xin chào, {userName}</span>
+                <button
+                  onClick={handleLogout}
+                  className="btn btn-danger btn-sm"
+                >
+                  Đăng Xuất
+                </button>
+              </div>
+            ) : (
+              <div className="auth-buttons">
+                <button
+                  className="btn btn-login"
+                  onClick={() => navigate('/login')}
+                >
+                  Đăng Nhập
+                </button>
+                <button
+                  className="btn btn-register"
+                  onClick={() => navigate('/register')}
+                >
+                  Đăng Ký
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       <style jsx>{`
         .main-header {
-          background-color: var(--white);
-          box-shadow: 0 8px 32px 0 rgba(0,47,108,0.08);
+          background-color: #ffffff;
           position: relative;
           z-index: 10;
-          border-bottom: 1.5px solid var(--gray-200);
+          width: 100%;
+          border-bottom: 1px solid #e6e6e6;
+          padding: 10px 0;
+          margin: 0;
+          left: 0;
+          right: 0;
+        }
+        
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
         }
         
         .header-content {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 1.5rem 0 0.5rem;
         }
         
         .logo-button {
@@ -70,38 +120,81 @@ const Header = ({ userName }) => {
         }
         
         .logo-text {
-          font-size: 2.2rem;
-          font-weight: 900;
-          color: var(--primary-color);
+          font-size: 2rem;
+          font-weight: 700;
+          color: #003b6f;
           letter-spacing: 1px;
-          font-family: 'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+          font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
         }
         
         .user-actions {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 15px;
         }
         
         .user-info {
           display: flex;
           align-items: center;
-          gap: 0.8rem;
+          gap: 15px;
         }
         
         .user-greeting {
           font-weight: 600;
-          color: var(--text-dark);
+          color: #333;
+        }
+        
+        .auth-buttons {
+          display: flex;
+          gap: 10px;
+        }
+        
+        .btn {
+          padding: 8px 20px;
+          font-size: 14px;
+          font-weight: 600;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-login {
+          background-color: #003b6f;
+          color: white;
+          border: none;
+        }
+        
+        .btn-login:hover {
+          background-color: #002a50;
+        }
+        
+        .btn-register {
+          background-color: white;
+          color: #003b6f;
+          border: 1px solid #003b6f;
+        }
+        
+        .btn-register:hover {
+          background-color: #f5f5f5;
+        }
+        
+        .btn-danger {
+          background-color: #dc3545;
+          color: white;
+          border: none;
+        }
+        
+        .btn-danger:hover {
+          background-color: #c82333;
         }
         
         .btn-sm {
-          padding: 0.4rem 1rem;
-          font-size: 0.9rem;
-          border-radius: var(--border-radius-sm);
+          padding: 8px 16px;
+          font-size: 14px;
         }
       `}</style>
     </header>
   );
 };
 
-export default Header; 
+export default Header;
