@@ -99,17 +99,25 @@ const TrackStatus = () => {
             width: '100%',
             background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
             fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-            padding: '2rem',
+            padding: '0',
+            margin: '0',
             boxSizing: 'border-box',
             overflowX: 'hidden'
         }}>
-            <Header userName={memberInfo.name} />
-            <SecondaryNavigation />
+            <div style={{
+                width: '100%',
+                margin: '0',
+                padding: '0'
+            }}>
+                <Header userName={memberInfo.name} />
+                <SecondaryNavigation />
+            </div>
 
             <div style={{
-                maxWidth: '100%',
+                maxWidth: '1200px',
                 margin: '0 auto',
                 width: '100%',
+                padding: '2rem',
                 boxSizing: 'border-box'
             }}>
                 <div className="page-header" style={{

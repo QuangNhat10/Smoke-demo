@@ -79,17 +79,25 @@ const AppointmentPage = () => {
             width: '100%',
             background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
             fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-            padding: '2rem',
+            padding: '0',
+            margin: '0',
             boxSizing: 'border-box',
             overflowX: 'hidden'
         }}>
-            <Header userName={userName} />
-            <SecondaryNavigation />
+            <div style={{
+                width: '100%',
+                margin: '0',
+                padding: '0'
+            }}>
+                <Header userName={userName} />
+                <SecondaryNavigation />
+            </div>
 
             <div style={{
                 maxWidth: '1200px',
                 margin: '0 auto',
                 width: '100%',
+                padding: '2rem',
                 boxSizing: 'border-box'
             }}>
                 <section style={{
