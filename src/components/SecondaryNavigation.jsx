@@ -64,6 +64,12 @@ const SecondaryNavigation = () => {
                             <div className="dropdown-menu">
                                 <button
                                     className="dropdown-item"
+                                    onClick={() => navigate('/profile')}
+                                >
+                                    Hồ Sơ Cá Nhân
+                                </button>
+                                <button
+                                    className="dropdown-item"
                                     onClick={() => navigate('/expert-advice')}
                                 >
                                     Chia Sẻ Từ Chuyên Gia

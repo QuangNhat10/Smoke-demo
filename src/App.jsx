@@ -23,6 +23,7 @@ import WorkSchedulePage from './pages/WorkSchedulePage';
 import PatientChatPage from './pages/PatientChatPage';
 import Unauthorized from './pages/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/appointment" element={<AppointmentPage />} />
         <Route path="/rankings" element={<Rankings />} />
         <Route path="/doctors" element={<DoctorPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         {/* Doctor routes */}
         <Route element={<PrivateRoute allowedRoles="Doctor" />}>
