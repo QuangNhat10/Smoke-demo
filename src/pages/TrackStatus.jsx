@@ -4,19 +4,36 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 
+// Dữ liệu giả về người dùng Member (chỉ dùng nếu không có dữ liệu trong localStorage)
+const fakeMemberData = {
+    name: 'John Smith',
+    gender: 'Nam',
+    age: 35,
+    dateOfBirth: '1990-05-15',
+    smokingDuration: '15 năm',
+    email: 'john.smith@example.com',
+    phone: '0912345678',
+    address: 'Hà Nội, Việt Nam'
+};
+
 const TrackStatus = () => {
     const navigate = useNavigate();
     const [memberInfo, setMemberInfo] = useState({
         name: '',
         gender: '',
         age: 0,
+        dateOfBirth: '',
         smokingDuration: '',
         consultingDoctor: '',
         quittingDuration: '',
         achievement: '',
-        chatMessages: []
+        chatMessages: [],
+        email: '',
+        phone: '',
+        address: ''
     });
     const [newMessage, setNewMessage] = useState('');
+    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         // Check if user is logged in
@@ -26,37 +43,61 @@ const TrackStatus = () => {
             return;
         }
 
-        // In a real application, this would fetch data from an API
-        // For demo purposes, we'll use localStorage or mock data
-        const userName = localStorage.getItem('userName') || 'John Doe';
+        const storedUserName = localStorage.getItem('userName') || fakeMemberData.name;
+        setUserName(storedUserName);
+
+        // Lấy dữ liệu từ localStorage
+        const userAge = calculateAge(localStorage.getItem('dateOfBirth') || fakeMemberData.dateOfBirth);
         const smokeFreeCount = localStorage.getItem('smokeFreeCount') || 0;
 
-        // Mock data for demonstration
-        setMemberInfo({
-            name: userName,
-            gender: 'Male',
-            age: 35,
-            smokingDuration: '15 years',
+        // Tạo đối tượng thông tin thành viên
+        const memberData = {
+            name: storedUserName,
+            gender: localStorage.getItem('gender') || fakeMemberData.gender,
+            age: userAge,
+            dateOfBirth: localStorage.getItem('dateOfBirth') || fakeMemberData.dateOfBirth,
+            smokingDuration: localStorage.getItem('smokingHistory') || fakeMemberData.smokingDuration,
+            email: localStorage.getItem('userEmail') || fakeMemberData.email,
+            phone: localStorage.getItem('phone') || fakeMemberData.phone,
+            address: localStorage.getItem('address') || fakeMemberData.address,
             consultingDoctor: 'Dr. Smith',
-            quittingDuration: `${smokeFreeCount} days`,
+            quittingDuration: `${smokeFreeCount} ngày`,
             achievement: determineAchievement(smokeFreeCount),
             chatMessages: [
-                { id: 1, sender: 'Dr. Smith', message: 'How are you feeling today?', time: '10:30 AM', date: '2023-06-10' },
-                { id: 2, sender: 'You', message: 'I\'m doing great! No cravings today.', time: '10:45 AM', date: '2023-06-10' },
-                { id: 3, sender: 'Dr. Smith', message: 'That\'s excellent progress! Keep going!', time: '11:00 AM', date: '2023-06-10' },
-                { id: 4, sender: 'Dr. Smith', message: 'Have you experienced any withdrawal symptoms this week?', time: '09:15 AM', date: '2023-06-12' },
-                { id: 5, sender: 'You', message: 'Just a mild headache yesterday, but it passed quickly.', time: '09:30 AM', date: '2023-06-12' },
-                { id: 6, sender: 'Dr. Smith', message: 'That\'s normal. Make sure to stay hydrated and get plenty of rest. We\'ll discuss more strategies in our next session.', time: '09:45 AM', date: '2023-06-12' }
+                { id: 1, sender: 'Dr. Smith', message: 'Bạn cảm thấy thế nào hôm nay?', time: '10:30 AM', date: '2023-06-10' },
+                { id: 2, sender: 'You', message: 'Tôi cảm thấy tuyệt vời! Không thèm thuốc lá chút nào.', time: '10:45 AM', date: '2023-06-10' },
+                { id: 3, sender: 'Dr. Smith', message: 'Tuyệt vời! Hãy tiếp tục nhé!', time: '11:00 AM', date: '2023-06-10' },
+                { id: 4, sender: 'Dr. Smith', message: 'Bạn có trải qua các triệu chứng cai nghiện trong tuần này không?', time: '09:15 AM', date: '2023-06-12' },
+                { id: 5, sender: 'You', message: 'Chỉ có một chút đau đầu hôm qua, nhưng nó nhanh chóng qua đi.', time: '09:30 AM', date: '2023-06-12' },
+                { id: 6, sender: 'Dr. Smith', message: 'Điều đó bình thường. Hãy đảm bảo uống đủ nước và nghỉ ngơi đầy đủ. Chúng ta sẽ thảo luận thêm các chiến lược trong phiên tới.', time: '09:45 AM', date: '2023-06-12' }
             ]
-        });
+        };
+
+        setMemberInfo(memberData);
     }, [navigate]);
 
+    // Hàm tính tuổi từ ngày sinh
+    const calculateAge = (birthDate) => {
+        if (!birthDate) return 30; // Giá trị mặc định
+
+        const today = new Date();
+        const birth = new Date(birthDate);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDifference = today.getMonth() - birth.getMonth();
+
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+
+        return age;
+    };
+
     const determineAchievement = (days) => {
-        if (days >= 30) return 'One Month Milestone';
-        if (days >= 14) return 'Two Week Champion';
-        if (days >= 7) return 'One Week Warrior';
-        if (days >= 3) return 'First Steps';
-        return 'Just Started';
+        if (days >= 30) return 'Cột mốc một tháng';
+        if (days >= 14) return 'Quán quân hai tuần';
+        if (days >= 7) return 'Chiến binh một tuần';
+        if (days >= 3) return 'Bước đầu tiên';
+        return 'Mới bắt đầu';
     };
 
     const handleSendMessage = (e) => {
@@ -99,17 +140,25 @@ const TrackStatus = () => {
             width: '100%',
             background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
             fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-            padding: '2rem',
+            padding: '0',
+            margin: '0',
             boxSizing: 'border-box',
             overflowX: 'hidden'
         }}>
-            <Header userName={memberInfo.name} />
-            <SecondaryNavigation />
+            <div style={{
+                width: '100%',
+                margin: '0',
+                padding: '0'
+            }}>
+                <Header userName={userName} />
+                <SecondaryNavigation />
+            </div>
 
             <div style={{
-                maxWidth: '100%',
+                maxWidth: '1200px',
                 margin: '0 auto',
                 width: '100%',
+                padding: '2rem',
                 boxSizing: 'border-box'
             }}>
                 <div className="page-header" style={{
@@ -185,6 +234,22 @@ const TrackStatus = () => {
                                 <div className="info-value" style={{
                                     color: '#7f8c8d'
                                 }}>{memberInfo.age}</div>
+
+                                <div className="info-label" style={{
+                                    fontWeight: '600',
+                                    color: '#2c3e50'
+                                }}>Email:</div>
+                                <div className="info-value" style={{
+                                    color: '#7f8c8d'
+                                }}>{memberInfo.email}</div>
+
+                                <div className="info-label" style={{
+                                    fontWeight: '600',
+                                    color: '#2c3e50'
+                                }}>Điện thoại:</div>
+                                <div className="info-value" style={{
+                                    color: '#7f8c8d'
+                                }}>{memberInfo.phone}</div>
 
                                 <div className="info-label" style={{
                                     fontWeight: '600',
