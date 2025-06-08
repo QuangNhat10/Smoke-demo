@@ -78,7 +78,7 @@ const Header = ({ userName }) => {
     } else if (userRole === 'Member') {
       navigate('/homepage-member');
     } else if (userRole === 'Admin') {
-      navigate('/dashboard-admin');
+      navigate('/admin');
     } else if (userRole === 'Staff') {
       navigate('/dashboard-staff');
     } else {
