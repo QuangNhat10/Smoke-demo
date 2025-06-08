@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -24,6 +24,7 @@ import PatientChatPage from './pages/PatientChatPage';
 import Unauthorized from './pages/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
 import ProfilePage from './pages/ProfilePage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -60,6 +61,17 @@ function App() {
           <Route path="/work-schedule" element={<WorkSchedulePage />} />
           <Route path="/patient-chat" element={<PatientChatPage />} />
         </Route>
+
+        {/* Admin routes */}
+        <Route path="/admin" element={
+          localStorage.getItem('userRole') === 'Admin' ?
+            <AdminPage /> : <Navigate to="/unauthorized" replace />
+        } />
+
+        {/* Admin route using PrivateRoute 
+        <Route element={<PrivateRoute allowedRoles="Admin" />}>
+          <Route path="/admin" element={<AdminPage />} />
+        </Route> */}
       </Routes>
     </Router>
   );

@@ -125,7 +125,7 @@ function Login() {
       } else if (user.role === 'Doctor') {
         navigate('/homepage-doctor');
       } else if (user.role === 'Admin') {
-        navigate('/dashboard-admin');
+        navigate('/admin');
       } else if (user.role === 'Staff') {
         navigate('/dashboard-staff');
       } else {
