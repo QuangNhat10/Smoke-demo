@@ -5,12 +5,12 @@
     "main": "index.js",
     "private": true,
     "workspaces": [
-        "packages/*"
+        "BreathingFree/*"
     ],
     "scripts": {
         "install-all": "npm install",
-        "start-frontend": "npm start --workspace=packages/frontend",
-        "start-backend": "npm start --workspace=packages/backend"
+        "start-frontend": "npm start --workspace=BreathingFree/frontend",
+        "start-backend": "npm start --workspace=BreathingFree/backend"
     },
     "keywords": [],
     "author": "",
