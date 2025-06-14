@@ -1,11 +1,9 @@
-// Import các thư viện và component cần thiết
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 
-// Component Bảng xếp hạng người dùng
 const Rankings = () => {
-    // Dữ liệu mẫu về xếp hạng người dùng
+    // Simulated ranking data
     const [rankings] = useState([
         { id: 1, name: 'Nguyễn Văn A', daysSmokeFree: 365, points: 4500 },
         { id: 2, name: 'Trần Thị B', daysSmokeFree: 287, points: 3970 },
@@ -19,10 +17,9 @@ const Rankings = () => {
         { id: 10, name: 'Trương Thị K', daysSmokeFree: 82, points: 1480 },
     ]);
 
-    // Lấy tên người dùng hiện tại từ localStorage nếu có
+    // Get current user name from localStorage if available
     const [currentUser, setCurrentUser] = useState(null);
 
-    // Effect hook để lấy tên người dùng khi component được mount
     useEffect(() => {
         const userName = localStorage.getItem('userName');
         if (userName) {
@@ -30,10 +27,10 @@ const Rankings = () => {
         }
     }, []);
 
-    // Tìm thứ hạng của người dùng hiện tại trong bảng xếp hạng
+    // Find current user in rankings if they exist
     const currentUserRank = currentUser ? rankings.findIndex(user => user.name === currentUser) + 1 : -1;
 
-    // Effect hook để đặt tiêu đề cho trang
+    // Set the document title
     useEffect(() => {
         document.title = "Bảng Xếp Hạng | Cùng Nhau Cai Thuốc Lá";
     }, []);
@@ -43,7 +40,6 @@ const Rankings = () => {
             <Header />
             <SecondaryNavigation />
 
-            {/* Phần nội dung chính của trang */}
             <main className="rankings-page">
                 <div className="container">
                     <h1 className="page-title">Bảng Xếp Hạng</h1>
@@ -51,7 +47,6 @@ const Rankings = () => {
                         Theo dõi thành tích cai thuốc của cộng đồng và phấn đấu để đạt thứ hạng cao nhất!
                     </p>
 
-                    {/* Bảng xếp hạng */}
                     <div className="ranking-table-container">
                         <table className="ranking-table">
                             <thead>
@@ -63,14 +58,12 @@ const Rankings = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* Hiển thị danh sách người dùng và thứ hạng */}
                                 {rankings.map((user, index) => (
                                     <tr
                                         key={user.id}
                                         className={`${index < 3 ? 'top-rank' : ''} ${user.name === currentUser ? 'current-user' : ''}`}
                                     >
                                         <td className="rank-column">
-                                            {/* Hiển thị huy chương cho top 3 */}
                                             {index === 0 && <span className="rank-badge gold">🥇</span>}
                                             {index === 1 && <span className="rank-badge silver">🥈</span>}
                                             {index === 2 && <span className="rank-badge bronze">🥉</span>}
@@ -85,7 +78,6 @@ const Rankings = () => {
                         </table>
                     </div>
 
-                    {/* Hiển thị thông tin xếp hạng của người dùng hiện tại */}
                     {currentUser && currentUserRank > 0 && (
                         <div className="user-status-container">
                             <h3>Thứ hạng của bạn</h3>
@@ -102,23 +94,20 @@ const Rankings = () => {
                 </div>
             </main>
 
-            {/* Footer của trang */}
+            {/* Simple Footer */}
             <footer className="simple-footer">
                 <div className="container">
                     <p>© {new Date().getFullYear()} Cùng Nhau Cai Thuốc Lá. All rights reserved.</p>
                 </div>
             </footer>
 
-            {/* Styles cho component */}
             <style jsx>{`
-                /* Style cho trang bảng xếp hạng */
                 .rankings-page {
                     padding: 3rem 0;
                     background-color: #f8f9fa;
                     min-height: 70vh;
                 }
                 
-                /* Style cho tiêu đề trang */
                 .page-title {
                     color: var(--primary-color);
                     font-size: 2.5rem;
@@ -127,7 +116,6 @@ const Rankings = () => {
                     font-weight: 700;
                 }
                 
-                /* Style cho mô tả trang */
                 .page-description {
                     text-align: center;
                     max-width: 700px;
@@ -136,7 +124,6 @@ const Rankings = () => {
                     font-size: 1.1rem;
                 }
                 
-                /* Style cho container bảng xếp hạng */
                 .ranking-table-container {
                     background-color: white;
                     border-radius: 12px;
@@ -145,13 +132,11 @@ const Rankings = () => {
                     margin-bottom: 2rem;
                 }
                 
-                /* Style cho bảng xếp hạng */
                 .ranking-table {
                     width: 100%;
                     border-collapse: collapse;
                 }
                 
-                /* Style cho header của bảng */
                 .ranking-table th {
                     background-color: #f0f7ff;
                     padding: 1.2rem 1rem;
@@ -161,23 +146,19 @@ const Rankings = () => {
                     font-size: 1.05rem;
                 }
                 
-                /* Style cho các ô trong bảng */
                 .ranking-table td {
                     padding: 1.2rem 1rem;
                     border-top: 1px solid #edf2f7;
                 }
                 
-                /* Hiệu ứng hover cho hàng trong bảng */
                 .ranking-table tr:hover {
                     background-color: #f9fafb;
                 }
                 
-                /* Style cho top 3 người dùng */
                 .top-rank td {
                     font-weight: 600;
                 }
                 
-                /* Style cho người dùng hiện tại trong bảng */
                 .current-user {
                     background-color: #ebf8ff;
                 }
@@ -186,19 +167,16 @@ const Rankings = () => {
                     background-color: #e6f6ff !important;
                 }
                 
-                /* Style cho cột thứ hạng */
                 .rank-column {
                     width: 80px;
                     text-align: center;
                 }
                 
-                /* Style cho huy chương */
                 .rank-badge {
                     font-size: 1.5rem;
                     display: inline-block;
                 }
                 
-                /* Style cho số thứ tự */
                 .rank-number {
                     display: inline-flex;
                     align-items: center;
@@ -211,26 +189,22 @@ const Rankings = () => {
                     color: #4a5568;
                 }
                 
-                /* Style cho cột điểm */
                 .points-column {
                     font-weight: 600;
                     color: #3182ce;
                 }
                 
-                /* Style cho container thông tin người dùng */
                 .user-status-container {
                     margin-top: 3rem;
                     text-align: center;
                 }
                 
-                /* Style cho tiêu đề thông tin người dùng */
                 .user-status-container h3 {
                     font-size: 1.4rem;
                     color: #2c3e50;
                     margin-bottom: 1rem;
                 }
                 
-                /* Style cho card thông tin người dùng */
                 .user-rank-card {
                     background-color: white;
                     border-radius: 12px;
@@ -243,7 +217,6 @@ const Rankings = () => {
                     border-left: 5px solid #3498db;
                 }
                 
-                /* Style cho số thứ tự trong card người dùng */
                 .user-rank-number {
                     font-size: 2rem;
                     font-weight: 700;
@@ -258,13 +231,11 @@ const Rankings = () => {
                     margin-right: 1.5rem;
                 }
                 
-                /* Style cho phần chi tiết trong card người dùng */
                 .user-rank-details {
                     flex: 1;
                     text-align: left;
                 }
                 
-                /* Style cho tên người dùng trong card */
                 .user-rank-name {
                     font-size: 1.2rem;
                     font-weight: 600;
@@ -272,14 +243,12 @@ const Rankings = () => {
                     margin: 0 0 0.5rem 0;
                 }
                 
-                /* Style cho điểm trong card người dùng */
                 .user-rank-points {
                     color: #3498db;
                     font-weight: 600;
                     margin: 0;
                 }
                 
-                /* Style cho số ngày trong card người dùng */
                 .user-rank-days {
                     background-color: #ebf8ff;
                     color: #3498db;
@@ -289,7 +258,6 @@ const Rankings = () => {
                     margin-left: 1rem;
                 }
                 
-                /* Style cho footer */
                 .simple-footer {
                     background-color: #2c3e50;
                     color: white;
@@ -302,4 +270,4 @@ const Rankings = () => {
     );
 };
 
-export default Rankings;
+export default Rankings; 
