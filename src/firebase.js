@@ -4,14 +4,21 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB8mqa54AyI3OXma7i3YAkbutQ6LZFJDyI",
-  authDomain: "smoke-app-e18a1.firebaseapp.com",
-  projectId: "smoke-app-e18a1",
-  storageBucket: "smoke-app-e18a1.appspot.com",
-  messagingSenderId: "326742322872",
-  appId: "1:326742322872:web:8052f7ebee14fbb99d2b4c"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
+
+// Log để debug (sẽ xóa sau)
+console.log('Firebase config:', {
+  apiKey: firebaseConfig.apiKey ? 'exists' : 'missing',
+  authDomain: firebaseConfig.authDomain ? 'exists' : 'missing',
+  projectId: firebaseConfig.projectId ? 'exists' : 'missing'
+});
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
+export const auth = getAuth(app); // Truyền app vào getAuth
