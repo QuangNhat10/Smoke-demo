@@ -118,15 +118,6 @@ const PatientPlansPage = () => {
                             </div>
                         </div>
                     </div>
-
-                    <div className="create-plan mt-4">
-                        <button
-                            className="create-plan-button"
-                            onClick={() => navigate('/create-plan')}
-                        >
-                            + Tạo kế hoạch mới
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -318,25 +309,6 @@ const PatientPlansPage = () => {
                 .action-button.report {
                     background-color: #27ae60;
                     color: white;
-                }
-                
-                .create-plan {
-                    text-align: center;
-                }
-                
-                .create-plan-button {
-                    padding: 0.75rem 1.5rem;
-                    background-color: #35a79c;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
-                }
-                
-                .create-plan-button:hover {
-                    background-color: #2c9085;
                 }
                 
                 @media (max-width: 992px) {

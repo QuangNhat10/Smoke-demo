@@ -31,7 +31,14 @@ const SecondaryNavigation = () => {
                     <li className="nav-item">
                         <button
                             className="nav-link"
-                            onClick={() => navigate('/homepage-member')}
+                            onClick={() => {
+                                const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+                                if (isLoggedIn) {
+                                    navigate('/homepage-member');
+                                } else {
+                                    navigate('/');
+                                }
+                            }}
                         >
                             Trang Chủ
                         </button>

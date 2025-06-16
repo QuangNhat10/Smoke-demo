@@ -164,7 +164,6 @@ const ExpertAdvicePage = () => {
                             transition: 'all 0.2s',
                         }}
                     >
-                        <span style={{ fontSize: '1.2rem' }}>←</span>
                         Quay Lại
                     </button>
 
