@@ -461,7 +461,7 @@ const SmokingCessationPage = () => {
                                 fontWeight: '600',
                                 marginBottom: '0.5rem',
                             }}>
-                                Gọi ngay đường dây hỗ trợ: 1800-xxx-xxx
+                                Gọi ngay đường dây hỗ trợ: 1800 6606
                             </p>
                         </div>
 

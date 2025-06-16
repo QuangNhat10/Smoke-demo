@@ -135,7 +135,7 @@ const MembershipPage = () => {
                             fontSize: '1rem',
                         }}
                     >
-                        ← Quay lại
+                        Quay lại
                     </button>
                     <h1 style={{
                         margin: 0,

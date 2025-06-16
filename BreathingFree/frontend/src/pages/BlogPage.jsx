@@ -65,7 +65,7 @@ const BlogPage = () => {
             id: 2,
             authorName: 'BS. Nguyễn Thị Hương',
             authorType: 'Chuyên gia',
-            avatar: '👩‍⚕️',
+            avatar: '👨‍⚕️',
             avatarColor: '#e74c3c22',
             accentColor: '#e74c3c',
             categories: ['Sức khỏe', 'Tác hại'],
@@ -396,7 +396,16 @@ const BlogPage = () => {
                     zIndex: 2,
                 }}>
                     <button
-                        onClick={() => navigate(-1)}
+                        onClick={() => {
+                            const role = localStorage.getItem('userRole');
+                            if (role === 'Member') {
+                                navigate('/homepage-member');
+                            } else if (role === 'Doctor') {
+                                navigate('/homepage-doctor');
+                            } else {
+                                navigate('/');
+                            }
+                        }}
                         style={{
                             background: 'rgba(255,255,255,0.15)',
                             border: 'none',
@@ -413,7 +422,6 @@ const BlogPage = () => {
                             transition: 'all 0.2s',
                         }}
                     >
-                        <span style={{ fontSize: '1.2rem' }}>←</span>
                         Quay Lại
                     </button>
 
