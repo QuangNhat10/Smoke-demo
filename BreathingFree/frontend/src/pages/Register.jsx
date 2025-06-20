@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import authApi from '../api/authApi';
 
 function Register() {
   const navigate = useNavigate();
@@ -38,9 +39,20 @@ function Register() {
       return;
     }
     setShowPasswordError(false);
-    // Xử lý đăng ký ở đây
-    // ...
-    navigate('/login');
+    // Gọi API đăng ký
+    authApi.register({
+      FullName: form.name,
+      Email: form.email,
+      Password: form.password,
+      Gender: form.gender,
+      DOB: form.dob
+    })
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((err) => {
+        alert('Đăng ký thất bại: ' + (err.response?.data || err.message));
+      });
   };
 
   return (
