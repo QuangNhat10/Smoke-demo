@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingFree\\backend\\BreathingFree.csproj": {}
+    "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingfree\\backend\\BreathingFree.csproj": {}
   },
   "projects": {
-    "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingFree\\backend\\BreathingFree.csproj": {
+    "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingfree\\backend\\BreathingFree.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingFree\\backend\\BreathingFree.csproj",
+        "projectUniqueName": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingfree\\backend\\BreathingFree.csproj",
         "projectName": "BreathingFree",
-        "projectPath": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingFree\\backend\\BreathingFree.csproj",
+        "projectPath": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingfree\\backend\\BreathingFree.csproj",
         "packagesPath": "C:\\Users\\quang\\.nuget\\packages\\",
-        "outputPath": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingFree\\backend\\obj\\",
+        "outputPath": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingfree\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\quang\\AppData\\Roaming\\NuGet\\NuGet.Config"

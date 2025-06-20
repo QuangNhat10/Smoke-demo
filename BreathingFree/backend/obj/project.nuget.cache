@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3wH2qWLSBSQ=",
+  "dgSpecHash": "P5WkIFPDudE=",
   "success": true,
-  "projectFilePath": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingFree\\backend\\BreathingFree.csproj",
+  "projectFilePath": "E:\\mon_ki_5\\SWP391\\BreathingFree\\BreathingFree\\Smoke-demo\\breathingfree\\backend\\BreathingFree.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\quang\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\quang\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

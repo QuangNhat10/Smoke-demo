@@ -25,10 +25,17 @@ function Login() {
     }
 
     try {
-      await authService.login(email, password);
-      localStorage.setItem("userLoggedIn", "true");
-      localStorage.setItem("userRole", selectedRole);
-      navigate("/homepage-member");
+      const token = await authService.login(email, password);
+      if (token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('userLoggedIn', 'true');
+        localStorage.setItem('userName', email);
+        localStorage.setItem("userRole", selectedRole);
+        navigate('/homepage-member');
+      } else {
+        setError('Đăng nhập thất bại: Không nhận được token từ server.');
+        alert('Đăng nhập thất bại: Không nhận được token từ server.');
+      }
     } catch (err) {
       setError("Tên đăng nhập hoặc mật khẩu không đúng!");
     }
@@ -246,7 +253,7 @@ function Login() {
           </label>
           <div style={{ position: "relative" }}>
             <input
-              type="text"
+              type="email"
               placeholder="Nhập email của bạn"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
