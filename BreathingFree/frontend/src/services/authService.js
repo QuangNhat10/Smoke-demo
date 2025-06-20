@@ -13,8 +13,12 @@ const authService = {
             if (response.data.token) {
                 // Lưu token vào localStorage
                 localStorage.setItem('token', response.data.token);
-                // Lưu thông tin user
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+                // Nếu backend trả về user thì mới lưu, còn không thì bỏ qua
+                if (response.data.user) {
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                } else {
+                    localStorage.removeItem('user');
+                }
             }
 
             return response.data;
@@ -61,4 +65,4 @@ const authService = {
     }
 };
 
-export default authService; 
+export default authService;
