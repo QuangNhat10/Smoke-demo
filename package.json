@@ -1,0 +1,18 @@
+{
+    "name": "smoke-demo-monorepo",
+    "version": "1.0.0",
+    "description": "Monorepo for Smoke-demo project (frontend + backend)",
+    "main": "index.js",
+    "private": true,
+    "workspaces": [
+        "BreathingFree/*"
+    ],
+    "scripts": {
+        "install-all": "npm install",
+        "start-frontend": "npm start --workspace=BreathingFree/frontend",
+        "start-backend": "npm start --workspace=BreathingFree/backend"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
