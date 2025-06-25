@@ -166,3 +166,4 @@ E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\refi
 E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
 E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
 E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
