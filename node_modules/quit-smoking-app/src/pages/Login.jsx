@@ -27,9 +27,7 @@ function Login() {
     try {
       const response = await authService.login(email, password);
       if (response && response.token) {
-        localStorage.setItem('token', response.token);
         localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('userName', email.split('@')[0]); // Tạm thời lấy tên từ email
         localStorage.setItem('userRole', selectedRole);
         
         // Đặt userId theo email - để giả lập khi chưa có API thực trả về userId

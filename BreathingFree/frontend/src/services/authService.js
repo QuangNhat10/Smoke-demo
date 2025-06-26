@@ -13,9 +13,12 @@ const authService = {
             if (response.data.token) {
                 // Lưu token vào localStorage
                 localStorage.setItem('token', response.data.token);
-                // Nếu backend trả về user thì mới lưu, còn không thì bỏ qua
+                
+                // Lưu thông tin user vào localStorage
                 if (response.data.user) {
                     localStorage.setItem('user', JSON.stringify(response.data.user));
+                    // Cập nhật userName với fullName từ response
+                    localStorage.setItem('userName', response.data.user.fullName || response.data.user.email);
                 } else {
                     localStorage.removeItem('user');
                 }
@@ -41,6 +44,11 @@ const authService = {
     logout: () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userLoggedIn');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userEmail');
         // Có thể thêm các xử lý khác khi logout
     },
 

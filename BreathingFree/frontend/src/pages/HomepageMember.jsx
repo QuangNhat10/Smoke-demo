@@ -36,10 +36,27 @@ function HomepageMember() {
     useEffect(() => {
         // Kiểm tra trạng thái đăng nhập
         const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-        const storedUserName = localStorage.getItem('userName');
+        
+        // Lấy tên người dùng - ưu tiên fullName từ user object, sau đó là userName
+        const storedUser = localStorage.getItem('user');
+        let displayName = '';
+        
+        if (storedUser) {
+            try {
+                const user = JSON.parse(storedUser);
+                displayName = user.fullName || user.FullName || user.name || '';
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+            }
+        }
+        
+        // Nếu không có fullName từ user object, lấy từ userName
+        if (!displayName) {
+            displayName = localStorage.getItem('userName') || '';
+        }
 
-        if (storedUserName) {
-            setUserName(storedUserName);
+        if (displayName) {
+            setUserName(displayName);
         } else {
             navigate('/login');
         }
