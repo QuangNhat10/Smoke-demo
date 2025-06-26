@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
 import SecondaryNavigation from "../components/SecondaryNavigation";
 import SecondaryNavigationDoctor from "../components/SecondaryNavigationDoctor";
@@ -218,10 +220,20 @@ function ProfilePage() {
 
       setIsEditing(false);
       setShowImageOptions(false);
-      alert("Cập nhật thông tin thành công!");
+      
+      // Hiển thị thông báo cập nhật thành công
+      toast.success("Cập nhật thông tin cá nhân thành công!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } catch (err) {
       console.error("Error updating profile:", err);
       setError("Không thể cập nhật hồ sơ. Vui lòng thử lại sau.");
+      toast.error("Không thể cập nhật hồ sơ. Vui lòng thử lại sau.");
     } finally {
       setIsLoading(false);
     }
@@ -729,6 +741,20 @@ function ProfilePage() {
           color: #666;
         }
       `}</style>
+      
+      {/* Toast Container để hiển thị thông báo */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

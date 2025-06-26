@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import authService from "../services/authService";
 
 function Login() {
@@ -41,13 +43,27 @@ function Login() {
         
         localStorage.setItem('userEmail', email);
         
-        navigate('/homepage-member');
+        // Hiển thị thông báo đăng nhập thành công
+        toast.success('Đăng nhập thành công! Chào mừng bạn quay trở lại.', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        
+        // Chờ một chút để hiển thị toast rồi mới chuyển trang
+        setTimeout(() => {
+          navigate('/homepage-member');
+        }, 1000);
       } else {
         setError('Đăng nhập thất bại: Không nhận được token từ server.');
-        alert('Đăng nhập thất bại: Không nhận được token từ server.');
+        toast.error('Đăng nhập thất bại: Không nhận được token từ server.');
       }
     } catch (err) {
       setError("Tên đăng nhập hoặc mật khẩu không đúng!");
+      toast.error("Tên đăng nhập hoặc mật khẩu không đúng!");
     }
   };
 
@@ -446,6 +462,20 @@ function Login() {
           </div>
         </div>
       </form>
+      
+      {/* Toast Container để hiển thị thông báo */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
