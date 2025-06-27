@@ -23,7 +23,7 @@ public class DoctorController : ControllerBase
     {
         // Giả sử RoleID = 3 là bác sĩ
         var doctors = _context.Users
-            .Where(u => u.RoleID == 3 && u.Status == "Active")
+            .Where(u => u.RoleID == 2 && u.Status == "Active")
             .Select(u => new {
                 userId = u.UserID,
                 fullName = u.FullName,

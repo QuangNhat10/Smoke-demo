@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SecondaryNavigationDoctor from '../components/SecondaryNavigationDoctor';
 import Header from '../components/Header';
+import chatHub from '../api/chatHub';
 
 /**
  * PatientChatPage - Trang chat với bệnh nhân dành cho bác sĩ
@@ -70,6 +71,19 @@ const PatientChatPage = () => {
         };
         fetchConversation();
     }, [activePatient]);
+
+    useEffect(() => {
+        chatHub.start().then(() => {
+            chatHub.on('ReceiveMessage', (senderId, message) => {
+                setMessages(prev => [...prev, { senderId, message }]);
+            });
+        });
+
+        return () => {
+            chatHub.off('ReceiveMessage');
+            chatHub.stop();
+        };
+    }, []);
 
     const handleSendMessage = async () => {
         if (message.trim() === '') return;
@@ -167,17 +181,17 @@ const PatientChatPage = () => {
                                 </div>
 
                                 <div className="chat-messages">
-                                    {messages.map(msg => (
-                                        <div key={msg.chatID} className={`message ${msg.fromUserID === myUserId ? 'sent' : 'received'}`}>
-                                            {msg.fromUserID !== myUserId && (
+                                    {messages.map((msg, idx) => (
+                                        <div key={idx} className={`message ${msg.senderId === myUserId ? 'sent' : 'received'}`}>
+                                            {msg.senderId !== myUserId && (
                                                 <img
-                                                    src={patients.find(p => p.userId === msg.fromUserID)?.avatar || '/default-avatar.png'}
+                                                    src={patients.find(p => p.userId === msg.senderId)?.avatar || '/default-avatar.png'}
                                                     alt="avatar"
                                                     className="message-avatar"
                                                 />
                                             )}
                                             <div className="message-content">
-                                                <p className="message-text">{msg.messageContent}</p>
+                                                <p className="message-text">{msg.message}</p>
                                                 <span className="message-time">
                                                     {new Date(msg.sentAt).toLocaleTimeString()}
                                                 </span>

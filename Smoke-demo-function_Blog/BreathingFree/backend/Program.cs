@@ -59,6 +59,7 @@ builder.Services.AddSwaggerGen( c =>
     {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "BreathingFree API", Version = "v1" });
 }); // nên dùng thay vì AddOpenApi()
+   builder.Services.AddSignalR();
 
 // Thêm cấu hình lưu trữ file tĩnh
 builder.Services.AddDirectoryBrowser(); // Cho phép duyệt thư mục
@@ -113,5 +114,6 @@ if (!Directory.Exists(uploadsDir))
 }
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();

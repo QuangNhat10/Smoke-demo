@@ -426,7 +426,8 @@ function Login() {
           </Link>
         </div>
 
-        {/* Demo login info */}
+       
+       {/* Demo login info
         <div
           style={{
             marginTop: "1rem",
@@ -460,9 +461,8 @@ function Login() {
           <div style={{ margin: "0.2rem 0" }}>
             Nhân viên: staff123 / Staff123!
           </div>
-        </div>
+        </div> */}
       </form>
-      
       {/* Toast Container để hiển thị thông báo */}
       <ToastContainer
         position="top-right"

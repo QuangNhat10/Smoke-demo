@@ -337,3 +337,6 @@ E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\bac
 E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
 E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
 E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Newtonsoft.Json.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
