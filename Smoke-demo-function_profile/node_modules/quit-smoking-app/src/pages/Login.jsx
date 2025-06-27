@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../services/authService";
+import authApi from "../api/authApi";
 
 function Login() {
   const [selectedRole, setSelectedRole] = useState("Member");
@@ -25,31 +25,24 @@ function Login() {
     }
 
     try {
-      const response = await authService.login(email, password);
-      if (response && response.token) {
-        localStorage.setItem('token', response.token);
+      const response = await authApi.login(email, password);
+      console.log('Login response:', response);
+      
+      if (response && response.data && response.data.token) {
+        localStorage.setItem('token', response.data.token);
         localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('userName', email.split('@')[0]); // Tạm thời lấy tên từ email
-        localStorage.setItem('userRole', selectedRole);
-        
-        // Đặt userId theo email - để giả lập khi chưa có API thực trả về userId
-        if (email.includes('member') || email === 'minh@gmail.com') {
-          localStorage.setItem('userId', 'member123');
-        } else if (email.includes('doctor')) {
-          localStorage.setItem('userId', 'doctor123');
-        } else {
-          localStorage.setItem('userId', '1'); // Default userId
-        }
-        
-        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', response.data.user.fullName);
+        localStorage.setItem('userRole', response.data.user.roleId.toString());
+        localStorage.setItem('userId', response.data.user.userId.toString());
+        localStorage.setItem('userEmail', response.data.user.email);
         
         navigate('/homepage-member');
       } else {
         setError('Đăng nhập thất bại: Không nhận được token từ server.');
-        alert('Đăng nhập thất bại: Không nhận được token từ server.');
       }
     } catch (err) {
-      setError("Tên đăng nhập hoặc mật khẩu không đúng!");
+      console.error('Login error:', err);
+      setError(err.response?.data || "Tên đăng nhập hoặc mật khẩu không đúng!");
     }
   };
 

@@ -21,19 +21,30 @@ namespace BreathingFree.Controllers
             _logger = logger;
         }
 
-        [HttpGet("search")]
-        public async Task<IActionResult> SearchDoctors([FromQuery] string? name)
+        // GET: api/feedback/doctors
+        [HttpGet("doctors")]
+        public async Task<IActionResult> GetDoctors([FromQuery] string? name)
         {
             try
             {
                 _logger.LogInformation($"Searching doctors with name: {name}");
 
-                // First, just try to get all users to see if that works
-                var allUsers = await _context.Users.ToListAsync();
-                _logger.LogInformation($"Total users in database: {allUsers.Count}");
+                // Query doctors directly with filter
+                var query = _context.Users.Where(u => u.RoleID == 3);
 
-                // Then filter for doctors
-                var doctors = allUsers.Where(u => u.RoleID == 3)
+                // Apply name filter if provided
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    name = name.ToLower();
+                    query = query.Where(d =>
+                        (d.FullName != null && d.FullName.ToLower().Contains(name)) ||
+                        (d.Specialty != null && d.Specialty.ToLower().Contains(name)) ||
+                        (d.Position != null && d.Position.ToLower().Contains(name))
+                    );
+                }
+
+                // Execute query and map results
+                var doctors = await query
                     .Select(d => new
                     {
                         d.UserID,
@@ -48,22 +59,9 @@ namespace BreathingFree.Controllers
                         Position = d.Position ?? "Chưa cập nhật chức vụ",
                         ShortBio = d.ShortBio ?? "Chưa có thông tin"
                     })
-                    .ToList();
+                    .ToListAsync();
 
                 _logger.LogInformation($"Found {doctors.Count} doctors");
-
-                // If name is provided, filter in memory
-                if (!string.IsNullOrWhiteSpace(name))
-                {
-                    name = name.ToLower();
-                    doctors = doctors.Where(d =>
-                        d.FullName.ToLower().Contains(name) ||
-                        d.Specialty.ToLower().Contains(name) ||
-                        d.Position.ToLower().Contains(name)
-                    ).ToList();
-                    _logger.LogInformation($"After name filter: {doctors.Count} doctors");
-                }
-
                 return Ok(doctors);
             }
             catch (Exception ex)

@@ -32,27 +32,38 @@ function Register() {
     return /[A-Z]/.test(pw) && /[0-9]/.test(pw) && /[^A-Za-z0-9]/.test(pw) && pw.length >= 8;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validatePassword(form.password)) {
       setShowPasswordError(true);
       return;
     }
     setShowPasswordError(false);
-    // Gọi API đăng ký
-    authApi.register({
-      FullName: form.name,
-      Email: form.email,
-      Password: form.password,
-      Gender: form.gender,
-      DOB: form.dob
-    })
-      .then(() => {
-        navigate('/login');
-      })
-      .catch((err) => {
-        alert('Đăng ký thất bại: ' + (err.response?.data || err.message));
+
+    try {
+      console.log('Registering with data:', {
+        FullName: form.name,
+        Email: form.email,
+        Password: form.password,
+        Gender: form.gender,
+        DOB: form.dob
       });
+
+      const response = await authApi.register({
+        FullName: form.name,
+        Email: form.email,
+        Password: form.password,
+        Gender: form.gender,
+        DOB: form.dob
+      });
+
+      console.log('Register response:', response);
+      alert('Đăng ký thành công! Vui lòng đăng nhập.');
+      navigate('/login');
+    } catch (err) {
+      console.error('Register error:', err);
+      alert('Đăng ký thất bại: ' + (err.response?.data || 'Có lỗi xảy ra, vui lòng thử lại sau.'));
+    }
   };
 
   return (

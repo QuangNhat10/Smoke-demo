@@ -678,3 +678,4 @@ E:\SU25\SWP\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFre
 E:\SU25\SWP\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
 E:\SU25\SWP\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
 E:\SU25\SWP\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\SU25\SWP\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json

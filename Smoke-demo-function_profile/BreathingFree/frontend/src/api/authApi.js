@@ -4,22 +4,22 @@ import axiosInstance from './axiosConfig';
 const authApi = {
     // API đăng nhập
     login: (email, password) => {
-        return axiosInstance.post('/auth/login', { email, password });
+        return axiosInstance.post('/api/auth/login', { email, password });
     },
 
     // API đăng ký
     register: (userData) => {
-        return axiosInstance.post('/auth/register', userData);
+        return axiosInstance.post('/api/auth/register', userData);
     },
 
     // API xác thực token
     verifyToken: () => {
-        return axiosInstance.get('/auth/verify');
+        return axiosInstance.get('/api/auth/verify');
     },
 
     // API đổi mật khẩu
     changePassword: (oldPassword, newPassword) => {
-        return axiosInstance.post('/auth/change-password', {
+        return axiosInstance.post('/api/auth/change-password', {
             oldPassword,
             newPassword
         });
@@ -27,12 +27,12 @@ const authApi = {
 
     // API quên mật khẩu
     forgotPassword: (email) => {
-        return axiosInstance.post('/auth/forgot-password', { email });
+        return axiosInstance.post('/api/auth/forgot-password', { email });
     },
 
     // API đặt lại mật khẩu
     resetPassword: (token, newPassword) => {
-        return axiosInstance.post('/auth/reset-password', {
+        return axiosInstance.post('/api/auth/reset-password', {
             token,
             newPassword
         });
@@ -40,12 +40,12 @@ const authApi = {
 
     // API lấy thông tin profile
     getUserProfile: () => {
-        return axiosInstance.get('/auth/profile');
+        return axiosInstance.get('/api/auth/profile');
     },
 
     // API cập nhật thông tin profile
     updateUserProfile: (profileData) => {
-        return axiosInstance.put('/auth/profile', profileData);
+        return axiosInstance.put('/api/auth/profile', profileData);
     }
 };
 

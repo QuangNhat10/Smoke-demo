@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import SecondaryNavigation from '../components/SecondaryNavigation';
 
 /**
  * ExpertAdvicePage - Trang lời khuyên từ chuyên gia
@@ -118,76 +120,18 @@ const ExpertAdvicePage = () => {
             display: 'flex',
             flexDirection: 'column',
         }}>
-            {/* Modern Header with Gradient */}
-            <header style={{
-                width: '100%',
-                background: 'linear-gradient(135deg, #35a79c 0%, #44b89d 100%)',
-                padding: '1.5rem 0',
-                boxShadow: '0 4px 20px rgba(53, 167, 156, 0.2)',
-                position: 'relative',
-                overflow: 'hidden',
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                    width: '100%',
-                    height: '100%',
-                    background: 'radial-gradient(circle at 20% 150%, rgba(255,255,255,0.1) 0%, transparent 60%)',
-                    zIndex: 1,
-                }}></div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                    padding: '0 2rem',
-                    position: 'relative',
-                    zIndex: 2,
-                }}>
-                    <button
-                        onClick={() => navigate(-1)}
-                        style={{
-                            background: 'rgba(255,255,255,0.15)',
-                            border: 'none',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            fontSize: '1rem',
-                            padding: '0.6rem 1.2rem',
-                            borderRadius: '30px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            backdropFilter: 'blur(5px)',
-                            transition: 'all 0.2s',
-                        }}
-                    >
-                        Quay Lại
-                    </button>
+            {/* Header */}
+            <Header />
+            
+            {/* Secondary Navigation */}
+            <SecondaryNavigation />
 
-                    <div style={{
-                        fontSize: '1.8rem',
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    }}>
-                        <span style={{ color: '#ffffff' }}>Breathing</span>
-                        <span style={{ color: '#ffffff' }}>Free</span>
-                    </div>
-
-                    <div style={{ width: '120px' }}></div>
-                </div>
-            </header>
-
-            {/* Title Banner */}
+            {/* Title Section */}
             <div style={{
-                background: 'white',
-                padding: '2.5rem 2rem',
                 textAlign: 'center',
+                padding: '3rem 2rem',
+                background: 'white',
                 boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-                position: 'relative',
             }}>
                 <h1 style={{
                     fontSize: '2.5rem',
@@ -221,55 +165,50 @@ const ExpertAdvicePage = () => {
                 </p>
             </div>
 
-            {/* Content */}
+            {/* Search and Filter Section */}
             <div style={{
                 maxWidth: '1200px',
-                margin: '0 auto',
-                padding: '3rem 2rem',
+                margin: '3rem auto',
+                padding: '0 2rem',
                 width: '100%',
                 boxSizing: 'border-box',
             }}>
-                {/* Search and Filters */}
                 <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1.5rem',
-                    marginBottom: '3rem',
                     background: 'white',
-                    padding: '1.5rem',
                     borderRadius: '12px',
+                    padding: '1.5rem',
+                    marginBottom: '2rem',
                     boxShadow: '0 2px 12px rgba(0, 0, 0, 0.05)',
                 }}>
+                    <h2 style={{
+                        fontSize: '1.3rem',
+                        color: '#2c3e50',
+                        margin: '0 0 1rem 0',
+                    }}>
+                        Tìm kiếm lời khuyên
+                    </h2>
                     <div style={{
                         display: 'flex',
-                        flexDirection: 'column',
-                        gap: '0.75rem',
+                        gap: '1rem',
+                        marginBottom: '1.5rem',
                     }}>
-                        <h2 style={{
-                            fontSize: '1.3rem',
-                            color: '#2c3e50',
-                            margin: '0',
-                        }}>Tìm kiếm lời khuyên</h2>
-                        <div style={{
-                            display: 'flex',
-                            gap: '1rem',
-                            width: '100%',
-                        }}>
-                            <input
-                                type="text"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                placeholder="Tìm theo tên chuyên gia, chủ đề, nội dung..."
-                                style={{
-                                    flex: 1,
-                                    padding: '0.75rem 1rem',
-                                    borderRadius: '8px',
-                                    border: '1.5px solid #e5e8ee',
-                                    fontSize: '1rem',
-                                    outline: 'none',
-                                }}
-                            />
-                            <button style={{
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Tìm theo tên chuyên gia, chủ đề, nội dung..."
+                            style={{
+                                flex: 1,
+                                padding: '0.75rem 1rem',
+                                borderRadius: '8px',
+                                border: '1.5px solid #e5e8ee',
+                                fontSize: '1rem',
+                                outline: 'none',
+                            }}
+                        />
+                        <button
+                            onClick={() => setSearchTerm('')}
+                            style={{
                                 background: '#44b89d',
                                 color: 'white',
                                 border: 'none',
@@ -277,117 +216,57 @@ const ExpertAdvicePage = () => {
                                 padding: '0.75rem 1.5rem',
                                 fontWeight: 'bold',
                                 cursor: 'pointer',
-                            }}>
-                                Tìm Kiếm
-                            </button>
-                        </div>
+                            }}
+                        >
+                            Tìm Kiếm
+                        </button>
                     </div>
 
-                    <div>
-                        <div style={{
-                            display: 'flex',
-                            gap: '1rem',
-                            overflowX: 'auto',
-                            paddingBottom: '0.5rem',
-                        }}>
+                    <div style={{
+                        display: 'flex',
+                        gap: '0.5rem',
+                        flexWrap: 'wrap',
+                    }}>
+                        <button
+                            onClick={() => setActiveCategory('all')}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                borderRadius: '20px',
+                                border: 'none',
+                                background: activeCategory === 'all' ? '#44b89d' : '#f1f3f5',
+                                color: activeCategory === 'all' ? 'white' : '#495057',
+                                cursor: 'pointer',
+                                fontSize: '0.9rem',
+                                fontWeight: '500',
+                            }}
+                        >
+                            Tất Cả
+                        </button>
+                        {['Cai Nghiện', 'Phổi Học', 'Y Học Cổ Truyền', 'Dinh Dưỡng', 'Tâm Lý Học'].map(category => (
                             <button
-                                onClick={() => setActiveCategory('all')}
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
                                 style={{
                                     padding: '0.5rem 1rem',
                                     borderRadius: '20px',
                                     border: 'none',
-                                    background: activeCategory === 'all' ? '#44b89d' : '#e5e8ee',
-                                    color: activeCategory === 'all' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
+                                    background: activeCategory === category ? '#44b89d' : '#f1f3f5',
+                                    color: activeCategory === category ? 'white' : '#495057',
                                     cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
+                                    fontSize: '0.9rem',
+                                    fontWeight: '500',
                                 }}
                             >
-                                Tất Cả
+                                {category}
                             </button>
-                            <button
-                                onClick={() => setActiveCategory('Cai nghiện')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Cai nghiện' ? '#44b89d' : '#e5e8ee',
-                                    color: activeCategory === 'Cai nghiện' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Cai Nghiện
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Phổi học')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Phổi học' ? '#44b89d' : '#e5e8ee',
-                                    color: activeCategory === 'Phổi học' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Phổi Học
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Y học cổ truyền')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Y học cổ truyền' ? '#44b89d' : '#e5e8ee',
-                                    color: activeCategory === 'Y học cổ truyền' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Y Học Cổ Truyền
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Dinh dưỡng')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Dinh dưỡng' ? '#44b89d' : '#e5e8ee',
-                                    color: activeCategory === 'Dinh dưỡng' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Dinh Dưỡng
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Tâm lý học')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Tâm lý học' ? '#44b89d' : '#e5e8ee',
-                                    color: activeCategory === 'Tâm lý học' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Tâm Lý Học
-                            </button>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* Expert Advice Cards */}
+                {/* Advice Cards */}
                 <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
                     gap: '2rem',
                 }}>
                     {filteredAdvice.map(advice => (
@@ -396,7 +275,6 @@ const ExpertAdvicePage = () => {
                             borderRadius: '12px',
                             overflow: 'hidden',
                             boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)',
-                            transition: 'transform 0.3s, box-shadow 0.3s',
                         }}>
                             <div style={{
                                 padding: '2rem',

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BlogPostForm from '../components/BlogPostForm';
 import CommentModal from '../components/CommentModal';
+import Header from '../components/Header';
+import SecondaryNavigation from '../components/SecondaryNavigation';
 
 /**
  * Component trang blog cộng đồng
@@ -360,139 +362,29 @@ const BlogPage = () => {
         <div style={{
             minHeight: '100vh',
             width: '100%',
-            background: 'linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%)',
+            background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
             fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
             boxSizing: 'border-box',
             overflowX: 'hidden',
             display: 'flex',
             flexDirection: 'column',
         }}>
-            {/* Modern Header with Gradient */}
-            <header style={{
-                width: '100%',
-                background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
-                padding: '1.5rem 0',
-                boxShadow: '0 4px 20px rgba(52, 152, 219, 0.2)',
-                position: 'relative',
-                overflow: 'hidden',
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                    width: '100%',
-                    height: '100%',
-                    background: 'radial-gradient(circle at 20% 150%, rgba(255,255,255,0.1) 0%, transparent 60%)',
-                    zIndex: 1,
-                }}></div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                    padding: '0 2rem',
-                    position: 'relative',
-                    zIndex: 2,
-                }}>
-                    <button
-                        onClick={() => {
-                            const role = localStorage.getItem('userRole');
-                            if (role === 'Member') {
-                                navigate('/homepage-member');
-                            } else if (role === 'Doctor') {
-                                navigate('/homepage-doctor');
-                            } else {
-                                navigate('/');
-                            }
-                        }}
-                        style={{
-                            background: 'rgba(255,255,255,0.15)',
-                            border: 'none',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            fontSize: '1rem',
-                            padding: '0.6rem 1.2rem',
-                            borderRadius: '30px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            backdropFilter: 'blur(5px)',
-                            transition: 'all 0.2s',
-                        }}
-                    >
-                        Quay Lại
-                    </button>
+            {/* Header */}
+            <Header />
+            
+            {/* Secondary Navigation */}
+            <SecondaryNavigation />
 
-                    <div style={{
-                        fontSize: '1.8rem',
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    }}>
-                        <span style={{ color: '#ffffff' }}>Breathing</span>
-                        <span style={{ color: '#ffffff' }}>Free</span>
-                    </div>
-
-                    {isLoggedIn ? (
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            color: 'white',
-                            fontWeight: 'bold',
-                        }}>
-                            <span style={{
-                                width: '36px',
-                                height: '36px',
-                                borderRadius: '50%',
-                                background: '#ffffff22',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '1.2rem',
-                            }}>
-                                {currentUser.avatar}
-                            </span>
-                            <span>{currentUser.name}</span>
-                        </div>
-                    ) : (
-                        <button
-                            onClick={() => navigate('/login')}
-                            style={{
-                                background: 'rgba(255,255,255,0.15)',
-                                border: 'none',
-                                color: 'white',
-                                fontWeight: 'bold',
-                                fontSize: '1rem',
-                                padding: '0.6rem 1.2rem',
-                                borderRadius: '30px',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.5rem',
-                                backdropFilter: 'blur(5px)',
-                                transition: 'all 0.2s',
-                            }}
-                        >
-                            Đăng Nhập
-                        </button>
-                    )}
-                </div>
-            </header>
-
-            {/* Title Banner */}
+            {/* Title Section */}
             <div style={{
-                background: 'white',
-                padding: '2.5rem 2rem',
                 textAlign: 'center',
+                padding: '3rem 2rem',
+                background: 'white',
                 boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-                position: 'relative',
             }}>
                 <h1 style={{
                     fontSize: '2.5rem',
-                    color: '#3498db',
+                    color: '#35a79c',
                     margin: '0 0 1rem 0',
                     fontWeight: '700',
                     position: 'relative',
@@ -506,7 +398,7 @@ const BlogPage = () => {
                         transform: 'translateX(-50%)',
                         width: '80px',
                         height: '4px',
-                        background: '#3498db',
+                        background: '#44b89d',
                         borderRadius: '2px',
                     }}></div>
                 </h1>
@@ -522,188 +414,124 @@ const BlogPage = () => {
                 </p>
             </div>
 
-            {/* Content */}
+            {/* Search and Filter Section */}
             <div style={{
                 maxWidth: '1200px',
-                margin: '0 auto',
-                padding: '3rem 2rem',
+                margin: '3rem auto',
+                padding: '0 2rem',
                 width: '100%',
                 boxSizing: 'border-box',
             }}>
-                {/* Search and Filters */}
                 <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1.5rem',
-                    marginBottom: '3rem',
                     background: 'white',
-                    padding: '1.5rem',
                     borderRadius: '12px',
+                    padding: '1.5rem',
+                    marginBottom: '2rem',
                     boxShadow: '0 2px 12px rgba(0, 0, 0, 0.05)',
                 }}>
                     <div style={{
                         display: 'flex',
-                        flexDirection: 'column',
-                        gap: '0.75rem',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginBottom: '1.5rem',
                     }}>
                         <h2 style={{
                             fontSize: '1.3rem',
                             color: '#2c3e50',
                             margin: '0',
-                        }}>Tìm kiếm bài viết</h2>
-                        <div style={{
-                            display: 'flex',
-                            gap: '1rem',
-                            width: '100%',
                         }}>
-                            <input
-                                type="text"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                placeholder="Tìm theo tên tác giả, chủ đề, nội dung..."
+                            Tìm kiếm bài viết
+                        </h2>
+                        {isLoggedIn && (
+                            <button
+                                onClick={handlePostButtonClick}
                                 style={{
-                                    flex: 1,
-                                    padding: '0.75rem 1rem',
+                                    background: '#44b89d',
+                                    color: 'white',
+                                    border: 'none',
                                     borderRadius: '8px',
-                                    border: '1.5px solid #e5e8ee',
-                                    fontSize: '1rem',
-                                    outline: 'none',
+                                    padding: '0.75rem 1.5rem',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
                                 }}
-                            />
-                            <button style={{
-                                background: '#3498db',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '8px',
-                                padding: '0.75rem 1.5rem',
-                                fontWeight: 'bold',
-                                cursor: 'pointer',
-                            }}>
-                                Tìm Kiếm
+                            >
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="currentColor"/>
+                                </svg>
+                                Tạo Bài Viết
                             </button>
-                        </div>
+                        )}
                     </div>
 
-                    <div>
-                        <div style={{
-                            display: 'flex',
-                            gap: '1rem',
-                            overflowX: 'auto',
-                            paddingBottom: '0.5rem',
-                        }}>
+                    <div style={{
+                        display: 'flex',
+                        gap: '1rem',
+                        marginBottom: '1.5rem',
+                    }}>
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Tìm theo tác giả, chủ đề, nội dung..."
+                            style={{
+                                flex: 1,
+                                padding: '0.75rem 1rem',
+                                borderRadius: '8px',
+                                border: '1.5px solid #e5e8ee',
+                                fontSize: '1rem',
+                                outline: 'none',
+                            }}
+                        />
+                    </div>
+
+                    <div style={{
+                        display: 'flex',
+                        gap: '0.5rem',
+                        flexWrap: 'wrap',
+                    }}>
+                        <button
+                            onClick={() => setActiveCategory('all')}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                borderRadius: '20px',
+                                border: 'none',
+                                background: activeCategory === 'all' ? '#44b89d' : '#f1f3f5',
+                                color: activeCategory === 'all' ? 'white' : '#495057',
+                                cursor: 'pointer',
+                                fontSize: '0.9rem',
+                                fontWeight: '500',
+                            }}
+                        >
+                            Tất Cả
+                        </button>
+                        {['Chia Sẻ', 'Kinh Nghiệm', 'Sức Khỏe', 'Điều Trị', 'Tác Hại', 'Động Lực'].map(category => (
                             <button
-                                onClick={() => setActiveCategory('all')}
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
                                 style={{
                                     padding: '0.5rem 1rem',
                                     borderRadius: '20px',
                                     border: 'none',
-                                    background: activeCategory === 'all' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'all' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
+                                    background: activeCategory === category ? '#44b89d' : '#f1f3f5',
+                                    color: activeCategory === category ? 'white' : '#495057',
                                     cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
+                                    fontSize: '0.9rem',
+                                    fontWeight: '500',
                                 }}
                             >
-                                Tất Cả
+                                {category}
                             </button>
-                            <button
-                                onClick={() => setActiveCategory('Chia sẻ')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Chia sẻ' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'Chia sẻ' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Chia Sẻ
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Kinh nghiệm')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Kinh nghiệm' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'Kinh nghiệm' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Kinh Nghiệm
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Sức khỏe')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Sức khỏe' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'Sức khỏe' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Sức Khỏe
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Điều trị')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Điều trị' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'Điều trị' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Điều Trị
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Tác hại')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Tác hại' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'Tác hại' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Tác Hại
-                            </button>
-                            <button
-                                onClick={() => setActiveCategory('Động lực')}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    border: 'none',
-                                    background: activeCategory === 'Động lực' ? '#3498db' : '#e5e8ee',
-                                    color: activeCategory === 'Động lực' ? 'white' : '#2c3e50',
-                                    fontWeight: 'bold',
-                                    cursor: 'pointer',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                Động Lực
-                            </button>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
                 {/* Blog Posts */}
                 <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
                     gap: '2rem',
                 }}>
                     {filteredPosts.map(post => (
@@ -945,56 +773,31 @@ const BlogPage = () => {
                         </div>
                     ))}
                 </div>
+            </div>
 
-                {/* Write Post Button - now checks login */}
-                <div style={{
-                    position: 'fixed',
-                    bottom: '2rem',
-                    right: '2rem',
-                }}>
-                    <button
-                        onClick={handlePostButtonClick}
-                        style={{
-                            width: '60px',
-                            height: '60px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
-                            color: 'white',
-                            fontSize: '2rem',
-                            border: 'none',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 4px 15px rgba(52, 152, 219, 0.4)',
-                            cursor: 'pointer',
-                        }}
-                    >
-                        ✏️
-                    </button>
-                </div>
-
-                {/* Blog Post Form Modal */}
+            {/* Blog Post Form Modal */}
+            {isPostFormOpen && (
                 <BlogPostForm
-                    isOpen={isPostFormOpen}
                     onClose={() => {
                         setIsPostFormOpen(false);
                         setEditingPost(null);
                     }}
                     onSubmit={handlePostSubmit}
-                    initialData={editingPost}
+                    editingPost={editingPost}
                 />
+            )}
 
-                {/* Comment Modal */}
-                {commentModalPostId && (
-                    <CommentModal
-                        isOpen={commentModalPostId !== null}
-                        onClose={closeCommentModal}
-                        comments={blogComments[commentModalPostId] || []}
-                        onAddComment={handleAddComment}
-                        postId={commentModalPostId}
-                    />
-                )}
-            </div>
+            {/* Comment Modal */}
+            {commentModalPostId && (
+                <CommentModal
+                    post={blogPosts.find(post => post.id === commentModalPostId)}
+                    comments={blogComments[commentModalPostId] || []}
+                    onClose={closeCommentModal}
+                    onAddComment={handleAddComment}
+                    currentUser={currentUser}
+                    isLoggedIn={isLoggedIn}
+                />
+            )}
         </div>
     );
 };

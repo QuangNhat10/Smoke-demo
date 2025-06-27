@@ -12,6 +12,7 @@ namespace BreathingFree.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +71,18 @@ namespace BreathingFree.Data
                     .HasForeignKey(f => f.UserID)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            // Configure User entity
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            // Configure Membership entity
+            modelBuilder.Entity<Membership>()
+                .HasOne(m => m.User)
+                .WithMany()
+                .HasForeignKey(m => m.UserID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

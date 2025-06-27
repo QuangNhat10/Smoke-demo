@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosConfig';
+import Header from '../components/Header';
+import SecondaryNavigation from '../components/SecondaryNavigation';
 
 /**
  * Component trang Bác sĩ
@@ -36,14 +38,27 @@ const DoctorPage = () => {
     const fetchDoctors = async (term = '') => {
         setIsLoading(true);
         try {
-            console.log('Fetching doctors with term:', term);
-            const response = await axiosInstance.get(`/feedback/search${term ? `?name=${encodeURIComponent(term)}` : ''}`);
-            console.log('Response from API:', response.data);
+            const endpoint = `/api/feedback/doctors${term ? `?name=${encodeURIComponent(term)}` : ''}`;
+            console.log('Calling API:', endpoint);
+            const response = await axiosInstance.get(endpoint);
+            console.log('API Response:', response.data);
             if (response.data) {
                 setDoctors(response.data);
+            } else {
+                console.log('No doctors data in response');
+                setDoctors([]);
             }
         } catch (error) {
             console.error('Error fetching doctors:', error);
+            if (error.response) {
+                console.error('Error response:', error.response.data);
+                console.error('Error status:', error.response.status);
+                console.error('Error headers:', error.response.headers);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+            } else {
+                console.error('Error setting up request:', error.message);
+            }
             setDoctors([]);
         } finally {
             setIsLoading(false);
@@ -344,76 +359,18 @@ const DoctorPage = () => {
             display: 'flex',
             flexDirection: 'column',
         }}>
-            {/* Modern Header with Gradient */}
-            <header style={{
-                width: '100%',
-                background: 'linear-gradient(135deg, #35a79c 0%, #44b89d 100%)',
-                padding: '1.5rem 0',
-                boxShadow: '0 4px 20px rgba(53, 167, 156, 0.2)',
-                position: 'relative',
-                overflow: 'hidden',
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                    width: '100%',
-                    height: '100%',
-                    background: 'radial-gradient(circle at 20% 150%, rgba(255,255,255,0.1) 0%, transparent 60%)',
-                    zIndex: 1,
-                }}></div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                    padding: '0 2rem',
-                    position: 'relative',
-                    zIndex: 2,
-                }}>
-                    <button
-                        onClick={() => navigate('/homepage-member')}
-                        style={{
-                            background: 'rgba(255,255,255,0.15)',
-                            border: 'none',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            fontSize: '1rem',
-                            padding: '0.6rem 1.2rem',
-                            borderRadius: '30px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            backdropFilter: 'blur(5px)',
-                            transition: 'all 0.2s',
-                        }}
-                    >
-                        Quay Lại Trang Chủ
-                    </button>
+            {/* Header */}
+            <Header />
+            
+            {/* Secondary Navigation */}
+            <SecondaryNavigation />
 
-                    <div style={{
-                        fontSize: '1.8rem',
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    }}>
-                        <span style={{ color: '#ffffff' }}>Breathing</span>
-                        <span style={{ color: '#ffffff' }}>Free</span>
-                    </div>
-
-                    <div style={{ width: '120px' }}></div> {/* Placeholder for balance */}
-                </div>
-            </header>
-
-            {/* Title Banner */}
+            {/* Title Section */}
             <div style={{
-                background: 'white',
-                padding: '2.5rem 2rem',
                 textAlign: 'center',
+                padding: '3rem 2rem',
+                background: 'white',
                 boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-                position: 'relative',
             }}>
                 <h1 style={{
                     fontSize: '2.5rem',
@@ -450,8 +407,8 @@ const DoctorPage = () => {
             {/* Search Section */}
             <div style={{
                 maxWidth: '1200px',
-                margin: '0 auto',
-                padding: '3rem 2rem',
+                margin: '3rem auto',
+                padding: '0 2rem',
                 width: '100%',
                 boxSizing: 'border-box',
             }}>
