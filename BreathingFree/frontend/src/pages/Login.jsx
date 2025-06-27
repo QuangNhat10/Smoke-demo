@@ -23,7 +23,7 @@ function Login() {
       const response = await authService.login(email, password);
       if (response && response.token) {
         // Hiển thị thông báo đăng nhập thành công
-        toast.success('Đăng nhập thành công! Chào mừng bạn quay trở lại.', {
+        toast.success("Đăng nhập thành công! Chào mừng bạn quay trở lại.", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -31,31 +31,31 @@ function Login() {
           pauseOnHover: true,
           draggable: true,
         });
-        
+
         // Điều hướng dựa trên role từ database
-        const userRole = localStorage.getItem('userRole');
-        
+        const userRole = localStorage.getItem("userRole");
+
         // Chờ một chút để hiển thị toast rồi mới chuyển trang
         setTimeout(() => {
           switch (userRole) {
-            case 'Doctor':
-              navigate('/homepage-doctor');
+            case "Doctor":
+              navigate("/homepage-doctor");
               break;
-            case 'Admin':
-              navigate('/admin');
+            case "Admin":
+              navigate("/admin");
               break;
-            case 'Staff':
-              navigate('/dashboard-staff');
+            case "Staff":
+              navigate("/dashboard-staff");
               break;
-            case 'Member':
+            case "Member":
             default:
-              navigate('/homepage-member');
+              navigate("/homepage-member");
               break;
           }
         }, 1000);
       } else {
-        setError('Đăng nhập thất bại: Không nhận được token từ server.');
-        toast.error('Đăng nhập thất bại: Không nhận được token từ server.');
+        setError("Đăng nhập thất bại: Không nhận được token từ server.");
+        toast.error("Đăng nhập thất bại: Không nhận được token từ server.");
       }
     } catch (err) {
       setError("Tên đăng nhập hoặc mật khẩu không đúng!");
@@ -99,14 +99,14 @@ function Login() {
         onSubmit={handleSubmit}
         style={{
           background: "#fff",
-          padding: "2.5rem 2rem",
+          padding: "3.5rem 2rem", // tăng chiều dọc (padding trên dưới lớn hơn)
           borderRadius: "18px",
           boxShadow: "0 10px 30px rgba(53, 167, 156, 0.15)",
-          minWidth: "380px",
-          maxWidth: "95vw",
+          minWidth: "500px",
+          maxWidth: "98vw",
           display: "flex",
           flexDirection: "column",
-          gap: "2.2rem",
+          gap: "2.7rem", // tăng khoảng cách giữa các thành phần
           alignItems: "stretch",
           position: "relative",
           overflow: "hidden",
@@ -329,44 +329,8 @@ function Login() {
             Đăng Ký
           </Link>
         </div>
-
-        {/* Demo login info */}
-        <div
-          style={{
-            marginTop: "1rem",
-            fontSize: "0.9rem",
-            color: "#5a6a6e",
-            textAlign: "center",
-            padding: "1rem",
-            background: "#f5f7fa",
-            borderRadius: "8px",
-            border: "1px dashed #35a79c",
-          }}
-        >
-          <div
-            style={{
-              fontWeight: 600,
-              marginBottom: "0.4rem",
-              color: "#35a79c",
-            }}
-          >
-            Tài khoản Demo:
-          </div>
-          <div style={{ marginBottom: "0.3rem" }}>
-            <strong>Member:</strong> tantantan123@gmail.com / password123
-          </div>
-          <div style={{ marginBottom: "0.3rem" }}>
-            <strong>Doctor:</strong> doctor@gmail.com / Doctor123!
-          </div>
-          <div style={{ marginBottom: "0.3rem" }}>
-            <strong>Admin:</strong> admin@gmail.com / Admin123!
-          </div>
-          <div>
-            <strong>Staff:</strong> staff@gmail.com / Staff123!
-          </div>
-        </div>
       </form>
-      
+
       {/* Toast Container để hiển thị thông báo */}
       <ToastContainer
         position="top-right"

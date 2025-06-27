@@ -843,3 +843,4 @@ E:\mon_ki_5\SWP391\Smoke-demo-function_profile\Smoke-demo-function_profile\breat
 E:\mon_ki_5\SWP391\Smoke-demo-function_profile\Smoke-demo-function_profile\breathingfree\backend\obj\Debug\net9.0\BreathingFree.pdb
 E:\mon_ki_5\SWP391\Smoke-demo-function_profile\Smoke-demo-function_profile\breathingfree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
 E:\mon_ki_5\SWP391\Smoke-demo-function_profile\Smoke-demo-function_profile\breathingfree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\mon_ki_5\SWP391\Smoke-demo-function_profile\Smoke-demo-function_profile\breathingfree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
