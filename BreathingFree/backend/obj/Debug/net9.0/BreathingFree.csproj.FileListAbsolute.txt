@@ -673,3 +673,4 @@ E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\refint\BreathingFree.dll
 E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
 E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
 E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
