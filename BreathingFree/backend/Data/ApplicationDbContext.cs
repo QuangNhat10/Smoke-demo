@@ -13,7 +13,10 @@ namespace BreathingFree.Data
         public DbSet<User> Users { get; set; }
         public DbSet<CommunityPost> CommunityPosts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
-         public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<QuitPlan> QuitPlans { get; set; }
+        public DbSet<QuitPlanStage> QuitPlanStages { get; set; }
+        public DbSet<QuitProgress> QuitProgresses { get; set; }
 
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -77,72 +80,8 @@ namespace BreathingFree.Data
                 entity.Property(e => e.WorkingHours);
                 entity.Property(e => e.Languages);
             });
-            modelBuilder.Entity<User>().HasData(
-                // Doctor với RoleID = 1
-                new User
-                {
-                    UserID = 1001,
-                    RoleID = 1,
-                    FullName = "Bác sĩ Nguyễn Văn A",
-                    Email = "doctor@gmail.com",
-                    PasswordHash = "$2a$11$P1C72FaN0SYvvh2aj0t1.OAVdzDvxBL.xoNGb.94D5PDM.piUAQiy", // password: "Doctor123!"
-                    Phone = "0123456789",
-                    Address = "Hà Nội",
-                    Gender = "Nam",
-                    DOB = new DateTime(1980, 1, 1),
-                    Avatar = null,
-                    CreatedAt = new DateTime(2024, 6, 22, 12, 0, 0),
-                    Status = "Active"
-                },
-                // Member với RoleID = 2
-                new User
-                {
-                    UserID = 1011,
-                    RoleID = 2,
-                    FullName = "Thành viên Nguyễn Văn B",
-                    Email = "tantantan123@gmail.com",
-                    PasswordHash = "$2a$11$P1C72FaN0SYvvh2aj0t1.OAVdzDvxBL.xoNGb.94D5PDM.piUAQiy",
-                    Phone = "0123456789",
-                    Address = "Hà Nội",
-                    Gender = "Nam",
-                    DOB = new DateTime(1990, 1, 1),
-                    Avatar = null,
-                    CreatedAt = new DateTime(2024, 6, 22, 12, 0, 0),
-                    Status = "Active"
-                },
-                // Staff với RoleID = 3
-                new User
-                {
-                    UserID = 1002,
-                    RoleID = 3,
-                    FullName = "Nhân viên Trần Thị C",
-                    Email = "staff@gmail.com",
-                    PasswordHash = "$2a$11$u1QwQwQwQwQwQwQwQwQwQeQwQwQwQwQwQwQwQwQwQwQwQwQwQwQ", // password: "Staff123!"
-                    Phone = "0987654321",
-                    Address = "Hồ Chí Minh",
-                    Gender = "Nữ",
-                    DOB = new DateTime(1985, 5, 5),
-                    Avatar = null,
-                    CreatedAt = new DateTime(2024, 6, 22, 12, 0, 0),
-                    Status = "Active"
-                },
-                // Admin với RoleID = 4
-                new User
-                {
-                    UserID = 1003,
-                    RoleID = 4,
-                    FullName = "Quản trị viên Lê Văn D",
-                    Email = "admin@gmail.com",
-                    PasswordHash = "$2a$11$P1C72FaN0SYvvh2aj0t1.OAVdzDvxBL.xoNGb.94D5PDM.piUAQiy", // password: "Admin123!"
-                    Phone = "0111222333",
-                    Address = "Đà Nẵng",
-                    Gender = "Nam",
-                    DOB = new DateTime(1975, 3, 15),
-                    Avatar = null,
-                    CreatedAt = new DateTime(2024, 6, 22, 12, 0, 0),
-                    Status = "Active"
-                }
-            );
+            // Tạm thời bỏ seeded data để tránh lỗi datetime
+            // modelBuilder.Entity<User>().HasData(...);
 
             // Cấu hình bảng CommunityPosts
             modelBuilder.Entity<CommunityPost>(entity =>
@@ -195,6 +134,86 @@ namespace BreathingFree.Data
 
                 // Đảm bảo một user chỉ like một post một lần
                 entity.HasIndex(e => new { e.PostID, e.UserID }).IsUnique();
+            });
+
+            // Cấu hình bảng QuitPlans
+            modelBuilder.Entity<QuitPlan>(entity =>
+            {
+                entity.ToTable("QuitPlans");
+                entity.HasKey(e => e.QuitPlanID);
+                
+                entity.Property(e => e.QuitPlanID).ValueGeneratedOnAdd();
+                entity.Property(e => e.UserID).IsRequired();
+                entity.Property(e => e.CigarettesPerDay).IsRequired();
+                entity.Property(e => e.CigarettesPerPack).IsRequired();
+                entity.Property(e => e.PricePerPack).HasColumnType("decimal(10,2)").IsRequired();
+                entity.Property(e => e.YearsSmoked).IsRequired();
+                entity.Property(e => e.DailyCost).HasColumnType("decimal(10,2)").IsRequired();
+                entity.Property(e => e.Difficulty).HasMaxLength(20).IsRequired();
+                entity.Property(e => e.Status).HasMaxLength(20).IsRequired();
+                entity.Property(e => e.Source).HasMaxLength(50).IsRequired();
+                entity.Property(e => e.StartDate).IsRequired();
+                entity.Property(e => e.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
+
+                // Thiết lập quan hệ
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserID)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(e => e.Doctor)
+                    .WithMany()
+                    .HasForeignKey(e => e.DoctorID)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            // Cấu hình bảng QuitPlanStages
+            modelBuilder.Entity<QuitPlanStage>(entity =>
+            {
+                entity.ToTable("QuitPlanStages");
+                entity.HasKey(e => e.StageID);
+                
+                entity.Property(e => e.StageID).ValueGeneratedOnAdd();
+                entity.Property(e => e.QuitPlanID).IsRequired();
+                entity.Property(e => e.StageName).HasMaxLength(200).IsRequired();
+                entity.Property(e => e.TargetDate).IsRequired();
+                entity.Property(e => e.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
+
+                // Thiết lập quan hệ
+                entity.HasOne(e => e.QuitPlan)
+                    .WithMany(e => e.QuitPlanStages)
+                    .HasForeignKey(e => e.QuitPlanID)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Cấu hình bảng QuitProgresses
+            modelBuilder.Entity<QuitProgress>(entity =>
+            {
+                entity.ToTable("QuitProgresses");
+                entity.HasKey(e => e.ProgressID);
+                
+                entity.Property(e => e.ProgressID).ValueGeneratedOnAdd();
+                entity.Property(e => e.QuitPlanID).IsRequired();
+                entity.Property(e => e.UserID).IsRequired();
+                entity.Property(e => e.Date).IsRequired();
+                entity.Property(e => e.MoneySaved).HasColumnType("decimal(10,2)");
+                entity.Property(e => e.MoodRating).HasMaxLength(20);
+                entity.Property(e => e.CravingLevel).HasMaxLength(20);
+                entity.Property(e => e.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
+
+                // Thiết lập quan hệ
+                entity.HasOne(e => e.QuitPlan)
+                    .WithMany(e => e.QuitProgresses)
+                    .HasForeignKey(e => e.QuitPlanID)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserID)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Đảm bảo một user chỉ có một progress record cho mỗi ngày trong một plan
+                entity.HasIndex(e => new { e.QuitPlanID, e.UserID, e.Date }).IsUnique();
             });
         }
     }

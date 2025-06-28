@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
+import { quitPlanApi } from '../api/quitPlanApi';
 
 // Component tạo kế hoạch cai thuốc mới
 const CreatePlanPage = () => {
@@ -20,7 +21,8 @@ const CreatePlanPage = () => {
         difficulty: 'medium', // Mức độ khó khăn
         supportNeeded: [], // Hình thức hỗ trợ cần thiết
         triggers: [], // Yếu tố kích thích hút thuốc
-        otherTrigger: '' // Yếu tố kích thích khác
+        otherTrigger: '', // Yếu tố kích thích khác
+        motivation: '' // Động lực cai thuốc
     });
 
     // Danh sách các lý do cai thuốc
@@ -83,20 +85,40 @@ const CreatePlanPage = () => {
     };
 
     // Xử lý khi submit form
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Tính toán chi phí và chuẩn bị dữ liệu
-        const dailyCost = calculateDailyCost();
-        const planData = {
-            ...formData,
-            dailyCost,
-            createdAt: new Date().toISOString()
-        };
+        
+        try {
+            // Chuẩn bị dữ liệu để gửi lên API
+            const planData = {
+                cigarettesPerDay: parseInt(formData.cigarettesPerDay),
+                cigarettesPerPack: parseInt(formData.cigarettesPerPack),
+                pricePerPack: parseFloat(formData.pricePerPack),
+                yearsSmoked: parseInt(formData.yearsSmoked),
+                quitDate: formData.quitDate || null,
+                reasons: formData.reasons,
+                otherReason: formData.otherReason,
+                difficulty: formData.difficulty,
+                supportNeeded: formData.supportNeeded,
+                triggers: formData.triggers,
+                otherTrigger: formData.otherTrigger,
+                motivation: formData.motivation
+            };
 
-        // Lưu kế hoạch vào localStorage
-        localStorage.setItem('smokingPlan', JSON.stringify(planData));
-        // Chuyển hướng về trang dashboard
-        navigate('/dashboard-member');
+            // Gọi API để tạo kế hoạch
+            const response = await quitPlanApi.createQuitPlan(planData);
+            
+            // Hiển thị thông báo thành công
+            alert(response.message || 'Tạo kế hoạch cai thuốc thành công!');
+            
+            // Chuyển hướng về trang dashboard
+            navigate('/dashboard-member');
+            
+        } catch (error) {
+            console.error('Lỗi khi tạo kế hoạch:', error);
+            const errorMessage = error.response?.data?.message || 'Có lỗi xảy ra khi tạo kế hoạch. Vui lòng thử lại.';
+            alert(errorMessage);
+        }
     };
 
     return (
@@ -444,6 +466,28 @@ const CreatePlanPage = () => {
                                         }}
                                     />
                                 )}
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{
+                                    color: '#2C9085',
+                                    marginBottom: '1rem'
+                                }}>Động Lực Cai Thuốc</h3>
+                                <textarea
+                                    name="motivation"
+                                    value={formData.motivation}
+                                    onChange={handleInputChange}
+                                    placeholder="Hãy viết về động lực của bạn để cai thuốc..."
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem',
+                                        borderRadius: '8px',
+                                        border: '1px solid #e2e8f0',
+                                        fontSize: '1rem',
+                                        minHeight: '100px',
+                                        resize: 'vertical'
+                                    }}
+                                />
                             </div>
                         </div>
                     )}
