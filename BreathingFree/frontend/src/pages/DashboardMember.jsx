@@ -12,11 +12,8 @@ const DashboardMember = () => {
   const [quitPlan, setQuitPlan] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // Chỉ giữ lại state cần thiết cho achievements
-  const [smokeFreeCount, setSmokeFreeCount] = useState(() => {
-    const savedCount = localStorage.getItem('smokeFreeCount');
-    return savedCount ? parseInt(savedCount, 10) : 0;
-  });
+  // Chỉ giữ lại state cần thiết cho achievements  
+  const [smokeFreeCount, setSmokeFreeCount] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,28 +30,72 @@ const DashboardMember = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    
     if (!token) {
       navigate('/login');
       return;
     }
 
-    const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-    if (userInfo.fullName) {
-      setUserName(userInfo.fullName);
-    }
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const fullName = user.fullName || localStorage.getItem('userName') || 'User';
+    setUserName(fullName);
 
+    // Load user's smoke free count
+    const userId = localStorage.getItem('userId');
+    const key = userId ? `smokeFreeCount_${userId}` : 'smokeFreeCount_default';
+    const savedCount = localStorage.getItem(key);
+    const count = savedCount ? parseInt(savedCount, 10) : 0;
+    console.log('Loading smoke free count for user:', userId, 'count:', count);
+    setSmokeFreeCount(count);
+    
     // Load active quit plan
     loadQuitPlan();
   }, [navigate]);
 
   useEffect(() => {
-    localStorage.setItem('smokeFreeCount', smokeFreeCount);
+    // Save smoke free count for current user when it changes
+    const userId = localStorage.getItem('userId');
+    const key = userId ? `smokeFreeCount_${userId}` : 'smokeFreeCount_default';
+    localStorage.setItem(key, smokeFreeCount.toString());
+    console.log('Saved smoke free count for user:', userId, 'count:', smokeFreeCount);
   }, [smokeFreeCount]);
+
+  // useEffect để listen thay đổi user và reload smokeFreeCount
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'userId' || e.key === 'token') {
+        console.log('User changed, reloading smoke free count...');
+        // Reload data when user changes
+        window.location.reload(); // Simple approach to reload everything
+      }
+    };
+
+    // Listen storage changes từ tabs khác  
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+
+
+  // Đơn giản hóa - chỉ dùng storage event và reload page khi cần
 
   const loadQuitPlan = async () => {
     try {
       setLoading(true);
-      const activePlan = await quitPlanApi.getActiveQuitPlan();
+      setQuitPlan(null);
+      
+      const currentUser = localStorage.getItem('userId');
+      console.log('Loading quit plan for user:', currentUser);
+      
+      const result = await quitPlanApi.getActiveQuitPlan();
+      console.log('API response:', result);
+      
+      // API trả về object với data property
+      const activePlan = result?.data || null;
+      console.log('Processed quit plan:', activePlan);
       setQuitPlan(activePlan);
     } catch (error) {
       console.error('Error loading quit plan:', error);
@@ -209,74 +250,79 @@ const DashboardMember = () => {
             </h2>
 
             <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem'
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              padding: '2rem',
+              borderRadius: '12px',
+              textAlign: 'center',
+              color: 'white',
+              marginBottom: '1.5rem'
             }}>
-              {/* Smoke Free Days Counter */}
-              <div style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                textAlign: 'center'
-              }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                  {smokeFreeCount}
-                </div>
-                <div style={{ fontSize: '1rem', opacity: 0.9 }}>
-                  Ngày không hút thuốc
-                </div>
+              <div style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                {smokeFreeCount}
               </div>
+              <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>
+                Ngày không hút thuốc
+              </div>
+            </div>
 
-              {/* Action Buttons */}
-              <div style={{
-                display: 'flex',
-                gap: '0.5rem',
-                flexDirection: isMobile ? 'column' : 'row'
-              }}>
-                <button
-                  onClick={increaseSmokeFreeDay}
-                  style={{
-                    flex: 1,
-                    padding: '0.8rem',
-                    backgroundColor: '#2ecc71',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontWeight: '500',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => e.target.style.backgroundColor = '#27ae60'}
-                  onMouseOut={(e) => e.target.style.backgroundColor = '#2ecc71'}
-                >
-                  +1 Ngày
-                </button>
-                <button
-                  onClick={resetSmokeFreeCount}
-                  style={{
-                    flex: 1,
-                    padding: '0.8rem',
-                    backgroundColor: '#e74c3c',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontWeight: '500',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
-                  onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
-                >
-                  Reset
-                </button>
-              </div>
+            <div style={{ 
+              display: 'flex', 
+              gap: '1rem',
+              justifyContent: 'center'
+            }}>
+              <button
+                onClick={increaseSmokeFreeDay}
+                style={{
+                  flex: 1,
+                  padding: '0.8rem',
+                  backgroundColor: '#27ae60',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#229954';
+                  e.target.style.transform = 'translateY(-1px)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = '#27ae60';
+                  e.target.style.transform = 'translateY(0)';
+                }}
+              >
+                +1 Ngày
+              </button>
+              <button
+                onClick={resetSmokeFreeCount}
+                style={{
+                  flex: 1,
+                  padding: '0.8rem',
+                  backgroundColor: '#e74c3c',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#c0392b';
+                  e.target.style.transform = 'translateY(-1px)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = '#e74c3c';
+                  e.target.style.transform = 'translateY(0)';
+                }}
+              >
+                Reset
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions Section */}
         <div style={{
           background: 'white',
           padding: '2rem',
@@ -295,80 +341,43 @@ const DashboardMember = () => {
           <div style={{
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)',
-            gap: '1rem'
+            gap: '1rem',
+            maxWidth: '800px',
+            margin: '0 auto'
           }}>
-            <button
-              onClick={() => navigate('/support-chat')}
-              style={{
-                padding: '1rem',
-                backgroundColor: '#3498db',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '500',
-                textAlign: 'center',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
-            >
-              Hỗ Trợ
-            </button>
-            <button
-              onClick={() => navigate('/blog')}
-              style={{
-                padding: '1rem',
-                backgroundColor: '#9b59b6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '500',
-                textAlign: 'center',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#8e44ad'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#9b59b6'}
-            >
-              Blog
-            </button>
-            <button
-              onClick={() => navigate('/profile')}
-              style={{
-                padding: '1rem',
-                backgroundColor: '#f39c12',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '500',
-                textAlign: 'center',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#e67e22'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#f39c12'}
-            >
-              Hồ Sơ
-            </button>
-            <button
-              onClick={() => navigate('/track-status')}
-              style={{
-                padding: '1rem',
-                backgroundColor: '#1abc9c',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '500',
-                textAlign: 'center',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#16a085'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#1abc9c'}
-            >
-              Theo Dõi
-            </button>
+            {[
+              { title: 'Hỗ Trợ', color: '#3498db', path: '/support-chat' },
+              { title: 'Blog', color: '#9b59b6', path: '/blog' },
+              { title: 'Hỏ Sơ', color: '#f39c12', path: '/profile' },
+              { title: 'Theo Dõi', color: '#1abc9c', path: '/track-status' }
+            ].map((action, index) => (
+              <button
+                key={index}
+                onClick={() => navigate(action.path)}
+                style={{
+                  padding: '1.5rem 1rem',
+                  backgroundColor: action.color,
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-3px)';
+                  e.target.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                }}
+              >
+                {action.title}
+              </button>
+            ))}
           </div>
         </div>
       </div>

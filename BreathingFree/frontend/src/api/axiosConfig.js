@@ -15,6 +15,8 @@ axiosInstance.interceptors.request.use(
     (config) => {
         // Lấy token từ localStorage
         const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+        console.log('Making API request with userId:', userId, 'token exists:', !!token);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

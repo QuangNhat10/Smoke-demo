@@ -1,5 +1,30 @@
 import axiosInstance from '../api/axiosConfig';
 
+// Event listeners để notify khi user thay đổi
+let authListeners = [];
+
+// Hàm để add listener
+const addAuthListener = (callback) => {
+    authListeners.push(callback);
+};
+
+// Hàm để remove listener
+const removeAuthListener = (callback) => {
+    authListeners = authListeners.filter(listener => listener !== callback);
+};
+
+// Hàm để notify tất cả listeners
+const notifyAuthChange = (eventType, data = null) => {
+    console.log('Notifying auth change:', eventType, 'to', authListeners.length, 'listeners');
+    authListeners.forEach(listener => {
+        try {
+            listener(eventType, data);
+        } catch (error) {
+            console.error('Error in auth listener:', error);
+        }
+    });
+};
+
 // Hàm mapping RoleID sang role name
 const getRoleFromId = (roleId) => {
     switch (roleId) {
@@ -43,9 +68,21 @@ const authService = {
                     localStorage.setItem('userId', response.data.user.userId.toString());
                     localStorage.setItem('userEmail', response.data.user.email);
                     localStorage.setItem('userLoggedIn', 'true');
+                    
+                    // Cũng lưu vào userInfo để tương thích với code cũ
+                    localStorage.setItem('userInfo', JSON.stringify({
+                        fullName: response.data.user.fullName,
+                        email: response.data.user.email,
+                        userId: response.data.user.userId,
+                        roleId: response.data.user.roleId
+                    }));
                 } else {
                     localStorage.removeItem('user');
+                    localStorage.removeItem('userInfo');
                 }
+                
+                // Notify listeners về login
+                notifyAuthChange('login', response.data.user);
             }
 
             return response.data;
@@ -68,12 +105,15 @@ const authService = {
     logout: () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('userInfo');
         localStorage.removeItem('userName');
         localStorage.removeItem('userLoggedIn');
         localStorage.removeItem('userRole');
         localStorage.removeItem('userId');
         localStorage.removeItem('userEmail');
-        // Có thể thêm các xử lý khác khi logout
+        
+        // Notify listeners về logout
+        notifyAuthChange('logout');
     },
 
     // Hàm kiểm tra trạng thái đăng nhập
@@ -94,7 +134,11 @@ const authService = {
     // Hàm lấy token
     getToken: () => {
         return localStorage.getItem('token');
-    }
+    },
+
+    // Export auth listeners
+    addAuthListener,
+    removeAuthListener
 };
 
 export default authService;
