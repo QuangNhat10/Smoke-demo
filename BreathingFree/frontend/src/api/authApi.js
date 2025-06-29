@@ -39,9 +39,15 @@ const authApi = {
         });
     },
 
-    // API lấy thông tin profile
-    getUserProfile: () => {
-        return axiosInstance.get('/auth/profile');
+    // Lấy thông tin profile đầy đủ
+    getUserProfile: async () => {
+        try {
+            const response = await axiosInstance.get('/auth/profile');
+            return response.data;
+        } catch (error) {
+            console.error('Error getting user profile:', error);
+            throw error;
+        }
     },
 
     // API cập nhật thông tin profile

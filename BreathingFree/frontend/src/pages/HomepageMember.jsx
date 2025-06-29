@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 import MembershipPlans from '../components/MembershipPlans';
 import DashboardCard from '../components/DashboardCard';
+import { quitPlanApi } from '../api/quitPlanApi';
 
 /**
  * HomepageMember - Trang chủ cho thành viên
@@ -22,20 +23,23 @@ function HomepageMember() {
     const [showMembershipModal, setShowMembershipModal] = useState(false); // Hiển thị modal gói thành viên
     const [hasMembership, setHasMembership] = useState(false); // Trạng thái đã mua gói thành viên chưa
     const [membershipPlan, setMembershipPlan] = useState(''); // Loại gói thành viên đã mua
-    const [smokeFreeCount, setSmokeFreeCount] = useState(0); // Số ngày không hút thuốc
-    const [cigarettesPerDay, setCigarettesPerDay] = useState(0); // Số điếu thuốc hút mỗi ngày
-    const [pricePerPack, setPricePerPack] = useState(0); // Giá một gói thuốc
-    const [cigarettesPerPack, setCigarettesPerPack] = useState(0); // Số điếu thuốc trong một gói
+    const [quitPlan, setQuitPlan] = useState(null); // Dữ liệu kế hoạch cai thuốc
+    const [loadingQuitPlan, setLoadingQuitPlan] = useState(true); // Loading state cho quit plan
 
     /**
-     * Lấy thông tin người dùng và trạng thái cai thuốc từ localStorage khi trang được tải
+     * Lấy thông tin người dùng và trạng thái cai thuốc từ API khi trang được tải
      * - Kiểm tra trạng thái đăng nhập
      * - Lấy thông tin gói thành viên
-     * - Lấy thông tin thống kê về cai thuốc
+     * - Lấy thông tin kế hoạch cai thuốc từ database
      */
     useEffect(() => {
         // Kiểm tra trạng thái đăng nhập
-        const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            navigate('/login');
+            return;
+        }
         
         // Lấy tên người dùng - ưu tiên fullName từ user object, sau đó là userName
         const storedUser = localStorage.getItem('user');
@@ -59,6 +63,7 @@ function HomepageMember() {
             setUserName(displayName);
         } else {
             navigate('/login');
+            return;
         }
 
         // Kiểm tra người dùng đã mua gói thành viên chưa
@@ -67,17 +72,26 @@ function HomepageMember() {
         setHasMembership(membership);
         setMembershipPlan(plan || '');
 
-        // Lấy thông tin thống kê cai thuốc
-        const count = localStorage.getItem('smokeFreeCount');
-        const perDay = localStorage.getItem('cigarettesPerDay');
-        const price = localStorage.getItem('pricePerPack');
-        const perPack = localStorage.getItem('cigarettesPerPack');
-
-        setSmokeFreeCount(count ? parseInt(count, 10) : 0);
-        setCigarettesPerDay(perDay ? parseInt(perDay, 10) : 20);
-        setPricePerPack(price ? parseInt(price, 10) : 35000);
-        setCigarettesPerPack(perPack ? parseInt(perPack, 10) : 20);
+        // Load quit plan data từ API
+        loadQuitPlan();
     }, [navigate]);
+
+    /**
+     * Load active quit plan từ API
+     */
+    const loadQuitPlan = async () => {
+        try {
+            setLoadingQuitPlan(true);
+            const result = await quitPlanApi.getActiveQuitPlan();
+            const activePlan = result?.data || null;
+            setQuitPlan(activePlan);
+        } catch (error) {
+            console.error('Error loading quit plan:', error);
+            setQuitPlan(null);
+        } finally {
+            setLoadingQuitPlan(false);
+        }
+    };
 
     /**
      * Xử lý sự kiện khi người dùng muốn quản lý gói thành viên
@@ -93,34 +107,12 @@ function HomepageMember() {
     };
 
     /**
-     * Tính toán số tiền tiết kiệm được từ việc không hút thuốc
-     * Công thức: số ngày không hút * số điếu mỗi ngày * giá mỗi điếu
-     * @returns {number} Số tiền tiết kiệm được (đơn vị: VND)
-     */
-    const calculateMoneySaved = () => {
-        const cigaretteCost = pricePerPack / cigarettesPerPack;
-        return Math.round(smokeFreeCount * cigarettesPerDay * cigaretteCost);
-    };
-
-    /**
-     * Tính toán số điếu thuốc không hút được
-     * Công thức: số ngày không hút * số điếu mỗi ngày
+     * Tính toán số điếu thuốc không hút được từ quit plan data
      * @returns {number} Số điếu thuốc không hút
      */
     const calculateCigarettesNotSmoked = () => {
-        return smokeFreeCount * cigarettesPerDay;
-    };
-
-    /**
-     * Tính toán thời gian sống thêm (ước tính)
-     * Dựa trên nghiên cứu: mỗi điếu thuốc giảm 11 phút tuổi thọ
-     * @returns {number} Số ngày sống thêm
-     */
-    const calculateTimeAdded = () => {
-        // Ước tính: Mỗi điếu thuốc giảm tuổi thọ 11 phút
-        const minutesSaved = calculateCigarettesNotSmoked() * 11;
-        const days = Math.floor(minutesSaved / (60 * 24));
-        return days;
+        if (!quitPlan) return 0;
+        return quitPlan.daysSmokeFree * quitPlan.cigarettesPerDay;
     };
 
     return (
@@ -438,40 +430,74 @@ function HomepageMember() {
                         color: '#35a79c',
                         fontSize: '1.6rem'
                     }}>Tiến Độ Của Bạn</h2>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-                        gap: '1.5rem'
-                    }}>
-                        <DashboardCard
-                            title="Ngày Không Hút Thuốc"
-                            value={smokeFreeCount}
-                            description="Cố gắng lên! Mỗi ngày đều quan trọng."
-                            icon="🎯"
-                            color="#44b89d"
-                        />
-                        <DashboardCard
-                            title="Tiền Tiết Kiệm Được"
-                            value={`${calculateMoneySaved().toLocaleString()} VND`}
-                            description="Tiết kiệm từ việc không mua thuốc lá"
-                            icon="💰"
-                            color="#0057b8"
-                        />
-                        <DashboardCard
-                            title="Điếu Thuốc Không Hút"
-                            value={calculateCigarettesNotSmoked()}
-                            description="Đó là rất nhiều hóa chất độc hại đã tránh được!"
-                            icon="🚭"
-                            color="#ff9800"
-                        />
-                        <DashboardCard
-                            title="Thời Gian Sống Thêm"
-                            value={`${calculateTimeAdded()} ngày`}
-                            description="Thời gian ước tính thêm vào cuộc sống của bạn"
-                            icon="⏱️"
-                            color="#e74c3c"
-                        />
-                    </div>
+                    {loadingQuitPlan ? (
+                        <div style={{
+                            textAlign: 'center',
+                            padding: '2rem',
+                            color: '#7f8c8d'
+                        }}>
+                            Đang tải thông tin kế hoạch cai thuốc...
+                        </div>
+                    ) : !quitPlan ? (
+                        <div style={{
+                            textAlign: 'center',
+                            padding: '2rem',
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
+                        }}>
+                            <p style={{ 
+                                color: '#7f8c8d', 
+                                marginBottom: '1.5rem',
+                                fontSize: '1.1rem'
+                            }}>
+                                Bạn chưa có kế hoạch cai thuốc nào
+                            </p>
+                            <button
+                                onClick={() => navigate('/create-plan')}
+                                style={{
+                                    padding: '1rem 2rem',
+                                    backgroundColor: '#35a79c',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    fontSize: '1rem'
+                                }}
+                            >
+                                Tạo Kế Hoạch Cai Thuốc
+                            </button>
+                        </div>
+                    ) : (
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+                            gap: '1.5rem'
+                        }}>
+                            <DashboardCard
+                                title="Ngày Không Hút Thuốc"
+                                value={quitPlan.daysSmokeFree}
+                                description="Cố gắng lên! Mỗi ngày đều quan trọng."
+                                icon="🎯"
+                                color="#44b89d"
+                            />
+                            <DashboardCard
+                                title="Tiền Tiết Kiệm Được"
+                                value={`${quitPlan.totalMoneySaved.toLocaleString()} VND`}
+                                description="Tiết kiệm từ việc không mua thuốc lá"
+                                icon="💰"
+                                color="#0057b8"
+                            />
+                            <DashboardCard
+                                title="Điếu Thuốc Không Hút"
+                                value={calculateCigarettesNotSmoked()}
+                                description="Đó là rất nhiều hóa chất độc hại đã tránh được!"
+                                icon="🚭"
+                                color="#ff9800"
+                            />
+                        </div>
+                    )}
                 </section>
 
                 <section style={{

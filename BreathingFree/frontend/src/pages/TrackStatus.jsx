@@ -3,142 +3,113 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
-
-// Dữ liệu giả về người dùng Member (chỉ dùng nếu không có dữ liệu trong localStorage)
-const fakeMemberData = {
-    name: 'John Smith',
-    gender: 'Nam',
-    age: 35,
-    dateOfBirth: '1990-05-15',
-    smokingDuration: '15 năm',
-    email: 'john.smith@example.com',
-    phone: '0912345678',
-    address: 'Hà Nội, Việt Nam'
-};
+import { quitPlanApi } from '../api/quitPlanApi';
+import authApi from '../api/authApi';
 
 /**
  * TrackStatus - Trang theo dõi trạng thái cai thuốc
  * 
  * Component này hiển thị thông tin chi tiết về tiến trình cai thuốc của thành viên:
- * - Thông tin cá nhân và lịch sử hút thuốc
- * - Tiến độ và thành tựu đạt được
- * - Lịch sử trò chuyện với bác sĩ tư vấn
+ * - Thông tin cá nhân từ database
+ * - Tiến độ và thành tựu từ quit plan
+ * - Thống kê cai thuốc thực tế
  */
 const TrackStatus = () => {
     const navigate = useNavigate();
-    const [memberInfo, setMemberInfo] = useState({
-        name: '',
-        gender: '',
-        age: 0,
-        dateOfBirth: '',
-        smokingDuration: '',
-        consultingDoctor: '',
-        quittingDuration: '',
-        achievement: '',
-        chatMessages: [],
-        email: '',
-        phone: '',
-        address: ''
-    });
-    const [newMessage, setNewMessage] = useState('');
-    const [userName, setUserName] = useState('');
-    const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'chat', 'achievements'
+    const [quitPlan, setQuitPlan] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'achievements'
 
     useEffect(() => {
-        // Check if user is logged in
-        const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-        if (!userLoggedIn) {
+        // Check authentication
+        const token = localStorage.getItem('token');
+        if (!token) {
             navigate('/login');
             return;
         }
 
-        const storedUserName = localStorage.getItem('userName') || fakeMemberData.name;
-        setUserName(storedUserName);
-
-        // Lấy dữ liệu từ localStorage
-        const userAge = calculateAge(localStorage.getItem('dateOfBirth') || fakeMemberData.dateOfBirth);
-        const smokeFreeCount = localStorage.getItem('smokeFreeCount') || 0;
-
-        // Tạo đối tượng thông tin thành viên
-        const memberData = {
-            name: storedUserName,
-            gender: localStorage.getItem('gender') || fakeMemberData.gender,
-            age: userAge,
-            dateOfBirth: localStorage.getItem('dateOfBirth') || fakeMemberData.dateOfBirth,
-            smokingDuration: localStorage.getItem('smokingHistory') || fakeMemberData.smokingDuration,
-            email: localStorage.getItem('userEmail') || fakeMemberData.email,
-            phone: localStorage.getItem('phone') || fakeMemberData.phone,
-            address: localStorage.getItem('address') || fakeMemberData.address,
-            consultingDoctor: 'Dr. Smith',
-            quittingDuration: `${smokeFreeCount} ngày`,
-            achievement: determineAchievement(smokeFreeCount),
-            chatMessages: [
-                { id: 1, sender: 'Dr. Smith', message: 'Bạn cảm thấy thế nào hôm nay?', time: '10:30 AM', date: '2023-06-10' },
-                { id: 2, sender: 'You', message: 'Tôi cảm thấy tuyệt vời! Không thèm thuốc lá chút nào.', time: '10:45 AM', date: '2023-06-10' },
-                { id: 3, sender: 'Dr. Smith', message: 'Tuyệt vời! Hãy tiếp tục nhé!', time: '11:00 AM', date: '2023-06-10' },
-                { id: 4, sender: 'Dr. Smith', message: 'Bạn có trải qua các triệu chứng cai nghiện trong tuần này không?', time: '09:15 AM', date: '2023-06-12' },
-                { id: 5, sender: 'You', message: 'Chỉ có một chút đau đầu hôm qua, nhưng nó nhanh chóng qua đi.', time: '09:30 AM', date: '2023-06-12' },
-                { id: 6, sender: 'Dr. Smith', message: 'Điều đó bình thường. Hãy đảm bảo uống đủ nước và nghỉ ngơi đầy đủ. Chúng ta sẽ thảo luận thêm các chiến lược trong phiên tới.', time: '09:45 AM', date: '2023-06-12' }
-            ]
-        };
-
-        setMemberInfo(memberData);
+        // Load user profile and quit plan data
+        loadUserProfile();
+        loadQuitPlan();
     }, [navigate]);
 
-    // Hàm tính tuổi từ ngày sinh
-    const calculateAge = (birthDate) => {
-        if (!birthDate) return 30;
+    const loadUserProfile = async () => {
+        try {
+            const profile = await authApi.getUserProfile();
+            setUser(profile);
+        } catch (error) {
+            console.error('Error loading user profile:', error);
+        }
+    };
+
+    const loadQuitPlan = async () => {
+        try {
+            setLoading(true);
+            const result = await quitPlanApi.getActiveQuitPlan();
+            const activePlan = result?.data || null;
+            setQuitPlan(activePlan);
+        } catch (error) {
+            console.error('Error loading quit plan:', error);
+            setQuitPlan(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const determineAchievement = (days) => {
+        if (days >= 365) return '🏆 Nhà vô địch một năm';
+        if (days >= 90) return '🥇 Siêu sao ba tháng';
+        if (days >= 30) return '🌟 Cột mốc một tháng';
+        if (days >= 14) return '⭐ Quán quân hai tuần';
+        if (days >= 7) return '💪 Chiến binh một tuần';
+        if (days >= 3) return '🎯 Bước đầu tiên';
+        return '🌱 Mới bắt đầu';
+    };
+
+    const getNextGoal = (days) => {
+        if (days < 7) return { target: 7, label: '1 tuần không hút thuốc' };
+        if (days < 14) return { target: 14, label: '2 tuần không hút thuốc' };
+        if (days < 30) return { target: 30, label: '1 tháng không hút thuốc' };
+        if (days < 90) return { target: 90, label: '3 tháng không hút thuốc' };
+        if (days < 365) return { target: 365, label: '1 năm không hút thuốc' };
+        return { target: days + 365, label: 'Tiếp tục duy trì' };
+    };
+
+    const formatDate = (dateString) => {
+        if (!dateString) return 'Chưa xác định';
+        return new Date(dateString).toLocaleDateString('vi-VN');
+    };
+
+    const calculateAge = (dob) => {
+        if (!dob) return null;
         const today = new Date();
-        const birth = new Date(birthDate);
-        let age = today.getFullYear() - birth.getFullYear();
-        const monthDifference = today.getMonth() - birth.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birth.getDate())) {
+        const birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
         return age;
     };
 
-    const determineAchievement = (days) => {
-        if (days >= 30) return 'Cột mốc một tháng';
-        if (days >= 14) return 'Quán quân hai tuần';
-        if (days >= 7) return 'Chiến binh một tuần';
-        if (days >= 3) return 'Bước đầu tiên';
-        return 'Mới bắt đầu';
-    };
-
-    const handleSendMessage = (e) => {
-        e.preventDefault();
-        if (!newMessage.trim()) return;
-
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const dateString = now.toISOString().split('T')[0];
-
-        const newChatMessage = {
-            id: memberInfo.chatMessages.length + 1,
-            sender: 'You',
-            message: newMessage,
-            time: timeString,
-            date: dateString
-        };
-
-        setMemberInfo(prev => ({
-            ...prev,
-            chatMessages: [...prev.chatMessages, newChatMessage]
-        }));
-
-        setNewMessage('');
-    };
-
-    // Group chat messages by date
-    const groupedChatMessages = memberInfo.chatMessages.reduce((groups, message) => {
-        const date = message.date;
-        if (!groups[date]) {
-            groups[date] = [];
-        }
-        groups[date].push(message);
-        return groups;
-    }, {});
+    if (loading) {
+        return (
+            <div style={{
+                minHeight: '100vh',
+                width: '100%',
+                background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
+                fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+                <div style={{ textAlign: 'center', color: '#35a79c', fontSize: '1.2rem' }}>
+                    Đang tải thông tin...
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div style={{
@@ -147,7 +118,7 @@ const TrackStatus = () => {
             background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
             fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif'
         }}>
-            <Header userName={userName} />
+            <Header userName={user?.fullName || 'User'} />
             <SecondaryNavigation />
 
             <div style={{
@@ -184,15 +155,15 @@ const TrackStatus = () => {
                             color: '#2c3e50',
                             fontSize: '2rem'
                         }}>
-                            {memberInfo.name}
+                            {user?.fullName || 'User'}
                         </h1>
                         <div style={{
                             display: 'flex',
                             gap: '2rem',
                             color: '#7f8c8d'
                         }}>
-                            <span>🎯 {memberInfo.quittingDuration} không hút thuốc</span>
-                            <span>🏆 {memberInfo.achievement}</span>
+                            <span>🎯 {quitPlan?.daysSmokeFree || 0} ngày không hút thuốc</span>
+                            <span>🏆 {determineAchievement(quitPlan?.daysSmokeFree || 0)}</span>
                         </div>
                     </div>
                 </div>
@@ -220,22 +191,6 @@ const TrackStatus = () => {
                         Tổng Quan
                     </button>
                     <button
-                        onClick={() => setActiveTab('chat')}
-                        style={{
-                            padding: '1rem 2rem',
-                            borderRadius: '10px',
-                            border: 'none',
-                            background: activeTab === 'chat' ? '#35a79c' : 'white',
-                            color: activeTab === 'chat' ? 'white' : '#2c3e50',
-                            fontWeight: '600',
-                            cursor: 'pointer',
-                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-                            transition: 'all 0.3s ease'
-                        }}
-                    >
-                        Trò Chuyện
-                    </button>
-                    <button
                         onClick={() => setActiveTab('achievements')}
                         style={{
                             padding: '1rem 2rem',
@@ -261,279 +216,406 @@ const TrackStatus = () => {
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
                 }}>
                     {activeTab === 'overview' && (
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                            gap: '2rem'
-                        }}>
-                            {/* Personal Information */}
-                            <div className="info-card" style={{
-                                background: '#f8fafb',
-                                borderRadius: '15px',
-                                padding: '1.5rem'
-                            }}>
-                                <h3 style={{
-                                    color: '#35a79c',
-                                    marginBottom: '1rem',
-                                    fontSize: '1.2rem'
-                                }}>Thông Tin Cá Nhân</h3>
+                        <>
+                            {!quitPlan ? (
+                                <div style={{
+                                    textAlign: 'center',
+                                    padding: '3rem',
+                                    color: '#7f8c8d'
+                                }}>
+                                    <div style={{
+                                        fontSize: '3rem',
+                                        marginBottom: '1rem'
+                                    }}>📋</div>
+                                    <h3 style={{
+                                        color: '#2c3e50',
+                                        marginBottom: '1rem'
+                                    }}>
+                                        Chưa có kế hoạch cai thuốc
+                                    </h3>
+                                    <p style={{ marginBottom: '2rem' }}>
+                                        Hãy tạo kế hoạch cai thuốc để bắt đầu theo dõi tiến trình của bạn
+                                    </p>
+                                    <button
+                                        onClick={() => navigate('/create-plan')}
+                                        style={{
+                                            padding: '1rem 2rem',
+                                            backgroundColor: '#35a79c',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '10px',
+                                            cursor: 'pointer',
+                                            fontWeight: '600',
+                                            fontSize: '1rem'
+                                        }}
+                                    >
+                                        Tạo Kế Hoạch Cai Thuốc
+                                    </button>
+                                </div>
+                            ) : (
                                 <div style={{
                                     display: 'grid',
-                                    gap: '1rem'
+                                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                    gap: '2rem'
                                 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Giới tính</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.gender}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Tuổi</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.age}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Email</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.email}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Điện thoại</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.phone}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Smoking History */}
-                            <div className="info-card" style={{
-                                background: '#f8fafb',
-                                borderRadius: '15px',
-                                padding: '1.5rem'
-                            }}>
-                                <h3 style={{
-                                    color: '#35a79c',
-                                    marginBottom: '1rem',
-                                    fontSize: '1.2rem'
-                                }}>Lịch Sử Hút Thuốc</h3>
-                                <div style={{
-                                    display: 'grid',
-                                    gap: '1rem'
-                                }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Thời gian hút thuốc</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.smokingDuration}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Thời gian cai thuốc</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.quittingDuration}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Thành tựu hiện tại</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.achievement}</span>
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{ color: '#7f8c8d' }}>Bác sĩ tư vấn</span>
-                                        <span style={{ color: '#2c3e50', fontWeight: '500' }}>{memberInfo.consultingDoctor}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'chat' && (
-                        <div style={{ maxHeight: '600px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                            {/* Chat Messages */}
-                            <div style={{
-                                flex: 1,
-                                overflowY: 'auto',
-                                padding: '1rem',
-                                marginBottom: '1rem'
-                            }}>
-                                {Object.entries(groupedChatMessages).map(([date, messages]) => (
-                                    <div key={date} style={{ marginBottom: '2rem' }}>
+                                    {/* Personal Information */}
+                                    <div className="info-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem'
+                                    }}>
+                                        <h3 style={{
+                                            color: '#35a79c',
+                                            marginBottom: '1rem',
+                                            fontSize: '1.2rem'
+                                        }}>Thông Tin Cá Nhân</h3>
                                         <div style={{
-                                            textAlign: 'center',
-                                            margin: '1rem 0',
-                                            position: 'relative'
+                                            display: 'grid',
+                                            gap: '1rem'
                                         }}>
-                                            <span style={{
-                                                background: '#f0f2f5',
-                                                padding: '0.5rem 1rem',
-                                                borderRadius: '15px',
-                                                fontSize: '0.9rem',
-                                                color: '#7f8c8d'
-                                            }}>
-                                                {new Date(date).toLocaleDateString('vi-VN', {
-                                                    weekday: 'long',
-                                                    year: 'numeric',
-                                                    month: 'long',
-                                                    day: 'numeric'
-                                                })}
-                                            </span>
+                                                                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                 <span style={{ color: '#7f8c8d' }}>Giới tính</span>
+                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                     {user?.gender || 'Chưa cập nhật'}
+                                                 </span>
+                                             </div>
+                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                 <span style={{ color: '#7f8c8d' }}>Tuổi</span>
+                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                     {user?.dob ? `${calculateAge(user.dob)} tuổi` : 'Chưa cập nhật'}
+                                                 </span>
+                                             </div>
+                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                 <span style={{ color: '#7f8c8d' }}>Email</span>
+                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                     {user?.email || 'Chưa cập nhật'}
+                                                 </span>
+                                             </div>
+                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                 <span style={{ color: '#7f8c8d' }}>Điện thoại</span>
+                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                     {user?.phone || 'Chưa cập nhật'}
+                                                 </span>
+                                             </div>
                                         </div>
-                                        {messages.map((message) => (
-                                            <div
-                                                key={message.id}
-                                                style={{
-                                                    display: 'flex',
-                                                    justifyContent: message.sender === 'You' ? 'flex-end' : 'flex-start',
-                                                    marginBottom: '1rem'
-                                                }}
-                                            >
-                                                <div style={{
-                                                    maxWidth: '70%',
-                                                    background: message.sender === 'You' ? '#35a79c' : '#f0f2f5',
-                                                    color: message.sender === 'You' ? 'white' : '#2c3e50',
-                                                    padding: '1rem',
-                                                    borderRadius: '15px',
-                                                    position: 'relative'
-                                                }}>
-                                                    <div style={{
-                                                        fontSize: '0.9rem',
-                                                        marginBottom: '0.3rem',
-                                                        color: message.sender === 'You' ? '#e0f7fa' : '#7f8c8d'
-                                                    }}>
-                                                        {message.sender === 'You' ? 'Bạn' : message.sender}
-                                                    </div>
-                                                    <div style={{ lineHeight: '1.5' }}>
-                                                        {message.message}
-                                                    </div>
-                                                    <div style={{
-                                                        fontSize: '0.8rem',
-                                                        marginTop: '0.5rem',
-                                                        color: message.sender === 'You' ? '#e0f7fa' : '#95a5a6'
-                                                    }}>
-                                                        {message.time}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
                                     </div>
-                                ))}
-                            </div>
 
-                            {/* Message Input */}
-                            <form onSubmit={handleSendMessage} style={{
-                                display: 'flex',
-                                gap: '1rem',
-                                padding: '1rem',
-                                borderTop: '1px solid #eee'
-                            }}>
-                                <input
-                                    type="text"
-                                    value={newMessage}
-                                    onChange={(e) => setNewMessage(e.target.value)}
-                                    placeholder="Nhập tin nhắn..."
-                                    style={{
-                                        flex: 1,
-                                        padding: '1rem',
-                                        borderRadius: '10px',
-                                        border: '1px solid #e0e0e0',
-                                        outline: 'none',
-                                        fontSize: '1rem'
-                                    }}
-                                />
-                                <button
-                                    type="submit"
-                                    style={{
-                                        padding: '1rem 2rem',
-                                        background: '#35a79c',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '10px',
-                                        cursor: 'pointer',
-                                        fontWeight: '600'
-                                    }}
-                                >
-                                    Gửi
-                                </button>
-                            </form>
-                        </div>
+                                    {/* Quit Plan Information */}
+                                    <div className="info-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem'
+                                    }}>
+                                        <h3 style={{
+                                            color: '#35a79c',
+                                            marginBottom: '1rem',
+                                            fontSize: '1.2rem'
+                                        }}>Lịch Sử Hút Thuốc</h3>
+                                        <div style={{
+                                            display: 'grid',
+                                            gap: '1rem'
+                                        }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Thời gian hút thuốc</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.yearsSmoked} năm
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Thời gian cai thuốc</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.daysSmokeFree} ngày
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Thành tựu hiện tại</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {determineAchievement(quitPlan.daysSmokeFree)}
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Bác sĩ tư vấn</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.doctorName || 'Chưa có'}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Progress Statistics */}
+                                    <div className="info-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem'
+                                    }}>
+                                        <h3 style={{
+                                            color: '#35a79c',
+                                            marginBottom: '1rem',
+                                            fontSize: '1.2rem'
+                                        }}>Thống Kê Tiến Trình</h3>
+                                        <div style={{
+                                            display: 'grid',
+                                            gap: '1rem'
+                                        }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Bắt đầu</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {formatDate(quitPlan.startDate)}
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Dự kiến hoàn thành</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {formatDate(quitPlan.expectedEndDate)}
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Tiến độ</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.completionPercentage?.toFixed(1) || 0}%
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Mức độ</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.difficulty === 'easy' ? 'Dễ' : 
+                                                     quitPlan.difficulty === 'medium' ? 'Trung bình' : 'Khó'}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Money & Health Statistics */}
+                                    <div className="info-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem'
+                                    }}>
+                                        <h3 style={{
+                                            color: '#35a79c',
+                                            marginBottom: '1rem',
+                                            fontSize: '1.2rem'
+                                        }}>Lợi Ích Đạt Được</h3>
+                                        <div style={{
+                                            display: 'grid',
+                                            gap: '1rem'
+                                        }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Tiền tiết kiệm</span>
+                                                <span style={{ color: '#27ae60', fontWeight: '500' }}>
+                                                    {quitPlan.totalMoneySaved?.toLocaleString() || 0} VND
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Điếu thuốc tránh được</span>
+                                                <span style={{ color: '#e74c3c', fontWeight: '500' }}>
+                                                    {(quitPlan.daysSmokeFree * quitPlan.cigarettesPerDay).toLocaleString()} điếu
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Chi phí mỗi ngày</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.dailyCost?.toLocaleString() || 0} VND
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Điếu/ngày trước đây</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {quitPlan.cigarettesPerDay} điếu
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </>
                     )}
 
                     {activeTab === 'achievements' && (
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                            gap: '2rem'
-                        }}>
-                            <div className="achievement-card" style={{
-                                background: '#f8fafb',
-                                borderRadius: '15px',
-                                padding: '1.5rem',
-                                textAlign: 'center'
-                            }}>
+                        <>
+                            {!quitPlan ? (
                                 <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    background: '#35a79c22',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '2rem',
-                                    margin: '0 auto 1rem'
+                                    textAlign: 'center',
+                                    padding: '3rem',
+                                    color: '#7f8c8d'
                                 }}>
-                                    🌟
+                                    <div style={{
+                                        fontSize: '3rem',
+                                        marginBottom: '1rem'
+                                    }}>🏆</div>
+                                    <h3 style={{
+                                        color: '#2c3e50',
+                                        marginBottom: '1rem'
+                                    }}>
+                                        Chưa có thành tựu
+                                    </h3>
+                                    <p>
+                                        Tạo kế hoạch cai thuốc để bắt đầu thu thập thành tựu
+                                    </p>
                                 </div>
-                                <h3 style={{ color: '#35a79c', marginBottom: '0.5rem' }}>
-                                    {memberInfo.achievement}
-                                </h3>
-                                <p style={{ color: '#7f8c8d' }}>
-                                    {memberInfo.quittingDuration} không hút thuốc
-                                </p>
-                            </div>
+                            ) : (
+                                <div style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                                    gap: '2rem'
+                                }}>
+                                    <div className="achievement-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem',
+                                        textAlign: 'center'
+                                    }}>
+                                        <div style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            borderRadius: '50%',
+                                            background: '#35a79c22',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '2rem',
+                                            margin: '0 auto 1rem'
+                                        }}>
+                                            🌟
+                                        </div>
+                                        <h3 style={{ color: '#35a79c', marginBottom: '0.5rem' }}>
+                                            Thành tựu hiện tại
+                                        </h3>
+                                        <p style={{ color: '#2c3e50', fontWeight: '600', fontSize: '1.1rem' }}>
+                                            {determineAchievement(quitPlan.daysSmokeFree)}
+                                        </p>
+                                        <p style={{ color: '#7f8c8d' }}>
+                                            {quitPlan.daysSmokeFree} ngày không hút thuốc
+                                        </p>
+                                    </div>
 
-                            <div className="achievement-card" style={{
-                                background: '#f8fafb',
-                                borderRadius: '15px',
-                                padding: '1.5rem',
-                                textAlign: 'center'
-                            }}>
-                                <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    background: '#e74c3c22',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '2rem',
-                                    margin: '0 auto 1rem'
-                                }}>
-                                    💪
-                                </div>
-                                <h3 style={{ color: '#e74c3c', marginBottom: '0.5rem' }}>
-                                    Quyết Tâm
-                                </h3>
-                                <p style={{ color: '#7f8c8d' }}>
-                                    Kiên trì với mục tiêu cai thuốc
-                                </p>
-                            </div>
+                                    <div className="achievement-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem',
+                                        textAlign: 'center'
+                                    }}>
+                                        <div style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            borderRadius: '50%',
+                                            background: '#27ae6022',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '2rem',
+                                            margin: '0 auto 1rem'
+                                        }}>
+                                            💰
+                                        </div>
+                                        <h3 style={{ color: '#27ae60', marginBottom: '0.5rem' }}>
+                                            Tiết Kiệm Được
+                                        </h3>
+                                        <p style={{ color: '#2c3e50', fontWeight: '600', fontSize: '1.1rem' }}>
+                                            {quitPlan.totalMoneySaved?.toLocaleString() || 0} VND
+                                        </p>
+                                        <p style={{ color: '#7f8c8d' }}>
+                                            Từ việc không mua thuốc lá
+                                        </p>
+                                    </div>
 
-                            <div className="achievement-card" style={{
-                                background: '#f8fafb',
-                                borderRadius: '15px',
-                                padding: '1.5rem',
-                                textAlign: 'center'
-                            }}>
-                                <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    background: '#3498db22',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '2rem',
-                                    margin: '0 auto 1rem'
-                                }}>
-                                    🎯
+                                    <div className="achievement-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem',
+                                        textAlign: 'center'
+                                    }}>
+                                        <div style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            borderRadius: '50%',
+                                            background: '#3498db22',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '2rem',
+                                            margin: '0 auto 1rem'
+                                        }}>
+                                            🎯
+                                        </div>
+                                        <h3 style={{ color: '#3498db', marginBottom: '0.5rem' }}>
+                                            Mục Tiêu Tiếp Theo
+                                        </h3>
+                                        <p style={{ color: '#2c3e50', fontWeight: '600', fontSize: '1.1rem' }}>
+                                            {getNextGoal(quitPlan.daysSmokeFree).label}
+                                        </p>
+                                        <p style={{ color: '#7f8c8d' }}>
+                                            Còn {getNextGoal(quitPlan.daysSmokeFree).target - quitPlan.daysSmokeFree} ngày nữa
+                                        </p>
+                                    </div>
+
+                                    <div className="achievement-card" style={{
+                                        background: '#f8fafb',
+                                        borderRadius: '15px',
+                                        padding: '1.5rem',
+                                        textAlign: 'center'
+                                    }}>
+                                        <div style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            borderRadius: '50%',
+                                            background: '#e74c3c22',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '2rem',
+                                            margin: '0 auto 1rem'
+                                        }}>
+                                            🚭
+                                        </div>
+                                        <h3 style={{ color: '#e74c3c', marginBottom: '0.5rem' }}>
+                                            Thuốc Lá Tránh Được
+                                        </h3>
+                                        <p style={{ color: '#2c3e50', fontWeight: '600', fontSize: '1.1rem' }}>
+                                            {(quitPlan.daysSmokeFree * quitPlan.cigarettesPerDay).toLocaleString()} điếu
+                                        </p>
+                                        <p style={{ color: '#7f8c8d' }}>
+                                            Hóa chất độc hại đã tránh được
+                                        </p>
+                                    </div>
+
+                                    {quitPlan.motivation && (
+                                        <div className="achievement-card" style={{
+                                            background: '#f8fafb',
+                                            borderRadius: '15px',
+                                            padding: '1.5rem',
+                                            textAlign: 'center',
+                                            gridColumn: 'span 2'
+                                        }}>
+                                            <div style={{
+                                                width: '80px',
+                                                height: '80px',
+                                                borderRadius: '50%',
+                                                background: '#9b59b622',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                fontSize: '2rem',
+                                                margin: '0 auto 1rem'
+                                            }}>
+                                                💪
+                                            </div>
+                                            <h3 style={{ color: '#9b59b6', marginBottom: '0.5rem' }}>
+                                                Động Lực Của Bạn
+                                            </h3>
+                                            <p style={{ 
+                                                color: '#2c3e50', 
+                                                fontStyle: 'italic',
+                                                fontSize: '1.1rem',
+                                                lineHeight: '1.5'
+                                            }}>
+                                                "{quitPlan.motivation}"
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
-                                <h3 style={{ color: '#3498db', marginBottom: '0.5rem' }}>
-                                    Mục Tiêu Tiếp Theo
-                                </h3>
-                                <p style={{ color: '#7f8c8d' }}>
-                                    30 ngày không hút thuốc
-                                </p>
-                            </div>
-                        </div>
+                            )}
+                        </>
                     )}
                 </div>
             </div>
