@@ -1,43 +1,36 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
-import { quitPlanApi } from '../api/quitPlanApi';
 import authApi from '../api/authApi';
+import { quitPlanApi } from '../api/quitPlanApi';
 
-/**
- * TrackStatus - Trang theo dõi trạng thái cai thuốc
- * 
- * Component này hiển thị thông tin chi tiết về tiến trình cai thuốc của thành viên:
- * - Thông tin cá nhân từ database
- * - Tiến độ và thành tựu từ quit plan
- * - Thống kê cai thuốc thực tế
- */
 const TrackStatus = () => {
     const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState('overview');
+    const [user, setUser] = useState(null);
     const [quitPlan, setQuitPlan] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
-    const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'achievements'
 
     useEffect(() => {
-        // Check authentication
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
             return;
         }
 
-        // Load user profile and quit plan data
-        loadUserProfile();
-        loadQuitPlan();
+        Promise.all([
+            loadUserProfile(),
+            loadQuitPlan()
+        ]).finally(() => {
+            setLoading(false);
+        });
     }, [navigate]);
 
     const loadUserProfile = async () => {
         try {
-            const profile = await authApi.getUserProfile();
-            setUser(profile);
+            const profileData = await authApi.getUserProfile();
+            setUser(profileData);
         } catch (error) {
             console.error('Error loading user profile:', error);
         }
@@ -45,52 +38,66 @@ const TrackStatus = () => {
 
     const loadQuitPlan = async () => {
         try {
-            setLoading(true);
             const result = await quitPlanApi.getActiveQuitPlan();
-            const activePlan = result?.data || null;
-            setQuitPlan(activePlan);
+            setQuitPlan(result?.data || null);
         } catch (error) {
             console.error('Error loading quit plan:', error);
             setQuitPlan(null);
-        } finally {
-            setLoading(false);
         }
     };
 
     const determineAchievement = (days) => {
-        if (days >= 365) return '🏆 Nhà vô địch một năm';
-        if (days >= 90) return '🥇 Siêu sao ba tháng';
-        if (days >= 30) return '🌟 Cột mốc một tháng';
-        if (days >= 14) return '⭐ Quán quân hai tuần';
-        if (days >= 7) return '💪 Chiến binh một tuần';
-        if (days >= 3) return '🎯 Bước đầu tiên';
+        if (days >= 365) return '🏆 Bậc thầy cai thuốc';
+        if (days >= 180) return '💎 Chuyên gia 6 tháng';
+        if (days >= 90) return '🎖️ Chiến binh 3 tháng';
+        if (days >= 30) return '🥇 Vô địch 1 tháng';
+        if (days >= 14) return '🥈 Kiên trì 2 tuần';
+        if (days >= 7) return '🥉 Mạnh mẽ 1 tuần';
+        if (days >= 3) return '⭐ Khởi đầu vững chắc';
+        if (days >= 1) return '🌱 Bước đầu dũng cảm';
         return '🌱 Mới bắt đầu';
     };
 
+    const getAchievementEmoji = (days) => {
+        if (days >= 365) return '🏆';
+        if (days >= 180) return '💎';
+        if (days >= 90) return '🎖️';
+        if (days >= 30) return '🥇';
+        if (days >= 14) return '🥈';
+        if (days >= 7) return '🥉';
+        if (days >= 3) return '⭐';
+        if (days >= 1) return '🌱';
+        return '🌱';
+    };
+
     const getNextGoal = (days) => {
-        if (days < 7) return { target: 7, label: '1 tuần không hút thuốc' };
-        if (days < 14) return { target: 14, label: '2 tuần không hút thuốc' };
-        if (days < 30) return { target: 30, label: '1 tháng không hút thuốc' };
-        if (days < 90) return { target: 90, label: '3 tháng không hút thuốc' };
-        if (days < 365) return { target: 365, label: '1 năm không hút thuốc' };
-        return { target: days + 365, label: 'Tiếp tục duy trì' };
+        if (days < 3) return '3 ngày đầu tiên';
+        if (days < 7) return '1 tuần không thuốc';
+        if (days < 14) return '2 tuần kiên trì';
+        if (days < 30) return '1 tháng thành công';
+        if (days < 90) return '3 tháng vững chắc';
+        if (days < 180) return '6 tháng hoàn hảo';
+        if (days < 365) return '1 năm chiến thắng';
+        return 'Chuyên gia cai thuốc';
+    };
+
+    const calculateDaysToNextGoal = (days) => {
+        if (days < 3) return 3 - days;
+        if (days < 7) return 7 - days;
+        if (days < 14) return 14 - days;
+        if (days < 30) return 30 - days;
+        if (days < 90) return 90 - days;
+        if (days < 180) return 180 - days;
+        if (days < 365) return 365 - days;
+        return 0;
     };
 
     const formatDate = (dateString) => {
-        if (!dateString) return 'Chưa xác định';
         return new Date(dateString).toLocaleDateString('vi-VN');
     };
 
     const calculateAge = (dob) => {
-        if (!dob) return null;
-        const today = new Date();
-        const birthDate = new Date(dob);
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
+        return new Date().getFullYear() - new Date(dob).getFullYear();
     };
 
     if (loading) {
@@ -100,11 +107,10 @@ const TrackStatus = () => {
                 width: '100%',
                 background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
                 fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                boxSizing: 'border-box',
+                overflowX: 'hidden'
             }}>
-                <div style={{ textAlign: 'center', color: '#35a79c', fontSize: '1.2rem' }}>
+                <div style={{ textAlign: 'center', color: '#35a79c', fontSize: '1.2rem', padding: '2rem' }}>
                     Đang tải thông tin...
                 </div>
             </div>
@@ -116,51 +122,63 @@ const TrackStatus = () => {
             minHeight: '100vh',
             width: '100%',
             background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)',
-            fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif'
+            fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
+            boxSizing: 'border-box',
+            overflowX: 'hidden'
         }}>
             <Header userName={user?.fullName || 'User'} />
             <SecondaryNavigation />
 
             <div style={{
                 maxWidth: '1200px',
-                margin: '2rem auto',
-                padding: '0 2rem'
+                margin: '0 auto',
+                padding: '2rem',
+                boxSizing: 'border-box'
             }}>
-                {/* Header Section */}
+                {/* Hero Header Section */}
                 <div style={{
                     background: 'white',
-                    borderRadius: '20px',
+                    borderRadius: '15px',
                     padding: '2rem',
                     marginBottom: '2rem',
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+                    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '2rem'
                 }}>
+                    {/* Avatar Section */}
                     <div style={{
                         width: '100px',
                         height: '100px',
                         borderRadius: '50%',
-                        background: '#35a79c22',
+                        background: '#35a79c',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '2.5rem'
+                        fontSize: '2.5rem',
+                        color: 'white',
+                        flexShrink: 0
                     }}>
                         👤
                     </div>
+
+                    {/* User Info */}
                     <div style={{ flex: 1 }}>
                         <h1 style={{
                             margin: '0 0 0.5rem 0',
                             color: '#2c3e50',
-                            fontSize: '2rem'
+                            fontSize: '2rem',
+                            fontWeight: '600'
                         }}>
                             {user?.fullName || 'User'}
                         </h1>
+                        
                         <div style={{
                             display: 'flex',
                             gap: '2rem',
-                            color: '#7f8c8d'
+                            color: '#7f8c8d',
+                            flexWrap: 'wrap',
+                            alignItems: 'center'
                         }}>
                             <span>🎯 {quitPlan?.daysSmokeFree || 0} ngày không hút thuốc</span>
                             <span>🏆 {determineAchievement(quitPlan?.daysSmokeFree || 0)}</span>
@@ -188,7 +206,7 @@ const TrackStatus = () => {
                             transition: 'all 0.3s ease'
                         }}
                     >
-                        Tổng Quan
+                        📊 Tổng Quan
                     </button>
                     <button
                         onClick={() => setActiveTab('achievements')}
@@ -204,16 +222,17 @@ const TrackStatus = () => {
                             transition: 'all 0.3s ease'
                         }}
                     >
-                        Thành Tựu
+                        🏆 Thành Tựu
                     </button>
                 </div>
 
                 {/* Content Area */}
                 <div style={{
                     background: 'white',
-                    borderRadius: '20px',
+                    borderRadius: '15px',
                     padding: '2rem',
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+                    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+                    minHeight: '500px'
                 }}>
                     {activeTab === 'overview' && (
                         <>
@@ -259,7 +278,7 @@ const TrackStatus = () => {
                                     gap: '2rem'
                                 }}>
                                     {/* Personal Information */}
-                                    <div className="info-card" style={{
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem'
@@ -273,35 +292,35 @@ const TrackStatus = () => {
                                             display: 'grid',
                                             gap: '1rem'
                                         }}>
-                                                                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                 <span style={{ color: '#7f8c8d' }}>Giới tính</span>
-                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
-                                                     {user?.gender || 'Chưa cập nhật'}
-                                                 </span>
-                                             </div>
-                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                 <span style={{ color: '#7f8c8d' }}>Tuổi</span>
-                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
-                                                     {user?.dob ? `${calculateAge(user.dob)} tuổi` : 'Chưa cập nhật'}
-                                                 </span>
-                                             </div>
-                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                 <span style={{ color: '#7f8c8d' }}>Email</span>
-                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
-                                                     {user?.email || 'Chưa cập nhật'}
-                                                 </span>
-                                             </div>
-                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                 <span style={{ color: '#7f8c8d' }}>Điện thoại</span>
-                                                 <span style={{ color: '#2c3e50', fontWeight: '500' }}>
-                                                     {user?.phone || 'Chưa cập nhật'}
-                                                 </span>
-                                             </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Giới tính</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {user?.gender || 'Chưa cập nhật'}
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Tuổi</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {user?.dob ? `${calculateAge(user.dob)} tuổi` : 'Chưa cập nhật'}
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Email</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {user?.email || 'Chưa cập nhật'}
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ color: '#7f8c8d' }}>Điện thoại</span>
+                                                <span style={{ color: '#2c3e50', fontWeight: '500' }}>
+                                                    {user?.phone || 'Chưa cập nhật'}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
 
                                     {/* Quit Plan Information */}
-                                    <div className="info-card" style={{
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem'
@@ -343,7 +362,7 @@ const TrackStatus = () => {
                                     </div>
 
                                     {/* Progress Statistics */}
-                                    <div className="info-card" style={{
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem'
@@ -386,7 +405,7 @@ const TrackStatus = () => {
                                     </div>
 
                                     {/* Money & Health Statistics */}
-                                    <div className="info-card" style={{
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem'
@@ -456,10 +475,11 @@ const TrackStatus = () => {
                             ) : (
                                 <div style={{
                                     display: 'grid',
-                                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                                     gap: '2rem'
                                 }}>
-                                    <div className="achievement-card" style={{
+                                    {/* Current Achievement */}
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem',
@@ -476,7 +496,7 @@ const TrackStatus = () => {
                                             fontSize: '2rem',
                                             margin: '0 auto 1rem'
                                         }}>
-                                            🌟
+                                            {getAchievementEmoji(quitPlan.daysSmokeFree)}
                                         </div>
                                         <h3 style={{ color: '#35a79c', marginBottom: '0.5rem' }}>
                                             Thành tựu hiện tại
@@ -489,7 +509,8 @@ const TrackStatus = () => {
                                         </p>
                                     </div>
 
-                                    <div className="achievement-card" style={{
+                                    {/* Money Saved */}
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem',
@@ -519,7 +540,8 @@ const TrackStatus = () => {
                                         </p>
                                     </div>
 
-                                    <div className="achievement-card" style={{
+                                    {/* Next Goal */}
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem',
@@ -542,14 +564,15 @@ const TrackStatus = () => {
                                             Mục Tiêu Tiếp Theo
                                         </h3>
                                         <p style={{ color: '#2c3e50', fontWeight: '600', fontSize: '1.1rem' }}>
-                                            {getNextGoal(quitPlan.daysSmokeFree).label}
+                                            {getNextGoal(quitPlan.daysSmokeFree)}
                                         </p>
                                         <p style={{ color: '#7f8c8d' }}>
-                                            Còn {getNextGoal(quitPlan.daysSmokeFree).target - quitPlan.daysSmokeFree} ngày nữa
+                                            Còn {calculateDaysToNextGoal(quitPlan.daysSmokeFree)} ngày nữa
                                         </p>
                                     </div>
 
-                                    <div className="achievement-card" style={{
+                                    {/* Cigarettes Avoided */}
+                                    <div style={{
                                         background: '#f8fafb',
                                         borderRadius: '15px',
                                         padding: '1.5rem',
@@ -566,7 +589,7 @@ const TrackStatus = () => {
                                             fontSize: '2rem',
                                             margin: '0 auto 1rem'
                                         }}>
-                                            🚭
+                                            🚫
                                         </div>
                                         <h3 style={{ color: '#e74c3c', marginBottom: '0.5rem' }}>
                                             Thuốc Lá Tránh Được
@@ -579,8 +602,9 @@ const TrackStatus = () => {
                                         </p>
                                     </div>
 
+                                    {/* Motivation */}
                                     {quitPlan.motivation && (
-                                        <div className="achievement-card" style={{
+                                        <div style={{
                                             background: '#f8fafb',
                                             borderRadius: '15px',
                                             padding: '1.5rem',
@@ -603,7 +627,7 @@ const TrackStatus = () => {
                                             <h3 style={{ color: '#9b59b6', marginBottom: '0.5rem' }}>
                                                 Động Lực Của Bạn
                                             </h3>
-                                            <p style={{ 
+                                            <p style={{
                                                 color: '#2c3e50', 
                                                 fontStyle: 'italic',
                                                 fontSize: '1.1rem',
