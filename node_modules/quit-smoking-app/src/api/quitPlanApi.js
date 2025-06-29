@@ -63,6 +63,17 @@ export const quitPlanApi = {
         }
     },
 
+    // Thêm ngày không hút thuốc
+    addSmokeFreeDay: async () => {
+        try {
+            const response = await axios.post('/quitplan/add-smoke-free-day');
+            return response.data;
+        } catch (error) {
+            console.error('Lỗi khi thêm ngày không hút thuốc:', error);
+            throw error;
+        }
+    },
+
     // API cho bác sĩ
     doctor: {
         // Xem kế hoạch của bệnh nhân

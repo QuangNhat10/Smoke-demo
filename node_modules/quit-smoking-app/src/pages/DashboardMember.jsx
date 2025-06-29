@@ -11,9 +11,6 @@ const DashboardMember = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [quitPlan, setQuitPlan] = useState(null);
   const [loading, setLoading] = useState(true);
-  
-  // Chỉ giữ lại state cần thiết cho achievements  
-  const [smokeFreeCount, setSmokeFreeCount] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,32 +36,15 @@ const DashboardMember = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const fullName = user.fullName || localStorage.getItem('userName') || 'User';
     setUserName(fullName);
-
-    // Load user's smoke free count
-    const userId = localStorage.getItem('userId');
-    const key = userId ? `smokeFreeCount_${userId}` : 'smokeFreeCount_default';
-    const savedCount = localStorage.getItem(key);
-    const count = savedCount ? parseInt(savedCount, 10) : 0;
-    console.log('Loading smoke free count for user:', userId, 'count:', count);
-    setSmokeFreeCount(count);
     
     // Load active quit plan
     loadQuitPlan();
   }, [navigate]);
 
   useEffect(() => {
-    // Save smoke free count for current user when it changes
-    const userId = localStorage.getItem('userId');
-    const key = userId ? `smokeFreeCount_${userId}` : 'smokeFreeCount_default';
-    localStorage.setItem(key, smokeFreeCount.toString());
-    console.log('Saved smoke free count for user:', userId, 'count:', smokeFreeCount);
-  }, [smokeFreeCount]);
-
-  // useEffect để listen thay đổi user và reload smokeFreeCount
-  useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === 'userId' || e.key === 'token') {
-        console.log('User changed, reloading smoke free count...');
+        console.log('User changed, reloading data...');
         // Reload data when user changes
         window.location.reload(); // Simple approach to reload everything
       }
@@ -77,10 +57,6 @@ const DashboardMember = () => {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
-
-
-
-  // Đơn giản hóa - chỉ dùng storage event và reload page khi cần
 
   const loadQuitPlan = async () => {
     try {
@@ -105,14 +81,21 @@ const DashboardMember = () => {
     }
   };
 
-  const increaseSmokeFreeDay = () => {
-    setSmokeFreeCount(prev => prev + 1);
+  const increaseSmokeFreeDay = async () => {
+    try {
+      await quitPlanApi.addSmokeFreeDay();
+      // Reload quit plan để hiển thị dữ liệu mới
+      await loadQuitPlan();
+      alert('Chúc mừng bạn đã có thêm một ngày không hút thuốc!');
+    } catch (error) {
+      console.error('Error adding smoke-free day:', error);
+      const errorMessage = error.response?.data?.message || 'Có lỗi xảy ra khi ghi nhận tiến trình';
+      alert(errorMessage);
+    }
   };
 
   const resetSmokeFreeCount = () => {
-    if (window.confirm('Bạn có chắc chắn muốn reset số ngày không hút thuốc không?')) {
-      setSmokeFreeCount(0);
-    }
+    alert('Tính năng reset sẽ được cập nhật trong phiên bản sau. Vui lòng liên hệ với bác sĩ hoặc nhân viên hỗ trợ để reset tiến trình.');
   };
 
   const formatCurrency = (amount) => {
@@ -258,7 +241,7 @@ const DashboardMember = () => {
               marginBottom: '1.5rem'
             }}>
               <div style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                {smokeFreeCount}
+                {quitPlan?.daysSmokeFree || 0}
               </div>
               <div style={{ fontSize: '1.2rem', opacity: 0.9 }}>
                 Ngày không hút thuốc

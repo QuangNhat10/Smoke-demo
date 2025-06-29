@@ -139,6 +139,58 @@ namespace BreathingFree.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<QuitProgressDto> AddSmokeFreeDay(int userId)
+        {
+            // Lấy quit plan đang hoạt động
+            var quitPlan = await _context.QuitPlans
+                .FirstOrDefaultAsync(q => q.UserID == userId && q.Status == "Active");
+
+            if (quitPlan == null)
+                throw new ArgumentException("Không tìm thấy kế hoạch cai thuốc đang hoạt động");
+
+            // Kiểm tra xem hôm nay đã có progress chưa
+            var today = DateTime.Today;
+            var existingProgress = await _context.QuitProgresses
+                .FirstOrDefaultAsync(p => p.QuitPlanID == quitPlan.QuitPlanID && p.Date.Date == today);
+
+            if (existingProgress != null)
+                throw new ArgumentException("Hôm nay bạn đã ghi nhận tiến trình rồi");
+
+            // Tính toán số ngày smoke-free hiện tại
+            var currentSmokeFreeCount = await _context.QuitProgresses
+                .CountAsync(p => p.QuitPlanID == quitPlan.QuitPlanID && !p.SmokedToday);
+
+            // Tạo progress entry mới
+            var progress = new QuitProgress
+            {
+                QuitPlanID = quitPlan.QuitPlanID,
+                UserID = userId,
+                Date = today,
+                SmokedToday = false,
+                CigarettesSmoked = 0,
+                MoneySaved = quitPlan.DailyCost,
+                DaysSmokeFree = currentSmokeFreeCount + 1,
+                CreatedAt = DateTime.Now
+            };
+
+            _context.QuitProgresses.Add(progress);
+            await _context.SaveChangesAsync();
+
+            return new QuitProgressDto
+            {
+                ProgressID = progress.ProgressID,
+                Date = progress.Date,
+                SmokedToday = progress.SmokedToday,
+                CigarettesSmoked = progress.CigarettesSmoked,
+                MoneySaved = progress.MoneySaved,
+                DaysSmokeFree = progress.DaysSmokeFree,
+                HealthNote = progress.HealthNote,
+                MoodRating = progress.MoodRating,
+                CravingLevel = progress.CravingLevel,
+                Notes = progress.Notes
+            };
+        }
+
         private QuitPlanDto MapToDto(QuitPlan quitPlan)
         {
             var totalDays = (DateTime.Now - quitPlan.StartDate).Days;

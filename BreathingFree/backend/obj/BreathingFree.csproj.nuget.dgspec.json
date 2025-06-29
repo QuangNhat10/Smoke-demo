@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\SWP\\demo_Tan\\breathingfree\\backend\\BreathingFree.csproj": {}
+    "E:\\SWP\\demo_Tan\\BreathingFree\\backend\\BreathingFree.csproj": {}
   },
   "projects": {
-    "E:\\SWP\\demo_Tan\\breathingfree\\backend\\BreathingFree.csproj": {
+    "E:\\SWP\\demo_Tan\\BreathingFree\\backend\\BreathingFree.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\SWP\\demo_Tan\\breathingfree\\backend\\BreathingFree.csproj",
+        "projectUniqueName": "E:\\SWP\\demo_Tan\\BreathingFree\\backend\\BreathingFree.csproj",
         "projectName": "BreathingFree",
-        "projectPath": "E:\\SWP\\demo_Tan\\breathingfree\\backend\\BreathingFree.csproj",
+        "projectPath": "E:\\SWP\\demo_Tan\\BreathingFree\\backend\\BreathingFree.csproj",
         "packagesPath": "C:\\Users\\FPTSHOP\\.nuget\\packages\\",
-        "outputPath": "E:\\SWP\\demo_Tan\\breathingfree\\backend\\obj\\",
+        "outputPath": "E:\\SWP\\demo_Tan\\BreathingFree\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

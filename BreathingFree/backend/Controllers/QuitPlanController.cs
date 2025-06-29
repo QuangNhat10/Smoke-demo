@@ -167,6 +167,33 @@ namespace BreathingFree.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPost("add-smoke-free-day")]
+        public async Task<IActionResult> AddSmokeFreeDay()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+                {
+                    return Unauthorized(new { message = "Không thể xác thực người dùng" });
+                }
+
+                var progress = await _quitPlanService.AddSmokeFreeDay(userId);
+                return Ok(new { 
+                    message = "Chúc mừng bạn đã có thêm một ngày không hút thuốc!", 
+                    data = progress 
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Có lỗi xảy ra khi ghi nhận tiến trình" });
+            }
+        }
     }
 
     // DTO classes cho các request
