@@ -24,40 +24,23 @@ const Header = ({ userName }) => {
    * Lấy thông tin người dùng từ localStorage và thiết lập các state
    */
   useEffect(() => {
-    // Kiểm tra xem người dùng đã là thành viên chưa
-    const membershipStatus = localStorage.getItem('isMember') === 'true';
-    setIsMember(membershipStatus);
-
-    // Lấy vai trò người dùng và ID
-    const role = localStorage.getItem('userRole');
-    const userId = localStorage.getItem('userId');
-    setUserRole(role);
-
     // Kiểm tra đăng nhập
+    const token = localStorage.getItem('token');
     const loggedIn = localStorage.getItem('userLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
+    setIsLoggedIn(!!token && loggedIn);
 
-    // Lấy ảnh đại diện và email từ localStorage nếu có
-    const storedProfilePicture = localStorage.getItem('profilePicture');
-    const storedEmail = localStorage.getItem('userEmail');
+    if (token && loggedIn) {
+      // Lấy thông tin người dùng
+      const role = localStorage.getItem('userRole');
+      const email = localStorage.getItem('userEmail');
+      setUserRole(role);
+      setUserEmail(email);
 
-    if (loggedIn && userId) {
-      // Lấy thông tin từ localStorage
-      if (storedProfilePicture) {
-        setProfilePicture(storedProfilePicture);
-      } else {
-        // Fallback nếu không có ảnh trong localStorage
-        setProfilePicture(role === 'Doctor' ?
-          'https://randomuser.me/api/portraits/women/44.jpg' :
-          'https://randomuser.me/api/portraits/men/32.jpg');
-      }
-
-      if (storedEmail) {
-        setUserEmail(storedEmail);
-      } else {
-        // Fallback nếu không có email trong localStorage
-        setUserEmail(role === 'Doctor' ? 'doctor@example.com' : 'user@example.com');
-      }
+      // Set profile picture based on role
+      const defaultPicture = role === 'Doctor' 
+        ? 'https://randomuser.me/api/portraits/women/44.jpg' 
+        : 'https://randomuser.me/api/portraits/men/32.jpg';
+      setProfilePicture(localStorage.getItem('profilePicture') || defaultPicture);
     }
 
     // Thêm event listener để đóng dropdown khi click ra ngoài
@@ -67,47 +50,24 @@ const Header = ({ userName }) => {
       }
     };
 
-    // Thêm event listener để cập nhật header khi localStorage thay đổi
-    const handleStorageChange = () => {
-      console.log('Storage changed, updating header');
-      const storedProfilePicture = localStorage.getItem('profilePicture');
-      const storedUserName = localStorage.getItem('userName');
-      const storedEmail = localStorage.getItem('userEmail');
-      
-      if (storedProfilePicture) {
-        setProfilePicture(storedProfilePicture);
-      }
-      
-      if (storedUserName) {
-        setUserName(storedUserName);
-      }
-      
-      if (storedEmail) {
-        setUserEmail(storedEmail);
-      }
-    };
-
     document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('storage', handleStorageChange);
     
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
   /**
    * Hàm xử lý đăng xuất
-   * Xóa thông tin người dùng khỏi localStorage và chuyển về trang chủ
    */
   const handleLogout = () => {
-    localStorage.removeItem('userLoggedIn');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('hasMembership');
-    localStorage.removeItem('membershipPlan');
-    localStorage.removeItem('profilePicture'); // Xóa ảnh đại diện khi logout
+    // Xóa tất cả thông tin người dùng
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setUserRole('');
+    setUserEmail('');
+    setProfilePicture('');
+    setShowUserDropdown(false);
     navigate('/');
   };
 

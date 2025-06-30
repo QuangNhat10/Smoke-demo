@@ -1,88 +1,81 @@
-﻿using BreathingFree.Models;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
+using BreathingFree.Models;
 
 namespace BreathingFree.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Membership> Memberships { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-            // Cấu hình bảng Users
+
+            // Configure User entity
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("Users");
+                entity.ToTable("Users", "dbo");
                 entity.HasKey(e => e.UserID);
-                
-                // Các trường đã tồn tại
-                entity.Property(e => e.UserID).ValueGeneratedOnAdd();
-                entity.Property(e => e.RoleID).IsRequired();
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.PasswordHash).IsRequired();
                 entity.Property(e => e.FullName).HasMaxLength(100);
-                entity.Property(e => e.Email).HasMaxLength(100);
-                entity.Property(e => e.PasswordHash);
                 entity.Property(e => e.Gender).HasMaxLength(10);
-                entity.Property(e => e.DOB);
-                entity.Property(e => e.CreatedAt).IsRequired().HasDefaultValueSql("GETDATE()");
-                entity.Property(e => e.Status).IsRequired().HasMaxLength(20);
-                
-                // Các trường cho thông tin liên hệ
+                entity.Property(e => e.Status).HasMaxLength(20);
+                entity.Property(e => e.Description).HasMaxLength(500);
                 entity.Property(e => e.Phone).HasMaxLength(15);
                 entity.Property(e => e.Address).HasMaxLength(200);
                 entity.Property(e => e.Avatar).HasMaxLength(500);
-
-                // Các trường cho thông tin bác sĩ
                 entity.Property(e => e.Specialty).HasMaxLength(200);
                 entity.Property(e => e.Position).HasMaxLength(200);
                 entity.Property(e => e.ShortBio).HasMaxLength(500);
+                entity.HasIndex(e => e.Email).IsUnique();
             });
-
-            // Cấu hình bảng Feedbacks
-            modelBuilder.Entity<Feedback>(entity =>
-            {
-                entity.ToTable("Feedbacks");
-                entity.HasKey(e => e.FeedbackID);
-
-                entity.Property(e => e.FeedbackID).ValueGeneratedOnAdd();
-                entity.Property(e => e.UserID).IsRequired();
-                entity.Property(e => e.DoctorID).IsRequired();
-                entity.Property(e => e.Rating).IsRequired();
-                entity.Property(e => e.FeedbackText).HasMaxLength(1000);
-                entity.Property(e => e.SubmittedAt).IsRequired().HasDefaultValueSql("GETDATE()");
-
-                // Tạo foreign key đến bảng Users cho DoctorID
-                entity.HasOne<User>()
-                    .WithMany()
-                    .HasForeignKey(f => f.DoctorID)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                // Tạo foreign key đến bảng Users cho UserID
-                entity.HasOne<User>()
-                    .WithMany()
-                    .HasForeignKey(f => f.UserID)
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
-
-            // Configure User entity
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.Email)
-                .IsUnique();
 
             // Configure Membership entity
-            modelBuilder.Entity<Membership>()
-                .HasOne(m => m.User)
-                .WithMany()
-                .HasForeignKey(m => m.UserID)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Membership>(entity =>
+            {
+                entity.ToTable("Memberships", "dbo");
+                entity.HasKey(e => e.MembershipID);
+                entity.HasOne(e => e.User)
+                      .WithMany()
+                      .HasForeignKey(e => e.UserID)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Configure Feedback entity
+            modelBuilder.Entity<Feedback>(entity =>
+            {
+                entity.ToTable("Feedback", "dbo");
+                entity.HasKey(e => e.FeedbackID);
+                entity.Property(e => e.FeedbackText)
+                      .HasColumnType("nvarchar(1000)")
+                      .IsUnicode(true);
+                entity.HasOne(e => e.User)
+                      .WithMany()
+                      .HasForeignKey(e => e.UserID)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Add some seed data for testing
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    UserID = 1,
+                    Email = "admin@example.com",
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+                    FullName = "Admin User",
+                    RoleID = 1, // Admin role
+                    CreatedAt = DateTime.Now,
+                    Status = "Active"
+                }
+            );
         }
     }
 }

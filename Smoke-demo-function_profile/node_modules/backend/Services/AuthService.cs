@@ -6,67 +6,170 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
+using BCrypt.Net;
+using Microsoft.Extensions.Logging;
 
 namespace BreathingFree.Services
 {
     public class AuthService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _config;
+        private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _environment;
+        private readonly ILogger<AuthService> _logger;
 
-        public AuthService(ApplicationDbContext context, IConfiguration config, IWebHostEnvironment environment)
+        public AuthService(
+            ApplicationDbContext context, 
+            IConfiguration configuration, 
+            IWebHostEnvironment environment,
+            ILogger<AuthService> logger)
         {
             _context = context;
-            _config = config;
+            _configuration = configuration;
             _environment = environment;
+            _logger = logger;
         }
 
-        public async Task<string> RegisterAsync(RegisterModel model)
+        public async Task<User?> GetUserByEmailAsync(string email)
         {
-            if (_context.Users.Any(u => u.Email == model.Email))
-                return "Email already exists";
-
-            var user = new User
+            try 
             {
-                FullName = model.FullName,
-                Email = model.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                Gender = model.Gender,
-                DOB = model.DOB,
-                RoleID = 2,
-                Status = "Active"
-            };
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return "User registered successfully";
+                return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user by email: {Email}", email);
+                throw;
+            }
         }
 
-        public async Task<string> LoginAsync(LoginModel model)
+        public bool ValidatePassword(User user, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
-                return null;
+            try 
+            {
+                return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error validating password for user: {UserId}", user.UserID);
+                throw;
+            }
+        }
 
-            return GenerateJwtToken(user);
+        public string GenerateJwtToken(User user)
+        {
+            try 
+            {
+                var jwtSettings = _configuration.GetSection("JwtSettings");
+                var secretKey = jwtSettings["SecretKey"] ?? throw new InvalidOperationException("JWT SecretKey is not configured");
+                var issuer = jwtSettings["Issuer"] ?? throw new InvalidOperationException("JWT Issuer is not configured");
+                var audience = jwtSettings["Audience"] ?? throw new InvalidOperationException("JWT Audience is not configured");
+
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                var claims = new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, user.RoleID.ToString())
+                };
+
+                var token = new JwtSecurityToken(
+                    issuer: issuer,
+                    audience: audience,
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: credentials
+                );
+
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error generating JWT token for user: {UserId}", user.UserID);
+                throw;
+            }
+        }
+
+        public async Task<(bool success, string message)> RegisterUserAsync(RegisterModel model)
+        {
+            try 
+            {
+                if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
+                {
+                    return (false, "Email và mật khẩu không được để trống.");
+                }
+
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+                if (existingUser != null)
+                {
+                    return (false, "Email đã được sử dụng.");
+                }
+
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password);
+                var user = new User
+                {
+                    Email = model.Email,
+                    PasswordHash = hashedPassword,
+                    FullName = model.FullName ?? "Chưa cập nhật",
+                    RoleID = 2, // Default role for regular users
+                    CreatedAt = DateTime.Now,
+                    Status = "Active"
+                };
+
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                return (true, "Đăng ký thành công.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error registering user with email: {Email}", model.Email);
+                throw;
+            }
+        }
+
+        public async Task<(bool success, string message, User? user)> LoginAsync(LoginModel model)
+        {
+            try 
+            {
+                _logger.LogInformation("Attempting login for email: {Email}", model.Email);
+
+                if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
+                {
+                    _logger.LogWarning("Login attempt with empty email or password");
+                    return (false, "Email và mật khẩu không được để trống.", null);
+                }
+
+                var user = await GetUserByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    _logger.LogWarning("Login attempt for non-existent email: {Email}", model.Email);
+                    return (false, "Email hoặc mật khẩu không đúng.", null);
+                }
+
+                var isValidPassword = ValidatePassword(user, model.Password);
+                if (!isValidPassword)
+                {
+                    _logger.LogWarning("Invalid password attempt for email: {Email}", model.Email);
+                    return (false, "Email hoặc mật khẩu không đúng.", null);
+                }
+
+                _logger.LogInformation("Successful login for user: {UserId}", user.UserID);
+                return (true, "Đăng nhập thành công.", user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during login for email: {Email}", model.Email);
+                throw;
+            }
         }
 
         public async Task<User> GetUserProfileAsync(int userId)
         {
             var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-                return null;
-            
-            // Đảm bảo không trả về mật khẩu
-            user.PasswordHash = null;
-            return user;
-        }
-
-        public async Task<User> GetUserByEmailAsync(string email)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
                 return null;
             
@@ -167,26 +270,6 @@ namespace BreathingFree.Services
             {
                 return false;
             }
-        }
-
-        private string GenerateJwtToken(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.RoleID.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
         }
 
         public async Task<(bool Success, string Message)> ChangePasswordAsync(int userId, ChangePasswordModel model)

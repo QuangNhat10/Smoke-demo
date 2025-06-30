@@ -50,16 +50,16 @@ function Register() {
       });
 
       const response = await authApi.register({
-        FullName: form.name,
-        Email: form.email,
-        Password: form.password,
-        Gender: form.gender,
-        DOB: form.dob
+      FullName: form.name,
+      Email: form.email,
+      Password: form.password,
+      Gender: form.gender,
+      DOB: form.dob
       });
 
       console.log('Register response:', response);
       alert('Đăng ký thành công! Vui lòng đăng nhập.');
-      navigate('/login');
+        navigate('/login');
     } catch (err) {
       console.error('Register error:', err);
       alert('Đăng ký thất bại: ' + (err.response?.data || 'Có lỗi xảy ra, vui lòng thử lại sau.'));

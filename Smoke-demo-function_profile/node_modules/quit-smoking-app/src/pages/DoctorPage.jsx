@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosConfig';
 import Header from '../components/Header';
@@ -9,6 +9,67 @@ import SecondaryNavigation from '../components/SecondaryNavigation';
  * Hiển thị danh sách bác sĩ và cho phép thành viên đánh giá
  * @returns {JSX.Element} Component trang Bác sĩ
  */
+const decodeText = (text) => {
+    try {
+        return decodeURIComponent(escape(text));
+    } catch {
+        return text;
+    }
+};
+
+const encodeText = (text) => {
+    try {
+        return unescape(encodeURIComponent(text));
+    } catch {
+        return text;
+    }
+};
+
+const ReviewFormInput = ({ value, onChange, placeholder }) => {
+    const textareaRef = useRef(null);
+
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.setAttribute('lang', 'vi');
+            textareaRef.current.setAttribute('spellcheck', 'false');
+            textareaRef.current.setAttribute('inputmode', 'text');
+        }
+    }, []);
+
+    const handleInput = (e) => {
+        const text = e.target.value;
+        // Normalize Vietnamese text to composed form (NFC)
+        const normalizedText = text.normalize('NFC');
+        onChange(normalizedText);
+    };
+
+    return (
+        <textarea
+            ref={textareaRef}
+            value={value}
+            onChange={handleInput}
+            placeholder={placeholder}
+            style={{
+                width: '100%',
+                minHeight: '120px',
+                padding: '0.75rem 1rem',
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                lineHeight: '1.5',
+                resize: 'vertical',
+                fontFamily: 'inherit'
+            }}
+        />
+    );
+};
+
+// Hàm để chuẩn hóa và hiển thị text tiếng Việt
+const normalizeVietnameseText = (text) => {
+    if (!text) return '';
+    return text.normalize('NFC');
+};
+
 const DoctorPage = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('all'); // State cho tab đang được chọn
@@ -19,49 +80,88 @@ const DoctorPage = () => {
     const [userReview, setUserReview] = useState({
         rating: 5,
         comment: ''
-    }); // State lưu thông tin đánh giá của người dùng
-    const [doctors, setDoctors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    });
 
-    /**
-     * Effect kiểm tra người dùng có phải là thành viên hay không
-     * Được gọi khi component được render
-     */
+    const [reviewFormData, setReviewFormData] = useState({
+        rating: 5,
+        comment: ''
+    });
+
+    const [doctors, setDoctors] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+    const [doctorFeedbacks, setDoctorFeedbacks] = useState({});
+
     useEffect(() => {
-        const membershipStatus = localStorage.getItem('isMember') === 'true';
-        setIsMember(membershipStatus);
-        // Fetch doctors when component mounts
+        const checkAuthAndMembership = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                setIsAuthenticated(true);
+                try {
+                    const response = await axiosInstance.get('/membership/current');
+                    setIsMember(response.data && response.data.isActive);
+                } catch (error) {
+                    console.error('Error checking membership:', error);
+                    setIsMember(false);
+                }
+            } else {
+                setIsAuthenticated(false);
+                setIsMember(false);
+            }
+        };
+
+        checkAuthAndMembership();
         fetchDoctors();
     }, []);
+
+    useEffect(() => {
+        if (showReviewForm) {
+            setReviewFormData({
+                rating: 5,
+                comment: ''
+            });
+        }
+    }, [showReviewForm]);
 
     // Fetch doctors from database
     const fetchDoctors = async (term = '') => {
         setIsLoading(true);
         try {
-            const endpoint = `/api/feedback/doctors${term ? `?name=${encodeURIComponent(term)}` : ''}`;
-            console.log('Calling API:', endpoint);
+            const endpoint = `/feedback/doctors${term ? `?name=${encodeURIComponent(term)}` : ''}`;
             const response = await axiosInstance.get(endpoint);
-            console.log('API Response:', response.data);
             if (response.data) {
-                setDoctors(response.data);
+                const doctorsData = response.data;
+                setDoctors(doctorsData);
+                
+                // Fetch feedbacks for each doctor
+                for (const doctor of doctorsData) {
+                    await fetchDoctorFeedbacks(doctor.userID);
+                }
             } else {
-                console.log('No doctors data in response');
                 setDoctors([]);
             }
         } catch (error) {
             console.error('Error fetching doctors:', error);
-            if (error.response) {
-                console.error('Error response:', error.response.data);
-                console.error('Error status:', error.response.status);
-                console.error('Error headers:', error.response.headers);
-            } else if (error.request) {
-                console.error('No response received:', error.request);
-            } else {
-                console.error('Error setting up request:', error.message);
-            }
             setDoctors([]);
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    // Fetch feedbacks for a specific doctor
+    const fetchDoctorFeedbacks = async (doctorId) => {
+        try {
+            const response = await axiosInstance.get(`/feedback/doctors/${doctorId}`);
+            if (response.data) {
+                setDoctorFeedbacks(prev => ({
+                    ...prev,
+                    [doctorId]: response.data
+                }));
+            }
+        } catch (error) {
+            console.error(`Error fetching feedbacks for doctor ${doctorId}:`, error);
         }
     };
 
@@ -107,40 +207,72 @@ const DoctorPage = () => {
         setExpandedDoctor(expandedDoctor === doctorId ? null : doctorId);
     };
 
-    /**
-     * Hàm xử lý khi người dùng thêm đánh giá mới
-     * Kiểm tra quyền thành viên và cập nhật đánh giá
-     */
+    const handleCommentChange = (value) => {
+        setReviewFormData(prev => ({
+            ...prev,
+            comment: value
+        }));
+    };
+
     const handleAddReview = async () => {
-        if (!isMember) {
-            alert('Bạn cần mua gói thành viên để đánh giá bác sĩ.');
-            navigate('/membership');
-            return;
-        }
-
-        if (!currentDoctor || !userReview.comment.trim()) {
-            alert('Vui lòng nhập đánh giá của bạn.');
-            return;
-        }
-
         try {
-            const response = await axios.post('/api/feedback', {
+            if (!currentDoctor) {
+                alert('Vui lòng chọn bác sĩ để đánh giá.');
+                return;
+            }
+
+            const normalizedComment = reviewFormData.comment.trim().normalize('NFC');
+            if (!normalizedComment) {
+                alert('Vui lòng nhập nhận xét của bạn.');
+                return;
+            }
+
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                const confirmLogin = window.confirm('Bạn cần đăng nhập để đánh giá bác sĩ. Bạn có muốn đăng nhập không?');
+                if (confirmLogin) {
+                    navigate('/login');
+                }
+                return;
+            }
+
+            const response = await axiosInstance.post('/feedback/doctors', {
+                userID: parseInt(userId),
                 doctorID: currentDoctor.userID,
-                rating: userReview.rating,
-                feedbackText: userReview.comment,
+                rating: reviewFormData.rating,
+                feedbackText: normalizedComment,
                 submittedAt: new Date().toISOString()
+            }, {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
             });
 
             if (response.data) {
                 alert('Đánh giá của bạn đã được gửi thành công!');
                 setShowReviewForm(false);
-                setUserReview({ rating: 5, comment: '' });
-                // Refresh doctors list to show updated ratings
-                fetchDoctors(searchTerm);
+                setReviewFormData({ rating: 5, comment: '' });
+                await fetchDoctors(searchTerm);
             }
         } catch (error) {
             console.error('Error submitting review:', error);
-            alert('Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại sau.');
+            if (error.response) {
+                if (error.response.status === 401) {
+                    const confirmLogin = window.confirm('Phiên đăng nhập đã hết hạn. Bạn có muốn đăng nhập lại không?');
+                    if (confirmLogin) {
+                        navigate('/login');
+                    }
+                } else if (error.response.status === 403) {
+                    const confirmUpgrade = window.confirm('Bạn cần có gói thành viên để đánh giá bác sĩ. Bạn có muốn xem các gói thành viên không?');
+                    if (confirmUpgrade) {
+                        navigate('/membership');
+                    }
+                } else {
+                    alert(error.response.data.message || 'Có lỗi xảy ra khi gửi đánh giá.');
+                }
+            } else {
+                alert('Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại sau.');
+            }
         }
     };
 
@@ -148,22 +280,144 @@ const DoctorPage = () => {
      * Hàm mở form đánh giá cho một bác sĩ
      * @param {Object} doctor - Thông tin bác sĩ cần đánh giá
      */
-    const openReviewForm = (doctor) => {
-        if (!isMember) {
-            alert('Bạn cần mua gói thành viên để đánh giá bác sĩ.');
-            navigate('/membership');
+    const openReviewForm = async (doctor) => {
+        if (!isAuthenticated) {
+            const confirmLogin = window.confirm('Bạn cần đăng nhập để đánh giá bác sĩ. Bạn có muốn đăng nhập không?');
+            if (confirmLogin) {
+                navigate('/login');
+            }
             return;
         }
+
+        if (!isMember) {
+            const confirmUpgrade = window.confirm('Bạn cần có gói thành viên để đánh giá bác sĩ. Bạn có muốn xem các gói thành viên không?');
+            if (confirmUpgrade) {
+                navigate('/membership');
+            }
+            return;
+        }
+
         setCurrentDoctor(doctor);
         setShowReviewForm(true);
     };
 
-    /**
-     * Component hiển thị form đánh giá bác sĩ
-     * @returns {JSX.Element|null} Form đánh giá hoặc null nếu không hiển thị
-     */
+    // Show all feedbacks modal
+    const showAllFeedbacks = (doctor) => {
+        setSelectedDoctor(doctor);
+        setShowFeedbackModal(true);
+    };
+
+    // Feedback Modal Component
+    const FeedbackModal = () => {
+        if (!showFeedbackModal || !selectedDoctor) return null;
+
+        const feedbacks = doctorFeedbacks[selectedDoctor.userID] || [];
+
+        const normalizeAndDisplay = (text) => {
+            if (!text) return '';
+            try {
+                // First try to normalize the text
+                return text.normalize('NFC');
+            } catch (e) {
+                console.error('Error normalizing text:', e);
+                return text;
+            }
+        };
+
+        return (
+            <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 1000,
+            }}>
+                <div style={{
+                    background: 'white',
+                    borderRadius: '12px',
+                    padding: '2rem',
+                    width: '90%',
+                    maxWidth: '800px',
+                    maxHeight: '80vh',
+                    overflow: 'auto',
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginBottom: '2rem',
+                    }}>
+                        <h2 style={{ margin: 0 }}>Đánh giá về bác sĩ {normalizeAndDisplay(selectedDoctor.fullName)}</h2>
+                        <button
+                            onClick={() => setShowFeedbackModal(false)}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                fontSize: '1.5rem',
+                                cursor: 'pointer',
+                                padding: '0.5rem',
+                            }}
+                        >
+                            ×
+                        </button>
+                    </div>
+
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1rem',
+                    }}>
+                        {feedbacks.length === 0 ? (
+                            <p>Chưa có đánh giá nào.</p>
+                        ) : (
+                            feedbacks.map((feedback, index) => (
+                                <div key={index} style={{
+                                    padding: '1rem',
+                                    background: '#f8f9fa',
+                                    borderRadius: '8px',
+                                    border: '1px solid #e9ecef',
+                                }}>
+                                    <div style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        marginBottom: '0.5rem',
+                                    }}>
+                                        <div>
+                                            <strong>{normalizeAndDisplay(feedback.userName)}</strong>
+                                            <div>{renderStars(feedback.rating)}</div>
+                                        </div>
+                                        <div style={{
+                                            color: '#666',
+                                            fontSize: '0.9rem',
+                                        }}>
+                                            {new Date(feedback.submittedAt).toLocaleDateString('vi-VN')}
+                                        </div>
+                                    </div>
+                                    <p style={{
+                                        margin: '0.5rem 0 0 0',
+                                        color: '#444',
+                                        lineHeight: '1.5',
+                                        whiteSpace: 'pre-wrap',
+                                        wordBreak: 'break-word'
+                                    }}>
+                                        {normalizeAndDisplay(feedback.feedbackText)}
+                                    </p>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     const ReviewForm = () => {
-        if (!showReviewForm) return null;
+        if (!showReviewForm || !currentDoctor) return null;
 
         return (
             <div style={{
@@ -189,7 +443,17 @@ const DoctorPage = () => {
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
                 }}>
                     <button
-                        onClick={() => setShowReviewForm(false)}
+                        onClick={() => {
+                            if (reviewFormData.comment.trim()) {
+                                if (window.confirm('Bạn có chắc muốn hủy đánh giá này không?')) {
+                                    setShowReviewForm(false);
+                                    setReviewFormData({ rating: 5, comment: '' });
+                                }
+                            } else {
+                                setShowReviewForm(false);
+                                setReviewFormData({ rating: 5, comment: '' });
+                            }
+                        }}
                         style={{
                             position: 'absolute',
                             top: '15px',
@@ -215,7 +479,7 @@ const DoctorPage = () => {
                         textAlign: 'center',
                         marginBottom: '1.5rem',
                         fontSize: '1.6rem',
-                        color: currentDoctor?.buttonColor || '#44b89d',
+                        color: '#44b89d',
                         fontWeight: '700',
                         position: 'relative',
                         paddingBottom: '15px'
@@ -228,7 +492,7 @@ const DoctorPage = () => {
                             transform: 'translateX(-50%)',
                             width: '50px',
                             height: '3px',
-                            background: currentDoctor?.buttonColor || '#44b89d',
+                            background: '#44b89d',
                             borderRadius: '2px'
                         }}></div>
                     </h2>
@@ -244,28 +508,29 @@ const DoctorPage = () => {
                             width: '60px',
                             height: '60px',
                             borderRadius: '50%',
-                            background: currentDoctor?.avatarColor || '#44b89d22',
+                            background: '#44b89d22',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: '2rem',
+                            overflow: 'hidden',
                         }}>
-                            {currentDoctor?.avatar ? (
-                                <img src={currentDoctor.avatar} alt={currentDoctor.fullName} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                            {currentDoctor.avatar ? (
+                                <img 
+                                    src={currentDoctor.avatar} 
+                                    alt={currentDoctor.fullName} 
+                                    style={{ 
+                                        width: '100%', 
+                                        height: '100%', 
+                                        objectFit: 'cover'
+                                    }} 
+                                />
                             ) : '👨‍⚕️'}
                         </div>
-                        <h3 style={{ margin: 0, color: '#2c3e50' }}>{currentDoctor?.fullName}</h3>
+                        <h3 style={{ margin: 0, color: '#2c3e50' }}>{currentDoctor.fullName}</h3>
                         <p style={{ color: '#44b89d', fontWeight: '500', margin: '0 0 0.5rem' }}>
-                            {currentDoctor?.position}
+                            {currentDoctor.position}
                         </p>
-                    </div>
-
-                    <div style={{ marginBottom: '1.5rem' }}>
-                        <h4 style={{ color: '#2c3e50', marginBottom: '0.5rem' }}>Chuyên ngành</h4>
-                        <p>{currentDoctor?.specialty}</p>
-                        
-                        <h4 style={{ color: '#2c3e50', marginBottom: '0.5rem', marginTop: '1rem' }}>Giới thiệu</h4>
-                        <p style={{ lineHeight: '1.6' }}>{currentDoctor?.shortBio}</p>
                     </div>
 
                     <div style={{ marginBottom: '1.5rem' }}>
@@ -282,13 +547,14 @@ const DoctorPage = () => {
                                 <button
                                     key={star}
                                     type="button"
-                                    onClick={() => setUserReview({ ...userReview, rating: star })}
+                                    onClick={() => setReviewFormData(prev => ({ ...prev, rating: star }))}
                                     style={{
                                         background: 'transparent',
                                         border: 'none',
                                         fontSize: '2rem',
                                         cursor: 'pointer',
-                                        color: star <= userReview.rating ? '#f39c12' : '#ddd',
+                                        color: star <= reviewFormData.rating ? '#f39c12' : '#ddd',
+                                        transition: 'color 0.2s',
                                     }}
                                 >
                                     ★
@@ -304,40 +570,71 @@ const DoctorPage = () => {
                             color: '#2c3e50',
                             fontWeight: '500'
                         }}>
-                            Nhận xét:
+                            Nhận xét của bạn:
                         </label>
-                        <textarea
-                            value={userReview.comment}
-                            onChange={(e) => setUserReview({ ...userReview, comment: e.target.value })}
+                        <ReviewFormInput
+                            value={reviewFormData.comment}
+                            onChange={(text) => setReviewFormData(prev => ({ ...prev, comment: text }))}
                             placeholder="Chia sẻ trải nghiệm của bạn với bác sĩ..."
-                            style={{
-                                width: '100%',
-                                padding: '0.75rem 1rem',
-                                borderRadius: '8px',
-                                border: '1.5px solid #e5e8ee',
-                                fontSize: '1rem',
-                                resize: 'vertical',
-                                outline: 'none',
-                                fontFamily: 'inherit',
-                                minHeight: '120px',
-                                boxSizing: 'border-box',
-                            }}
                         />
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    {reviewFormData.comment.trim() && (
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <label style={{
+                                display: 'block',
+                                marginBottom: '0.5rem',
+                                color: '#2c3e50',
+                                fontWeight: '500'
+                            }}>
+                                Xem trước:
+                            </label>
+                            <div style={{
+                                padding: '0.75rem 1rem',
+                                background: '#f8f9fa',
+                                borderRadius: '8px',
+                                fontSize: '1rem',
+                                lineHeight: '1.5',
+                                whiteSpace: 'pre-wrap',
+                                wordBreak: 'break-word'
+                            }}>
+                                {reviewFormData.comment}
+                            </div>
+                        </div>
+                    )}
+
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
                         <button
-                            onClick={handleAddReview}
+                            onClick={() => {
+                                setShowReviewForm(false);
+                                setReviewFormData({ rating: 5, comment: '' });
+                            }}
                             style={{
-                                background: currentDoctor?.buttonColor || '#44b89d',
-                                color: 'white',
+                                background: '#e0e0e0',
+                                color: '#666',
                                 border: 'none',
                                 borderRadius: '8px',
                                 padding: '0.75rem 2rem',
                                 fontSize: '1rem',
                                 fontWeight: '600',
                                 cursor: 'pointer',
-                                boxShadow: `0 4px 10px ${(currentDoctor?.buttonColor || '#44b89d') + '33'}`,
+                            }}
+                        >
+                            Hủy
+                        </button>
+                        <button
+                            onClick={handleAddReview}
+                            disabled={!reviewFormData.comment.trim()}
+                            style={{
+                                background: reviewFormData.comment.trim() ? '#44b89d' : '#a0a0a0',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                padding: '0.75rem 2rem',
+                                fontSize: '1rem',
+                                fontWeight: '600',
+                                cursor: reviewFormData.comment.trim() ? 'pointer' : 'not-allowed',
+                                boxShadow: reviewFormData.comment.trim() ? '0 4px 10px rgba(68, 184, 157, 0.2)' : 'none',
                             }}
                         >
                             Gửi Đánh Giá
@@ -491,159 +788,276 @@ const DoctorPage = () => {
                                 overflow: 'hidden',
                                 boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)',
                                 transition: 'transform 0.3s, box-shadow 0.3s',
-                                height: '100%',
-                                display: 'flex',
-                                flexDirection: 'column',
                             }}>
+                                {/* Doctor Info Section */}
                                 <div style={{
                                     padding: '2rem',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    textAlign: 'center',
                                     borderBottom: '1px solid #f0f0f0',
                                 }}>
                                     <div style={{
-                                        width: '80px',
-                                        height: '80px',
-                                        borderRadius: '50%',
-                                        background: '#44b89d22',
                                         display: 'flex',
                                         alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '2.5rem',
+                                        gap: '1.5rem',
                                         marginBottom: '1.5rem',
                                     }}>
-                                        {doctor.avatar || '👨‍⚕️'}
-                                    </div>
-                                    <h3 style={{
-                                        margin: '0 0 0.5rem 0',
-                                        fontSize: '1.4rem',
-                                        fontWeight: '700',
-                                        color: '#2c3e50',
-                                    }}>
-                                        {doctor.fullName}
-                                    </h3>
-                                    {doctor.position && (
-                                        <p style={{
-                                            margin: '0 0 0.5rem 0',
-                                            color: '#34495e',
-                                            fontSize: '0.95rem',
-                                            fontWeight: '500',
-                                        }}>
-                                            {doctor.position}
-                                        </p>
-                                    )}
-                                    {doctor.specialty && (
-                                        <p style={{
-                                            margin: '0 0 0.5rem 0',
-                                            color: '#7f8c8d',
-                                            fontSize: '0.9rem',
-                                        }}>
-                                            {doctor.specialty}
-                                        </p>
-                                    )}
-                                    {doctor.shortBio && (
-                                        <p style={{
-                                            margin: '0.5rem 0',
-                                            color: '#7f8c8d',
-                                            fontSize: '0.85rem',
-                                            lineHeight: '1.4',
-                                            maxHeight: '3.6em',
+                                        <div style={{
+                                            width: '100px',
+                                            height: '100px',
+                                            borderRadius: '50%',
                                             overflow: 'hidden',
-                                            display: '-webkit-box',
-                                            WebkitLineClamp: 2,
-                                            WebkitBoxOrient: 'vertical',
+                                            background: '#f0f0f0',
+                                        }}>
+                                            {doctor.avatar ? (
+                                                <img
+                                                    src={doctor.avatar}
+                                                    alt={doctor.fullName}
+                                                    style={{
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        objectFit: 'cover',
+                                                    }}
+                                                />
+                                            ) : (
+                                                <div style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: '2.5rem',
+                                                    color: '#44b89d',
+                                                }}>
+                                                    👨‍⚕️
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <h3 style={{
+                                                margin: '0 0 0.5rem 0',
+                                                fontSize: '1.4rem',
+                                                color: '#2c3e50',
+                                            }}>
+                                                {doctor.fullName}
+                                            </h3>
+                                            {doctor.position && (
+                                                <p style={{
+                                                    margin: '0 0 0.25rem 0',
+                                                    color: '#44b89d',
+                                                    fontWeight: '500',
+                                                }}>
+                                                    {doctor.position}
+                                                </p>
+                                            )}
+                                            {doctor.specialty && (
+                                                <p style={{
+                                                    margin: '0',
+                                                    color: '#7f8c8d',
+                                                    fontSize: '0.9rem',
+                                                }}>
+                                                    {doctor.specialty}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Doctor Bio */}
+                                    {doctor.shortBio && (
+                                        <div style={{
+                                            marginBottom: '1.5rem',
+                                            color: '#666',
+                                            fontSize: '0.95rem',
+                                            lineHeight: '1.6',
                                         }}>
                                             {doctor.shortBio}
-                                        </p>
+                                        </div>
+                                    )}
+
+                                    {/* Contact Info */}
+                                    {(doctor.phone || doctor.email || doctor.address) && (
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '0.5rem',
+                                            fontSize: '0.9rem',
+                                            color: '#666',
+                                        }}>
+                                            {doctor.phone && (
+                                                <div>📞 {doctor.phone}</div>
+                                            )}
+                                            {doctor.email && (
+                                                <div>📧 {doctor.email}</div>
+                                            )}
+                                            {doctor.address && (
+                                                <div>📍 {doctor.address}</div>
+                                            )}
+                                        </div>
                                     )}
                                 </div>
+
+                                {/* Ratings Section */}
                                 <div style={{
-                                    padding: '1.5rem 2rem',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: '1rem',
+                                    padding: '1rem 2rem',
+                                    background: '#f8f9fa',
+                                    borderBottom: '1px solid #f0f0f0',
                                 }}>
                                     <div style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '1fr 1fr',
-                                        gap: '1rem',
-                                        width: '100%'
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
                                     }}>
-                                        <button
-                                            onClick={() => handleContactDoctor(doctor.fullName)}
-                                            className="doctor-action-btn"
-                                            style={{
-                                                background: '#44b89d',
-                                                color: 'white',
-                                                border: 'none',
-                                                borderRadius: '8px',
-                                                padding: '0.75rem',
-                                                fontWeight: '600',
+                                        <div>
+                                            <div style={{
                                                 fontSize: '0.9rem',
-                                                cursor: 'pointer',
-                                                transition: 'all 0.2s',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                gap: '0.5rem',
-                                                boxShadow: '0 2px 8px rgba(68, 184, 157, 0.2)',
-                                                height: '45px'
-                                            }}
-                                            onMouseOver={(e) => {
-                                                e.target.style.transform = 'translateY(-2px)';
-                                                e.target.style.boxShadow = '0 4px 12px rgba(68, 184, 157, 0.3)';
-                                            }}
-                                            onMouseOut={(e) => {
-                                                e.target.style.transform = 'translateY(0)';
-                                                e.target.style.boxShadow = '0 2px 8px rgba(68, 184, 157, 0.2)';
-                                            }}
-                                        >
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="currentColor"/>
-                                            </svg>
-                                            Liên Hệ
-                                        </button>
-                                        <button
-                                            onClick={() => {
-                                                setCurrentDoctor(doctor);
-                                                setShowReviewForm(true);
-                                            }}
-                                            className="doctor-action-btn"
-                                            style={{
-                                                background: '#f1c40f',
-                                                color: 'white',
-                                                border: 'none',
-                                                borderRadius: '8px',
-                                                padding: '0.75rem',
-                                                fontWeight: '600',
+                                                color: '#666',
+                                                marginBottom: '0.25rem',
+                                            }}>
+                                                Đánh giá trung bình
+                                            </div>
+                                            {renderStars(doctor.averageRating || 0)}
+                                        </div>
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-end',
+                                            gap: '0.5rem',
+                                        }}>
+                                            <div style={{
                                                 fontSize: '0.9rem',
-                                                cursor: 'pointer',
-                                                transition: 'all 0.2s',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                gap: '0.5rem',
-                                                boxShadow: '0 2px 8px rgba(241, 196, 15, 0.2)',
-                                                height: '45px'
-                                            }}
-                                            onMouseOver={(e) => {
-                                                e.target.style.transform = 'translateY(-2px)';
-                                                e.target.style.boxShadow = '0 4px 12px rgba(241, 196, 15, 0.3)';
-                                            }}
-                                            onMouseOut={(e) => {
-                                                e.target.style.transform = 'translateY(0)';
-                                                e.target.style.boxShadow = '0 2px 8px rgba(241, 196, 15, 0.2)';
-                                            }}
-                                        >
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="currentColor"/>
-                                            </svg>
-                                            Đánh Giá
-                                        </button>
+                                                color: '#666',
+                                            }}>
+                                                {doctor.reviewCount || 0} đánh giá
+                                            </div>
+                                            {doctor.reviewCount > 0 && (
+                                                <button
+                                                    onClick={() => showAllFeedbacks(doctor)}
+                                                    style={{
+                                                        background: 'none',
+                                                        border: 'none',
+                                                        color: '#44b89d',
+                                                        cursor: 'pointer',
+                                                        fontSize: '0.9rem',
+                                                        padding: 0,
+                                                        textDecoration: 'underline',
+                                                    }}
+                                                >
+                                                    Xem tất cả
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
+
+                                {/* Action Buttons */}
+                                <div style={{
+                                    padding: '1.5rem 2rem',
+                                    display: 'grid',
+                                    gridTemplateColumns: '1fr 1fr',
+                                    gap: '1rem',
+                                }}>
+                                    <button
+                                        onClick={() => handleContactDoctor(doctor.fullName)}
+                                        style={{
+                                            background: '#44b89d',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            padding: '0.75rem',
+                                            fontWeight: '600',
+                                            fontSize: '0.9rem',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '0.5rem',
+                                        }}
+                                    >
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="currentColor"/>
+                                        </svg>
+                                        Liên Hệ
+                                    </button>
+                                    <button
+                                        onClick={() => openReviewForm(doctor)}
+                                        style={{
+                                            background: '#f1c40f',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            padding: '0.75rem',
+                                            fontWeight: '600',
+                                            fontSize: '0.9rem',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '0.5rem',
+                                        }}
+                                    >
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="currentColor"/>
+                                        </svg>
+                                        Đánh Giá
+                                    </button>
+                                </div>
+
+                                {/* Recent Reviews Preview */}
+                                {doctorFeedbacks[doctor.userID]?.length > 0 && (
+                                    <div style={{
+                                        padding: '1.5rem 2rem',
+                                        borderTop: '1px solid #f0f0f0',
+                                    }}>
+                                        <h4 style={{
+                                            margin: '0 0 1rem 0',
+                                            color: '#2c3e50',
+                                            fontSize: '1.1rem',
+                                        }}>
+                                            Đánh giá gần đây
+                                        </h4>
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '1rem',
+                                        }}>
+                                            {doctorFeedbacks[doctor.userID].slice(0, 2).map((feedback, index) => (
+                                                <div key={index} style={{
+                                                    padding: '1rem',
+                                                    background: '#f8f9fa',
+                                                    borderRadius: '8px',
+                                                }}>
+                                                    <div style={{
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                        marginBottom: '0.5rem',
+                                                    }}>
+                                                        <div>
+                                                            <div style={{
+                                                                fontWeight: '500',
+                                                                marginBottom: '0.25rem',
+                                                            }}>
+                                                                {feedback.userName}
+                                                            </div>
+                                                            {renderStars(feedback.rating)}
+                                                        </div>
+                                                        <div style={{
+                                                            fontSize: '0.85rem',
+                                                            color: '#999',
+                                                        }}>
+                                                            {new Date(feedback.submittedAt).toLocaleDateString()}
+                                                        </div>
+                                                    </div>
+                                                    <p style={{
+                                                        margin: '0',
+                                                        fontSize: '0.95rem',
+                                                        color: '#666',
+                                                        lineHeight: '1.5',
+                                                    }}>
+                                                        {feedback.feedbackText}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         ))
                     )}
@@ -654,126 +1068,7 @@ const DoctorPage = () => {
             <ReviewForm />
 
             {/* Feedback Modal */}
-            {showReviewForm && currentDoctor && (
-                <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 1000
-                }}>
-                    <div style={{
-                        background: 'white',
-                        padding: '2rem',
-                        borderRadius: '12px',
-                        width: '90%',
-                        maxWidth: '500px',
-                        position: 'relative'
-                    }}>
-                        <button
-                            onClick={() => {
-                                setShowReviewForm(false);
-                                setUserReview({ rating: 5, comment: '' });
-                            }}
-                            style={{
-                                position: 'absolute',
-                                top: '1rem',
-                                right: '1rem',
-                                background: 'none',
-                                border: 'none',
-                                fontSize: '1.5rem',
-                                cursor: 'pointer',
-                                color: '#666'
-                            }}
-                        >
-                            ×
-                        </button>
-                        <h3 style={{
-                            margin: '0 0 1.5rem 0',
-                            color: '#2c3e50',
-                            fontSize: '1.3rem'
-                        }}>
-                            Đánh giá bác sĩ {currentDoctor.fullName}
-                        </h3>
-                        <div style={{
-                            marginBottom: '1.5rem'
-                        }}>
-                            <p style={{
-                                margin: '0 0 0.5rem 0',
-                                color: '#666',
-                                fontSize: '0.9rem'
-                            }}>
-                                Đánh giá của bạn:
-                            </p>
-                            <div style={{
-                                display: 'flex',
-                                gap: '0.5rem'
-                            }}>
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                    <button
-                                        key={star}
-                                        onClick={() => setUserReview({ ...userReview, rating: star })}
-                                        style={{
-                                            background: 'none',
-                                            border: 'none',
-                                            fontSize: '1.5rem',
-                                            cursor: 'pointer',
-                                            color: star <= userReview.rating ? '#f1c40f' : '#ddd'
-                                        }}
-                                    >
-                                        ★
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <div style={{
-                            marginBottom: '1.5rem'
-                        }}>
-                            <p style={{
-                                margin: '0 0 0.5rem 0',
-                                color: '#666',
-                                fontSize: '0.9rem'
-                            }}>
-                                Nhận xét của bạn:
-                            </p>
-                            <textarea
-                                value={userReview.comment}
-                                onChange={(e) => setUserReview({ ...userReview, comment: e.target.value })}
-                                placeholder="Chia sẻ trải nghiệm của bạn với bác sĩ..."
-                                style={{
-                                    width: '100%',
-                                    minHeight: '100px',
-                                    padding: '0.75rem',
-                                    borderRadius: '8px',
-                                    border: '1.5px solid #e5e8ee',
-                                    fontSize: '0.9rem',
-                                    resize: 'vertical'
-                                }}
-                            />
-                        </div>
-                        <button
-                            onClick={handleAddReview}
-                            style={{
-                                width: '100%',
-                                padding: '0.8rem',
-                                background: '#44b89d',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '8px',
-                                fontWeight: 'bold',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Gửi Đánh Giá
-                        </button>
-                    </div>
-                </div>
-            )}
+            <FeedbackModal />
         </div>
     );
 };

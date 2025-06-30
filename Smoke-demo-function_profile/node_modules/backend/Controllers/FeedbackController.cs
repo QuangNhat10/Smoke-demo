@@ -5,6 +5,8 @@ using BreathingFree.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BreathingFree.Controllers
 {
@@ -21,111 +23,135 @@ namespace BreathingFree.Controllers
             _logger = logger;
         }
 
-        // GET: api/feedback/doctors
         [HttpGet("doctors")]
-        public async Task<IActionResult> GetDoctors([FromQuery] string? name)
+        public async Task<IActionResult> GetDoctors()
         {
             try
             {
-                _logger.LogInformation($"Searching doctors with name: {name}");
-
-                // Query doctors directly with filter
-                var query = _context.Users.Where(u => u.RoleID == 3);
-
-                // Apply name filter if provided
-                if (!string.IsNullOrWhiteSpace(name))
-                {
-                    name = name.ToLower();
-                    query = query.Where(d =>
-                        (d.FullName != null && d.FullName.ToLower().Contains(name)) ||
-                        (d.Specialty != null && d.Specialty.ToLower().Contains(name)) ||
-                        (d.Position != null && d.Position.ToLower().Contains(name))
-                    );
-                }
-
-                // Execute query and map results
-                var doctors = await query
+                var doctors = await _context.Users
+                    .Where(u => u.RoleID == 3) // RoleID 3 là bác sĩ
                     .Select(d => new
                     {
                         d.UserID,
-                        FullName = d.FullName ?? "Chưa cập nhật",
-                        Email = d.Email ?? "Chưa cập nhật",
-                        Gender = d.Gender ?? "Chưa cập nhật",
-                        DOB = d.DOB,
-                        Phone = d.Phone ?? "Chưa cập nhật",
-                        Address = d.Address ?? "Chưa cập nhật",
-                        Avatar = d.Avatar ?? "👨‍⚕️",
-                        Specialty = d.Specialty ?? "Chưa cập nhật chuyên môn",
-                        Position = d.Position ?? "Chưa cập nhật chức vụ",
-                        ShortBio = d.ShortBio ?? "Chưa có thông tin"
+                        d.FullName,
+                        d.Email,
+                        d.Phone,
+                        d.Specialty,
+                        AverageRating = _context.Feedbacks
+                            .Where(f => f.DoctorID == d.UserID)
+                            .Select(f => (double)f.Rating)
+                            .DefaultIfEmpty()
+                            .Average(),
+                        ReviewCount = _context.Feedbacks
+                            .Count(f => f.DoctorID == d.UserID)
                     })
                     .ToListAsync();
 
-                _logger.LogInformation($"Found {doctors.Count} doctors");
                 return Ok(doctors);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error searching doctors");
-                throw; // Let the global error handler deal with it
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi lấy danh sách bác sĩ.", error = ex.Message });
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddFeedback([FromBody] Feedback feedback)
+        [Authorize]
+        [HttpPost("doctors")]
+        public async Task<IActionResult> AddDoctorFeedback([FromBody] Feedback feedback)
         {
             try
             {
-                if (!ModelState.IsValid)
+                // Kiểm tra người dùng đã đăng nhập
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId) || int.Parse(userId) != feedback.UserID)
                 {
-                    return BadRequest(ModelState);
+                    return Unauthorized(new { message = "Bạn không có quyền thực hiện hành động này." });
                 }
 
-                // Verify doctor exists
-                var doctorExists = await _context.Users
-                    .AnyAsync(u => u.UserID == feedback.DoctorID && u.RoleID == 3);
+                // Kiểm tra membership
+                var membership = await _context.Memberships
+                    .Where(m => m.UserID == int.Parse(userId) && m.EndDate > DateTime.UtcNow)
+                    .FirstOrDefaultAsync();
 
-                if (!doctorExists)
+                if (membership == null)
                 {
-                    return BadRequest(new { message = "Doctor not found" });
+                    return StatusCode(403, new { message = "Bạn cần có gói thành viên để đánh giá bác sĩ." });
                 }
 
-                feedback.SubmittedAt = DateTime.Now;
+                // Kiểm tra bác sĩ tồn tại
+                var doctor = await _context.Users
+                    .FirstOrDefaultAsync(d => d.UserID == feedback.DoctorID && d.RoleID == 3);
+
+                if (doctor == null)
+                {
+                    return NotFound(new { message = "Không tìm thấy bác sĩ." });
+                }
+
+                // Kiểm tra đánh giá hợp lệ
+                if (feedback.Rating < 1 || feedback.Rating > 5)
+                {
+                    return BadRequest(new { message = "Đánh giá phải từ 1 đến 5 sao." });
+                }
+
+                if (string.IsNullOrWhiteSpace(feedback.FeedbackText))
+                {
+                    return BadRequest(new { message = "Vui lòng nhập nội dung đánh giá." });
+                }
+
+                // Normalize feedback text to ensure proper Unicode handling
+                feedback.FeedbackText = feedback.FeedbackText.Normalize(System.Text.NormalizationForm.FormC);
+
+                // Kiểm tra xem người dùng đã đánh giá bác sĩ này chưa
+                var existingFeedback = await _context.Feedbacks
+                    .FirstOrDefaultAsync(f => f.UserID == int.Parse(userId) && f.DoctorID == feedback.DoctorID);
+
+                if (existingFeedback != null)
+                {
+                    // Cập nhật đánh giá cũ
+                    existingFeedback.Rating = feedback.Rating;
+                    existingFeedback.FeedbackText = feedback.FeedbackText;
+                    existingFeedback.SubmittedAt = DateTime.UtcNow;
+                    await _context.SaveChangesAsync();
+                    return Ok(new { message = "Đã cập nhật đánh giá của bạn." });
+                }
+
+                // Thêm đánh giá mới
+                feedback.SubmittedAt = DateTime.UtcNow;
                 _context.Feedbacks.Add(feedback);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { message = "Feedback added successfully", feedback });
+                return Ok(new { message = "Đã thêm đánh giá thành công." });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error adding feedback");
-                throw; // Let the global error handler deal with it
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi thêm đánh giá.", error = ex.Message });
             }
         }
 
-        [HttpGet("doctor/{doctorId}")]
+        [HttpGet("doctors/{doctorId}")]
         public async Task<IActionResult> GetDoctorFeedbacks(int doctorId)
         {
             try
             {
                 var feedbacks = await _context.Feedbacks
                     .Where(f => f.DoctorID == doctorId)
-                    .OrderByDescending(f => f.SubmittedAt)
+                    .Include(f => f.User)
                     .Select(f => new
                     {
                         f.FeedbackID,
                         f.Rating,
-                        Comment = f.FeedbackText ?? "",
-                        f.SubmittedAt
+                        FeedbackText = f.FeedbackText != null ? f.FeedbackText.Normalize(System.Text.NormalizationForm.FormC) : null,
+                        f.SubmittedAt,
+                        UserName = f.User != null ? f.User.FullName : "Anonymous"
                     })
+                    .OrderByDescending(f => f.SubmittedAt)
                     .ToListAsync();
 
                 return Ok(feedbacks);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting doctor feedbacks");
-                throw; // Let the global error handler deal with it
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi lấy danh sách đánh giá.", error = ex.Message });
             }
         }
     }

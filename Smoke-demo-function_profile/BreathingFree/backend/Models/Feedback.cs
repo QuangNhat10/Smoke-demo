@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BreathingFree.Models
 {
@@ -21,5 +22,12 @@ namespace BreathingFree.Models
         public string? FeedbackText { get; set; }
 
         public DateTime SubmittedAt { get; set; } = DateTime.Now;
+
+        // Navigation properties
+        [ForeignKey("UserID")]
+        public virtual User? User { get; set; }
+
+        [ForeignKey("DoctorID")]
+        public virtual User? Doctor { get; set; }
     }
 }

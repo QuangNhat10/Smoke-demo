@@ -20,7 +20,7 @@ function PaymentPage() {
 
     const handlePayment = () => {
         // Xử lý thanh toán và chuyển hướng đến trang thành công
-        localStorage.setItem('isMember', 'true');
+            localStorage.setItem('isMember', 'true');
         navigate('/payment-success');
     };
 
@@ -59,9 +59,9 @@ function PaymentPage() {
                     fontWeight: '700',
                     position: 'relative',
                     display: 'inline-block',
-                }}>
+            }}>
                     Thanh Toán
-                    <div style={{
+                <div style={{
                         position: 'absolute',
                         bottom: '-10px',
                         left: '50%',
@@ -79,10 +79,10 @@ function PaymentPage() {
                     maxWidth: '800px',
                     margin: '1.5rem auto 0',
                     lineHeight: '1.6',
-                }}>
+                    }}>
                     Hoàn tất đăng ký gói thành viên
                 </p>
-            </div>
+                </div>
 
             {/* Payment Container */}
             <div style={{
@@ -105,18 +105,18 @@ function PaymentPage() {
                     }}>
                         <h3 style={{
                             fontSize: '1.2rem',
-                            color: '#2c3e50',
-                            marginBottom: '1rem',
-                        }}>
+                                color: '#2c3e50',
+                                marginBottom: '1rem',
+                            }}>
                             Chi tiết gói
                         </h3>
                         <div style={{
                             display: 'grid',
                             gridTemplateColumns: '1fr 2fr',
                             gap: '1rem',
-                            fontSize: '1rem',
+                                fontSize: '1rem',
                             color: '#34495e',
-                        }}>
+                            }}>
                             <div>Gói</div>
                             <div>{selectedPlan.name}</div>
                             
@@ -134,12 +134,12 @@ function PaymentPage() {
                     <div style={{ marginBottom: '2rem' }}>
                         <h3 style={{
                             fontSize: '1.2rem',
-                            color: '#2c3e50',
+                                color: '#2c3e50',
                             marginBottom: '1rem',
                         }}>
                             Phương thức thanh toán
                         </h3>
-                        <div style={{
+                            <div style={{
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '1rem',
@@ -148,67 +148,67 @@ function PaymentPage() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '1rem',
-                                padding: '1rem',
+                                    padding: '1rem',
                                 border: '1.5px solid #e5e8ee',
-                                borderRadius: '8px',
-                                cursor: 'pointer',
-                            }}>
-                                <input
-                                    type="radio"
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                }}>
+                                    <input
+                                        type="radio"
                                     name="payment"
                                     value="credit"
                                     checked={paymentMethod === 'credit'}
                                     onChange={(e) => setPaymentMethod(e.target.value)}
-                                />
-                                <div>
+                                    />
+                                    <div>
                                     <div style={{ fontWeight: '500' }}>Thẻ tín dụng/ghi nợ</div>
-                                    <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Visa, Mastercard, JCB</div>
-                                </div>
-                            </label>
+                                        <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>Visa, Mastercard, JCB</div>
+                                    </div>
+                                </label>
 
-                            <label style={{
-                                display: 'flex',
-                                alignItems: 'center',
+                                <label style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
                                 gap: '1rem',
                                 padding: '1rem',
                                 border: '1.5px solid #e5e8ee',
                                 borderRadius: '8px',
-                                cursor: 'pointer',
-                            }}>
-                                <input
-                                    type="radio"
+                                    cursor: 'pointer',
+                                }}>
+                                    <input
+                                        type="radio"
                                     name="payment"
                                     value="bank"
                                     checked={paymentMethod === 'bank'}
                                     onChange={(e) => setPaymentMethod(e.target.value)}
-                                />
-                                <div>
+                                    />
+                                    <div>
                                     <div style={{ fontWeight: '500' }}>Chuyển khoản ngân hàng</div>
-                                    <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>BIDV, Vietcombank, Agribank</div>
-                                </div>
-                            </label>
+                                        <div style={{ fontSize: '0.9rem', color: '#7f8c8d' }}>BIDV, Vietcombank, Agribank</div>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
                     {/* Payment Button */}
-                    <button
+                                <button
                         onClick={handlePayment}
-                        style={{
-                            width: '100%',
+                                    style={{
+                                        width: '100%',
                             background: '#44b89d',
-                            color: 'white',
-                            border: 'none',
-                            padding: '1rem',
-                            borderRadius: '8px',
+                                        color: 'white',
+                                        border: 'none',
+                                            padding: '1rem',
+                                            borderRadius: '8px',
                             fontSize: '1.1rem',
-                            fontWeight: 'bold',
+                                            fontWeight: 'bold',
                             cursor: 'pointer',
                             transition: 'all 0.2s',
                             boxShadow: '0 4px 15px rgba(68, 184, 157, 0.3)',
-                        }}
-                    >
+                                        }}
+                                    >
                         Thanh Toán
-                    </button>
+                                    </button>
                 </div>
             </div>
         </div>

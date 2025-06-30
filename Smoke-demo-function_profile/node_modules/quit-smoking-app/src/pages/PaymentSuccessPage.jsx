@@ -39,10 +39,10 @@ const PaymentSuccessPage = () => {
                         width: '80px',
                         height: '80px',
                         background: 'white',
-                        borderRadius: '50%',
+                    borderRadius: '50%',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
+                    justifyContent: 'center',
                         margin: '0 auto 1.5rem',
                         fontSize: '2.5rem'
                     }}>
@@ -70,7 +70,7 @@ const PaymentSuccessPage = () => {
                             color: '#2c3e50',
                             fontSize: '1.3rem'
                         }}>Chi tiết đăng ký</h2>
-                        
+
                         <div style={{
                             display: 'grid',
                             gap: '1rem'
@@ -84,7 +84,7 @@ const PaymentSuccessPage = () => {
                                 <span style={{ color: '#7f8c8d' }}>Gói thành viên</span>
                                 <span style={{ color: '#2c3e50', fontWeight: '600' }}>{membershipDetails.packageName}</span>
                             </div>
-                            
+
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -96,7 +96,7 @@ const PaymentSuccessPage = () => {
                                     {new Date(membershipDetails.startDate).toLocaleDateString('vi-VN')} - {new Date(membershipDetails.endDate).toLocaleDateString('vi-VN')}
                                 </span>
                             </div>
-                            
+
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -106,7 +106,7 @@ const PaymentSuccessPage = () => {
                                 <span style={{ color: '#7f8c8d' }}>Phương thức thanh toán</span>
                                 <span style={{ color: '#2c3e50', fontWeight: '600' }}>{membershipDetails.paymentMethod}</span>
                             </div>
-                            
+
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -123,28 +123,28 @@ const PaymentSuccessPage = () => {
                         </div>
                     </div>
 
-                    <div style={{
+                <div style={{
                         display: 'flex',
                         gap: '1rem'
-                    }}>
-                        <button
+                }}>
+                    <button
                             onClick={() => navigate('/homepage-member')}
-                            style={{
+                        style={{
                                 flex: 1,
                                 padding: '1rem',
                                 background: '#44b89d',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '8px',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
-                                cursor: 'pointer',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '8px',
+                            fontSize: '1rem',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
                                 transition: 'all 0.3s',
                                 boxShadow: '0 4px 10px rgba(68, 184, 157, 0.2)'
-                            }}
-                        >
+                        }}
+                    >
                             Về Trang Chủ
-                        </button>
+                    </button>
                     </div>
                 </div>
             </div>

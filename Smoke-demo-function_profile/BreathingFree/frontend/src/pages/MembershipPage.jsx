@@ -102,36 +102,36 @@ const MembershipPage = () => {
             setPackages([
                 {
                     name: "1 Tháng",
-                    price: 600000,
+            price: 600000,
                     durationDays: 30,
                     savings: 0,
-                    features: [
+            features: [
                         "Không giới hạn tư vấn với bác sĩ",
                         "Kế hoạch cai thuốc cá nhân hóa",
                         "Truy cập nội dung cao cấp",
                         "Hỗ trợ từ cộng đồng",
                         "Đánh giá bác sĩ chuyên gia"
-                    ]
-                },
+            ]
+        },
                 {
                     name: "6 Tháng",
-                    price: 3000000,
+            price: 3000000,
                     durationDays: 180,
                     savings: 16,
-                    features: [
+            features: [
                         "Tất cả tính năng từ gói Hàng tháng",
                         "Hỗ trợ bác sĩ ưu tiên",
                         "Báo cáo tiến độ hàng tháng",
                         "Hội thảo sức khỏe độc quyền",
                         "Đánh giá bác sĩ chuyên gia"
-                    ]
-                },
+            ]
+        },
                 {
                     name: "1 Năm",
-                    price: 5400000,
+            price: 5400000,
                     durationDays: 365,
                     savings: 25,
-                    features: [
+            features: [
                         "Tất cả tính năng từ gói 6 tháng",
                         "Huấn luyện viên sức khỏe riêng",
                         "Đánh giá sức khỏe hàng quý",
@@ -191,7 +191,7 @@ const MembershipPage = () => {
                 padding: '3rem 2rem',
                 background: 'white',
                 boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-            }}>
+        }}>
                 <h1 style={{
                     fontSize: '2.5rem',
                     color: '#35a79c',
@@ -239,9 +239,9 @@ const MembershipPage = () => {
                         flex: '1',
                         minWidth: '300px',
                         maxWidth: '400px',
-                        background: 'white',
+                    background: 'white',
                         borderRadius: '16px',
-                        padding: '2rem',
+                    padding: '2rem',
                         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                         display: 'flex',
                         flexDirection: 'column'
@@ -338,79 +338,79 @@ const MembershipPage = () => {
                         </div>
                     </div>
                 ))}
-            </div>
+                </div>
 
-            {/* FAQ Section */}
-            <div style={{
+                {/* FAQ Section */}
+                <div style={{
                 maxWidth: '800px',
                 margin: '4rem auto',
                 padding: '2rem',
-                background: 'white',
+                    background: 'white',
                 borderRadius: '16px',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)'
-            }}>
-                <h2 style={{
-                    color: '#2c3e50',
+                }}>
+                    <h2 style={{
+                        color: '#2c3e50',
                     fontSize: '1.8rem',
                     marginBottom: '2rem',
                     textAlign: 'center'
-                }}>
-                    Câu hỏi thường gặp
-                </h2>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
+                    }}>
+                        Câu hỏi thường gặp
+                    </h2>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
                     gap: '2rem'
-                }}>
-                    <div>
-                        <h3 style={{
-                            fontSize: '1.1rem',
-                            color: '#2c3e50',
+                    }}>
+                        <div>
+                            <h3 style={{
+                                fontSize: '1.1rem',
+                                color: '#2c3e50',
                             margin: '0 0 0.5rem 0'
-                        }}>
-                            Tôi có thể hủy đăng ký bất cứ lúc nào không?
-                        </h3>
-                        <p style={{
-                            color: '#7f8c8d',
-                            margin: 0,
+                            }}>
+                                Tôi có thể hủy đăng ký bất cứ lúc nào không?
+                            </h3>
+                            <p style={{
+                                color: '#7f8c8d',
+                                margin: 0,
                             fontSize: '1rem'
-                        }}>
-                            Có, bạn có thể hủy đăng ký bất cứ lúc nào. Tuy nhiên, chúng tôi không hoàn lại phí đăng ký cho thời gian chưa sử dụng.
-                        </p>
-                    </div>
+                            }}>
+                                Có, bạn có thể hủy đăng ký bất cứ lúc nào. Tuy nhiên, chúng tôi không hoàn lại phí đăng ký cho thời gian chưa sử dụng.
+                            </p>
+                        </div>
 
-                    <div>
-                        <h3 style={{
-                            fontSize: '1.1rem',
-                            color: '#2c3e50',
+                        <div>
+                            <h3 style={{
+                                fontSize: '1.1rem',
+                                color: '#2c3e50',
                             margin: '0 0 0.5rem 0'
-                        }}>
-                            Tôi sẽ nhận được gì khi trở thành thành viên?
-                        </h3>
-                        <p style={{
-                            color: '#7f8c8d',
-                            margin: 0,
+                            }}>
+                                Tôi sẽ nhận được gì khi trở thành thành viên?
+                            </h3>
+                            <p style={{
+                                color: '#7f8c8d',
+                                margin: 0,
                             fontSize: '1rem'
-                        }}>
-                            Khi trở thành thành viên, bạn sẽ nhận được quyền truy cập vào tất cả các tính năng cao cấp của ứng dụng, bao gồm tư vấn với bác sĩ, kế hoạch cai thuốc cá nhân hóa, và nhiều tính năng khác tùy theo gói bạn chọn.
-                        </p>
-                    </div>
+                            }}>
+                                Khi trở thành thành viên, bạn sẽ nhận được quyền truy cập vào tất cả các tính năng cao cấp của ứng dụng, bao gồm tư vấn với bác sĩ, kế hoạch cai thuốc cá nhân hóa, và nhiều tính năng khác tùy theo gói bạn chọn.
+                            </p>
+                        </div>
 
-                    <div>
-                        <h3 style={{
-                            fontSize: '1.1rem',
-                            color: '#2c3e50',
+                        <div>
+                            <h3 style={{
+                                fontSize: '1.1rem',
+                                color: '#2c3e50',
                             margin: '0 0 0.5rem 0'
-                        }}>
-                            Các phương thức thanh toán được chấp nhận?
-                        </h3>
-                        <p style={{
-                            color: '#7f8c8d',
-                            margin: 0,
+                            }}>
+                                Các phương thức thanh toán được chấp nhận?
+                            </h3>
+                            <p style={{
+                                color: '#7f8c8d',
+                                margin: 0,
                             fontSize: '1rem'
-                        }}>
-                            Chúng tôi chấp nhận thanh toán qua thẻ tín dụng/ghi nợ (Visa, Mastercard, JCB) và chuyển khoản ngân hàng (BIDV, Vietcombank, Agribank).
-                        </p>
+                            }}>
+                                Chúng tôi chấp nhận thanh toán qua thẻ tín dụng/ghi nợ (Visa, Mastercard, JCB) và chuyển khoản ngân hàng (BIDV, Vietcombank, Agribank).
+                            </p>
                     </div>
                 </div>
             </div>

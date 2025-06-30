@@ -87,27 +87,42 @@ namespace BreathingFree.Controllers
             }
         }
 
-        [HttpGet("current")]
         [Authorize]
+        [HttpGet("current")]
         public async Task<IActionResult> GetCurrentMembership()
         {
-            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId))
+            try
             {
-                return Unauthorized();
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Unauthorized(new { message = "Không tìm thấy thông tin người dùng." });
+                }
+
+                var membership = await _context.Memberships
+                    .Where(m => m.UserID == int.Parse(userId))
+                    .OrderByDescending(m => m.EndDate)
+                    .FirstOrDefaultAsync();
+
+                if (membership == null)
+                {
+                    return Ok(new { isActive = false, message = "Bạn chưa có gói thành viên nào." });
+                }
+
+                var isActive = membership.EndDate > DateTime.UtcNow;
+                return Ok(new
+                {
+                    isActive,
+                    membership.StartDate,
+                    membership.EndDate,
+                    membership.PackageName,
+                    message = isActive ? "Gói thành viên đang hoạt động." : "Gói thành viên đã hết hạn."
+                });
             }
-
-            var membership = await _context.Memberships
-                .Where(m => m.UserID == userId && m.IsActive)
-                .OrderByDescending(m => m.EndDate)
-                .FirstOrDefaultAsync();
-
-            if (membership == null)
+            catch (Exception ex)
             {
-                return NotFound(new { message = "Không tìm thấy gói thành viên đang hoạt động" });
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi kiểm tra thông tin thành viên.", error = ex.Message });
             }
-
-            return Ok(membership);
         }
 
         public class PackageInfo
@@ -184,6 +199,84 @@ namespace BreathingFree.Controllers
                 .ToListAsync();
 
             return Ok(history);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateMembership([FromBody] Membership membership)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId) || int.Parse(userId) != membership.UserID)
+                {
+                    return Unauthorized(new { message = "Bạn không có quyền thực hiện hành động này." });
+                }
+
+                // Kiểm tra gói thành viên hiện tại
+                var currentMembership = await _context.Memberships
+                    .Where(m => m.UserID == membership.UserID && m.EndDate > DateTime.UtcNow)
+                    .FirstOrDefaultAsync();
+
+                if (currentMembership != null)
+                {
+                    return BadRequest(new { message = "Bạn đã có gói thành viên đang hoạt động." });
+                }
+
+                // Thêm gói thành viên mới
+                membership.StartDate = DateTime.UtcNow;
+                membership.EndDate = membership.PackageName switch
+                {
+                    "1_month" => DateTime.UtcNow.AddMonths(1),
+                    "3_months" => DateTime.UtcNow.AddMonths(3),
+                    "6_months" => DateTime.UtcNow.AddMonths(6),
+                    "1_year" => DateTime.UtcNow.AddYears(1),
+                    _ => throw new ArgumentException("Loại gói không hợp lệ")
+                };
+
+                _context.Memberships.Add(membership);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Đăng ký gói thành viên thành công!" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi đăng ký gói thành viên.", error = ex.Message });
+            }
+        }
+
+        [HttpGet("plans")]
+        public IActionResult GetMembershipPlans()
+        {
+            var plans = new[]
+            {
+                new {
+                    id = "1_month",
+                    name = "Gói 1 tháng",
+                    price = 99000,
+                    description = "Trải nghiệm đầy đủ tính năng trong 1 tháng"
+                },
+                new {
+                    id = "3_months",
+                    name = "Gói 3 tháng",
+                    price = 269000,
+                    description = "Tiết kiệm 10% so với gói 1 tháng"
+                },
+                new {
+                    id = "6_months",
+                    name = "Gói 6 tháng",
+                    price = 499000,
+                    description = "Tiết kiệm 15% so với gói 1 tháng"
+                },
+                new {
+                    id = "1_year",
+                    name = "Gói 1 năm",
+                    price = 899000,
+                    description = "Tiết kiệm 25% so với gói 1 tháng"
+                }
+            };
+
+            return Ok(plans);
         }
     }
 } 

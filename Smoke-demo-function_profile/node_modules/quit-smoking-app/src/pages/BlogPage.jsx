@@ -376,7 +376,7 @@ const BlogPage = () => {
             <SecondaryNavigation />
 
             {/* Title Section */}
-            <div style={{
+                        <div style={{
                 textAlign: 'center',
                 padding: '3rem 2rem',
                 background: 'white',
@@ -466,47 +466,47 @@ const BlogPage = () => {
                         )}
                     </div>
 
-                    <div style={{
-                        display: 'flex',
-                        gap: '1rem',
+                        <div style={{
+                            display: 'flex',
+                            gap: '1rem',
                         marginBottom: '1.5rem',
-                    }}>
-                        <input
-                            type="text"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                        }}>
+                            <input
+                                type="text"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             placeholder="Tìm theo tác giả, chủ đề, nội dung..."
-                            style={{
-                                flex: 1,
-                                padding: '0.75rem 1rem',
-                                borderRadius: '8px',
-                                border: '1.5px solid #e5e8ee',
-                                fontSize: '1rem',
-                                outline: 'none',
-                            }}
-                        />
+                                style={{
+                                    flex: 1,
+                                    padding: '0.75rem 1rem',
+                                    borderRadius: '8px',
+                                    border: '1.5px solid #e5e8ee',
+                                    fontSize: '1rem',
+                                    outline: 'none',
+                                }}
+                            />
                     </div>
 
-                    <div style={{
-                        display: 'flex',
+                        <div style={{
+                            display: 'flex',
                         gap: '0.5rem',
                         flexWrap: 'wrap',
-                    }}>
-                        <button
-                            onClick={() => setActiveCategory('all')}
-                            style={{
-                                padding: '0.5rem 1rem',
-                                borderRadius: '20px',
-                                border: 'none',
+                        }}>
+                            <button
+                                onClick={() => setActiveCategory('all')}
+                                style={{
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '20px',
+                                    border: 'none',
                                 background: activeCategory === 'all' ? '#44b89d' : '#f1f3f5',
                                 color: activeCategory === 'all' ? 'white' : '#495057',
-                                cursor: 'pointer',
+                                    cursor: 'pointer',
                                 fontSize: '0.9rem',
                                 fontWeight: '500',
-                            }}
-                        >
-                            Tất Cả
-                        </button>
+                                }}
+                            >
+                                Tất Cả
+                            </button>
                         {['Chia Sẻ', 'Kinh Nghiệm', 'Sức Khỏe', 'Điều Trị', 'Tác Hại', 'Động Lực'].map(category => (
                             <button
                                 key={category}
@@ -773,9 +773,9 @@ const BlogPage = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+                </div>
 
-            {/* Blog Post Form Modal */}
+                {/* Blog Post Form Modal */}
             {isPostFormOpen && (
                 <BlogPostForm
                     onClose={() => {
@@ -787,17 +787,17 @@ const BlogPage = () => {
                 />
             )}
 
-            {/* Comment Modal */}
-            {commentModalPostId && (
-                <CommentModal
+                {/* Comment Modal */}
+                {commentModalPostId && (
+                    <CommentModal
                     post={blogPosts.find(post => post.id === commentModalPostId)}
-                    comments={blogComments[commentModalPostId] || []}
+                        comments={blogComments[commentModalPostId] || []}
                     onClose={closeCommentModal}
-                    onAddComment={handleAddComment}
+                        onAddComment={handleAddComment}
                     currentUser={currentUser}
                     isLoggedIn={isLoggedIn}
-                />
-            )}
+                    />
+                )}
         </div>
     );
 };

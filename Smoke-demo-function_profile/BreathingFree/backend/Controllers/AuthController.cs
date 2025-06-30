@@ -1,126 +1,168 @@
-﻿using BreathingFree.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using BreathingFree.Models;
+using BreathingFree.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.Extensions.Logging;
 
 namespace BreathingFree.Controllers
 {
+    [Route("api/auth")]
     [ApiController]
-    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly AuthService _authService;
-        private readonly IConfiguration _config;
-        private readonly IWebHostEnvironment _environment;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(AuthService authService, IConfiguration config, 
-            IWebHostEnvironment environment, IHttpContextAccessor httpContextAccessor)
+        public AuthController(AuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
-            _config = config;
-            _environment = environment;
-            _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var result = await _authService.RegisterAsync(model);
-            if (result.Contains("exists")) return BadRequest(result);
-            return Ok(result);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _authService.RegisterUserAsync(model);
+            if (!result.success)
+            {
+                return BadRequest(new { message = result.message });
+            }
+
+            return Ok(new { message = result.message });
         }
 
-        /*[HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel model)
-        {
-            var token = _authService.Login(model);
-            if (token == null) return Unauthorized("Invalid credentials");
-
-            return Ok(new { token });
-        }*/
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var token = await _authService.LoginAsync(model);
-            if (token == null)
-                return Unauthorized("Invalid credentials");
-
-            // Lấy thông tin người dùng từ email để trả về cùng token
-            var user = await _authService.GetUserByEmailAsync(model.Email);
-            if (user == null)
-                return Unauthorized("User not found");
-
-            // Trả về token và thông tin cơ bản của user
-            return Ok(new { 
-                token,
-                user = new {
-                    userId = user.UserID,
-                    fullName = user.FullName,
-                    email = user.Email,
-                    roleId = user.RoleID
-                }
-            });
-        }
-
-        [HttpGet("profile")]
-        [Authorize]
-        public async Task<IActionResult> GetProfile()
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userId))
-                return Unauthorized();
-
-            var userProfile = await _authService.GetUserProfileAsync(int.Parse(userId));
-            if (userProfile == null)
-                return NotFound("User not found");
-
-            // Xử lý avatar URL
-            if (!string.IsNullOrEmpty(userProfile.Avatar) && !userProfile.Avatar.StartsWith("http") && !userProfile.Avatar.StartsWith("data:"))
+            if (!ModelState.IsValid)
             {
-                // Nếu avatar là đường dẫn tương đối, thêm đường dẫn gốc
-                var request = _httpContextAccessor.HttpContext.Request;
-                var baseUrl = $"{request.Scheme}://{request.Host}";
-                userProfile.Avatar = $"{baseUrl}{userProfile.Avatar}";
+                return BadRequest(ModelState);
             }
 
-            return Ok(userProfile);
-        }
+            var result = await _authService.LoginAsync(model);
+            if (!result.success || result.user == null)
+            {
+                return BadRequest(new { message = result.message });
+            }
 
-        [HttpPut("profile")]
-        [Authorize]
-        public async Task<IActionResult> UpdateProfile([FromBody] ProfileUpdateModel model)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userId))
-                return Unauthorized();
+            var token = _authService.GenerateJwtToken(result.user);
 
-            var result = await _authService.UpdateUserProfileAsync(int.Parse(userId), model);
-            if (!result)
-                return BadRequest("Failed to update profile");
-
-            // Lấy thông tin profile đã cập nhật để trả về
-            var updatedProfile = await _authService.GetUserProfileAsync(int.Parse(userId));
-            
-            return Ok(new { 
-                message = "Profile updated successfully",
-                profile = updatedProfile
+            return Ok(new
+            {
+                token,
+                userId = result.user.UserID,
+                email = result.user.Email,
+                fullName = result.user.FullName,
+                roleId = result.user.RoleID,
+                message = result.message
             });
         }
 
-        [HttpPost("change-password")]
         [Authorize]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                _logger.LogInformation("Logout attempt for user: {UserId}", userId);
+
+                Response.Cookies.Delete("jwt");
+
+                _logger.LogInformation("Logout successful for user: {UserId}", userId);
+                return Ok(new { message = "Đăng xuất thành công." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during logout");
+                return StatusCode(500, new { message = "Đã xảy ra lỗi trong quá trình đăng xuất. Vui lòng thử lại sau." });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return Unauthorized(new { message = "Không tìm thấy thông tin người dùng." });
+            }
+
+            var user = await _authService.GetUserByEmailAsync(userEmail);
+            if (user == null)
+            {
+                return NotFound(new { message = "Không tìm thấy thông tin người dùng." });
+            }
+
+            return Ok(new
+            {
+                id = user.UserID,
+                email = user.Email,
+                fullName = user.FullName,
+                roleId = user.RoleID
+            });
+        }
+
+        [Authorize]
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return Unauthorized(new { message = "Không tìm thấy thông tin người dùng." });
+            }
+
+            var user = await _authService.GetUserProfileAsync(userId);
+            if (user == null)
+            {
+                return NotFound(new { message = "Không tìm thấy thông tin người dùng." });
+            }
+
+            return Ok(user);
+        }
+
+        [Authorize]
+        [HttpPut("profile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] ProfileUpdateModel model)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return Unauthorized(new { message = "Không tìm thấy thông tin người dùng." });
+            }
+
+            var success = await _authService.UpdateUserProfileAsync(userId, model);
+            if (!success)
+            {
+                return BadRequest(new { message = "Không thể cập nhật thông tin người dùng." });
+            }
+
+            return Ok(new { message = "Cập nhật thông tin thành công." });
+        }
+
+        [Authorize]
+        [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userId))
-                return Unauthorized();
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return Unauthorized(new { message = "Không tìm thấy thông tin người dùng." });
+            }
 
-            var result = await _authService.ChangePasswordAsync(int.Parse(userId), model);
-            
+            var result = await _authService.ChangePasswordAsync(userId, model);
             if (!result.Success)
-                return BadRequest(result.Message);
+            {
+                return BadRequest(new { message = result.Message });
+            }
 
             return Ok(new { message = result.Message });
         }

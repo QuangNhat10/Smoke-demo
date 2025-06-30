@@ -34,7 +34,7 @@ function ProfilePage() {
         setUserRole(storedUserRole || '');
         setUserId(storedUserId || '');
 
-        fetchUserProfile();
+            fetchUserProfile();
 
         // Nếu có profilePicture trong localStorage, cập nhật preview
         const storedProfilePicture = localStorage.getItem('profilePicture');
@@ -130,7 +130,7 @@ function ProfilePage() {
     };
 
     const handleImageClick = () => {
-        setShowImageOptions(!showImageOptions);
+            setShowImageOptions(!showImageOptions);
     };
 
     const handleFileChange = async (e) => {
@@ -138,11 +138,11 @@ function ProfilePage() {
         if (file) {
             try {
                 // TODO: Implement actual file upload to server
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setImagePreview(reader.result);
-                };
-                reader.readAsDataURL(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
             } catch (error) {
                 console.error('Error uploading image:', error);
                 setError('Không thể tải lên ảnh. Vui lòng thử lại sau.');
@@ -316,7 +316,7 @@ function ProfilePage() {
                                 borderRadius: '4px'
                             }}>
                                 {userData?.userID || 'N/A'}
-                            </div>
+                        </div>
                         </div>
 
                         <div style={{ marginBottom: '1rem' }}>
@@ -347,9 +347,9 @@ function ProfilePage() {
                                     borderRadius: '4px'
                                 }}>
                                     {formData.fullName || 'Chưa cập nhật'}
-                                </div>
-                            )}
-                        </div>
+                    </div>
+                )}
+            </div>
 
                         <div style={{ marginBottom: '1rem' }}>
                             <label style={{
@@ -365,8 +365,8 @@ function ProfilePage() {
                                 borderRadius: '4px'
                             }}>
                                 {formData.email || 'Chưa cập nhật'}
-                            </div>
-                        </div>
+            </div>
+        </div>
 
                         <div style={{ marginBottom: '1rem' }}>
                             <label style={{
@@ -396,10 +396,10 @@ function ProfilePage() {
                                     borderRadius: '4px'
                                 }}>
                                     {formData.phone || 'Chưa cập nhật'}
-                                </div>
-                            )}
-                        </div>
-
+                                    </div>
+                                )}
+                            </div>
+                            
                         <div style={{ marginBottom: '1rem' }}>
                             <label style={{
                                 display: 'block',
@@ -409,7 +409,7 @@ function ProfilePage() {
                                 Địa chỉ:
                             </label>
                             {isEditing ? (
-                                <input
+                                    <input
                                     type="text"
                                     name="address"
                                     value={formData.address}
@@ -530,7 +530,7 @@ function ProfilePage() {
                             >
                                 Chỉnh sửa
                             </button>
-                        )}
+                    )}
                     </div>
                 </div>
             </div>

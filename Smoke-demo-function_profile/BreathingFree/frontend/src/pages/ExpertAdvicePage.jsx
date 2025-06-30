@@ -180,32 +180,32 @@ const ExpertAdvicePage = () => {
                     marginBottom: '2rem',
                     boxShadow: '0 2px 12px rgba(0, 0, 0, 0.05)',
                 }}>
-                    <h2 style={{
-                        fontSize: '1.3rem',
-                        color: '#2c3e50',
+                        <h2 style={{
+                            fontSize: '1.3rem',
+                            color: '#2c3e50',
                         margin: '0 0 1rem 0',
                     }}>
                         Tìm kiếm lời khuyên
                     </h2>
-                    <div style={{
-                        display: 'flex',
-                        gap: '1rem',
+                        <div style={{
+                            display: 'flex',
+                            gap: '1rem',
                         marginBottom: '1.5rem',
-                    }}>
-                        <input
-                            type="text"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            placeholder="Tìm theo tên chuyên gia, chủ đề, nội dung..."
-                            style={{
-                                flex: 1,
-                                padding: '0.75rem 1rem',
-                                borderRadius: '8px',
-                                border: '1.5px solid #e5e8ee',
-                                fontSize: '1rem',
-                                outline: 'none',
-                            }}
-                        />
+                        }}>
+                            <input
+                                type="text"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                placeholder="Tìm theo tên chuyên gia, chủ đề, nội dung..."
+                                style={{
+                                    flex: 1,
+                                    padding: '0.75rem 1rem',
+                                    borderRadius: '8px',
+                                    border: '1.5px solid #e5e8ee',
+                                    fontSize: '1rem',
+                                    outline: 'none',
+                                }}
+                            />
                         <button
                             onClick={() => setSearchTerm('')}
                             style={{
@@ -218,30 +218,30 @@ const ExpertAdvicePage = () => {
                                 cursor: 'pointer',
                             }}
                         >
-                            Tìm Kiếm
-                        </button>
+                                Tìm Kiếm
+                            </button>
                     </div>
 
-                    <div style={{
-                        display: 'flex',
+                        <div style={{
+                            display: 'flex',
                         gap: '0.5rem',
                         flexWrap: 'wrap',
-                    }}>
-                        <button
-                            onClick={() => setActiveCategory('all')}
-                            style={{
-                                padding: '0.5rem 1rem',
-                                borderRadius: '20px',
-                                border: 'none',
+                        }}>
+                            <button
+                                onClick={() => setActiveCategory('all')}
+                                style={{
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '20px',
+                                    border: 'none',
                                 background: activeCategory === 'all' ? '#44b89d' : '#f1f3f5',
                                 color: activeCategory === 'all' ? 'white' : '#495057',
-                                cursor: 'pointer',
+                                    cursor: 'pointer',
                                 fontSize: '0.9rem',
                                 fontWeight: '500',
-                            }}
-                        >
-                            Tất Cả
-                        </button>
+                                }}
+                            >
+                                Tất Cả
+                            </button>
                         {['Cai Nghiện', 'Phổi Học', 'Y Học Cổ Truyền', 'Dinh Dưỡng', 'Tâm Lý Học'].map(category => (
                             <button
                                 key={category}
