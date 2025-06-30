@@ -69,11 +69,21 @@ namespace BreathingFree.Services
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+                // Map RoleID to role name
+                string roleName = user.RoleID switch
+                {
+                    1 => "Admin",
+                    2 => "Member",
+                    3 => "Doctor",
+                    4 => "Staff",
+                    _ => "User"
+                };
+
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.RoleID.ToString())
+                    new Claim(ClaimTypes.Role, roleName)
                 };
 
                 var token = new JwtSecurityToken(
@@ -150,14 +160,17 @@ namespace BreathingFree.Services
                     return (false, "Email hoặc mật khẩu không đúng.", null);
                 }
 
+                _logger.LogInformation("Found user with ID: {UserId}, attempting password validation", user.UserID);
                 var isValidPassword = ValidatePassword(user, model.Password);
+                _logger.LogInformation("Password validation result for user {UserId}: {Result}", user.UserID, isValidPassword);
+
                 if (!isValidPassword)
                 {
                     _logger.LogWarning("Invalid password attempt for email: {Email}", model.Email);
                     return (false, "Email hoặc mật khẩu không đúng.", null);
                 }
 
-                _logger.LogInformation("Successful login for user: {UserId}", user.UserID);
+                _logger.LogInformation("Successful login for user: {UserId} with role: {RoleId}", user.UserID, user.RoleID);
                 return (true, "Đăng nhập thành công.", user);
             }
             catch (Exception ex)

@@ -112,7 +112,8 @@ const SecondaryNavigationDoctor = () => {
                 </ul>
             </div>
 
-            <style jsx>{`
+            <style>
+                {`
         .secondary-navigation {
           background-color: #2C9085;
           padding: 0;
@@ -202,7 +203,8 @@ const SecondaryNavigationDoctor = () => {
           background-color: #f0f9f8;
           color: #2C9085;
         }
-      `}</style>
+                `}
+            </style>
         </nav>
     );
 };

@@ -19,7 +19,8 @@ const DashboardCard = ({ title, value, description, icon, color }) => {
       </div>
 
       {/* CSS nội bộ cho component */}
-      <style jsx>{`
+      <style>
+        {`
         .dashboard-card {
           background-color: var(--white);
           border-radius: var(--border-radius-lg);
@@ -68,7 +69,8 @@ const DashboardCard = ({ title, value, description, icon, color }) => {
           color: var(--gray-600);
           margin: 0;
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };

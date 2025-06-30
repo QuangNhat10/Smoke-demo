@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -23,7 +24,6 @@ import PatientPlansPage from './pages/PatientPlansPage';
 import WorkSchedulePage from './pages/WorkSchedulePage';
 import PatientChatPage from './pages/PatientChatPage';
 import Unauthorized from './pages/Unauthorized';
-import PrivateRoute from './components/PrivateRoute';
 import ProfilePage from './pages/ProfilePage';
 import AdminPage from './pages/AdminPage';
 import AboutUs from './pages/AboutUs';
@@ -38,64 +38,225 @@ import ChangePasswordPage from './pages/ChangePasswordPage';
  * @returns {JSX.Element} Component ứng dụng với định tuyến
  */
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      const token = localStorage.getItem('token');
+      const role = localStorage.getItem('userRole');
+      const isAuthenticatedLocal = localStorage.getItem('isAuthenticated') === 'true';
+
+      setIsAuthenticated(!!token && isAuthenticatedLocal);
+      setUserRole(role);
+      setIsLoading(false);
+    };
+
+    checkAuthStatus();
+    
+    // Chỉ lắng nghe sự kiện storage khi cần thiết
+    const handleStorageChange = (e) => {
+      if (e.key === 'token' || e.key === 'userRole' || e.key === 'isAuthenticated') {
+        checkAuthStatus();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  // Redirect to appropriate homepage based on role
+  const getHomePage = () => {
+    if (!isAuthenticated) return '/';
+    
+    switch (userRole) {
+      case 'Member':
+        return '/homepage-member';
+      case 'Doctor':
+        return '/homepage-doctor';
+      case 'Staff':
+        return '/dashboard-staff';
+      case 'Admin':
+        return '/admin';
+      default:
+        return '/';
+    }
+  };
+
+  // Protected Route wrapper
+  const ProtectedRoute = ({ children, allowedRoles }) => {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (!isAuthenticated) {
+      return <Navigate to="/login" replace />;
+    }
+
+    if (!allowedRoles.includes(userRole)) {
+      return <Navigate to="/unauthorized" replace />;
+    }
+
+    return children;
+  };
+
+  // Public Route wrapper - redirects to user's homepage if already authenticated
+  const PublicRoute = ({ children }) => {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    // Đặc biệt cho trang login và register, chỉ chuyển hướng khi đã xác thực
+    const currentPath = window.location.pathname;
+    if (isAuthenticated && (currentPath === '/login' || currentPath === '/register')) {
+      return <Navigate to={getHomePage()} replace />;
+    } else if (isAuthenticated && currentPath === '/') {
+      return <Navigate to={getHomePage()} replace />;
+    }
+
+    return children;
+  };
+
   return (
     <Router>
       <Routes>
-        {/* Các route công khai - ai cũng có thể truy cập */}
-        <Route path="/" element={<Home />} /> {/* Trang chủ chính của ứng dụng */}
-        <Route path="/login" element={<Login />} /> {/* Trang đăng nhập */}
-        <Route path="/register" element={<Register />} /> {/* Trang đăng ký */}
-        <Route path="/unauthorized" element={<Unauthorized />} /> {/* Trang hiển thị khi không có quyền truy cập */}
-        <Route path="/about" element={<AboutUs />} /> {/* Trang giới thiệu về công ty và đội ngũ bác sĩ */}
-        <Route path="/faq" element={<FAQ />} /> {/* Trang câu hỏi thường gặp */}
-        <Route path="/profile" element={<ProfilePage />} /> {/* Trang hồ sơ người dùng - chuyển vào mục công khai */}
+        {/* Public routes */}
+        <Route path="/" element={<PublicRoute><Home /></PublicRoute>} />
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/blog" element={<BlogPage />} />
         
-        {/* Route đổi mật khẩu - yêu cầu đăng nhập */}
-        <Route element={<PrivateRoute allowedRoles={["Member", "Doctor", "Staff", "Admin"]} />}>
-          <Route path="/change-password" element={<ChangePasswordPage />} /> {/* Trang đổi mật khẩu */}
-        </Route>
+        {/* Member routes */}
+        <Route path="/homepage-member" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <HomepageMember />
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard-member" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <DashboardMember />
+          </ProtectedRoute>
+        } />
+        <Route path="/create-plan" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <CreatePlanPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/track-status" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <TrackStatus />
+          </ProtectedRoute>
+        } />
+        <Route path="/expert-advice" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <ExpertAdvicePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/smoking-cessation" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <SmokingCessationPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/support-chat" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <SupportChat />
+          </ProtectedRoute>
+        } />
+        <Route path="/membership" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <MembershipPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <PaymentPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment-success" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <PaymentSuccessPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/appointment" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <AppointmentPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/rankings" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <Rankings />
+          </ProtectedRoute>
+        } />
+        <Route path="/doctors" element={
+          <ProtectedRoute allowedRoles={['Member']}>
+            <DoctorPage />
+          </ProtectedRoute>
+        } />
 
-        {/* Các route dành cho thành viên đã đăng nhập */}
-        <Route path="/homepage-member" element={<HomepageMember />} /> {/* Trang chủ dành cho thành viên */}
-        <Route path="/dashboard-member" element={<DashboardMember />} /> {/* Bảng điều khiển thành viên */}
-        <Route path="/create-plan" element={<CreatePlanPage />} /> {/* Trang tạo kế hoạch cai thuốc */}
-        <Route path="/track-status" element={<TrackStatus />} /> {/* Trang theo dõi tiến trình cai thuốc */}
-        <Route path="/expert-advice" element={<ExpertAdvicePage />} /> {/* Trang tư vấn từ chuyên gia */}
-        <Route path="/blog" element={<BlogPage />} /> {/* Trang bài viết blog */}
-        <Route path="/smoking-cessation" element={<SmokingCessationPage />} /> {/* Trang cai thuốc lá */}
-        <Route path="/support-chat" element={<SupportChat />} /> {/* Trò chuyện hỗ trợ */}
-        <Route path="/membership" element={<MembershipPage />} /> {/* Trang mua gói thành viên để có quyền đánh giá bác sĩ */}
-        <Route path="/payment" element={<PaymentPage />} /> {/* Trang thanh toán */}
-        <Route path="/payment-success" element={<PaymentSuccessPage />} /> {/* Trang xác nhận thanh toán thành công */}
-        <Route path="/appointment" element={<AppointmentPage />} /> {/* Trang đặt lịch hẹn */}
-        <Route path="/rankings" element={<Rankings />} /> {/* Trang xếp hạng */}
-        <Route path="/doctors" element={<DoctorPage />} /> {/* Trang hiển thị bác sĩ và cho phép thành viên đánh giá */}
+        {/* Doctor routes */}
+        <Route path="/homepage-doctor" element={
+          <ProtectedRoute allowedRoles={['Doctor']}>
+            <HomepageDoctor />
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard-doctor" element={
+          <ProtectedRoute allowedRoles={['Doctor']}>
+            <DashboardDoctor />
+          </ProtectedRoute>
+        } />
+        <Route path="/patient-monitoring" element={
+          <ProtectedRoute allowedRoles={['Doctor']}>
+            <PatientMonitoringPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/patient-plans" element={
+          <ProtectedRoute allowedRoles={['Doctor']}>
+            <PatientPlansPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/work-schedule" element={
+          <ProtectedRoute allowedRoles={['Doctor']}>
+            <WorkSchedulePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/patient-chat" element={
+          <ProtectedRoute allowedRoles={['Doctor']}>
+            <PatientChatPage />
+          </ProtectedRoute>
+        } />
 
-        {/* Các route dành cho bác sĩ - chỉ bác sĩ mới có thể truy cập */}
-        <Route element={<PrivateRoute allowedRoles="Doctor" />}>
-          <Route path="/homepage-doctor" element={<HomepageDoctor />} /> {/* Trang chủ dành cho bác sĩ */}
-          <Route path="/dashboard-doctor" element={<DashboardDoctor />} /> {/* Bảng điều khiển bác sĩ */}
-          <Route path="/patient-monitoring" element={<PatientMonitoringPage />} /> {/* Trang theo dõi bệnh nhân */}
-          <Route path="/patient-plans" element={<PatientPlansPage />} /> {/* Trang kế hoạch điều trị cho bệnh nhân */}
-          <Route path="/work-schedule" element={<WorkSchedulePage />} /> {/* Trang lịch làm việc */}
-          <Route path="/patient-chat" element={<PatientChatPage />} /> {/* Trang chat với bệnh nhân */}
-        </Route>
+        {/* Staff routes */}
+        <Route path="/dashboard-staff" element={
+          <ProtectedRoute allowedRoles={['Staff']}>
+            <DashboardStaff />
+          </ProtectedRoute>
+        } />
 
-        {/* Các route dành cho nhân viên - chỉ nhân viên mới có thể truy cập */}
-        <Route element={<PrivateRoute allowedRoles="Staff" />}>
-          <Route path="/dashboard-staff" element={<DashboardStaff />} /> {/* Bảng điều khiển nhân viên */}
-        </Route>
-
-        {/* Route dành cho admin - chỉ admin mới có thể truy cập */}
+        {/* Admin routes */}
         <Route path="/admin" element={
-          localStorage.getItem('userRole') === 'Admin' ?
-            <AdminPage /> : <Navigate to="/unauthorized" replace />
-        } /> {/* Trang quản trị */}
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminPage />
+          </ProtectedRoute>
+        } />
 
-        {/* Cách khác để định nghĩa route admin sử dụng PrivateRoute
-        <Route element={<PrivateRoute allowedRoles="Admin" />}>
-          <Route path="/admin" element={<AdminPage />} />
-        </Route> */}
+        {/* Protected routes for all authenticated users */}
+        <Route path="/profile" element={
+          <ProtectedRoute allowedRoles={['Member', 'Doctor', 'Staff', 'Admin']}>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/change-password" element={
+          <ProtectedRoute allowedRoles={['Member', 'Doctor', 'Staff', 'Admin']}>
+            <ChangePasswordPage />
+          </ProtectedRoute>
+        } />
+
+        {/* Catch all - redirect to appropriate homepage or login */}
+        <Route path="*" element={<Navigate to={getHomePage()} replace />} />
       </Routes>
     </Router>
   );

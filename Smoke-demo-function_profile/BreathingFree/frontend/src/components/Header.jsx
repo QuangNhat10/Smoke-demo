@@ -129,78 +129,264 @@ const Header = ({ userName }) => {
     setShowUserDropdown(false);
   };
 
+  // Styles
+  const styles = {
+    mainHeader: {
+      backgroundColor: '#ffffff',
+      position: 'relative',
+      zIndex: 1000,
+      width: '100%',
+      borderBottom: '1px solid #e6e6e6',
+      padding: '10px 0',
+      margin: 0,
+      left: 0,
+      right: 0,
+    },
+    container: {
+      maxWidth: '1200px',
+      margin: '0 auto',
+      padding: '0 20px',
+    },
+    headerContent: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    logoButton: {
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      padding: 0,
+    },
+    logoText: {
+      fontSize: '2rem',
+      fontWeight: 700,
+      color: '#003b6f',
+      letterSpacing: '1px',
+    },
+    userActions: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '15px',
+    },
+    userInfo: {
+      position: 'relative',
+    },
+    userDropdownToggle: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      padding: '8px',
+      borderRadius: '50px',
+      transition: 'all 0.2s ease',
+    },
+    avatarContainer: {
+      width: '40px',
+      height: '40px',
+      borderRadius: '50%',
+      overflow: 'hidden',
+      border: '2px solid #35a79c',
+    },
+    userAvatar: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    },
+    dropdownArrow: {
+      fontSize: '12px',
+      color: '#64748b',
+      transition: 'transform 0.2s ease',
+    },
+    dropdownArrowOpen: {
+      transform: 'rotate(180deg)',
+    },
+    userDropdown: {
+      position: 'absolute',
+      top: 'calc(100% + 10px)',
+      right: 0,
+      backgroundColor: 'white',
+      borderRadius: '12px',
+      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+      width: '280px',
+      zIndex: 1000,
+      overflow: 'hidden',
+      animation: 'fadeIn 0.2s ease-out',
+    },
+    dropdownHeader: {
+      padding: '20px',
+      borderBottom: '1px solid #f1f5f9',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '15px',
+    },
+    dropdownAvatar: {
+      width: '50px',
+      height: '50px',
+      borderRadius: '50%',
+      overflow: 'hidden',
+      border: '2px solid #35a79c',
+    },
+    dropdownUserDetails: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    dropdownUsername: {
+      fontWeight: '600',
+      color: '#1e293b',
+      marginBottom: '4px',
+      fontSize: '1rem',
+    },
+    dropdownEmail: {
+      color: '#64748b',
+      fontSize: '0.875rem',
+    },
+    dropdownDivider: {
+      height: '1px',
+      backgroundColor: '#f1f5f9',
+      margin: '5px 0',
+    },
+    dropdownItem: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '12px',
+      padding: '12px 20px',
+      width: '100%',
+      backgroundColor: 'transparent',
+      border: 'none',
+      textAlign: 'left',
+      cursor: 'pointer',
+      transition: 'background-color 0.2s ease',
+      color: '#1e293b',
+      fontWeight: '500',
+      fontSize: '0.95rem',
+    },
+    dropdownItemHover: {
+      backgroundColor: '#f8fafc',
+    },
+    dropdownIcon: {
+      fontSize: '1.2rem',
+      color: '#64748b',
+    },
+    textDanger: {
+      color: '#e53e3e',
+    },
+    authButtons: {
+      display: 'flex',
+      gap: '10px',
+    },
+    btnLogin: {
+      padding: '10px 20px',
+      backgroundColor: 'transparent',
+      color: '#35a79c',
+      border: '2px solid #35a79c',
+      borderRadius: '8px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+    },
+    btnLoginHover: {
+      backgroundColor: 'rgba(53, 167, 156, 0.1)',
+    },
+    btnRegister: {
+      padding: '10px 20px',
+      backgroundColor: '#35a79c',
+      color: 'white',
+      border: 'none',
+      borderRadius: '8px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+    },
+    btnRegisterHover: {
+      backgroundColor: '#2c9085',
+    },
+  };
+
   return (
-    <header className="main-header">
-      <div className="container">
-        <div className="header-content">
+    <header style={styles.mainHeader}>
+      <div style={styles.container}>
+        <div style={styles.headerContent}>
           <button
             onClick={handleLogoClick}
-            className="logo-button"
+            style={styles.logoButton}
           >
-            <span className="logo-text">Breathing Free</span>
+            <span style={styles.logoText}>Breathing Free</span>
           </button>
 
-          <div className="user-actions">
+          <div style={styles.userActions}>
             {isLoggedIn ? (
-              <div className="user-info" ref={dropdownRef}>
-                <button className="user-dropdown-toggle" onClick={toggleUserDropdown}>
-                  <div className="avatar-container">
+              <div style={styles.userInfo} ref={dropdownRef}>
+                <button 
+                  style={styles.userDropdownToggle} 
+                  onClick={toggleUserDropdown}
+                >
+                  <div style={styles.avatarContainer}>
                     <img
                       src={profilePicture || 'https://via.placeholder.com/150'}
                       alt="Profile"
-                      className="user-avatar"
+                      style={styles.userAvatar}
                     />
                   </div>
-                  <span className={`dropdown-arrow ${showUserDropdown ? 'open' : ''}`}>▾</span>
+                  <span style={{
+                    ...styles.dropdownArrow,
+                    ...(showUserDropdown ? styles.dropdownArrowOpen : {})
+                  }}>▾</span>
                 </button>
                 {/* Dropdown menu hiển thị khi nhấn vào avatar */}
                 {showUserDropdown && (
-                  <div className="user-dropdown">
-                    <div className="dropdown-header">
-                      <div className="dropdown-avatar">
-                        <img src={profilePicture || 'https://via.placeholder.com/150'} alt="Profile" />
+                  <div style={styles.userDropdown}>
+                    <div style={styles.dropdownHeader}>
+                      <div style={styles.dropdownAvatar}>
+                        <img 
+                          src={profilePicture || 'https://via.placeholder.com/150'} 
+                          alt="Profile" 
+                          style={styles.userAvatar}
+                        />
                       </div>
-                      <div className="dropdown-user-details">
-                        <span className="dropdown-username">{userName}</span>
-                        <span className="dropdown-email">{userEmail}</span>
+                      <div style={styles.dropdownUserDetails}>
+                        <span style={styles.dropdownUsername}>{userName}</span>
+                        <span style={styles.dropdownEmail}>{userEmail}</span>
                       </div>
                     </div>
-                    <div className="dropdown-divider"></div>
+                    <div style={styles.dropdownDivider}></div>
                     <button
-                      className="dropdown-item"
+                      style={styles.dropdownItem}
                       onClick={handleProfileClick}
                     >
-                      <span className="dropdown-icon">👤</span>
+                      <span style={styles.dropdownIcon}>👤</span>
                       Hồ sơ cá nhân
                     </button>
                     <button
-                      className="dropdown-item"
+                      style={styles.dropdownItem}
                       onClick={handleChangePasswordClick}
                     >
-                      <span className="dropdown-icon">🔒</span>
+                      <span style={styles.dropdownIcon}>🔒</span>
                       Đổi mật khẩu
                     </button>
-                    <div className="dropdown-divider"></div>
+                    <div style={styles.dropdownDivider}></div>
                     <button
-                      className="dropdown-item text-danger"
+                      style={{...styles.dropdownItem, ...styles.textDanger}}
                       onClick={handleLogout}
                     >
-                      <span className="dropdown-icon">🚪</span>
+                      <span style={styles.dropdownIcon}>🚪</span>
                       Đăng xuất
                     </button>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="auth-buttons">
+              <div style={styles.authButtons}>
                 <button
-                  className="btn btn-login"
+                  style={styles.btnLogin}
                   onClick={() => navigate('/login')}
                 >
                   Đăng Nhập
                 </button>
                 <button
-                  className="btn btn-register"
+                  style={styles.btnRegister}
                   onClick={() => navigate('/register')}
                 >
                   Đăng Ký
@@ -211,239 +397,14 @@ const Header = ({ userName }) => {
         </div>
       </div>
 
-      <style jsx>{`
-        .main-header {
-          background-color: #ffffff;
-          position: relative;
-          z-index: 1000;
-          width: 100%;
-          border-bottom: 1px solid #e6e6e6;
-          padding: 10px 0;
-          margin: 0;
-          left: 0;
-          right: 0;
-        }
-        
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-        }
-        
-        .header-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        
-        .logo-button {
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-        }
-        
-        .logo-text {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #003b6f;
-          letter-spacing: 1px;
-          font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-        }
-        
-        .user-actions {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-        }
-        
-        .user-info {
-          display: flex;
-          align-items: center;
-          position: relative;
-        }
-        
-        .avatar-container {
-          width: 38px;
-          height: 38px;
-          border-radius: 50%;
-          overflow: hidden;
-          border: 2px solid #e5e8ee;
-          margin-right: 5px;
-        }
-        
-        .user-avatar {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        
-        .user-dropdown-toggle {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 4px;
-          border-radius: 50%;
-          transition: all 0.2s ease;
-        }
-        
-        .user-dropdown-toggle:hover {
-          background-color: #f5f5f5;
-        }
-        
-        .dropdown-arrow {
-          font-size: 12px;
-          transition: transform 0.2s ease;
-          color: #666;
-          margin-left: -5px;
-        }
-        
-        .dropdown-arrow.open {
-          transform: rotate(180deg);
-        }
-        
-        .user-dropdown {
-          position: absolute;
-          top: 100%;
-          right: 0;
-          width: 300px;
-          background: white;
-          border-radius: 10px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          margin-top: 10px;
-          z-index: 1000;
-          overflow: hidden;
-          animation: fadeIn 0.2s ease;
-        }
-        
-        .dropdown-header {
-          padding: 16px;
-          display: flex;
-          align-items: center;
-          background-color: #f9f9f9;
-          border-bottom: 1px solid #eee;
-        }
-        
-        .dropdown-avatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          overflow: hidden;
-          margin-right: 12px;
-          border: 2px solid #e5e8ee;
-        }
-        
-        .dropdown-avatar img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        
-        .dropdown-user-details {
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .dropdown-username {
-          font-weight: 600;
-          font-size: 16px;
-          color: #333;
-        }
-        
-        .dropdown-email {
-          font-size: 12px;
-          color: #666;
-        }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .dropdown-item {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          text-align: left;
-          padding: 14px 16px;
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-size: 14px;
-          transition: background-color 0.2s ease;
-        }
-        
-        .dropdown-item:hover {
-          background-color: #f5f5f5;
-        }
-        
-        .dropdown-icon {
-          margin-right: 10px;
-          font-size: 16px;
-        }
-        
-        .text-danger {
-          color: #dc3545;
-        }
-        
-        .dropdown-divider {
-          height: 1px;
-          background-color: #e6e6e6;
-          margin: 0;
-        }
-        
-        .auth-buttons {
-          display: flex;
-          gap: 10px;
-        }
-        
-        .btn {
-          padding: 8px 20px;
-          font-size: 14px;
-          font-weight: 600;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        
-        .btn-login {
-          background-color: #003b6f;
-          color: white;
-          border: none;
-        }
-        
-        .btn-login:hover {
-          background-color: #002a50;
-        }
-        
-        .btn-register {
-          background-color: white;
-          color: #003b6f;
-          border: 1px solid #003b6f;
-        }
-        
-        .btn-register:hover {
-          background-color: #f5f5f5;
-        }
-        
-        .btn-danger {
-          background-color: #dc3545;
-          color: white;
-          border: none;
-        }
-        
-        .btn-danger:hover {
-          background-color: #c82333;
-        }
-        
-        .btn-sm {
-          padding: 8px 16px;
-          font-size: 14px;
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
     </header>
   );
 };

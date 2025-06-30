@@ -208,7 +208,8 @@ function Home() {
             </div>
           </div>
 
-          <style jsx>{`
+          <style>
+            {`
             .main-header {
               background-color: var(--white);
               box-shadow: 0 8px 32px 0 rgba(0,47,108,0.08);
@@ -248,13 +249,9 @@ function Home() {
             .btn-sm {
               padding: 0.4rem 1rem;
               font-size: 0.9rem;
-              border-radius: var(--border-radius-sm);
             }
-            
-            .mr-2 {
-              margin-right: 0.5rem;
-            }
-          `}</style>
+            `}
+          </style>
         </header>
       )}
 

@@ -218,14 +218,14 @@ const DoctorPage = () => {
         try {
             if (!currentDoctor) {
                 alert('Vui lòng chọn bác sĩ để đánh giá.');
-                return;
-            }
+            return;
+        }
 
             const normalizedComment = reviewFormData.comment.trim().normalize('NFC');
             if (!normalizedComment) {
                 alert('Vui lòng nhập nhận xét của bạn.');
-                return;
-            }
+            return;
+        }
 
             const userId = localStorage.getItem('userId');
             if (!userId) {
@@ -271,7 +271,7 @@ const DoctorPage = () => {
                     alert(error.response.data.message || 'Có lỗi xảy ra khi gửi đánh giá.');
                 }
             } else {
-                alert('Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại sau.');
+            alert('Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại sau.');
             }
         }
     };
@@ -292,7 +292,7 @@ const DoctorPage = () => {
         if (!isMember) {
             const confirmUpgrade = window.confirm('Bạn cần có gói thành viên để đánh giá bác sĩ. Bạn có muốn xem các gói thành viên không?');
             if (confirmUpgrade) {
-                navigate('/membership');
+            navigate('/membership');
             }
             return;
         }
@@ -599,7 +599,7 @@ const DoctorPage = () => {
                                 wordBreak: 'break-word'
                             }}>
                                 {reviewFormData.comment}
-                            </div>
+                    </div>
                         </div>
                     )}
 
@@ -795,15 +795,15 @@ const DoctorPage = () => {
                                     borderBottom: '1px solid #f0f0f0',
                                 }}>
                                     <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
+                                    display: 'flex',
+                                    alignItems: 'center',
                                         gap: '1.5rem',
                                         marginBottom: '1.5rem',
-                                    }}>
-                                        <div style={{
+                                }}>
+                                    <div style={{
                                             width: '100px',
                                             height: '100px',
-                                            borderRadius: '50%',
+                                        borderRadius: '50%',
                                             overflow: 'hidden',
                                             background: '#f0f0f0',
                                         }}>
@@ -821,42 +821,42 @@ const DoctorPage = () => {
                                                 <div style={{
                                                     width: '100%',
                                                     height: '100%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    fontSize: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '2.5rem',
                                                     color: '#44b89d',
-                                                }}>
+                                    }}>
                                                     👨‍⚕️
-                                                </div>
+                                    </div>
                                             )}
                                         </div>
                                         <div>
-                                            <h3 style={{
-                                                margin: '0 0 0.5rem 0',
-                                                fontSize: '1.4rem',
-                                                color: '#2c3e50',
-                                            }}>
-                                                {doctor.fullName}
-                                            </h3>
-                                            {doctor.position && (
-                                                <p style={{
+                                    <h3 style={{
+                                        margin: '0 0 0.5rem 0',
+                                        fontSize: '1.4rem',
+                                        color: '#2c3e50',
+                                    }}>
+                                        {doctor.fullName}
+                                    </h3>
+                                    {doctor.position && (
+                                        <p style={{
                                                     margin: '0 0 0.25rem 0',
                                                     color: '#44b89d',
-                                                    fontWeight: '500',
-                                                }}>
-                                                    {doctor.position}
-                                                </p>
-                                            )}
-                                            {doctor.specialty && (
-                                                <p style={{
+                                            fontWeight: '500',
+                                        }}>
+                                            {doctor.position}
+                                        </p>
+                                    )}
+                                    {doctor.specialty && (
+                                        <p style={{
                                                     margin: '0',
-                                                    color: '#7f8c8d',
-                                                    fontSize: '0.9rem',
-                                                }}>
-                                                    {doctor.specialty}
-                                                </p>
-                                            )}
+                                            color: '#7f8c8d',
+                                            fontSize: '0.9rem',
+                                        }}>
+                                            {doctor.specialty}
+                                        </p>
+                                    )}
                                         </div>
                                     </div>
 
@@ -889,8 +889,8 @@ const DoctorPage = () => {
                                             )}
                                             {doctor.address && (
                                                 <div>📍 {doctor.address}</div>
-                                            )}
-                                        </div>
+                                    )}
+                                </div>
                                     )}
                                 </div>
 
@@ -916,12 +916,12 @@ const DoctorPage = () => {
                                             {renderStars(doctor.averageRating || 0)}
                                         </div>
                                         <div style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
+                                    display: 'flex',
+                                    flexDirection: 'column',
                                             alignItems: 'flex-end',
                                             gap: '0.5rem',
-                                        }}>
-                                            <div style={{
+                                }}>
+                                    <div style={{
                                                 fontSize: '0.9rem',
                                                 color: '#666',
                                             }}>
@@ -950,82 +950,82 @@ const DoctorPage = () => {
                                 {/* Action Buttons */}
                                 <div style={{
                                     padding: '1.5rem 2rem',
-                                    display: 'grid',
-                                    gridTemplateColumns: '1fr 1fr',
-                                    gap: '1rem',
-                                }}>
-                                    <button
-                                        onClick={() => handleContactDoctor(doctor.fullName)}
-                                        style={{
-                                            background: '#44b89d',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '8px',
-                                            padding: '0.75rem',
-                                            fontWeight: '600',
-                                            fontSize: '0.9rem',
-                                            cursor: 'pointer',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            gap: '0.5rem',
-                                        }}
-                                    >
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="currentColor"/>
-                                        </svg>
-                                        Liên Hệ
-                                    </button>
-                                    <button
+                                        display: 'grid',
+                                        gridTemplateColumns: '1fr 1fr',
+                                        gap: '1rem',
+                                    }}>
+                                        <button
+                                            onClick={() => handleContactDoctor(doctor.fullName)}
+                                            style={{
+                                                background: '#44b89d',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '8px',
+                                                padding: '0.75rem',
+                                                fontWeight: '600',
+                                                fontSize: '0.9rem',
+                                                cursor: 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '0.5rem',
+                                            }}
+                                        >
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="currentColor"/>
+                                            </svg>
+                                            Liên Hệ
+                                        </button>
+                                        <button
                                         onClick={() => openReviewForm(doctor)}
-                                        style={{
-                                            background: '#f1c40f',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '8px',
-                                            padding: '0.75rem',
-                                            fontWeight: '600',
-                                            fontSize: '0.9rem',
-                                            cursor: 'pointer',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            gap: '0.5rem',
-                                        }}
-                                    >
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="currentColor"/>
-                                        </svg>
-                                        Đánh Giá
-                                    </button>
-                                </div>
+                                            style={{
+                                                background: '#f1c40f',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '8px',
+                                                padding: '0.75rem',
+                                                fontWeight: '600',
+                                                fontSize: '0.9rem',
+                                                cursor: 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '0.5rem',
+                                            }}
+                                        >
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="currentColor"/>
+                                            </svg>
+                                            Đánh Giá
+                                        </button>
+            </div>
 
                                 {/* Recent Reviews Preview */}
                                 {doctorFeedbacks[doctor.userID]?.length > 0 && (
-                                    <div style={{
+                <div style={{
                                         padding: '1.5rem 2rem',
                                         borderTop: '1px solid #f0f0f0',
                                     }}>
                                         <h4 style={{
                                             margin: '0 0 1rem 0',
-                                            color: '#2c3e50',
+                            color: '#2c3e50',
                                             fontSize: '1.1rem',
-                                        }}>
+                        }}>
                                             Đánh giá gần đây
                                         </h4>
-                                        <div style={{
+                        <div style={{
                                             display: 'flex',
                                             flexDirection: 'column',
                                             gap: '1rem',
-                                        }}>
+                        }}>
                                             {doctorFeedbacks[doctor.userID].slice(0, 2).map((feedback, index) => (
                                                 <div key={index} style={{
                                                     padding: '1rem',
                                                     background: '#f8f9fa',
                                                     borderRadius: '8px',
-                                                }}>
-                                                    <div style={{
-                                                        display: 'flex',
+                            }}>
+                            <div style={{
+                                display: 'flex',
                                                         justifyContent: 'space-between',
                                                         marginBottom: '0.5rem',
                                                     }}>
@@ -1035,29 +1035,29 @@ const DoctorPage = () => {
                                                                 marginBottom: '0.25rem',
                                                             }}>
                                                                 {feedback.userName}
-                                                            </div>
+                            </div>
                                                             {renderStars(feedback.rating)}
-                                                        </div>
-                                                        <div style={{
+                        </div>
+                        <div style={{
                                                             fontSize: '0.85rem',
                                                             color: '#999',
-                                                        }}>
+                        }}>
                                                             {new Date(feedback.submittedAt).toLocaleDateString()}
                                                         </div>
                                                     </div>
-                                                    <p style={{
+                            <p style={{
                                                         margin: '0',
                                                         fontSize: '0.95rem',
-                                                        color: '#666',
+                                color: '#666',
                                                         lineHeight: '1.5',
                                                     }}>
                                                         {feedback.feedbackText}
                                                     </p>
-                                                </div>
+                        </div>
                                             ))}
-                                        </div>
-                                    </div>
-                                )}
+                    </div>
+                </div>
+            )}
                             </div>
                         ))
                     )}

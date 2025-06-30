@@ -13,11 +13,12 @@ namespace BreathingFree.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<QuitPlan> QuitPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             // Configure User entity
             modelBuilder.Entity<User>(entity =>
             {
@@ -62,6 +63,36 @@ namespace BreathingFree.Data
                       .HasForeignKey(e => e.UserID)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            // Configure QuitPlan entity
+            modelBuilder.Entity<QuitPlan>(entity =>
+            {
+                entity.ToTable("QuitPlans", "dbo");
+                entity.HasKey(e => e.ID);
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                      .HasForeignKey(e => e.UserID)
+                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.Doctor)
+                    .WithMany()
+                      .HasForeignKey(e => e.DoctorID)
+                      .OnDelete(DeleteBehavior.SetNull);
+            });
+
+            // Add test user with known password
+            var testPassword = BCrypt.Net.BCrypt.HashPassword("Test@123");
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    UserID = 999,
+                    Email = "test@example.com",
+                    PasswordHash = testPassword,
+                    FullName = "Test User",
+                    RoleID = 2, // Member role
+                    CreatedAt = DateTime.Now,
+                    Status = "Active"
+                }
+            );
 
             // Add some seed data for testing
             modelBuilder.Entity<User>().HasData(

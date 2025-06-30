@@ -4,6 +4,7 @@ using BreathingFree.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace BreathingFree.Controllers
 {
@@ -40,28 +41,48 @@ namespace BreathingFree.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
+            try
+            {
+                _logger.LogInformation("Login attempt for email: {Email}", model.Email);
+
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                    _logger.LogWarning("Invalid model state for login attempt");
+                    return BadRequest(new { message = "Invalid request data" });
             }
 
             var result = await _authService.LoginAsync(model);
+                _logger.LogInformation("Login result for {Email}: Success={Success}, Message={Message}", 
+                    model.Email, result.success, result.message);
+
             if (!result.success || result.user == null)
             {
                 return BadRequest(new { message = result.message });
             }
 
             var token = _authService.GenerateJwtToken(result.user);
+                _logger.LogInformation("Generated token for user {UserId}", result.user.UserID);
 
-            return Ok(new
+                var response = new
             {
-                token,
+                    token = token,
                 userId = result.user.UserID,
+                    roleId = result.user.RoleID,
                 email = result.user.Email,
                 fullName = result.user.FullName,
-                roleId = result.user.RoleID,
-                message = result.message
-            });
+                    message = "Đăng nhập thành công"
+                };
+
+                _logger.LogInformation("Login successful for user {UserId} with role {RoleId}", 
+                    result.user.UserID, result.user.RoleID);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during login for email: {Email}", model.Email);
+                return StatusCode(500, new { message = "Lỗi server. Vui lòng thử lại sau." });
+            }
         }
 
         [Authorize]
@@ -165,6 +186,35 @@ namespace BreathingFree.Controllers
             }
 
             return Ok(new { message = result.Message });
+        }
+
+        [Authorize]
+        [HttpGet("verify")]
+        public IActionResult VerifyToken()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    return Unauthorized(new { message = "Token không hợp lệ." });
+                }
+
+                var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+
+                return Ok(new { 
+                    userId = userId,
+                    role = userRole,
+                    email = userEmail,
+                    message = "Token hợp lệ."
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error verifying token");
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi xác thực token." });
+            }
         }
     }
 }

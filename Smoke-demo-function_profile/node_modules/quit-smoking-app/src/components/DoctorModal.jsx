@@ -354,7 +354,8 @@ const DoctorModal = ({ isOpen, onClose }) => {
             </div>
 
             {/* CSS Animation */}
-            <style jsx>{`
+            <style>
+                {`
                 @keyframes fadeInUp {
                     from {
                         opacity: 0;
@@ -377,7 +378,8 @@ const DoctorModal = ({ isOpen, onClose }) => {
                         transform: scale(1);
                     }
                 }
-            `}</style>
+                `}
+            </style>
         </div>
     );
 };

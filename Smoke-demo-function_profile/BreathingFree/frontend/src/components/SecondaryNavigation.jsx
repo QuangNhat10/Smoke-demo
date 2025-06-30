@@ -23,14 +23,97 @@ const SecondaryNavigation = () => {
         setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
     };
 
+    // Styles
+    const styles = {
+        secondaryNavigation: {
+            backgroundColor: '#2C9085',
+            padding: 0,
+            width: '100%',
+            margin: 0,
+            left: 0,
+            right: 0,
+        },
+        container: {
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: '0 20px',
+        },
+        navList: {
+            display: 'flex',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0,
+        },
+        navItem: {
+            position: 'relative',
+        },
+        navLink: {
+            display: 'block',
+            padding: '1rem 1.5rem',
+            color: 'white',
+            fontWeight: 500,
+            textDecoration: 'none',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+        },
+        navLinkHover: {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            color: 'white',
+        },
+        blogMenuItem: {
+            color: 'white',
+            fontWeight: 500,
+        },
+        dropdownToggle: {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+        },
+        dropdownArrow: {
+            fontSize: '0.8rem',
+            transition: 'transform 0.3s ease',
+        },
+        dropdownMenu: {
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            minWidth: '220px',
+            zIndex: 1000,
+            padding: '0.5rem 0',
+            animation: 'fadeIn 0.2s ease-out',
+        },
+        dropdownItem: {
+            display: 'block',
+            width: '100%',
+            padding: '0.75rem 1.5rem',
+            clear: 'both',
+            fontWeight: 500,
+            color: '#2C9085',
+            textAlign: 'left',
+            backgroundColor: 'transparent',
+            border: 0,
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+        },
+        dropdownItemHover: {
+            backgroundColor: '#f0f9f8',
+            color: '#2C9085',
+        }
+    };
+
     return (
-        <nav className="secondary-navigation">
-            <div className="container">
-                <ul className="nav-list">
+        <nav style={styles.secondaryNavigation}>
+            <div style={styles.container}>
+                <ul style={styles.navList}>
                     {/* Các mục điều hướng chính */}
-                    <li className="nav-item">
+                    <li style={styles.navItem}>
                         <button
-                            className="nav-link"
+                            style={styles.navLink}
                             onClick={() => {
                                 const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
                                 if (isLoggedIn) {
@@ -45,29 +128,29 @@ const SecondaryNavigation = () => {
                     </li>
 
                     {/* Dropdown Công Cụ & Mẹo */}
-                    <li className="nav-item dropdown">
+                    <li style={styles.navItem}>
                         <button
-                            className="nav-link dropdown-toggle"
+                            style={{...styles.navLink, ...styles.dropdownToggle}}
                             onClick={() => handleDropdownToggle('tools')}
                         >
-                            Công Cụ & Mẹo <span className="dropdown-arrow">▾</span>
+                            Công Cụ & Mẹo <span style={styles.dropdownArrow}>▾</span>
                         </button>
                         {activeDropdown === 'tools' && (
-                            <div className="dropdown-menu">
+                            <div style={styles.dropdownMenu}>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/track-status')}
                                 >
                                     Theo Dõi Trạng Thái
                                 </button>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/dashboard-member')}
                                 >
                                     Tạo Kế Hoạch
                                 </button>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/smoking-cessation')}
                                 >
                                     Cách Cai Thuốc
@@ -77,29 +160,29 @@ const SecondaryNavigation = () => {
                     </li>
 
                     {/* Dropdown Về Chúng Tôi */}
-                    <li className="nav-item dropdown">
+                    <li style={styles.navItem}>
                         <button
-                            className="nav-link dropdown-toggle"
+                            style={{...styles.navLink, ...styles.dropdownToggle}}
                             onClick={() => handleDropdownToggle('about')}
                         >
-                            Về Chúng Tôi <span className="dropdown-arrow">▾</span>
+                            Về Chúng Tôi <span style={styles.dropdownArrow}>▾</span>
                         </button>
                         {activeDropdown === 'about' && (
-                            <div className="dropdown-menu">
+                            <div style={styles.dropdownMenu}>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/expert-advice')}
                                 >
                                     Chia Sẻ Từ Chuyên Gia
                                 </button>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/rankings')}
                                 >
                                     Bảng Xếp Hạng
                                 </button>
                                 <button
-                                    className="dropdown-item blog-menu-item"
+                                    style={{...styles.dropdownItem, ...styles.blogMenuItem}}
                                     onClick={() => navigate('/blog')}
                                 >
                                     Blog Cộng Đồng
@@ -109,35 +192,35 @@ const SecondaryNavigation = () => {
                     </li>
 
                     {/* Dropdown Trợ Giúp & Hỗ Trợ */}
-                    <li className="nav-item dropdown">
+                    <li style={styles.navItem}>
                         <button
-                            className="nav-link dropdown-toggle"
+                            style={{...styles.navLink, ...styles.dropdownToggle}}
                             onClick={() => handleDropdownToggle('help')}
                         >
-                            Trợ Giúp & Hỗ Trợ <span className="dropdown-arrow">▾</span>
+                            Trợ Giúp & Hỗ Trợ <span style={styles.dropdownArrow}>▾</span>
                         </button>
                         {activeDropdown === 'help' && (
-                            <div className="dropdown-menu">
+                            <div style={styles.dropdownMenu}>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => requireLogin(() => navigate('/appointment'))}
                                 >
                                     Đặt Lịch
                                 </button>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => requireLogin(() => navigate('/doctors'))}
                                 >
                                     Bác Sĩ
                                 </button>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/support-chat')}
                                 >
                                     Nhắn Tin Hỗ Trợ
                                 </button>
                                 <button
-                                    className="dropdown-item"
+                                    style={styles.dropdownItem}
                                     onClick={() => navigate('/faq')}
                                 >
                                     Câu Hỏi Thường Gặp
@@ -147,104 +230,15 @@ const SecondaryNavigation = () => {
                     </li>
                 </ul>
             </div>
-
-            <style jsx>{`
-        .secondary-navigation {
-          background-color: #2C9085;
-          padding: 0;
-          width: 100%;
-          margin: 0;
-          left: 0;
-          right: 0;
-        }
-        
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-        }
-        
-        .nav-list {
-          display: flex;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        
-        .nav-item {
-          position: relative;
-        }
-        
-        .nav-link {
-          display: block;
-          padding: 1rem 1.5rem;
-          color: white;
-          font-weight: 500;
-          text-decoration: none;
-          background: none;
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-          color: white;
-        }
-        
-        .blog-menu-item {
-          color: white;
-          font-weight: 500;
-        }
-        
-        .dropdown-toggle {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-        
-        .dropdown-arrow {
-          font-size: 0.8rem;
-          transition: transform 0.3s ease;
-        }
-        
-        .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background-color: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          min-width: 220px;
-          z-index: 1000;
-          padding: 0.5rem 0;
-          animation: fadeIn 0.2s ease-out;
-        }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .dropdown-item {
-          display: block;
-          width: 100%;
-          padding: 0.75rem 1.5rem;
-          clear: both;
-          font-weight: 500;
-          color: #2C9085;
-          text-align: left;
-          background-color: transparent;
-          border: 0;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        
-        .dropdown-item:hover {
-          background-color: #f0f9f8;
-          color: #2C9085;
-        }
-      `}</style>
+            
+            <style>
+                {`
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(-10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                `}
+            </style>
         </nav>
     );
 };
