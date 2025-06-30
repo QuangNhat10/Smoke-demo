@@ -131,15 +131,24 @@ function ProfilePage() {
     };
   }, []);
 
+  // Debug useEffect để theo dõi userData changes
+  useEffect(() => {
+    console.log("userData changed:", userData);
+    console.log("isLoading:", isLoading);
+    console.log("error:", error);
+  }, [userData, isLoading, error]);
+
   const fetchUserProfile = async () => {
     setIsLoading(true);
     setError("");
 
     try {
-      const response = await authApi.getUserProfile();
-      const profileData = response.data;
+      const profileData = await authApi.getUserProfile();
+      console.log("Profile data received:", profileData);
+      console.log("Setting userData with:", profileData);
 
       setUserData(profileData);
+      console.log("userData set successfully");
       setFormData({
         fullName: profileData.fullName || "",
         email: profileData.email || "",
@@ -171,6 +180,9 @@ function ProfilePage() {
       // Lưu một số thông tin vào localStorage để các component khác có thể sử dụng
       localStorage.setItem("userName", profileData.fullName || "");
       localStorage.setItem("userEmail", profileData.email || "");
+      
+      console.log("Profile loaded successfully:", profileData);
+      setError(""); // Clear any previous errors
     } catch (err) {
       console.error("Error fetching profile:", err);
       setError(
