@@ -11,6 +11,7 @@ const DashboardMember = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [quitPlan, setQuitPlan] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,8 +27,18 @@ const DashboardMember = () => {
   }, []);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setIsSticky(scrollTop > 200); // Activate sticky after scrolling 200px
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
       navigate('/login');
       return;
@@ -36,7 +47,7 @@ const DashboardMember = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const fullName = user.fullName || localStorage.getItem('userName') || 'User';
     setUserName(fullName);
-    
+
     // Load active quit plan
     loadQuitPlan();
   }, [navigate]);
@@ -52,7 +63,7 @@ const DashboardMember = () => {
 
     // Listen storage changes từ tabs khác  
     window.addEventListener('storage', handleStorageChange);
-    
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
@@ -62,13 +73,13 @@ const DashboardMember = () => {
     try {
       setLoading(true);
       setQuitPlan(null);
-      
+
       const currentUser = localStorage.getItem('userId');
       console.log('Loading quit plan for user:', currentUser);
-      
+
       const result = await quitPlanApi.getActiveQuitPlan();
       console.log('API response:', result);
-      
+
       // API trả về object với data property
       const activePlan = result?.data || null;
       console.log('Processed quit plan:', activePlan);
@@ -159,9 +170,9 @@ const DashboardMember = () => {
             boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
             height: 'fit-content'
           }}>
-            <h2 style={{ 
-              fontWeight: '600', 
-              marginBottom: '1.5rem', 
+            <h2 style={{
+              fontWeight: '600',
+              marginBottom: '1.5rem',
               color: '#35a79c',
               textAlign: 'center'
             }}>
@@ -173,14 +184,14 @@ const DashboardMember = () => {
                 <p>Đang tải...</p>
               </div>
             ) : quitPlan ? (
-              <QuitPlanCard 
-                quitPlan={quitPlan} 
+              <QuitPlanCard
+                quitPlan={quitPlan}
                 onUpdate={loadQuitPlan}
               />
             ) : (
               <div style={{ textAlign: 'center', padding: '2rem' }}>
-                <p style={{ 
-                  color: '#7f8c8d', 
+                <p style={{
+                  color: '#7f8c8d',
                   marginBottom: '1.5rem',
                   fontSize: '1.1rem'
                 }}>
@@ -220,12 +231,20 @@ const DashboardMember = () => {
             background: 'white',
             padding: '2rem',
             borderRadius: '15px',
-            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
-            height: 'fit-content'
+            boxShadow: isSticky
+              ? '0 10px 25px rgba(0, 0, 0, 0.15), 0 0 0 2px rgba(53, 167, 156, 0.2)'
+              : '0 5px 15px rgba(0, 0, 0, 0.05)',
+            height: 'fit-content',
+            position: 'sticky',
+            top: isMobile ? '10px' : '20px',
+            zIndex: 10,
+            transition: 'all 0.3s ease',
+            transform: isSticky ? 'scale(1.02)' : 'scale(1)',
+            border: isSticky ? '1px solid rgba(53, 167, 156, 0.2)' : 'none'
           }}>
-            <h2 style={{ 
-              fontWeight: '600', 
-              marginBottom: '1.5rem', 
+            <h2 style={{
+              fontWeight: '600',
+              marginBottom: '1.5rem',
               color: '#35a79c',
               textAlign: 'center'
             }}>
@@ -233,12 +252,16 @@ const DashboardMember = () => {
             </h2>
 
             <div style={{
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: isSticky
+                ? 'linear-gradient(135deg, #35a79c 0%, #2d8f85 50%, #667eea 100%)'
+                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
               padding: '2rem',
               borderRadius: '12px',
               textAlign: 'center',
               color: 'white',
-              marginBottom: '1.5rem'
+              marginBottom: '1.5rem',
+              transition: 'all 0.3s ease',
+              boxShadow: isSticky ? '0 5px 20px rgba(53, 167, 156, 0.3)' : 'none'
             }}>
               <div style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
                 {quitPlan?.daysSmokeFree || 0}
@@ -248,8 +271,8 @@ const DashboardMember = () => {
               </div>
             </div>
 
-            <div style={{ 
-              display: 'flex', 
+            <div style={{
+              display: 'flex',
               gap: '1rem',
               justifyContent: 'center'
             }}>
@@ -312,9 +335,9 @@ const DashboardMember = () => {
           borderRadius: '15px',
           boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
         }}>
-          <h2 style={{ 
-            fontWeight: '600', 
-            marginBottom: '1.5rem', 
+          <h2 style={{
+            fontWeight: '600',
+            marginBottom: '1.5rem',
             color: '#35a79c',
             textAlign: 'center'
           }}>
