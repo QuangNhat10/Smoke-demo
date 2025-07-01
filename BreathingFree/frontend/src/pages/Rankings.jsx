@@ -2,42 +2,130 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 import SecondaryNavigationDoctor from '../components/SecondaryNavigationDoctor';
+import { getLeaderboardWithUser } from '../api/rankingApi';
 
 const Rankings = () => {
-    // Simulated ranking data
-    const [rankings] = useState([
-        { id: 1, name: 'Nguyễn Văn A', daysSmokeFree: 365, points: 4500 },
-        { id: 2, name: 'Trần Thị B', daysSmokeFree: 287, points: 3970 },
-        { id: 3, name: 'Phạm Văn C', daysSmokeFree: 240, points: 3650 },
-        { id: 4, name: 'Lê Thị D', daysSmokeFree: 192, points: 3200 },
-        { id: 5, name: 'Hoàng Văn E', daysSmokeFree: 178, points: 2950 },
-        { id: 6, name: 'Nguyễn Thị F', daysSmokeFree: 150, points: 2580 },
-        { id: 7, name: 'Vũ Văn G', daysSmokeFree: 130, points: 2200 },
-        { id: 8, name: 'Đặng Thị H', daysSmokeFree: 110, points: 1890 },
-        { id: 9, name: 'Bùi Văn I', daysSmokeFree: 95, points: 1650 },
-        { id: 10, name: 'Trương Thị K', daysSmokeFree: 82, points: 1480 },
-    ]);
-
-    // Get current user name from localStorage if available
-    const [currentUser, setCurrentUser] = useState(null);
+    const [rankings, setRankings] = useState([]);
+    const [currentUserRank, setCurrentUserRank] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
-        const userName = localStorage.getItem('userName');
-        if (userName) {
-            setCurrentUser(userName);
-        }
         const role = localStorage.getItem('userRole');
         setUserRole(role || '');
-    }, []);
+        
+        const fetchRankings = async () => {
+            try {
+                setLoading(true);
+                const userId = localStorage.getItem('userId');
+                
+                if (userId) {
+                    const response = await getLeaderboardWithUser(parseInt(userId));
+                    if (response.success) {
+                        setRankings(response.data.leaderboard);
+                        setCurrentUserRank(response.data.currentUserRank);
+                    } else {
+                        setError('Không thể tải dữ liệu bảng xếp hạng');
+                    }
+                } else {
+                    setError('Không tìm thấy thông tin người dùng');
+                }
+            } catch (err) {
+                console.error('Error fetching rankings:', err);
+                setError('Có lỗi xảy ra khi tải dữ liệu');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    // Find current user in rankings if they exist
-    const currentUserRank = currentUser ? rankings.findIndex(user => user.name === currentUser) + 1 : -1;
+        fetchRankings();
+    }, []);
 
     // Set the document title
     useEffect(() => {
         document.title = "Bảng Xếp Hạng | Cùng Nhau Cai Thuốc Lá";
     }, []);
+
+    if (loading) {
+        return (
+            <>
+                <Header
+                    onHomeClick={() => {
+                        if (!userRole) {
+                            window.location.href = '/';
+                        }
+                    }}
+                />
+                {userRole === 'Doctor' ? <SecondaryNavigationDoctor /> : <SecondaryNavigation />}
+                <main className="rankings-page">
+                    <div className="container">
+                        <div className="loading-container">
+                            <div className="loading-spinner"></div>
+                            <p>Đang tải bảng xếp hạng...</p>
+                        </div>
+                    </div>
+                </main>
+            </>
+        );
+    }
+
+    if (error) {
+        return (
+            <>
+                <Header
+                    onHomeClick={() => {
+                        if (!userRole) {
+                            window.location.href = '/';
+                        }
+                    }}
+                />
+                {userRole === 'Doctor' ? <SecondaryNavigationDoctor /> : <SecondaryNavigation />}
+                <main className="rankings-page">
+                    <div className="container">
+                        <div className="error-container">
+                            <p className="error-message">{error}</p>
+                            <button onClick={() => window.location.reload()} className="retry-button">
+                                Thử lại
+                            </button>
+                        </div>
+                    </div>
+                </main>
+            </>
+        );
+    }
+
+    if (!rankings || rankings.length === 0) {
+        return (
+            <>
+                <Header
+                    onHomeClick={() => {
+                        if (!userRole) {
+                            window.location.href = '/';
+                        }
+                    }}
+                />
+                {userRole === 'Doctor' ? <SecondaryNavigationDoctor /> : <SecondaryNavigation />}
+                <main className="rankings-page">
+                    <div className="container">
+                        <h1 className="page-title">Bảng Xếp Hạng</h1>
+                        <div className="empty-state">
+                            <h3>Chưa có dữ liệu xếp hạng</h3>
+                            <p>Chưa có thành viên nào có dữ liệu tiến trình cai thuốc để xếp hạng.</p>
+                            <p>Hãy bắt đầu theo dõi tiến trình cai thuốc để xuất hiện trong bảng xếp hạng!</p>
+                        </div>
+                    </div>
+                </main>
+            </>
+        );
+    }
+
+    const formatMoney = (amount) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(amount);
+    };
 
     return (
         <>
@@ -55,6 +143,8 @@ const Rankings = () => {
                     <h1 className="page-title">Bảng Xếp Hạng</h1>
                     <p className="page-description">
                         Theo dõi thành tích cai thuốc của cộng đồng và phấn đấu để đạt thứ hạng cao nhất!
+                        <br />
+                        <small>Xếp hạng dựa trên: Số ngày không hút thuốc → Tiền tiết kiệm → Điểm tổng</small>
                     </p>
 
                     <div className="ranking-table-container">
@@ -64,23 +154,36 @@ const Rankings = () => {
                                     <th>Hạng</th>
                                     <th>Người Dùng</th>
                                     <th>Ngày Không Hút Thuốc</th>
+                                    <th>Tiền Tiết Kiệm</th>
                                     <th>Điểm</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {rankings.map((user, index) => (
                                     <tr
-                                        key={user.id}
-                                        className={`${index < 3 ? 'top-rank' : ''} ${user.name === currentUser ? 'current-user' : ''}`}
+                                        key={user.userID}
+                                        className={`${index < 3 ? 'top-rank' : ''} ${currentUserRank && user.userID === currentUserRank.userID ? 'current-user' : ''}`}
                                     >
                                         <td className="rank-column">
                                             {index === 0 && <span className="rank-badge gold">🥇</span>}
                                             {index === 1 && <span className="rank-badge silver">🥈</span>}
                                             {index === 2 && <span className="rank-badge bronze">🥉</span>}
-                                            {index > 2 && <span className="rank-number">{index + 1}</span>}
+                                            {index > 2 && <span className="rank-number">{user.rank}</span>}
                                         </td>
-                                        <td>{user.name}</td>
-                                        <td>{user.daysSmokeFree} ngày</td>
+                                        <td className="user-column">
+                                            <div className="user-info">
+                                                {user.avatar && (
+                                                    <img 
+                                                        src={`http://localhost:5000${user.avatar}`} 
+                                                        alt={user.fullName}
+                                                        className="user-avatar"
+                                                    />
+                                                )}
+                                                <span className="user-name">{user.fullName}</span>
+                                            </div>
+                                        </td>
+                                        <td><strong>{user.daysSmokeFree}</strong> ngày</td>
+                                        <td className="money-column">{formatMoney(user.totalMoneySaved)}</td>
                                         <td className="points-column">{user.points}</td>
                                     </tr>
                                 ))}
@@ -88,16 +191,36 @@ const Rankings = () => {
                         </table>
                     </div>
 
-                    {currentUser && currentUserRank > 0 && (
+                    {currentUserRank && (
                         <div className="user-status-container">
                             <h3>Thứ hạng của bạn</h3>
                             <div className="user-rank-card">
-                                <div className="user-rank-number">{currentUserRank}</div>
+                                <div className="user-rank-number">#{currentUserRank.rank}</div>
                                 <div className="user-rank-details">
-                                    <p className="user-rank-name">{currentUser}</p>
-                                    <p className="user-rank-points">{rankings[currentUserRank - 1]?.points || 0} điểm</p>
+                                    <div className="user-rank-info">
+                                        {currentUserRank.avatar && (
+                                            <img 
+                                                src={`http://localhost:5000${currentUserRank.avatar}`} 
+                                                alt={currentUserRank.fullName}
+                                                className="user-rank-avatar"
+                                            />
+                                        )}
+                                        <div>
+                                            <p className="user-rank-name">{currentUserRank.fullName}</p>
+                                            <p className="user-rank-points">{currentUserRank.points} điểm</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="user-rank-days">{rankings[currentUserRank - 1]?.daysSmokeFree || 0} ngày</div>
+                                <div className="user-rank-stats">
+                                    <div className="stat">
+                                        <span className="stat-value">{currentUserRank.daysSmokeFree}</span>
+                                        <span className="stat-label">ngày</span>
+                                    </div>
+                                    <div className="stat">
+                                        <span className="stat-value">{formatMoney(currentUserRank.totalMoneySaved)}</span>
+                                        <span className="stat-label">tiết kiệm</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -132,6 +255,69 @@ const Rankings = () => {
                     margin: 0 auto 3rem;
                     color: var(--text-light);
                     font-size: 1.1rem;
+                }
+
+                .page-description small {
+                    color: #666;
+                    font-style: italic;
+                }
+
+                .loading-container, .error-container {
+                    text-align: center;
+                    padding: 3rem 0;
+                }
+
+                .loading-spinner {
+                    border: 4px solid #f3f3f3;
+                    border-top: 4px solid var(--primary-color);
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    animation: spin 1s linear infinite;
+                    margin: 0 auto 1rem;
+                }
+
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+
+                .error-message {
+                    color: #e53e3e;
+                    font-size: 1.1rem;
+                    margin-bottom: 1rem;
+                }
+
+                .retry-button {
+                    background-color: var(--primary-color);
+                    color: white;
+                    border: none;
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+
+                .retry-button:hover {
+                    background-color: #0056b3;
+                }
+
+                .empty-state {
+                    text-align: center;
+                    padding: 3rem 2rem;
+                    background: white;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                }
+
+                .empty-state h3 {
+                    color: var(--primary-color);
+                    margin-bottom: 1rem;
+                }
+
+                .empty-state p {
+                    color: #666;
+                    margin-bottom: 0.5rem;
                 }
                 
                 .ranking-table-container {
@@ -198,74 +384,113 @@ const Rankings = () => {
                     font-weight: 600;
                     color: #4a5568;
                 }
-                
-                .points-column {
+
+                .user-column {
+                    min-width: 200px;
+                }
+
+                .user-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                }
+
+                .user-avatar {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                .user-name {
+                    font-weight: 500;
+                }
+
+                .money-column, .points-column {
                     font-weight: 600;
-                    color: #3182ce;
+                    color: var(--primary-color);
                 }
                 
                 .user-status-container {
-                    margin-top: 3rem;
+                    background-color: white;
+                    border-radius: 12px;
+                    padding: 2rem;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
                     text-align: center;
                 }
                 
                 .user-status-container h3 {
-                    font-size: 1.4rem;
-                    color: #2c3e50;
-                    margin-bottom: 1rem;
+                    color: var(--primary-color);
+                    margin-bottom: 1.5rem;
+                    font-size: 1.5rem;
                 }
                 
                 .user-rank-card {
-                    background-color: white;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-                    padding: 1.5rem;
                     display: flex;
                     align-items: center;
-                    max-width: 500px;
-                    margin: 0 auto;
-                    border-left: 5px solid #3498db;
+                    justify-content: space-between;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
                 }
                 
                 .user-rank-number {
-                    font-size: 2rem;
+                    font-size: 2.5rem;
                     font-weight: 700;
-                    color: #3498db;
-                    background-color: #ebf8ff;
-                    width: 60px;
-                    height: 60px;
+                    background: rgba(255, 255, 255, 0.2);
+                    border-radius: 12px;
+                    padding: 1rem;
+                    min-width: 80px;
+                }
+
+                .user-rank-info {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    margin-right: 1.5rem;
+                    gap: 1rem;
                 }
-                
-                .user-rank-details {
-                    flex: 1;
-                    text-align: left;
+
+                .user-rank-avatar {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
                 }
                 
                 .user-rank-name {
                     font-size: 1.2rem;
                     font-weight: 600;
-                    color: #2c3e50;
-                    margin: 0 0 0.5rem 0;
-                }
-                
-                .user-rank-points {
-                    color: #3498db;
-                    font-weight: 600;
                     margin: 0;
                 }
                 
-                .user-rank-days {
-                    background-color: #ebf8ff;
-                    color: #3498db;
-                    font-weight: 600;
-                    padding: 0.5rem 1rem;
-                    border-radius: 20px;
-                    margin-left: 1rem;
+                .user-rank-points {
+                    font-size: 1rem;
+                    opacity: 0.9;
+                    margin: 0.25rem 0 0;
+                }
+
+                .user-rank-stats {
+                    display: flex;
+                    gap: 1.5rem;
+                }
+
+                .stat {
+                    text-align: center;
+                }
+
+                .stat-value {
+                    display: block;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                }
+
+                .stat-label {
+                    display: block;
+                    font-size: 0.875rem;
+                    opacity: 0.8;
+                    margin-top: 0.25rem;
                 }
                 
                 .simple-footer {
@@ -274,6 +499,36 @@ const Rankings = () => {
                     padding: 2rem 0;
                     text-align: center;
                     margin-top: 3rem;
+                }
+                
+                .simple-footer p {
+                    margin: 0;
+                    opacity: 0.8;
+                }
+
+                @media (max-width: 768px) {
+                    .ranking-table {
+                        font-size: 0.875rem;
+                    }
+
+                    .ranking-table th,
+                    .ranking-table td {
+                        padding: 0.75rem 0.5rem;
+                    }
+
+                    .user-rank-card {
+                        flex-direction: column;
+                        gap: 1rem;
+                        text-align: center;
+                    }
+
+                    .user-rank-stats {
+                        justify-content: center;
+                    }
+
+                    .page-title {
+                        font-size: 2rem;
+                    }
                 }
             `}</style>
         </>

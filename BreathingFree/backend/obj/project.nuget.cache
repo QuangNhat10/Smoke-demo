@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rzq34n4qifI=",
+  "dgSpecHash": "z0iRI72LexA=",
   "success": true,
-  "projectFilePath": "E:\\SWP\\demo_Tan\\breathingfree\\backend\\BreathingFree.csproj",
+  "projectFilePath": "E:\\SWP\\demo_Tan\\Breathingfree\\backend\\BreathingFree.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\FPTSHOP\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\FPTSHOP\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BreathingFree")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e56b83b2401eaa2b8db6be8b66ca5caa484dc297")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07b827ccb98083627bcc3393c8d0684e01df84f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("BreathingFree")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BreathingFree")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
