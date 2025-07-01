@@ -16,68 +16,60 @@ namespace BreathingFree.Controllers
             _rankingService = rankingService;
         }
 
+        // Test endpoint without authorization
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok(new { message = "Ranking API is working!", timestamp = DateTime.Now });
+        }
+
         [HttpGet("leaderboard")]
         [Authorize]
-        public async Task<ActionResult<object>> GetLeaderboard()
+        public async Task<IActionResult> GetLeaderboard()
         {
             try
             {
-                var rankings = await _rankingService.GetLeaderboardAsync();
-                return Ok(new { success = true, data = rankings });
+                var leaderboard = await _rankingService.GetLeaderboardAsync();
+                return Ok(leaderboard);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi tải dữ liệu", error = ex.Message });
             }
         }
 
         [HttpGet("user-rank/{userId}")]
         [Authorize]
-        public async Task<ActionResult<object>> GetUserRank(int userId)
+        public async Task<IActionResult> GetUserRank(int userId)
         {
             try
             {
                 var userRank = await _rankingService.GetUserRankAsync(userId);
                 if (userRank == null)
                 {
-                    return NotFound(new { success = false, message = "User ranking not found" });
+                    return NotFound(new { message = "Không tìm thấy thông tin xếp hạng của người dùng" });
                 }
-                return Ok(new { success = true, data = userRank });
+                return Ok(userRank);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi tải dữ liệu", error = ex.Message });
             }
         }
 
         [HttpGet("leaderboard-with-user/{userId}")]
         [Authorize]
-        public async Task<ActionResult<object>> GetLeaderboardWithUser(int userId)
+        public async Task<IActionResult> GetLeaderboardWithUser(int userId)
         {
             try
             {
                 var result = await _rankingService.GetLeaderboardWithUserRankAsync(userId);
-                return Ok(new { success = true, data = result });
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = ex.Message });
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi tải dữ liệu", error = ex.Message });
             }
-        }
-
-        // Test endpoint không cần authorization
-        [HttpGet("test")]
-        public ActionResult<object> Test()
-        {
-            return Ok(new { 
-                success = true, 
-                message = "Ranking API is working!", 
-                timestamp = DateTime.Now,
-                data = new {
-                    leaderboard = GetFallbackLeaderboard().Take(3),
-                    currentUserRank = GetFallbackUserRank(1)
-                }
-            });
         }
 
         private List<object> GetFallbackLeaderboard()
