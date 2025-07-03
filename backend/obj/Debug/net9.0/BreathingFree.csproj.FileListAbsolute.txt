@@ -846,3 +846,4 @@ E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\Breathin
 E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
 E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Newtonsoft.Json.dll
 E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json

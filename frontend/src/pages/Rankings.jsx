@@ -2,21 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 import SecondaryNavigationDoctor from '../components/SecondaryNavigationDoctor';
+import { leaderboardApi } from '../api/leaderboardApi';
 
 const Rankings = () => {
-    // Simulated ranking data
-    const [rankings] = useState([
-        { id: 1, name: 'Nguyễn Văn A', daysSmokeFree: 365, points: 4500 },
-        { id: 2, name: 'Trần Thị B', daysSmokeFree: 287, points: 3970 },
-        { id: 3, name: 'Phạm Văn C', daysSmokeFree: 240, points: 3650 },
-        { id: 4, name: 'Lê Thị D', daysSmokeFree: 192, points: 3200 },
-        { id: 5, name: 'Hoàng Văn E', daysSmokeFree: 178, points: 2950 },
-        { id: 6, name: 'Nguyễn Thị F', daysSmokeFree: 150, points: 2580 },
-        { id: 7, name: 'Vũ Văn G', daysSmokeFree: 130, points: 2200 },
-        { id: 8, name: 'Đặng Thị H', daysSmokeFree: 110, points: 1890 },
-        { id: 9, name: 'Bùi Văn I', daysSmokeFree: 95, points: 1650 },
-        { id: 10, name: 'Trương Thị K', daysSmokeFree: 82, points: 1480 },
-    ]);
+    const [rankings, setRankings] = useState([]);
 
     // Get current user name from localStorage if available
     const [currentUser, setCurrentUser] = useState(null);
@@ -29,6 +18,26 @@ const Rankings = () => {
         }
         const role = localStorage.getItem('userRole');
         setUserRole(role || '');
+    }, []);
+
+    // Fetch leaderboard whenever sortBy changes
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await leaderboardApi.getLeaderboard('days');
+                // Transform data to fit existing columns
+                const transformed = data.map((item, index) => ({
+                    id: item.userId || item.userID,
+                    name: item.fullName || item.fullname || `User ${index + 1}`,
+                    daysSmokeFree: item.daysSmokeFree ?? item.daysSmokeFree,
+                    healthNote: item.latestHealthNote ?? item.latestHealthnote,
+                }));
+                setRankings(transformed);
+            } catch (error) {
+                console.error('Failed to fetch leaderboard:', error);
+            }
+        };
+        fetchData();
     }, []);
 
     // Find current user in rankings if they exist
@@ -64,7 +73,6 @@ const Rankings = () => {
                                     <th>Hạng</th>
                                     <th>Người Dùng</th>
                                     <th>Ngày Không Hút Thuốc</th>
-                                    <th>Điểm</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,8 +88,7 @@ const Rankings = () => {
                                             {index > 2 && <span className="rank-number">{index + 1}</span>}
                                         </td>
                                         <td>{user.name}</td>
-                                        <td>{user.daysSmokeFree} ngày</td>
-                                        <td className="points-column">{user.points}</td>
+                                        <td>{user.daysSmokeFree ?? 0} ngày</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -95,7 +102,6 @@ const Rankings = () => {
                                 <div className="user-rank-number">{currentUserRank}</div>
                                 <div className="user-rank-details">
                                     <p className="user-rank-name">{currentUser}</p>
-                                    <p className="user-rank-points">{rankings[currentUserRank - 1]?.points || 0} điểm</p>
                                 </div>
                                 <div className="user-rank-days">{rankings[currentUserRank - 1]?.daysSmokeFree || 0} ngày</div>
                             </div>
@@ -199,11 +205,6 @@ const Rankings = () => {
                     color: #4a5568;
                 }
                 
-                .points-column {
-                    font-weight: 600;
-                    color: #3182ce;
-                }
-                
                 .user-status-container {
                     margin-top: 3rem;
                     text-align: center;
@@ -251,12 +252,6 @@ const Rankings = () => {
                     font-weight: 600;
                     color: #2c3e50;
                     margin: 0 0 0.5rem 0;
-                }
-                
-                .user-rank-points {
-                    color: #3498db;
-                    font-weight: 600;
-                    margin: 0;
                 }
                 
                 .user-rank-days {
