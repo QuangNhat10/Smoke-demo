@@ -1,0 +1,79 @@
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Vietnamese character support */
+  -webkit-font-feature-settings: "liga" 1, "kern" 1;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1 {
+  line-height: 1.1;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Remove focus outline for mouse users, keep for keyboard navigation */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Basic style resets for better compatibility with global.css */
+* {
+  box-sizing: border-box;
+}
+
+/* Vietnamese text optimization */
+body, input, textarea, select, button, div, span, p, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Force UTF-8 character support */
+  unicode-bidi: embed;
+  direction: ltr;
+}
+
+/* Ensure proper encoding for Vietnamese characters */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Vietnamese diacritics support */
+* {
+  -webkit-font-variant-ligatures: normal;
+  font-variant-ligatures: normal;
+  -webkit-font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+  font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+}
+
+/* Fix for Vietnamese characters in different elements */
+.vietnamese-text, 
+[lang="vi"], 
+[lang="vi-VN"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+  unicode-bidi: embed;
+  direction: ltr;
+}

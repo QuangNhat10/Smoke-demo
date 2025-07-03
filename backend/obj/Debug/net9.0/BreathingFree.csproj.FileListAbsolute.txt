@@ -1,0 +1,1019 @@
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\appsettings.Development.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\appsettings.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\package-lock.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\package.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.endpoints.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.exe
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.deps.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.runtimeconfig.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.pdb
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Azure.Core.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Azure.Identity.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Humanizer.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Mono.TextTemplating.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.ClientModel.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.CodeDom.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Convention.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Hosting.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Runtime.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Drawing.Common.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Formats.Asn1.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Memory.Data.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Runtime.Caching.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Security.Permissions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Text.Json.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Windows.Extensions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.AssemblyReference.cache
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.GeneratedMSBuildEditorConfig.editorconfig
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfoInputs.cache
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfo.cs
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.CoreCompileInputs.cache
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cs
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cache
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\scopedcss\bundle\BreathingFree.styles.css
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json.cache
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.development.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\Breathin.EEC2C890.Up2Date
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\refint\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\appsettings.Development.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\appsettings.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\package-lock.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\package.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.endpoints.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.exe
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.deps.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.runtimeconfig.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.pdb
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Azure.Core.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Azure.Identity.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Humanizer.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Mono.TextTemplating.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.ClientModel.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.CodeDom.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Convention.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Hosting.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Runtime.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Drawing.Common.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Memory.Data.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Runtime.Caching.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Security.Permissions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Windows.Extensions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.AssemblyReference.cache
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\rpswa.dswa.cache.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.GeneratedMSBuildEditorConfig.editorconfig
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfoInputs.cache
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfo.cs
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.CoreCompileInputs.cache
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cs
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cache
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\rjimswa.dswa.cache.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\scopedcss\bundle\BreathingFree.styles.css
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json.cache
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.development.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\Breathin.EEC2C890.Up2Date
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\refint\BreathingFree.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\KÌ 5\SWP\Smoke-demo-function_Blog\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\appsettings.Development.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\appsettings.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\package-lock.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\package.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.endpoints.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.exe
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.deps.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.runtimeconfig.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.pdb
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Azure.Core.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Azure.Identity.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Humanizer.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Mono.TextTemplating.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.ClientModel.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.CodeDom.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Convention.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Hosting.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Runtime.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Drawing.Common.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Formats.Asn1.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Memory.Data.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Runtime.Caching.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Security.Permissions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Text.Json.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\System.Windows.Extensions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.AssemblyReference.cache
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.GeneratedMSBuildEditorConfig.editorconfig
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfoInputs.cache
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfo.cs
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.CoreCompileInputs.cache
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cs
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cache
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\scopedcss\bundle\BreathingFree.styles.css
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json.cache
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.development.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\Breathin.EEC2C890.Up2Date
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\refint\BreathingFree.dll
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
+E:\FESWP\Smoke-demo-function_Blog\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\appsettings.Development.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\appsettings.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\package-lock.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\package.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.endpoints.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.exe
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.deps.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.runtimeconfig.json
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.pdb
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Azure.Core.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Azure.Identity.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Humanizer.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Mono.TextTemplating.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.ClientModel.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.CodeDom.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Convention.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Hosting.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Runtime.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Drawing.Common.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Formats.Asn1.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Memory.Data.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Runtime.Caching.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Security.Permissions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Text.Json.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\System.Windows.Extensions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\SWP\demo_Tan\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.AssemblyReference.cache
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.GeneratedMSBuildEditorConfig.editorconfig
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfoInputs.cache
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfo.cs
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.CoreCompileInputs.cache
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cs
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cache
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\scopedcss\bundle\BreathingFree.styles.css
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json.cache
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.development.json
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\Breathin.EEC2C890.Up2Date
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.dll
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\refint\BreathingFree.dll
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\SWP\demo_Tan\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\appsettings.Development.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\appsettings.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\package-lock.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\package.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.endpoints.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.exe
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.deps.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.runtimeconfig.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BreathingFree.pdb
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Azure.Core.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Azure.Identity.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Humanizer.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Mono.TextTemplating.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.ClientModel.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.CodeDom.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Convention.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Hosting.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.Runtime.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Drawing.Common.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Memory.Data.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Runtime.Caching.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Security.Permissions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Windows.Extensions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.AssemblyReference.cache
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\rpswa.dswa.cache.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.GeneratedMSBuildEditorConfig.editorconfig
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfoInputs.cache
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfo.cs
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.csproj.CoreCompileInputs.cache
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cs
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cache
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\rjimswa.dswa.cache.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\scopedcss\bundle\BreathingFree.styles.css
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.json.cache
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.development.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\Breathin.EEC2C890.Up2Date
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\refint\BreathingFree.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.pdb
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\ref\BreathingFree.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\Newtonsoft.Json.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+E:\KÌ 5\PRN212\Smoke-demo-function_profile\Smoke-demo-function_profile\BreathingFree\backend\obj\Debug\net9.0\BreathingFree.sourcelink.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\appsettings.Development.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\package-lock.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\package.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\appsettings.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.runtime.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.staticwebassets.endpoints.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.exe
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.deps.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.runtimeconfig.json
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BreathingFree.pdb
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Azure.Core.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Azure.Identity.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Humanizer.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Mono.TextTemplating.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Newtonsoft.Json.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.ClientModel.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.CodeDom.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Composition.Convention.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Composition.Hosting.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Composition.Runtime.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Drawing.Common.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Formats.Asn1.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Memory.Data.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Runtime.Caching.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Security.Permissions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Text.Json.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\System.Windows.Extensions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+E:\SWP\Smoke-demo-function_BXH\backend\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.csproj.AssemblyReference.cache
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.GeneratedMSBuildEditorConfig.editorconfig
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfoInputs.cache
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.AssemblyInfo.cs
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.csproj.CoreCompileInputs.cache
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cs
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.MvcApplicationPartsAssemblyInfo.cache
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\scopedcss\bundle\BreathingFree.styles.css
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\staticwebassets.build.json
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\staticwebassets.build.json.cache
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\staticwebassets.development.json
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\Breathin.EEC2C890.Up2Date
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.dll
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\refint\BreathingFree.dll
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.pdb
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\BreathingFree.genruntimeconfig.cache
+E:\SWP\Smoke-demo-function_BXH\backend\obj\Debug\net9.0\ref\BreathingFree.dll

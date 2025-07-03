@@ -1,0 +1,443 @@
+/* ===== SMOKING CESSATION PAGE STYLES ===== */
+
+.smoking-cessation {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%);
+  font-family: 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.smoking-cessation-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.smoking-cessation-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* ===== HEADER SECTION ===== */
+.smoking-cessation-header {
+  text-align: center;
+  margin: 2rem 0 3rem;
+  position: relative;
+}
+
+.smoking-cessation-title {
+  font-size: 3rem;
+  color: #35a79c;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(53, 167, 156, 0.2);
+  letter-spacing: -0.02em;
+}
+
+.smoking-cessation-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+  border-radius: 2px;
+}
+
+.smoking-cessation-description {
+  color: #7f8c8d;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* ===== CONTENT LAYOUT ===== */
+.smoking-cessation-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.smoking-cessation-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* ===== SECTION CARDS ===== */
+.smoking-cessation-section {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.smoking-cessation-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.smoking-cessation-section-title {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  border-bottom: 3px solid #e3f2fd;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.smoking-cessation-section-title::before {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #35a79c, #44b89d);
+  border-radius: 2px;
+}
+
+/* ===== COPING STRATEGIES SECTION ===== */
+.coping-strategies-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.coping-subsection h3 {
+  font-size: 1.3rem;
+  color: #34495e;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coping-subsection h3::before {
+  content: '●';
+  color: #35a79c;
+  font-size: 1.5rem;
+}
+
+.coping-subsection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.coping-subsection li {
+  margin-bottom: 1rem;
+  color: #5d6d7e;
+  font-size: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.coping-subsection li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* ===== BENEFITS SECTION ===== */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-box {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.benefit-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--accent-color);
+  transition: height 0.3s ease;
+}
+
+.benefit-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-box:hover::before {
+  height: 100%;
+  opacity: 0.1;
+}
+
+.benefit-box:nth-child(1) { --accent-color: #e74c3c; }
+.benefit-box:nth-child(2) { --accent-color: #f39c12; }
+.benefit-box:nth-child(3) { --accent-color: #3498db; }
+.benefit-box:nth-child(4) { --accent-color: #2ecc71; }
+.benefit-box:nth-child(5) { --accent-color: #9b59b6; }
+.benefit-box:nth-child(6) { --accent-color: #34495e; }
+
+.benefit-time {
+  color: #35a79c;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.benefit-description {
+  color: #5d6d7e;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ===== STEPS SECTION ===== */
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.step-box {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-left: 5px solid #35a79c;
+}
+
+.step-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-left-color: #44b89d;
+}
+
+.step-header {
+  color: #35a79c;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.step-number {
+  background: linear-gradient(135deg, #35a79c, #44b89d);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(53, 167, 156, 0.3);
+}
+
+.step-list {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  list-style: none;
+}
+
+.step-list li {
+  margin-bottom: 0.8rem;
+  color: #5d6d7e;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.step-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #35a79c;
+  font-weight: bold;
+}
+
+/* ===== SIDEBAR ===== */
+.smoking-cessation-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar-card {
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.sidebar-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-tips {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-emergency {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+}
+
+.sidebar-appointment {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: white;
+}
+
+.sidebar-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.sidebar-tips .sidebar-title {
+  color: #2c3e50;
+}
+
+.sidebar-tips ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-tips li {
+  margin-bottom: 1rem;
+  color: #5d6d7e;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.sidebar-tips li::before {
+  content: '💡';
+  position: absolute;
+  left: 0;
+}
+
+.sidebar-text {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.sidebar-highlight {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.appointment-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.appointment-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+  .smoking-cessation-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .smoking-cessation-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .smoking-cessation-container {
+    padding: 1rem;
+  }
+  
+  .smoking-cessation-title {
+    font-size: 2rem;
+  }
+  
+  .smoking-cessation-section {
+    padding: 1.5rem;
+  }
+  
+  .coping-strategies-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .steps-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .smoking-cessation-title {
+    font-size: 1.8rem;
+  }
+  
+  .smoking-cessation-section {
+    padding: 1rem;
+  }
+  
+  .smoking-cessation-section-title {
+    font-size: 1.4rem;
+  }
+} 
