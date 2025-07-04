@@ -279,6 +279,15 @@ function Login() {
           </div>
         </div>
 
+<<<<<<< HEAD
+=======
+        <div style={{ textAlign: 'right', marginTop: '-1rem' }}>
+          <Link to="/forgot-password" style={{ color: '#35a79c', fontSize: '0.95rem', textDecoration: 'none' }}>
+            Quên mật khẩu?
+          </Link>
+        </div>
+
+>>>>>>> feb8be7 ( Complete)
         <button
           type="submit"
           style={{
@@ -330,6 +339,7 @@ function Login() {
           </Link>
         </div>
 
+<<<<<<< HEAD
         {/* Demo login info */}
         <div
           style={{
@@ -365,6 +375,9 @@ function Login() {
             <strong>Staff:</strong> staff@gmail.com / Staff123!
           </div>
         </div>
+=======
+        
+>>>>>>> feb8be7 ( Complete)
       </form>
       
       {/* Toast Container để hiển thị thông báo */}

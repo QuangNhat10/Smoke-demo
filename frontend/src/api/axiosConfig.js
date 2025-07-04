@@ -37,7 +37,13 @@ axiosInstance.interceptors.response.use(
                 case 401: // Unauthorized
                     // Xử lý khi token hết hạn hoặc không hợp lệ
                     localStorage.removeItem('token');
+<<<<<<< HEAD
                     window.location.href = '/login';
+=======
+                    // Sử dụng replace để không thêm mục mới vào lịch sử trình duyệt,
+                    // giúp người dùng có thể quay lại trang trước đó dễ dàng.
+                    window.location.replace('/login');
+>>>>>>> feb8be7 ( Complete)
                     break;
                 case 403: // Forbidden
                     // Xử lý khi không có quyền truy cập

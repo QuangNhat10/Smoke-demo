@@ -17,6 +17,10 @@ namespace BreathingFree.Data
         public DbSet<QuitPlan> QuitPlans { get; set; }
         public DbSet<QuitPlanStage> QuitPlanStages { get; set; }
         public DbSet<QuitProgress> QuitProgresses { get; set; }
+<<<<<<< HEAD
+=======
+        public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
+>>>>>>> feb8be7 ( Complete)
 
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -215,6 +219,23 @@ namespace BreathingFree.Data
                 // Đảm bảo một user chỉ có một progress record cho mỗi ngày trong một plan
                 entity.HasIndex(e => new { e.QuitPlanID, e.UserID, e.Date }).IsUnique();
             });
+<<<<<<< HEAD
+=======
+
+            // Cấu hình bảng PasswordResetTokens
+            modelBuilder.Entity<PasswordResetToken>(entity =>
+            {
+                entity.ToTable("PasswordResetTokens");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Token).IsRequired();
+                entity.Property(e => e.ExpiresAt).IsRequired();
+
+                entity.HasOne(e => e.User)
+                      .WithMany()
+                      .HasForeignKey(e => e.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+>>>>>>> feb8be7 ( Complete)
         }
     }
 }

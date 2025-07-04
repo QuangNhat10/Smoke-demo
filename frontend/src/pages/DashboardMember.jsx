@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 import QuitPlanCard from '../components/QuitPlanCard';
+<<<<<<< HEAD
+=======
+import ConfirmModal from '../components/ConfirmModal';
+>>>>>>> feb8be7 ( Complete)
 import { quitPlanApi } from '../api/quitPlanApi';
 
 const DashboardMember = () => {
@@ -11,6 +15,10 @@ const DashboardMember = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [quitPlan, setQuitPlan] = useState(null);
   const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
+=======
+  const [showResetModal, setShowResetModal] = useState(false);
+>>>>>>> feb8be7 ( Complete)
 
   useEffect(() => {
     const handleResize = () => {
@@ -95,7 +103,39 @@ const DashboardMember = () => {
   };
 
   const resetSmokeFreeCount = () => {
+<<<<<<< HEAD
     alert('Tính năng reset sẽ được cập nhật trong phiên bản sau. Vui lòng liên hệ với bác sĩ hoặc nhân viên hỗ trợ để reset tiến trình.');
+=======
+    setShowResetModal(true);
+  };
+
+  const handleResetConfirm = async () => {
+    setShowResetModal(false);
+
+    try {
+      setLoading(true);
+      const result = await quitPlanApi.resetQuitPlan();
+      
+      // Xóa quit plan khỏi state
+      setQuitPlan(null);
+      
+      // Hiển thị thông báo thành công
+      alert(result.message || 'Đã reset kế hoạch thành công! Bạn có thể tạo kế hoạch mới.');
+      
+      // Reload lại dữ liệu
+      await loadQuitPlan();
+    } catch (error) {
+      console.error('Error resetting quit plan:', error);
+      const errorMessage = error.response?.data?.message || 'Có lỗi xảy ra khi reset kế hoạch';
+      alert(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetCancel = () => {
+    setShowResetModal(false);
+>>>>>>> feb8be7 ( Complete)
   };
 
   const formatCurrency = (amount) => {
@@ -364,6 +404,27 @@ const DashboardMember = () => {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+
+      {/* Reset Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showResetModal}
+        onClose={handleResetCancel}
+        onConfirm={handleResetConfirm}
+        title="Xác nhận reset kế hoạch"
+        message={`Bạn có chắc chắn muốn reset kế hoạch cai thuốc?
+
+Hành động này sẽ:
+• Xóa toàn bộ tiến trình hiện tại
+• Đặt lại số ngày không hút thuốc về 0
+• Cho phép bạn tạo kế hoạch mới
+
+Hành động này không thể hoàn tác!`}
+        confirmText="Reset"
+        cancelText="Hủy"
+      />
+>>>>>>> feb8be7 ( Complete)
     </div>
   );
 };

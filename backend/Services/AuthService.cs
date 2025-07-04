@@ -14,12 +14,22 @@ namespace BreathingFree.Services
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _environment;
+<<<<<<< HEAD
 
         public AuthService(ApplicationDbContext context, IConfiguration config, IWebHostEnvironment environment)
+=======
+        private readonly EmailService _emailService;
+
+        public AuthService(ApplicationDbContext context, IConfiguration config, IWebHostEnvironment environment, EmailService emailService)
+>>>>>>> feb8be7 ( Complete)
         {
             _context = context;
             _config = config;
             _environment = environment;
+<<<<<<< HEAD
+=======
+            _emailService = emailService;
+>>>>>>> feb8be7 ( Complete)
         }
 
         public async Task<string> RegisterAsync(RegisterModel model)
@@ -225,5 +235,69 @@ namespace BreathingFree.Services
 
             return (true, "Password changed successfully");
         }
+<<<<<<< HEAD
+=======
+
+        // ========== Forgot / Reset password ==========
+
+        public async Task<(bool Success, string Message)> SendPasswordResetCodeAsync(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                return (false, "Email not found");
+            }
+
+            // Generate 6-digit numeric code
+            var random = new Random();
+            var code = random.Next(100000, 999999).ToString();
+
+            // Store token
+            var token = new PasswordResetToken
+            {
+                UserId = user.UserID,
+                Token = code,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(15)
+            };
+
+            _context.PasswordResetTokens.Add(token);
+            await _context.SaveChangesAsync();
+
+            // Send email
+            var subject = "Your BreathingFree password reset code";
+            var body = $"Your verification code is: {code}. This code will expire in 15 minutes.";
+            await _emailService.SendEmailAsync(email, subject, body);
+
+            return (true, "Verification code sent to your email");
+        }
+
+        public async Task<(bool Success, string Message)> ResetPasswordAsync(ResetPasswordModel model)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+            if (user == null)
+                return (false, "Email not found");
+
+            var token = await _context.PasswordResetTokens
+                .Where(t => t.UserId == user.UserID && t.Token == model.Code && t.ExpiresAt > DateTime.UtcNow)
+                .OrderByDescending(t => t.ExpiresAt)
+                .FirstOrDefaultAsync();
+
+            if (token == null)
+            {
+                return (false, "Invalid or expired verification code");
+            }
+
+            // Update password
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+
+            // Remove all tokens for user
+            var tokensToRemove = _context.PasswordResetTokens.Where(t => t.UserId == user.UserID);
+            _context.PasswordResetTokens.RemoveRange(tokensToRemove);
+
+            await _context.SaveChangesAsync();
+
+            return (true, "Password reset successfully");
+        }
+>>>>>>> feb8be7 ( Complete)
     }
 }

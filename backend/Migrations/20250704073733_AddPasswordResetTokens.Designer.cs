@@ -4,6 +4,7 @@ using BreathingFree.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreathingFree.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250704073733_AddPasswordResetTokens")]
+    partial class AddPasswordResetTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,8 +127,6 @@ namespace BreathingFree.Migrations
                     b.ToTable("Chat", (string)null);
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("BreathingFree.Models.PasswordResetToken", b =>
                 {
                     b.Property<int>("Id")
@@ -151,7 +152,6 @@ namespace BreathingFree.Migrations
                     b.ToTable("PasswordResetTokens", (string)null);
                 });
 
->>>>>>> feb8be7 ( Complete)
             modelBuilder.Entity("BreathingFree.Models.PostLike", b =>
                 {
                     b.Property<int>("PostLikeID")
@@ -507,8 +507,6 @@ namespace BreathingFree.Migrations
                     b.Navigation("Sender");
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("BreathingFree.Models.PasswordResetToken", b =>
                 {
                     b.HasOne("BreathingFree.Models.User", "User")
@@ -520,7 +518,6 @@ namespace BreathingFree.Migrations
                     b.Navigation("User");
                 });
 
->>>>>>> feb8be7 ( Complete)
             modelBuilder.Entity("BreathingFree.Models.PostLike", b =>
                 {
                     b.HasOne("BreathingFree.Models.CommunityPost", "Post")

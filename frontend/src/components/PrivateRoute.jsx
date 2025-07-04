@@ -17,9 +17,17 @@ const PrivateRoute = ({ allowedRoles }) => {
     useEffect(() => {
         // Kiểm tra trạng thái đăng nhập từ localStorage
         const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+<<<<<<< HEAD
         const userRole = localStorage.getItem('userRole');
 
         setIsAuthenticated(userLoggedIn);
+=======
+        const token = localStorage.getItem('token');
+        const userRole = localStorage.getItem('userRole');
+
+        // Chỉ xác nhận đã đăng nhập khi CÓ CẢ userLoggedIn === true và token tồn tại
+        setIsAuthenticated(userLoggedIn && !!token);
+>>>>>>> feb8be7 ( Complete)
 
         // Kiểm tra vai trò của người dùng có nằm trong allowedRoles không
         if (Array.isArray(allowedRoles)) {

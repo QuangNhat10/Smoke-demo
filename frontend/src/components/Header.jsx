@@ -109,6 +109,11 @@ const Header = ({ userName }) => {
    * Xóa thông tin người dùng khỏi localStorage và chuyển về trang chủ
    */
   const handleLogout = () => {
+<<<<<<< HEAD
+=======
+    // Xoá token xác thực để ngăn người dùng cũ tiếp tục được nhận diện
+    localStorage.removeItem("token");
+>>>>>>> feb8be7 ( Complete)
     localStorage.removeItem("userLoggedIn");
     localStorage.removeItem("userName");
     localStorage.removeItem("userRole");

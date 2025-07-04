@@ -194,6 +194,36 @@ namespace BreathingFree.Controllers
                 return BadRequest(new { message = "Có lỗi xảy ra khi ghi nhận tiến trình" });
             }
         }
+<<<<<<< HEAD
+=======
+
+        [HttpPost("reset")]
+        public async Task<IActionResult> ResetQuitPlan()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+                {
+                    return Unauthorized(new { message = "Không thể xác thực người dùng" });
+                }
+
+                var result = await _quitPlanService.ResetQuitPlanAsync(userId);
+                return Ok(new { 
+                    message = "Đã reset kế hoạch cai thuốc thành công! Bạn có thể tạo kế hoạch mới.", 
+                    data = result 
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Có lỗi xảy ra khi reset kế hoạch" });
+            }
+        }
+>>>>>>> feb8be7 ( Complete)
     }
 
     // DTO classes cho các request

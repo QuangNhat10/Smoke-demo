@@ -24,6 +24,10 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<SupportService>();
 builder.Services.AddScoped<QuitPlanService>();
+<<<<<<< HEAD
+=======
+builder.Services.AddScoped<EmailService>();
+>>>>>>> feb8be7 ( Complete)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "1aabqJHmD7Q=",
   "success": true,
   "projectFilePath": "E:\\KÌ 5\\PRN212\\Smoke-demo-function_profile\\Smoke-demo-function_profile\\BreathingFree\\backend\\BreathingFree.csproj",
+=======
+  "dgSpecHash": "ZGxdKGG6whk=",
+  "success": true,
+  "projectFilePath": "E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\BreathingFree.csproj",
+>>>>>>> feb8be7 ( Complete)
   "expectedPackageFiles": [
     "C:\\Users\\Nguyen Xuan Tan\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Nguyen Xuan Tan\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

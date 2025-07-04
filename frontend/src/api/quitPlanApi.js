@@ -74,6 +74,20 @@ export const quitPlanApi = {
         }
     },
 
+<<<<<<< HEAD
+=======
+    // Reset kế hoạch cai thuốc
+    resetQuitPlan: async () => {
+        try {
+            const response = await axios.post('/quitplan/reset');
+            return response.data;
+        } catch (error) {
+            console.error('Lỗi khi reset kế hoạch cai thuốc:', error);
+            throw error;
+        }
+    },
+
+>>>>>>> feb8be7 ( Complete)
     // API cho bác sĩ
     doctor: {
         // Xem kế hoạch của bệnh nhân

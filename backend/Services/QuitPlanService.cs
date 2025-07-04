@@ -16,6 +16,18 @@ namespace BreathingFree.Services
 
         public async Task<QuitPlanDto> CreateQuitPlanAsync(int userId, CreateQuitPlanDto createDto)
         {
+<<<<<<< HEAD
+=======
+            // Kiểm tra xem người dùng đã có kế hoạch Active hay chưa
+            var existingActivePlan = await _context.QuitPlans
+                .FirstOrDefaultAsync(q => q.UserID == userId && q.Status == "Active");
+            
+            if (existingActivePlan != null)
+            {
+                throw new ArgumentException("Bạn đã có kế hoạch cai thuốc đang hoạt động. Vui lòng reset kế hoạch cũ trước khi tạo kế hoạch mới.");
+            }
+
+>>>>>>> feb8be7 ( Complete)
             // Tính toán chi phí hàng ngày
             var dailyCost = (createDto.CigarettesPerDay * createDto.PricePerPack) / createDto.CigarettesPerPack;
 
@@ -191,6 +203,46 @@ namespace BreathingFree.Services
             };
         }
 
+<<<<<<< HEAD
+=======
+        public async Task<object> ResetQuitPlanAsync(int userId)
+        {
+            // Lấy quit plan đang hoạt động
+            var quitPlan = await _context.QuitPlans
+                .Include(q => q.QuitPlanStages)
+                .Include(q => q.QuitProgresses)
+                .FirstOrDefaultAsync(q => q.UserID == userId && q.Status == "Active");
+
+            if (quitPlan == null)
+                throw new ArgumentException("Không tìm thấy kế hoạch cai thuốc đang hoạt động để reset");
+
+            // Đặt trạng thái kế hoạch hiện tại thành "Reset"
+            quitPlan.Status = "Reset";
+            quitPlan.UpdatedAt = DateTime.Now;
+
+            // Xóa tất cả progress entries
+            if (quitPlan.QuitProgresses != null && quitPlan.QuitProgresses.Any())
+            {
+                _context.QuitProgresses.RemoveRange(quitPlan.QuitProgresses);
+            }
+
+            // Xóa tất cả stages
+            if (quitPlan.QuitPlanStages != null && quitPlan.QuitPlanStages.Any())
+            {
+                _context.QuitPlanStages.RemoveRange(quitPlan.QuitPlanStages);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return new
+            {
+                message = "Đã reset kế hoạch cai thuốc thành công",
+                resetDate = DateTime.Now,
+                previousPlanId = quitPlan.QuitPlanID
+            };
+        }
+
+>>>>>>> feb8be7 ( Complete)
         private QuitPlanDto MapToDto(QuitPlan quitPlan)
         {
             var totalDays = (DateTime.Now - quitPlan.StartDate).Days;

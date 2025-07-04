@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"Version":1,"Hash":"/KbT1ei2TkecpDzkJJagzGynM1Nwufm18/MvkaoXqGE=","Source":"BreathingFree","BasePath":"_content/BreathingFree","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[{"Name":"BreathingFree\\wwwroot","Source":"BreathingFree","ContentRoot":"E:\\KÌ 5\\PRN212\\Smoke-demo-function_profile\\Smoke-demo-function_profile\\BreathingFree\\backend\\wwwroot\\","BasePath":"_content/BreathingFree","Pattern":"**"}],"Assets":[],"Endpoints":[]}
+=======
+{"Version":1,"Hash":"ySKUAhddKNMyfqgzbmN3tK3iYf8ZXAFEihI9mmmWwGQ=","Source":"BreathingFree","BasePath":"_content/BreathingFree","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[{"Name":"BreathingFree\\wwwroot","Source":"BreathingFree","ContentRoot":"E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\wwwroot\\","BasePath":"_content/BreathingFree","Pattern":"**"}],"Assets":[],"Endpoints":[]}
+>>>>>>> feb8be7 ( Complete)

@@ -32,6 +32,10 @@ import FAQ from './pages/FAQ';
 import CreatePlanPage from './pages/CreatePlanPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import DoctorChat from './pages/DoctorChat';
+<<<<<<< HEAD
+=======
+import ForgotPassword from './pages/ForgotPassword';
+>>>>>>> feb8be7 ( Complete)
 
 /**
  * Component chính của ứng dụng
@@ -47,6 +51,10 @@ function App() {
         <Route path="/" element={<Home />} /> {/* Trang chủ chính của ứng dụng */}
         <Route path="/login" element={<Login />} /> {/* Trang đăng nhập */}
         <Route path="/register" element={<Register />} /> {/* Trang đăng ký */}
+<<<<<<< HEAD
+=======
+        <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Quên mật khẩu */}
+>>>>>>> feb8be7 ( Complete)
         <Route path="/unauthorized" element={<Unauthorized />} /> {/* Trang hiển thị khi không có quyền truy cập */}
         <Route path="/about" element={<AboutUs />} /> {/* Trang giới thiệu về công ty và đội ngũ bác sĩ */}
         <Route path="/faq" element={<FAQ />} /> {/* Trang câu hỏi thường gặp */}
@@ -60,8 +68,17 @@ function App() {
         {/* Các route dành cho thành viên đã đăng nhập */}
         <Route path="/homepage-member" element={<HomepageMember />} /> {/* Trang chủ dành cho thành viên */}
         <Route path="/dashboard-member" element={<DashboardMember />} /> {/* Bảng điều khiển thành viên */}
+<<<<<<< HEAD
         <Route path="/create-plan" element={<CreatePlanPage />} /> {/* Trang tạo kế hoạch cai thuốc */}
         <Route path="/track-status" element={<TrackStatus />} /> {/* Trang theo dõi tiến trình cai thuốc */}
+=======
+
+        {/* Bảo vệ các route yêu cầu đăng nhập */}
+        <Route element={<PrivateRoute allowedRoles={["Member", "Doctor", "Staff", "Admin"]} />}> 
+          <Route path="/create-plan" element={<CreatePlanPage />} /> {/* Trang tạo kế hoạch cai thuốc - yêu cầu đăng nhập */}
+          <Route path="/track-status" element={<TrackStatus />} /> {/* Trang theo dõi tiến trình cai thuốc - yêu cầu đăng nhập */}
+        </Route>
+>>>>>>> feb8be7 ( Complete)
         <Route path="/expert-advice" element={<ExpertAdvicePage />} /> {/* Trang tư vấn từ chuyên gia */}
         <Route path="/blog" element={<BlogAPI />} /> {/* Trang bài viết blog - kết nối API */}
         <Route path="/blog-old" element={<BlogPage />} /> {/* Trang blog cũ - backup */}

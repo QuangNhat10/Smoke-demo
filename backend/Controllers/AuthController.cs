@@ -125,5 +125,30 @@ namespace BreathingFree.Controllers
 
             return Ok(new { message = result.Message });
         }
+<<<<<<< HEAD
+=======
+
+        // ================= Forgot / Reset password =================
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordModel model)
+        {
+            var result = await _authService.SendPasswordResetCodeAsync(model.Email);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(new { message = result.Message });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel model)
+        {
+            var result = await _authService.ResetPasswordAsync(model);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(new { message = result.Message });
+        }
+>>>>>>> feb8be7 ( Complete)
     }
 }

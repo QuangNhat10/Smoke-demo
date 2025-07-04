@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "E:\\KÌ 5\\PRN212\\Smoke-demo-function_profile\\Smoke-demo-function_profile\\BreathingFree\\backend\\BreathingFree.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "E:\\KÌ 5\\PRN212\\Smoke-demo-function_profile\\Smoke-demo-function_profile\\BreathingFree\\backend\\BreathingFree.csproj",
         "packagesPath": "C:\\Users\\Nguyen Xuan Tan\\.nuget\\packages\\",
         "outputPath": "E:\\KÌ 5\\PRN212\\Smoke-demo-function_profile\\Smoke-demo-function_profile\\BreathingFree\\backend\\obj\\",
+=======
+    "E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\BreathingFree.csproj": {}
+  },
+  "projects": {
+    "E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\BreathingFree.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\BreathingFree.csproj",
+        "projectName": "BreathingFree",
+        "projectPath": "E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\BreathingFree.csproj",
+        "packagesPath": "C:\\Users\\Nguyen Xuan Tan\\.nuget\\packages\\",
+        "outputPath": "E:\\KÌ 5\\SWP\\Smoke-demo-function_resetPlan\\Smoke-demo-function_resetPlan\\backend\\obj\\",
+>>>>>>> feb8be7 ( Complete)
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
