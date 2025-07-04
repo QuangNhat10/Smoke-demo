@@ -16,19 +16,7 @@ namespace BreathingFree.Services
 
         public async Task<QuitPlanDto> CreateQuitPlanAsync(int userId, CreateQuitPlanDto createDto)
         {
-<<<<<<< HEAD
-=======
-            // Kiểm tra xem người dùng đã có kế hoạch Active hay chưa
-            var existingActivePlan = await _context.QuitPlans
-                .FirstOrDefaultAsync(q => q.UserID == userId && q.Status == "Active");
-            
-            if (existingActivePlan != null)
-            {
-                throw new ArgumentException("Bạn đã có kế hoạch cai thuốc đang hoạt động. Vui lòng reset kế hoạch cũ trước khi tạo kế hoạch mới.");
-            }
-
->>>>>>> feb8be7 ( Complete)
-            // Tính toán chi phí hàng ngày
+                    // Tính toán chi phí hàng ngày
             var dailyCost = (createDto.CigarettesPerDay * createDto.PricePerPack) / createDto.CigarettesPerPack;
 
             // Tạo quit plan
@@ -203,8 +191,6 @@ namespace BreathingFree.Services
             };
         }
 
-<<<<<<< HEAD
-=======
         public async Task<object> ResetQuitPlanAsync(int userId)
         {
             // Lấy quit plan đang hoạt động

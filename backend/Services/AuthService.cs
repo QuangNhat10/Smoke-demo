@@ -14,22 +14,12 @@ namespace BreathingFree.Services
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _environment;
-<<<<<<< HEAD
 
         public AuthService(ApplicationDbContext context, IConfiguration config, IWebHostEnvironment environment)
-=======
-        private readonly EmailService _emailService;
-
-        public AuthService(ApplicationDbContext context, IConfiguration config, IWebHostEnvironment environment, EmailService emailService)
->>>>>>> feb8be7 ( Complete)
         {
             _context = context;
             _config = config;
             _environment = environment;
-<<<<<<< HEAD
-=======
-            _emailService = emailService;
->>>>>>> feb8be7 ( Complete)
         }
 
         public async Task<string> RegisterAsync(RegisterModel model)
@@ -235,8 +225,6 @@ namespace BreathingFree.Services
 
             return (true, "Password changed successfully");
         }
-<<<<<<< HEAD
-=======
 
         // ========== Forgot / Reset password ==========
 

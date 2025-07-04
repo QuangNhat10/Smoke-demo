@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 import QuitPlanCard from '../components/QuitPlanCard';
-<<<<<<< HEAD
-=======
 import ConfirmModal from '../components/ConfirmModal';
->>>>>>> feb8be7 ( Complete)
 import { quitPlanApi } from '../api/quitPlanApi';
 
 const DashboardMember = () => {
@@ -15,10 +12,7 @@ const DashboardMember = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [quitPlan, setQuitPlan] = useState(null);
   const [loading, setLoading] = useState(true);
-<<<<<<< HEAD
-=======
   const [showResetModal, setShowResetModal] = useState(false);
->>>>>>> feb8be7 ( Complete)
 
   useEffect(() => {
     const handleResize = () => {
@@ -103,9 +97,6 @@ const DashboardMember = () => {
   };
 
   const resetSmokeFreeCount = () => {
-<<<<<<< HEAD
-    alert('Tính năng reset sẽ được cập nhật trong phiên bản sau. Vui lòng liên hệ với bác sĩ hoặc nhân viên hỗ trợ để reset tiến trình.');
-=======
     setShowResetModal(true);
   };
 
@@ -135,7 +126,6 @@ const DashboardMember = () => {
 
   const handleResetCancel = () => {
     setShowResetModal(false);
->>>>>>> feb8be7 ( Complete)
   };
 
   const formatCurrency = (amount) => {
@@ -404,8 +394,6 @@ const DashboardMember = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-=======
 
       {/* Reset Confirmation Modal */}
       <ConfirmModal
@@ -424,7 +412,6 @@ Hành động này không thể hoàn tác!`}
         confirmText="Reset"
         cancelText="Hủy"
       />
->>>>>>> feb8be7 ( Complete)
     </div>
   );
 };

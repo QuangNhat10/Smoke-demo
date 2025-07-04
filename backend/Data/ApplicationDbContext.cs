@@ -219,8 +219,6 @@ namespace BreathingFree.Data
                 // Đảm bảo một user chỉ có một progress record cho mỗi ngày trong một plan
                 entity.HasIndex(e => new { e.QuitPlanID, e.UserID, e.Date }).IsUnique();
             });
-<<<<<<< HEAD
-=======
 
             // Cấu hình bảng PasswordResetTokens
             modelBuilder.Entity<PasswordResetToken>(entity =>
@@ -235,7 +233,6 @@ namespace BreathingFree.Data
                       .HasForeignKey(e => e.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
->>>>>>> feb8be7 ( Complete)
         }
     }
 }

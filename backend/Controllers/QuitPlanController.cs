@@ -194,8 +194,6 @@ namespace BreathingFree.Controllers
                 return BadRequest(new { message = "Có lỗi xảy ra khi ghi nhận tiến trình" });
             }
         }
-<<<<<<< HEAD
-=======
 
         [HttpPost("reset")]
         public async Task<IActionResult> ResetQuitPlan()
