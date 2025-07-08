@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BreathingFree", "BreathingFree", "{2E2FC063-910E-8733-D723-4227FA4A15C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreathingFree", "BreathingFree\backend\BreathingFree.csproj", "{299E1EF6-8002-6978-0019-0A0956CCB0FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{299E1EF6-8002-6978-0019-0A0956CCB0FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{299E1EF6-8002-6978-0019-0A0956CCB0FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{299E1EF6-8002-6978-0019-0A0956CCB0FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{299E1EF6-8002-6978-0019-0A0956CCB0FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{299E1EF6-8002-6978-0019-0A0956CCB0FF} = {2E2FC063-910E-8733-D723-4227FA4A15C1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DB3C1D7-303D-497C-BF7D-A6E747C1F261}
+	EndGlobalSection
+EndGlobal
