@@ -1,9 +1,14 @@
+// Import các thư viện React và routing cần thiết
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authApi from '../api/authApi';
 
+// Component trang đăng ký người dùng
 function Register() {
+  // Hook để điều hướng trang
   const navigate = useNavigate();
+
+  // State quản lý dữ liệu form đăng ký
   const [form, setForm] = useState({
     name: '',
     dob: '',
@@ -12,14 +17,18 @@ function Register() {
     email: '',
     password: '',
   });
+
+  // State để hiển thị lỗi mật khẩu
   const [showPasswordError, setShowPasswordError] = useState(false);
 
-  // Capitalize each word in name
+  // Hàm viết hoa chữ cái đầu của mỗi từ trong tên
   const capitalizeName = (value) =>
     value.replace(/\b\w/g, (char) => char.toUpperCase());
 
+  // Hàm xử lý thay đổi giá trị input
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Áp dụng capitalize cho trường name
     if (name === 'name') {
       setForm((prev) => ({ ...prev, [name]: capitalizeName(value) }));
     } else {
@@ -27,19 +36,25 @@ function Register() {
     }
   };
 
+  // Hàm kiểm tra tính hợp lệ của mật khẩu
+  // Yêu cầu: ít nhất 1 chữ hoa, 1 ký tự đặc biệt, 1 số, tối thiểu 8 ký tự
   const validatePassword = (pw) => {
-    // At least 1 uppercase, 1 special char, 1 number, min 8 chars
     return /[A-Z]/.test(pw) && /[0-9]/.test(pw) && /[^A-Za-z0-9]/.test(pw) && pw.length >= 8;
   };
 
+  // Hàm xử lý submit form đăng ký
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Kiểm tra mật khẩu có hợp lệ không
     if (!validatePassword(form.password)) {
       setShowPasswordError(true);
       return;
     }
+
     setShowPasswordError(false);
-    // Gọi API đăng ký
+
+    // Gọi API đăng ký với dữ liệu form
     authApi.register({
       FullName: form.name,
       Email: form.email,
@@ -48,14 +63,17 @@ function Register() {
       DOB: form.dob
     })
       .then(() => {
+        // Đăng ký thành công, chuyển hướng đến trang đăng nhập
         navigate('/login');
       })
       .catch((err) => {
+        // Hiển thị lỗi nếu đăng ký thất bại
         alert('Đăng ký thất bại: ' + (err.response?.data || err.message));
       });
   };
 
   return (
+    // Container chính của trang đăng ký
     <div style={{
       minHeight: '100vh',
       width: '100%',
@@ -67,6 +85,7 @@ function Register() {
       fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif',
       padding: '2rem',
     }}>
+      {/* Logo/Tiêu đề có thể click để về trang chủ */}
       <button onClick={() => navigate('/')} style={{
         fontSize: '2.6rem',
         fontWeight: 900,
@@ -82,6 +101,8 @@ function Register() {
       }}>
         Breathing Free
       </button>
+
+      {/* Form đăng ký */}
       <form onSubmit={handleSubmit} style={{
         background: '#fff',
         padding: '2.5rem 2rem',
@@ -96,6 +117,7 @@ function Register() {
         position: 'relative',
         overflow: 'hidden',
       }}>
+        {/* Thanh màu decorative ở đầu form */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -106,9 +128,12 @@ function Register() {
           borderRadius: '18px 18px 0 0',
         }}></div>
 
+        {/* Tiêu đề form */}
         <div style={{ fontSize: '2rem', fontWeight: 800, color: '#35a79c', marginBottom: '0.5rem', lineHeight: 1.1, fontFamily: '"Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif' }}>
           Tạo tài khoản của bạn
         </div>
+
+        {/* Input họ và tên */}
         <input
           type="text"
           name="name"
@@ -127,6 +152,8 @@ function Register() {
           onFocus={(e) => e.target.style.borderColor = '#35a79c'}
           onBlur={(e) => e.target.style.borderColor = '#e5e8ee'}
         />
+
+        {/* Input ngày sinh */}
         <input
           type="date"
           name="dob"
@@ -144,6 +171,8 @@ function Register() {
           onFocus={(e) => e.target.style.borderColor = '#35a79c'}
           onBlur={(e) => e.target.style.borderColor = '#e5e8ee'}
         />
+
+        {/* Radio buttons cho giới tính */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', margin: '0.5rem 0 0.5rem 0' }}>
           <span style={{ color: '#5a6a6e', fontWeight: 600 }}>Giới tính:</span>
           <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontWeight: 500, color: '#5a6a6e' }}>
@@ -156,6 +185,8 @@ function Register() {
             <input type="radio" name="gender" value="Other" checked={form.gender === 'Other'} onChange={handleChange} /> Khác
           </label>
         </div>
+
+        {/* Input nghề nghiệp */}
         <input
           type="text"
           name="job"
@@ -173,6 +204,8 @@ function Register() {
           onFocus={(e) => e.target.style.borderColor = '#35a79c'}
           onBlur={(e) => e.target.style.borderColor = '#e5e8ee'}
         />
+
+        {/* Input email */}
         <input
           type="email"
           name="email"
@@ -190,7 +223,10 @@ function Register() {
           onFocus={(e) => e.target.style.borderColor = '#35a79c'}
           onBlur={(e) => e.target.style.borderColor = '#e5e8ee'}
         />
+
+        {/* Container cho mật khẩu và thông báo lỗi */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {/* Input mật khẩu */}
           <input
             type="password"
             name="password"
@@ -208,6 +244,7 @@ function Register() {
             onFocus={(e) => e.target.style.borderColor = showPasswordError ? '#e53935' : '#35a79c'}
             onBlur={(e) => e.target.style.borderColor = showPasswordError ? '#e53935' : '#e5e8ee'}
           />
+          {/* Thông báo yêu cầu mật khẩu */}
           <div style={{
             color: showPasswordError ? '#e53935' : '#5a6a6e',
             fontWeight: 500,
@@ -219,6 +256,8 @@ function Register() {
             Mật khẩu phải có ít nhất 8 ký tự, bao gồm 1 chữ hoa, 1 số và 1 ký tự đặc biệt.
           </div>
         </div>
+
+        {/* Nút submit đăng ký */}
         <button type="submit" style={{
           background: 'linear-gradient(90deg, #35a79c, #44b89d)',
           color: '#fff',
@@ -241,6 +280,8 @@ function Register() {
             e.target.style.boxShadow = '0 4px 10px rgba(53, 167, 156, 0.3)';
           }}
         >Đăng Ký</button>
+
+        {/* Link chuyển đến trang đăng nhập */}
         <div style={{ textAlign: 'center', color: '#5a6a6e', fontWeight: 500, marginTop: '0.5rem' }}>
           Đã có tài khoản?{' '}
           <Link to="/login" style={{

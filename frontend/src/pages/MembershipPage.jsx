@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-/**
- * Trang Gói Thành Viên - cho phép người dùng mua các gói thành viên
- * 
- * Khi mua gói thành viên, người dùng sẽ nhận được nhiều quyền lợi,
- * trong đó có quyền đánh giá bác sĩ chuyên gia trên trang Doctors.
- * 
- * Sau khi thanh toán, trạng thái thành viên sẽ được lưu vào localStorage
- * với key "isMember" = "true", và sẽ được kiểm tra ở các trang khác
- * để xác định người dùng có quyền đánh giá bác sĩ hay không.
- */
+
 const MembershipPage = () => {
     const navigate = useNavigate();
     const [selectedPackage, setSelectedPackage] = useState('monthly6');

@@ -1,3 +1,4 @@
+// Import các thư viện React và dependencies cần thiết
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -5,19 +6,49 @@ import Header from '../components/Header';
 import SecondaryNavigation from '../components/SecondaryNavigation';
 import postApi from '../api/postApi';
 
+/**
+ * Component trang Blog với API thực tế
+ * Quản lý việc hiển thị, tạo, sửa, xóa các bài viết blog từ server
+ * Tích hợp đầy đủ với backend API và authentication
+ * @returns {JSX.Element} Component trang blog với đầy đủ chức năng CRUD
+ */
 const BlogAPI = () => {
     const navigate = useNavigate();
+
+    // State quản lý danh sách bài viết từ API
     const [posts, setPosts] = useState([]);
+
+    // State quản lý danh mục bài viết
     const [categories, setCategories] = useState([]);
+
+    // State danh mục đang được chọn để lọc
     const [activeCategory, setActiveCategory] = useState('all');
+
+    // State từ khóa tìm kiếm
     const [searchTerm, setSearchTerm] = useState('');
+
+    // State trạng thái loading khi tải dữ liệu
     const [isLoading, setIsLoading] = useState(true);
+
+    // State trạng thái đang tìm kiếm
     const [isSearching, setIsSearching] = useState(false);
+
+    // State lưu từ khóa tìm kiếm cuối cùng để tránh duplicate search
     const [lastSearchTerm, setLastSearchTerm] = useState('');
+
+    // State theo dõi các bài viết đã được view để track analytics
     const [viewedPosts, setViewedPosts] = useState(new Set());
+
+    // State trạng thái đăng nhập
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // State hiển thị form tạo/sửa bài viết
     const [showCreateForm, setShowCreateForm] = useState(false);
+
+    // State bài viết đang được chỉnh sửa
     const [editingPost, setEditingPost] = useState(null);
+
+    // State dữ liệu form bài viết mới
     const [newPost, setNewPost] = useState({
         title: '',
         content: '',
@@ -25,40 +56,50 @@ const BlogAPI = () => {
         tags: []
     });
 
+    /**
+     * Effect kiểm tra trạng thái đăng nhập và load categories khi component mount
+     */
     useEffect(() => {
-        // Check both userLoggedIn flag and token existence
+        // Kiểm tra cả flag đăng nhập và token tồn tại
         const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
         const token = localStorage.getItem('token');
         const actuallyLoggedIn = userLoggedIn && token;
-        
+
         setIsLoggedIn(actuallyLoggedIn);
-        
+
+        // Load danh sách categories từ API
         loadCategories();
     }, []);
 
-    // Separate useEffect for category changes (immediate)
+    /**
+     * Effect riêng cho việc thay đổi category - load posts ngay lập tức
+     */
     useEffect(() => {
         loadPosts();
     }, [activeCategory]);
 
-    // Auto-search only when search term is cleared
+    /**
+     * Effect xử lý auto-search khi xóa từ khóa tìm kiếm
+     */
     useEffect(() => {
         if (searchTerm === '') {
-            // If search term is cleared, search immediately to show all posts
+            // Nếu từ khóa bị xóa, tìm kiếm ngay để hiển thị tất cả bài viết
             setLastSearchTerm('');
             loadPosts();
         } else {
-            // Reset lastSearchTerm when user types new content
+            // Reset lastSearchTerm khi người dùng nhập nội dung mới
             if (searchTerm.trim() !== lastSearchTerm) {
                 setLastSearchTerm('');
             }
         }
     }, [searchTerm]);
 
-    // Simple view tracking when posts load
+    /**
+     * Effect theo dõi view bài viết đơn giản khi posts được load
+     */
     useEffect(() => {
         if (posts.length > 0) {
-            // Track views for all posts after a delay (simulating user viewing)
+            // Track views cho tất cả bài viết sau delay (mô phỏng người dùng đang xem)
             const timer = setTimeout(() => {
                 posts.forEach(post => {
                     if (!viewedPosts.has(post.postID)) {
@@ -66,27 +107,33 @@ const BlogAPI = () => {
                         handlePostView(post.postID);
                     }
                 });
-            }, 2000); // 2 seconds after posts load
+            }, 2000); // 2 giây sau khi posts load
 
             return () => clearTimeout(timer);
         }
     }, [posts]);
 
+    /**
+     * Hàm load danh sách bài viết từ API với filters
+     * @async
+     */
     const loadPosts = async () => {
         try {
             setIsLoading(true);
+
+            // Chuẩn bị filters cho API
             const filters = {
                 category: activeCategory === 'all' ? null : activeCategory,
                 search: searchTerm || null,
                 page: 1,
                 pageSize: 10
             };
-            
+
             console.log('🔄 Loading posts with filters:', filters);
             const data = await postApi.getPosts('Blog', filters);
             console.log('📨 API response:', data);
-            
-            // Backend returns array directly, not wrapped in posts property
+
+            // Backend trả về array trực tiếp, không wrap trong posts property
             if (data && Array.isArray(data)) {
                 console.log('✅ Found posts array:', data.length);
                 setPosts(data);
@@ -99,52 +146,63 @@ const BlogAPI = () => {
             }
         } catch (error) {
             console.error('❌ Error loading posts:', error);
-            // Only use fallback if there's a real error
+            // Chỉ sử dụng fallback nếu có lỗi thực sự
             setPosts([]);
         } finally {
             setIsLoading(false);
         }
     };
 
+    /**
+     * Hàm load danh sách categories từ API
+     * @async
+     */
     const loadCategories = async () => {
         try {
             const data = await postApi.getCategories('Blog');
             setCategories(data);
         } catch (error) {
             console.error('Lỗi khi tải danh mục:', error);
+            // Fallback categories nếu API lỗi
             setCategories(['Kinh nghiệm', 'Sức khỏe', 'Phương pháp', 'Động lực', 'Chia sẻ']);
         }
     };
 
+    /**
+     * Hàm xử lý tạo bài viết mới
+     * @async
+     */
     const handleCreatePost = async () => {
-        // Check authentication
+        // Kiểm tra authentication
         const token = localStorage.getItem('token');
-        
+
         if (!isLoggedIn || !token) {
             toast.error('Vui lòng đăng nhập để tạo bài viết.');
             navigate('/login');
             return;
         }
 
+        // Validate dữ liệu form
         if (!newPost.title || !newPost.content || !newPost.category) {
             toast.error('Vui lòng điền đầy đủ thông tin bắt buộc: Tiêu đề, Nội dung, Danh mục');
             return;
         }
 
         try {
+            // Chuẩn bị dữ liệu để gửi API
             const postData = {
                 ...newPost,
                 postType: 'Blog'
             };
-            
+
             const createdPost = await postApi.createPost(postData);
             console.log('✅ Post created:', createdPost);
-            
+
             toast.success('Tạo bài viết thành công!');
             setShowCreateForm(false);
             setNewPost({ title: '', content: '', category: '', tags: [] });
-            
-            // Force reload posts
+
+            // Force reload posts để hiển thị bài viết mới
             console.log('🔄 Force reloading posts...');
             await loadPosts();
         } catch (error) {
@@ -153,6 +211,11 @@ const BlogAPI = () => {
         }
     };
 
+    /**
+     * Hàm xử lý like/unlike bài viết
+     * @async
+     * @param {number} postId - ID của bài viết cần like
+     */
     const handleLikePost = async (postId) => {
         if (!isLoggedIn) {
             toast.error('Vui lòng đăng nhập để thích bài viết');
@@ -161,6 +224,7 @@ const BlogAPI = () => {
 
         try {
             await postApi.likePost(postId);
+            // Reload posts để cập nhật số likes
             loadPosts();
         } catch (error) {
             console.error('Lỗi khi thích bài viết:', error);
@@ -168,6 +232,10 @@ const BlogAPI = () => {
         }
     };
 
+    /**
+     * Hàm xử lý chỉnh sửa bài viết - mở form với dữ liệu hiện tại
+     * @param {Object} post - Bài viết cần chỉnh sửa
+     */
     const handleEditPost = (post) => {
         setEditingPost(post);
         setNewPost({
@@ -179,28 +247,35 @@ const BlogAPI = () => {
         setShowCreateForm(true);
     };
 
+    /**
+     * Hàm xử lý cập nhật bài viết đã chỉnh sửa
+     * @async
+     */
     const handleUpdatePost = async () => {
         const token = localStorage.getItem('token');
-        
+
         if (!isLoggedIn || !token) {
             toast.error('Vui lòng đăng nhập để sửa bài viết.');
             return;
         }
 
+        // Validate dữ liệu form
         if (!newPost.title || !newPost.content || !newPost.category) {
             toast.error('Vui lòng điền đầy đủ thông tin bắt buộc');
             return;
         }
 
         try {
+            // Chuẩn bị dữ liệu update
             const updateData = {
                 ...newPost,
                 postType: 'Blog'
             };
-            
+
             await postApi.updatePost(editingPost.postID, updateData);
             toast.success('Cập nhật bài viết thành công!');
-            
+
+            // Reset form state và reload posts
             setShowCreateForm(false);
             setEditingPost(null);
             setNewPost({ title: '', content: '', category: '', tags: [] });
@@ -211,13 +286,19 @@ const BlogAPI = () => {
         }
     };
 
+    /**
+     * Hàm xử lý xóa bài viết
+     * @async
+     * @param {number} postId - ID của bài viết cần xóa
+     */
     const handleDeletePost = async (postId) => {
+        // Xác nhận trước khi xóa
         if (!window.confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
             return;
         }
 
         const token = localStorage.getItem('token');
-        
+
         if (!isLoggedIn || !token) {
             toast.error('Vui lòng đăng nhập để xóa bài viết.');
             return;
@@ -233,36 +314,49 @@ const BlogAPI = () => {
         }
     };
 
+    /**
+     * Hàm hủy chỉnh sửa và đóng form
+     */
     const cancelEdit = () => {
         setShowCreateForm(false);
         setEditingPost(null);
         setNewPost({ title: '', content: '', category: '', tags: [] });
     };
 
+    /**
+     * Kiểm tra xem người dùng hiện tại có phải chủ sở hữu bài viết không
+     * @param {Object} post - Bài viết cần kiểm tra
+     * @returns {boolean} True nếu người dùng là chủ sở hữu
+     */
     const isOwner = (post) => {
         const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
         return currentUser.userId === post.userID;
     };
 
+    /**
+     * Hàm xử lý tìm kiếm thủ công khi nhấn nút hoặc Enter
+     * @async
+     * @param {Event} e - Event object (optional)
+     */
     const handleManualSearch = async (e) => {
         if (e) {
             e.preventDefault();
             e.stopPropagation();
         }
-        
+
         const currentTerm = searchTerm.trim();
         if (!currentTerm || isSearching) return;
-        
-        // Prevent duplicate searches
+
+        // Tránh tìm kiếm trùng lặp
         if (currentTerm === lastSearchTerm && lastSearchTerm !== '') {
             console.log('🔄 Same search term, skipping duplicate search');
             return;
         }
-        
+
         console.log('🔍 Manual search triggered with term:', currentTerm);
         setIsSearching(true);
         setLastSearchTerm(currentTerm);
-        
+
         try {
             await loadPosts();
         } catch (error) {
@@ -272,25 +366,31 @@ const BlogAPI = () => {
         }
     };
 
+    /**
+     * Hàm track view bài viết cho analytics
+     * @async
+     * @param {number} postId - ID bài viết được view
+     */
     const handlePostView = async (postId) => {
         // Chỉ track view một lần cho mỗi bài viết
         if (viewedPosts.has(postId)) {
             console.log('📊 Post already viewed:', postId);
             return;
         }
-        
+
         console.log('👁️ Tracking view for post:', postId);
-        
+
         try {
             const response = await postApi.incrementView(postId);
             console.log('✅ View tracked successfully:', response);
-            
+
+            // Lưu vào Set để tránh track duplicate
             setViewedPosts(prev => new Set([...prev, postId]));
-            
-            // Cập nhật view count trong state để UI reflect ngay
-            setPosts(prevPosts => 
-                prevPosts.map(post => 
-                    post.postID === postId 
+
+            // Cập nhật view count trong UI ngay lập tức
+            setPosts(prevPosts =>
+                prevPosts.map(post =>
+                    post.postID === postId
                         ? { ...post, views: (post.views || 0) + 1 }
                         : post
                 )
@@ -300,11 +400,21 @@ const BlogAPI = () => {
         }
     };
 
+    /**
+     * Hàm format ngày tháng theo định dạng Việt Nam
+     * @param {string} dateString - Chuỗi ngày cần format
+     * @returns {string} Ngày đã được format
+     */
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('vi-VN');
     };
 
+    /**
+     * Hàm lấy màu badge theo danh mục
+     * @param {string} category - Tên danh mục
+     * @returns {string} Mã màu hex
+     */
     const getBadgeColor = (category) => {
         const colors = {
             'Kinh nghiệm': '#3498db',
@@ -316,6 +426,7 @@ const BlogAPI = () => {
         return colors[category] || '#95a5a6';
     };
 
+    // Hiển thị loading state
     if (isLoading) {
         return (
             <div style={{
@@ -333,7 +444,7 @@ const BlogAPI = () => {
     }
 
     return (
-        <div 
+        <div
             lang="vi"
             className="vietnamese-text"
             style={{
@@ -341,10 +452,13 @@ const BlogAPI = () => {
                 background: 'linear-gradient(135deg, #f0f7fa 0%, #d5f1e8 100%)'
             }}
         >
+            {/* Header và Navigation Components */}
             <Header />
             <SecondaryNavigation />
 
+            {/* Main Content Container */}
             <div style={{ maxWidth: '1200px', margin: '2rem auto', padding: '0 2rem' }}>
+                {/* Page Header với tiêu đề và mô tả */}
                 <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h1 style={{ color: '#2C9085', fontSize: '2.5rem', marginBottom: '1rem' }}>
                         🌿 Cộng Đồng Cai Thuốc Lá
@@ -352,9 +466,9 @@ const BlogAPI = () => {
                     <p style={{ color: '#666', fontSize: '1.1rem' }}>
                         Chia sẻ kinh nghiệm, trao đổi kiến thức và hỗ trợ lẫn nhau trên hành trình cai thuốc lá
                     </p>
-
                 </div>
 
+                {/* Controls Bar: Category Filter, Search, Create Button */}
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -363,7 +477,9 @@ const BlogAPI = () => {
                     flexWrap: 'wrap',
                     gap: '1rem'
                 }}>
+                    {/* Left Controls: Category và Search */}
                     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                        {/* Category Selector */}
                         <select
                             value={activeCategory}
                             onChange={(e) => setActiveCategory(e.target.value)}
@@ -380,7 +496,9 @@ const BlogAPI = () => {
                             ))}
                         </select>
 
+                        {/* Search Controls */}
                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                            {/* Search Input với Clear Button */}
                             <div style={{ position: 'relative', minWidth: '250px' }}>
                                 <input
                                     type="text"
@@ -404,6 +522,7 @@ const BlogAPI = () => {
                                         outline: isSearching ? '2px solid rgba(44, 144, 133, 0.2)' : 'none'
                                     }}
                                 />
+                                {/* Clear Search Button */}
                                 {searchTerm && !isSearching && (
                                     <button
                                         onClick={() => setSearchTerm('')}
@@ -425,7 +544,8 @@ const BlogAPI = () => {
                                     </button>
                                 )}
                             </div>
-                            
+
+                            {/* Search Button */}
                             <button
                                 onClick={handleManualSearch}
                                 disabled={!searchTerm.trim() || isSearching}
@@ -450,6 +570,7 @@ const BlogAPI = () => {
                         </div>
                     </div>
 
+                    {/* Create Post Button - chỉ hiển thị cho user đã đăng nhập */}
                     {isLoggedIn && (
                         <button
                             onClick={() => setShowCreateForm(true)}
@@ -469,6 +590,7 @@ const BlogAPI = () => {
                     )}
                 </div>
 
+                {/* Create/Edit Post Form - hiển thị khi showCreateForm = true */}
                 {showCreateForm && (
                     <div style={{
                         backgroundColor: 'white',
@@ -478,15 +600,17 @@ const BlogAPI = () => {
                         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                         border: '1px solid #e0e0e0'
                     }}>
+                        {/* Form Header */}
                         <h3 style={{ marginBottom: '1rem', color: '#2C9085' }}>
                             {editingPost ? '✏️ Chỉnh sửa bài viết' : '✨ Tạo bài viết mới'}
                         </h3>
-                        
+
+                        {/* Title Input */}
                         <input
                             type="text"
                             placeholder="Tiêu đề bài viết"
                             value={newPost.title}
-                            onChange={(e) => setNewPost({...newPost, title: e.target.value})}
+                            onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
                             style={{
                                 width: '100%',
                                 padding: '0.7rem',
@@ -498,9 +622,10 @@ const BlogAPI = () => {
                             }}
                         />
 
+                        {/* Category Selector */}
                         <select
                             value={newPost.category}
-                            onChange={(e) => setNewPost({...newPost, category: e.target.value})}
+                            onChange={(e) => setNewPost({ ...newPost, category: e.target.value })}
                             style={{
                                 width: '100%',
                                 padding: '0.7rem',
@@ -518,10 +643,11 @@ const BlogAPI = () => {
                             <option value="Chia sẻ">💬 Chia sẻ</option>
                         </select>
 
+                        {/* Content Textarea */}
                         <textarea
                             placeholder="Nội dung bài viết"
                             value={newPost.content}
-                            onChange={(e) => setNewPost({...newPost, content: e.target.value})}
+                            onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
                             rows={6}
                             style={{
                                 width: '100%',
@@ -535,6 +661,7 @@ const BlogAPI = () => {
                             }}
                         />
 
+                        {/* Tags Input */}
                         <input
                             type="text"
                             placeholder="Tags (phân cách bằng dấu phẩy, ví dụ: cai thuốc, kinh nghiệm, sức khỏe)"
@@ -542,7 +669,7 @@ const BlogAPI = () => {
                             onChange={(e) => {
                                 const tagsString = e.target.value;
                                 const tagsArray = tagsString.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
-                                setNewPost({...newPost, tags: tagsArray});
+                                setNewPost({ ...newPost, tags: tagsArray });
                             }}
                             style={{
                                 width: '100%',
@@ -555,9 +682,9 @@ const BlogAPI = () => {
                             }}
                         />
 
-
-
+                        {/* Form Action Buttons */}
                         <div style={{ display: 'flex', gap: '1rem' }}>
+                            {/* Submit Button - khác nhau giữa create và update */}
                             <button
                                 onClick={editingPost ? handleUpdatePost : handleCreatePost}
                                 style={{
@@ -571,6 +698,8 @@ const BlogAPI = () => {
                             >
                                 {editingPost ? '💾 Cập nhật' : '📝 Đăng bài'}
                             </button>
+
+                            {/* Cancel Button */}
                             <button
                                 onClick={cancelEdit}
                                 style={{
@@ -588,6 +717,7 @@ const BlogAPI = () => {
                     </div>
                 )}
 
+                {/* Posts List */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {posts.map(post => (
                         <div
@@ -601,12 +731,14 @@ const BlogAPI = () => {
                                 border: '1px solid #f0f0f0'
                             }}
                         >
+                            {/* Post Header với thông tin tác giả và category */}
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'flex-start',
                                 marginBottom: '1rem'
                             }}>
+                                {/* Author Info */}
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                     <div style={{
                                         width: '40px',
@@ -629,7 +761,8 @@ const BlogAPI = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
+
+                                {/* Category Badge */}
                                 {post.category && (
                                     <span style={{
                                         backgroundColor: getBadgeColor(post.category),
@@ -643,21 +776,24 @@ const BlogAPI = () => {
                                 )}
                             </div>
 
+                            {/* Post Title */}
                             <h3 style={{ color: '#333', marginBottom: '1rem', fontSize: '1.3rem' }}>
                                 {post.title}
                             </h3>
-                            
+
+                            {/* Post Content - truncate nếu quá dài */}
                             <p style={{
                                 color: '#555',
                                 lineHeight: '1.6',
                                 marginBottom: '1.5rem'
                             }}>
-                                {post.content && post.content.length > 200 
+                                {post.content && post.content.length > 200
                                     ? `${post.content.substring(0, 200)}...`
                                     : post.content
                                 }
                             </p>
 
+                            {/* Post Footer với action buttons */}
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -665,7 +801,9 @@ const BlogAPI = () => {
                                 paddingTop: '1rem',
                                 borderTop: '1px solid #f0f0f0'
                             }}>
+                                {/* Left Actions: Like, Comment, View */}
                                 <div style={{ display: 'flex', gap: '2rem' }}>
+                                    {/* Like Button */}
                                     <button
                                         onClick={() => handleLikePost(post.postID)}
                                         style={{
@@ -681,7 +819,8 @@ const BlogAPI = () => {
                                     >
                                         {post.isLiked ? '❤️' : '🤍'} {post.likes || 0}
                                     </button>
-                                    
+
+                                    {/* Comments Count */}
                                     <span style={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -691,7 +830,8 @@ const BlogAPI = () => {
                                     }}>
                                         💬 {post.comments?.length || 0}
                                     </span>
-                                    
+
+                                    {/* View Button - clickable để test view tracking */}
                                     <button
                                         onClick={() => handlePostView(post.postID)}
                                         style={{
@@ -711,8 +851,10 @@ const BlogAPI = () => {
                                     </button>
                                 </div>
 
+                                {/* Right Actions: Edit & Delete cho chủ sở hữu */}
                                 {isLoggedIn && isOwner(post) && (
                                     <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        {/* Edit Button */}
                                         <button
                                             onClick={() => handleEditPost(post)}
                                             style={{
@@ -740,6 +882,8 @@ const BlogAPI = () => {
                                         >
                                             ✏️ Sửa
                                         </button>
+
+                                        {/* Delete Button */}
                                         <button
                                             onClick={() => handleDeletePost(post.postID)}
                                             style={{
@@ -774,6 +918,7 @@ const BlogAPI = () => {
                     ))}
                 </div>
 
+                {/* Empty State - hiển thị khi không có bài viết */}
                 {posts.length === 0 && !isLoading && (
                     <div style={{
                         textAlign: 'center',
@@ -802,8 +947,6 @@ const BlogAPI = () => {
                         )}
                     </div>
                 )}
-
-
             </div>
         </div>
     );

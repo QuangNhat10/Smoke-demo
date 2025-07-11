@@ -7,16 +7,7 @@ import MembershipPlans from '../components/MembershipPlans';
 import DashboardCard from '../components/DashboardCard';
 import { quitPlanApi } from '../api/quitPlanApi';
 
-/**
- * HomepageMember - Trang chủ cho thành viên
- * 
- * Component này hiển thị trang chính sau khi thành viên đăng nhập vào hệ thống với:
- * - Thông tin cá nhân và trạng thái thành viên
- * - Tổng quan về tiến độ cai thuốc (ngày không hút, tiền tiết kiệm, v.v.)
- * - Các hành động nhanh (theo dõi trạng thái, cập nhật kế hoạch, tìm bác sĩ)
- * - Phần trợ giúp và hỗ trợ
- * - Phần lời khuyên từ chuyên gia
- */
+
 function HomepageMember() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState(''); // Tên người dùng
@@ -26,12 +17,7 @@ function HomepageMember() {
     const [quitPlan, setQuitPlan] = useState(null); // Dữ liệu kế hoạch cai thuốc
     const [loadingQuitPlan, setLoadingQuitPlan] = useState(true); // Loading state cho quit plan
 
-    /**
-     * Lấy thông tin người dùng và trạng thái cai thuốc từ API khi trang được tải
-     * - Kiểm tra trạng thái đăng nhập
-     * - Lấy thông tin gói thành viên
-     * - Lấy thông tin kế hoạch cai thuốc từ database
-     */
+  
     useEffect(() => {
         // Kiểm tra trạng thái đăng nhập
         const token = localStorage.getItem('token');
