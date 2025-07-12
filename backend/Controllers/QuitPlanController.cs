@@ -6,6 +6,11 @@ using System.Security.Claims;
 
 namespace BreathingFree.Controllers
 {
+    /// <summary>
+    /// Controller quản lý các chức năng liên quan đến kế hoạch cai thuốc lá
+    /// Bao gồm: tạo kế hoạch mới, xem chi tiết, cập nhật tiến trình, reset kế hoạch
+    /// Hỗ trợ cả người dùng thông thường và bác sĩ với các quyền truy cập khác nhau
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
