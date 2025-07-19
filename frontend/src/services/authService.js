@@ -43,7 +43,7 @@ const getRoleFromId = (roleId) => {
 
 // Service xử lý các chức năng liên quan đến authentication
 const authService = {
-    // Hàm đăng nhập
+        // Hàm đăng nhập
     login: async (email, password) => {
         try {
             const response = await axiosInstance.post('/auth/login', {
@@ -111,7 +111,7 @@ const authService = {
         localStorage.removeItem('userRole');
         localStorage.removeItem('userId');
         localStorage.removeItem('userEmail');
-        
+
         // Notify listeners về logout
         notifyAuthChange('logout');
     },

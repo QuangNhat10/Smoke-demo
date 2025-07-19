@@ -87,7 +87,7 @@ const CreatePlanPage = () => {
     // Xử lý khi submit form
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
             // Chuẩn bị dữ liệu để gửi lên API
             const planData = {
@@ -107,13 +107,13 @@ const CreatePlanPage = () => {
 
             // Gọi API để tạo kế hoạch
             const response = await quitPlanApi.createQuitPlan(planData);
-            
+
             // Hiển thị thông báo thành công
             alert(response.message || 'Tạo kế hoạch cai thuốc thành công!');
-            
+
             // Chuyển hướng về trang dashboard
             navigate('/dashboard-member');
-            
+
         } catch (error) {
             console.error('Lỗi khi tạo kế hoạch:', error);
             const errorMessage = error.response?.data?.message || 'Có lỗi xảy ra khi tạo kế hoạch. Vui lòng thử lại.';

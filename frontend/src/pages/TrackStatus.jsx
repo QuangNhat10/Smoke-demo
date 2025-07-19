@@ -13,19 +13,14 @@ const TrackStatus = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-
+        // Không cần kiểm tra token nữa vì đã được bảo vệ bởi PrivateRoute
         Promise.all([
             loadUserProfile(),
             loadQuitPlan()
         ]).finally(() => {
             setLoading(false);
         });
-    }, [navigate]);
+    }, []);
 
     const loadUserProfile = async () => {
         try {

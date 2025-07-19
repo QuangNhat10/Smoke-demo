@@ -875,8 +875,6 @@ function Home() {
         </div>
       </div>
 
-      {/* Bảng xếp hạng */}
-      <RankingBoard />
 
       {/* Expert Advice Section */}
       <div style={{
@@ -1390,55 +1388,5 @@ const BenefitCard = ({ title, image, text }) => {
   );
 };
 
-// Component bảng xếp hạng đơn giản
-const RankingBoard = () => {
-  // Dữ liệu mẫu top thành viên
-  const rankingData = [
-    { name: 'Nguyễn Văn A', score: 120, avatar: '🥇' },
-    { name: 'Trần Thị B', score: 110, avatar: '🥈' },
-    { name: 'Lê Văn C', score: 100, avatar: '🥉' },
-    { name: 'Phạm Minh D', score: 90, avatar: '🏅' },
-    { name: 'Hoàng Thị E', score: 85, avatar: '🏅' },
-  ];
-  return (
-    <div style={{
-      background: '#fff',
-      borderRadius: '16px',
-      boxShadow: '0 4px 16px rgba(53,167,156,0.08)',
-      maxWidth: '600px',
-      margin: '3rem auto',
-      padding: '2.5rem 2rem',
-      textAlign: 'center',
-    }}>
-      <h2 style={{
-        color: '#35a79c',
-        fontWeight: 800,
-        fontSize: '2rem',
-        marginBottom: '1.5rem',
-        letterSpacing: '1px',
-      }}>
-        Bảng Xếp Hạng Thành Viên
-      </h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ background: '#f0f7fa' }}>
-            <th style={{ padding: '0.7rem', fontWeight: 700, color: '#35a79c', fontSize: '1.1rem' }}>#</th>
-            <th style={{ padding: '0.7rem', fontWeight: 700, color: '#35a79c', fontSize: '1.1rem' }}>Thành viên</th>
-            <th style={{ padding: '0.7rem', fontWeight: 700, color: '#35a79c', fontSize: '1.1rem' }}>Điểm</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rankingData.map((user, idx) => (
-            <tr key={user.name} style={{ borderBottom: '1px solid #e5e8ee' }}>
-              <td style={{ padding: '0.7rem', fontWeight: 700, fontSize: '1.1rem' }}>{user.avatar}</td>
-              <td style={{ padding: '0.7rem', textAlign: 'left', fontWeight: 600 }}>{user.name}</td>
-              <td style={{ padding: '0.7rem', color: '#44b89d', fontWeight: 700 }}>{user.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
 
 export default Home;

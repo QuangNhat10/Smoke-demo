@@ -361,7 +361,7 @@ const DashboardMember = () => {
             {[
               { title: 'Hỗ Trợ', color: '#3498db', path: '/support-chat' },
               { title: 'Blog', color: '#9b59b6', path: '/blog' },
-              { title: 'Hỏ Sơ', color: '#f39c12', path: '/profile' },
+              { title: 'Hồ Sơ', color: '#f39c12', path: '/profile' },
               { title: 'Theo Dõi', color: '#1abc9c', path: '/track-status' }
             ].map((action, index) => (
               <button

@@ -58,21 +58,23 @@ function App() {
         </Route>
 
         {/* Các route dành cho thành viên đã đăng nhập */}
-        <Route path="/homepage-member" element={<HomepageMember />} /> {/* Trang chủ dành cho thành viên */}
-        <Route path="/dashboard-member" element={<DashboardMember />} /> {/* Bảng điều khiển thành viên */}
-        <Route path="/create-plan" element={<CreatePlanPage />} /> {/* Trang tạo kế hoạch cai thuốc */}
-        <Route path="/track-status" element={<TrackStatus />} /> {/* Trang theo dõi tiến trình cai thuốc */}
-        <Route path="/expert-advice" element={<ExpertAdvicePage />} /> {/* Trang tư vấn từ chuyên gia */}
-        <Route path="/blog" element={<BlogAPI />} /> {/* Trang bài viết blog - kết nối API */}
-        <Route path="/blog-old" element={<BlogPage />} /> {/* Trang blog cũ - backup */}
-        <Route path="/smoking-cessation" element={<SmokingCessationPage />} /> {/* Trang cai thuốc lá */}
-        <Route path="/support-chat" element={<SupportChat />} /> {/* Trò chuyện hỗ trợ */}
-        <Route path="/membership" element={<MembershipPage />} /> {/* Trang mua gói thành viên để có quyền đánh giá bác sĩ */}
-        <Route path="/payment" element={<PaymentPage />} /> {/* Trang thanh toán */}
-        <Route path="/payment-success" element={<PaymentSuccessPage />} /> {/* Trang xác nhận thanh toán thành công */}
-        <Route path="/appointment" element={<AppointmentPage />} /> {/* Trang đặt lịch hẹn */}
-        <Route path="/rankings" element={<Rankings />} /> {/* Trang xếp hạng */}
-        <Route path="/doctors" element={<DoctorPage />} /> {/* Trang hiển thị bác sĩ và cho phép thành viên đánh giá */}
+        <Route element={<PrivateRoute allowedRoles={["Member", "Doctor", "Staff", "Admin"]} />}>
+          <Route path="/homepage-member" element={<HomepageMember />} /> {/* Trang chủ dành cho thành viên */}
+          <Route path="/dashboard-member" element={<DashboardMember />} /> {/* Bảng điều khiển thành viên */}
+          <Route path="/create-plan" element={<CreatePlanPage />} /> {/* Trang tạo kế hoạch cai thuốc - YÊU CẦU ĐĂNG NHẬP */}
+          <Route path="/track-status" element={<TrackStatus />} /> {/* Trang theo dõi tiến trình cai thuốc - YÊU CẦU ĐĂNG NHẬP */}
+          <Route path="/expert-advice" element={<ExpertAdvicePage />} /> {/* Trang tư vấn từ chuyên gia */}
+          <Route path="/blog" element={<BlogAPI />} /> {/* Trang bài viết blog - kết nối API */}
+          <Route path="/blog-old" element={<BlogPage />} /> {/* Trang blog cũ - backup */}
+          <Route path="/smoking-cessation" element={<SmokingCessationPage />} /> {/* Trang cai thuốc lá */}
+          <Route path="/support-chat" element={<SupportChat />} /> {/* Trò chuyện hỗ trợ */}
+          <Route path="/membership" element={<MembershipPage />} /> {/* Trang mua gói thành viên để có quyền đánh giá bác sĩ */}
+          <Route path="/payment" element={<PaymentPage />} /> {/* Trang thanh toán */}
+          <Route path="/payment-success" element={<PaymentSuccessPage />} /> {/* Trang xác nhận thanh toán thành công */}
+          <Route path="/appointment" element={<AppointmentPage />} /> {/* Trang đặt lịch hẹn */}
+          <Route path="/rankings" element={<Rankings />} /> {/* Trang xếp hạng */}
+          <Route path="/doctors" element={<DoctorPage />} /> {/* Trang hiển thị bác sĩ và cho phép thành viên đánh giá */}
+        </Route>
 
         {/* Các route dành cho bác sĩ - chỉ bác sĩ mới có thể truy cập */}
         <Route element={<PrivateRoute allowedRoles="Doctor" />}>
